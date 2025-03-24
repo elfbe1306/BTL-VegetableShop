@@ -1,7 +1,29 @@
 import React from "react";
 import "../style/header.css";
+import { useLocation } from 'react-router-dom'; //levy add
 
 const Header = () => {
+  //levy làm
+  const location = useLocation();
+  const getPageTitle = () => {
+    switch (location.pathname) {
+      case '/blog':
+        return 'Blog';
+      case '/vegetable':
+        return 'Vegetable';
+      case '/contact':
+        return 'Contact';
+      case '/about':
+        return 'About';
+      case '/faqs':
+        return 'Faqs';
+      case '/shoppingcart':
+        return 'Shopping cart';
+      default:
+        return 'Home';
+    }
+  };
+
   return (
     <header className="header">
       <div className="top-bar">
@@ -62,7 +84,8 @@ const Header = () => {
         <div className="breadcrumb-address">
             <span className="material-symbols-outlined">home</span>
             <span className="material-symbols-outlined">chevron_right</span>
-            <span className="page">Blog</span>
+            {/* <span className="page">Blog</span> */}
+            <span className="page">{getPageTitle()}</span> //levy sửa chút
         </div>
       </div>
     </header>
