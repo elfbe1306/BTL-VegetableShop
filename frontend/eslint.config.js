@@ -28,6 +28,9 @@ export default [
         'warn',
         { allowConstantExport: true },
       ],
+      "rules": {
+        "no-useless-catch": "off"
+      }
     },
   },
 ]
