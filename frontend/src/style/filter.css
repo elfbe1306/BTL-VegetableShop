@@ -1,0 +1,72 @@
+.filter_frame {
+    padding: 10px 5%;
+    display: flex;
+    align-items: center;
+}
+
+.filter_button {
+    background-color: #00B207;
+    border-radius: 43px;
+    color: white;
+    border: none;
+    width: 131px;
+    height: 45px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10%;
+}
+
+.filter_button:hover {
+    background-color: #2C742F;
+}
+
+.filter_button i {
+    font-size: 1.2rem;
+}
+
+.sort_frame {
+    margin-left: 16%;
+    color: #808080;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.sort_dropdown {
+    height: 41px;
+    width: 166px;
+    font-size: 14px;
+    margin-left: 5px;
+}
+
+.filter_result {
+    margin-left: auto;
+    font-size: 14px; 
+}
+
+@media (max-width: 600px) {
+    .filter_frame {
+        padding: 10px 3%;
+    }
+    .filter_button {
+        width: 80px;
+        height: 40px;
+        font-size: 12px;
+    }
+    .sort_frame {
+        font-size: 12px;
+    }
+    .sort_dropdown {
+        height: 36px;
+        width: 100px;
+        margin: 0;
+        font-size: 12px;
+    }
+    .filter_result {
+        font-size: 12px;
+    }
+}
