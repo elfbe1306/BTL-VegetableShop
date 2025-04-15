@@ -31,7 +31,7 @@ function App() {
   const [message, setMessage] = useState('');
 
   useEffect(() => {
-    axios.get('http://localhost/VegetableShop/api.php')
+    axios.get('http://localhost/BTL-VegetableShop/backend/api.php')
       .then(response => {
         setMessage(response.data.message);
       })
