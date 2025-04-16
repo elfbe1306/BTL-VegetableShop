@@ -1,0 +1,53 @@
+.bannerBarContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.bannerBarBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    column-gap: 25px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid transparent;
+}
+
+.bannerBarBox:hover {
+    border-bottom: solid 2px #00B207;
+}
+
+.icon {
+    fill: #00B207;
+    background-color: #EDF2EE;
+    border-radius: 50%;
+    padding: 15px;
+}
+
+.bannerBarBox:hover .icon {
+    fill: #FFFF;
+    background-color: #00B207;
+}
+
+.titleBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.title {
+    font-weight: 600;
+    font-size: 18px;
+    margin: 0;
+}
+
+.subTitle {
+    font-family: 400;
+    color: #999999;
+    font-size: 14px;
+    margin-top: 5px;
+}
+  
