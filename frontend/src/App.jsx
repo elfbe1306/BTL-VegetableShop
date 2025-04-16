@@ -1,4 +1,3 @@
-import './App.css'
 import { Routes, Route } from 'react-router-dom'//levy thêm chữ dom
 import 'remixicon/fonts/remixicon.css'
 import HomePage from './pages/HomePage'
