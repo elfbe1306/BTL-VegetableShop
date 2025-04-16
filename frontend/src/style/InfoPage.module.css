@@ -22,7 +22,7 @@
     font-weight: 400;
 }
 .AboutMe{
-    background: linear-gradient(269deg, #FFF 18.88%, rgba(255, 255, 255, 0.00) 86.37%), url('img/About-me-BG.png') lightgray 50% / cover no-repeat;
+    background: linear-gradient(269deg, #FFF 18.88%, rgba(255, 255, 255, 0.00) 86.37%), url('src/assets/images/About-me-BG.png') lightgray 50% / cover no-repeat;
     width: 600px;
     height: 350px;
     margin-top: 50px;
