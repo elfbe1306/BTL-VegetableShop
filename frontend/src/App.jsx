@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom'//levy thêm chữ dom
 import 'remixicon/fonts/remixicon.css'
 import HomePage from './pages/HomePage'
 import ListProduct from './pages/ListProduct'
-import InfoPage from './pages/InfoPage'
+import InfoPage from './pages/InfoPage/InfoPage'
 
 function App() {
   return (

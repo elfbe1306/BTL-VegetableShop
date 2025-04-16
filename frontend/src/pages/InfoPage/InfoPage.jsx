@@ -1,7 +1,7 @@
 import React from 'react'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
-import styles from '../style/InfoPage.module.css'
+import Header from '../../components/Header'
+import Footer from '../../components/Footer'
+import styles from './InfoPage.module.css'
 
 function InfoPage() {
   return (
