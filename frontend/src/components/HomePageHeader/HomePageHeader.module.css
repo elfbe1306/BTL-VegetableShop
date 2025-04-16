@@ -1,0 +1,35 @@
+.topBar {
+    color: #B3B3B3;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 5%;
+    font-size: 12px;
+    gap: 30px;
+}
+
+.storeLocation {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    gap: 5px;
+}
+
+.selector {
+    display: flex;
+    gap: 15px;
+}
+
+.languageSelector, .currencySelector {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.mainHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    border-bottom: 1px solid #ddd;
+}
