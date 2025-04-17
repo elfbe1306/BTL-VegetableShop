@@ -1,0 +1,36 @@
+.container{
+    margin: 20px auto;
+}
+.blog_layout {
+    display: grid;
+    grid-template-columns: 280px 1fr; /* Sidebar + content */
+    gap: 2rem;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.blog_filter{
+    width: 100px;
+}
+
+.blog_content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+@media (max-width: 768px) {
+    .blog_layout {
+        grid-template-columns: 1fr;
+    }
+
+    .blog_filter{
+        order: 1;
+    }
+
+    .blog_content {
+        order: 2;
+        grid-template-columns: 1fr;
+    }
+}

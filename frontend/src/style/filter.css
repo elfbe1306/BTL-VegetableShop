@@ -41,11 +41,19 @@
     width: 166px;
     font-size: 14px;
     margin-left: 5px;
+
+    border: 1px solid #ccc; /*quin*/
+    border-radius: 4px;
+    color: #4d4d4d;
+    font-family: inherit; 
+    padding-inline: 10px; 
 }
 
 .filter_result {
     margin-left: auto;
     font-size: 14px; 
+
+    color: #4d4d4d; /*quin*/
 }
 
 @media (max-width: 600px) {
