@@ -71,11 +71,12 @@ function ListProduct() {
                 </div>
                 <span>1.0 & up</span>
               </div>
+              
             </div>
           </div>
           <div className='product_align'>
             <div className='product'>
-              <div className='product_status'>Out of stock</div>
+              <div className='product_out_of_stock'>Out of stock</div>
               <img src="./img/Potato.png" alt="" />
               <div className='product_description'>
                 <div className='product_title'>
@@ -112,11 +113,15 @@ function ListProduct() {
             </div>
 
             <div className='product'>
+              <div className='product_on_sale'>Sale 50%</div>
               <img src="./img/Potato.png" alt="" />
               <div className='product_description'>
                 <div className='product_title'>
                   <span>Big Potatoes</span>
-                  <span>$14.99</span>
+                  <div className='product_price'>
+                    <span>$14.99</span>
+                    <span className='price_before_sale'>$29.98</span>
+                  </div>
                   <div className='product_rate'>
                     <i class="ri-star-fill star-yellow"></i>
                     <i class="ri-star-fill star-yellow"></i>

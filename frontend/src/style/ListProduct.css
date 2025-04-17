@@ -43,13 +43,32 @@ input[type="checkbox"]:checked {
 }
 
 
-.product_status {
+.product_out_of_stock {
     position: absolute;
     background-color: black;
     color: white;
     border-radius: 4px;
     padding: 5px 10px;
     margin: 15px;
+}
+
+.product_on_sale{
+    position: absolute;
+    background-color: rgb(234, 75, 72);
+    color: white;
+    border-radius: 4px;
+    padding: 5px 10px;
+    margin: 15px;
+}
+
+.product_price {
+    display: flex;
+    gap: 8px;
+}
+
+.price_before_sale {
+    color: gray;
+    text-decoration: line-through;
 }
 
 .product:hover {
@@ -105,13 +124,16 @@ input[type="checkbox"]:checked {
     color: #00B207;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 769px) {
     .product, .product_chosen {
         flex: 1 1 calc(50% - 24px);
     }
+    .filter_field span {
+       display: none;
+    }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 480px) {
     .product, .product_chosen {
         flex: 1 1 100%;
     }
