@@ -6,11 +6,8 @@
 }
 
 .bannerBarBox {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: row;
-    column-gap: 25px;
+    display: grid;
+    grid-template-columns: 80px 1fr;
     padding-bottom: 10px;
     border-bottom: 2px solid transparent;
 }
@@ -22,7 +19,9 @@
 .icon {
     fill: #00B207;
     background-color: #EDF2EE;
-    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    border-radius: 90%;
     padding: 15px;
 }
 
@@ -35,7 +34,6 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-top: 15px;
 }
 
 .title {
@@ -49,5 +47,35 @@
     color: #999999;
     font-size: 14px;
     margin-top: 5px;
+}
+
+@media screen and (max-width: 769px) {
+    .bannerBarBox {
+        column-gap: 10px;
+        grid-template-columns: 60px 1fr;
+    }
+
+    .icon {
+        width: 32px;
+        height: 32px;
+    }
+
+    .titleBox {
+        margin-top: 0px;
+    }
+
+    .title {
+        font-size: 12px;
+    }
+    
+    .subTitle {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .bannerBarContainer {
+        display: none;
+    }
 }
   
