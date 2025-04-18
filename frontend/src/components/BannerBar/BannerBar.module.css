@@ -1,6 +1,7 @@
 .bannerBarContainer {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
+    column-gap: 10px;
     margin-left: 5%;
     margin-right: 5%;
     margin-top: 15px;
