@@ -2,6 +2,7 @@ import React from 'react'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import styles from './InfoPage.module.css'
+import { FaLeaf } from "react-icons/fa";
 
 function InfoPage() {
   return (
@@ -25,6 +26,15 @@ function InfoPage() {
                 <div className={styles.Text}>
                     <div className={styles.BoldText}>100% Trusted Organic Food Store</div>
                     <div className={styles.SmallText}>Pellentesque a ante vulputate leo porttitor luctus sed eget eros. Nulla et rhoncus neque. Duis non diam eget est luctus tincidunt a a mi. Nulla eu eros consequat tortor tincidunt feugiat. </div>
+                </div>
+                <div className={styles.FullIconWrap}>
+                    <div className={styles.IAndT}>
+                      <div className={styles.icon}><FaLeaf/></div>
+                      <div className={styles.IconText}>
+                        <div className={styles.IconHeadText}>100% Organic food</div>
+                        <div className={styles.IconContentText}>100% healthy & Fresh food.</div>
+                      </div>
+                    </div>
                 </div>
               </div>
 

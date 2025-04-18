@@ -1,6 +1,7 @@
 .Wrapper{
     height: 100%;
     width: 100%;
+    font-family: Pop;
 }
 .AboutUs{
     display: flex;
@@ -44,7 +45,7 @@
 .TextAndIconWrap{
     width: 100%;
     position: absolute;
-    left: 38rem;
+    left: 38.5rem;
 }
 .TextAndIconWrap .Text{
     margin-top: 20px;
@@ -55,4 +56,21 @@
     margin-top: 5px;
     color: var(--Gray-Scale-Gray-500, #808080);
     line-height: 150%;
+}
+.IAndT{
+    display: flex;
+    flex-direction: row;
+}
+.icon{
+    background-color: rgba(0, 178, 7, 0.10);
+    font-size: 25px;
+    width: 40px;
+    height: 40px;
+    border-radius: 5000px;
+}
+.IconHeadText{
+    font-size: 12px;
+}
+.IconContentText{
+    font-size: 8px;
 }
