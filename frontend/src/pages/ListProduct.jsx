@@ -3,6 +3,7 @@ import Header from '../components/Header/Header'
 import Footer from '../components/Footer/Footer'
 import Filter from '../components/Filter'
 import Pagination from '../components/Pagination'
+import PriceSlider from '../components/PriceSlider/PriceSlider'
 import "../style/ListProduct.css"; 
 
 function ListProduct() {
@@ -71,7 +72,8 @@ function ListProduct() {
                 </div>
                 <span>1.0 & up</span>
               </div>
-              
+              <span style={{ marginTop: '30px', display: 'block' }}>Price</span>
+              <PriceSlider />
             </div>
           </div>
           <div className='product_align'>
