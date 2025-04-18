@@ -1,3 +1,7 @@
+.Wrapper{
+    height: 100%;
+    width: 100%;
+}
 .AboutUs{
     display: flex;
     flex-direction: row;
@@ -14,20 +18,41 @@
 }
 .BoldText{
     font-size: 35px;
+    line-height: 120%;
     font-weight: 600;
 }
 .SmallText{
     margin-top: 10px;
     font-size: 12px;
     font-weight: 400;
+    line-height: 150%;
+}
+.AboutMeWrap{
+    display: flex;
+    flex-direction: row;
+    margin-top: 50px;
 }
 .AboutMe{
     background: linear-gradient(269deg, #FFF 18.88%, rgba(255, 255, 255, 0.00) 86.37%), url('src/assets/images/About-me-BG.png') lightgray 50% / cover no-repeat;
-    width: 600px;
+    width: 900px;
     height: 350px;
-    margin-top: 50px;
 }
 .AboutMe img{
-    width: 63.5%;
-    margin-left: 110px;
+    width: 23.8rem;
+    margin-left: 25%;
+}
+.TextAndIconWrap{
+    width: 100%;
+    position: absolute;
+    left: 38rem;
+}
+.TextAndIconWrap .Text{
+    margin-top: 20px;
+    width: 23rem;
+}
+.TextAndIconWrap .SmallText{
+    font-size: 10px;
+    margin-top: 5px;
+    color: var(--Gray-Scale-Gray-500, #808080);
+    line-height: 150%;
 }

@@ -7,7 +7,7 @@ function InfoPage() {
   return (
     <div>
       <Header />       
-        <div>
+        <div className={styles.Wrapper}>
             <div className={styles.AboutUs}>
                 <div className={styles.Text}>
                     <div className={styles.BoldText}>100% Trusted Organic Food Store</div>
@@ -17,8 +17,18 @@ function InfoPage() {
                     <img src="src/assets/images/About-us-img.png" alt="img" />
                 </div>
             </div>
-            <div className={styles.AboutMe}>
-                <img src="src/assets/images/About-me-img.png" alt="img" />
+            <div className={styles.AboutMeWrap}>
+              <div className={styles.AboutMe}>
+                <img src="src/assets/images/About-me-img.png" alt="img" />  
+              </div>
+              <div className={styles.TextAndIconWrap}>
+                <div className={styles.Text}>
+                    <div className={styles.BoldText}>100% Trusted Organic Food Store</div>
+                    <div className={styles.SmallText}>Pellentesque a ante vulputate leo porttitor luctus sed eget eros. Nulla et rhoncus neque. Duis non diam eget est luctus tincidunt a a mi. Nulla eu eros consequat tortor tincidunt feugiat. </div>
+                </div>
+              </div>
+
+
             </div>
         </div>
       <Footer /> 
