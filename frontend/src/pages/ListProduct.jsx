@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react';
 import Header from '../components/Header/Header'
 import Footer from '../components/Footer/Footer'
 import Filter from '../components/Filter'
 import Pagination from '../components/Pagination'
 import PriceSlider from '../components/PriceSlider/PriceSlider'
+import RatingFilter from '../components/RatingFilter/RatingFilter'
 import "../style/ListProduct.css"; 
 
 function ListProduct() {
+  const [ratings, setRatings] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <div>
@@ -16,66 +19,13 @@ function ListProduct() {
         <div className='main_container'>
           <div>
             <div className='filter_field'>
-              <span>Rating</span>
-              <div className='rate_field'>
-                <input type="checkbox" id="" name="" value=""/>
-                <div>
-                  <i class="ri-star-fill star-yellow"></i>
-                  <i class="ri-star-fill star-yellow"></i>
-                  <i class="ri-star-fill star-yellow"></i>
-                  <i class="ri-star-fill star-yellow"></i>
-                  <i class="ri-star-fill star-yellow"></i>
-                </div>
-                <span>5.0</span>
-              </div>
-              <div className='rate_field'>
-                <input type="checkbox" id="" name="" value=""/>
-                <div>
-                  <i class="ri-star-fill star-yellow"></i>
-                  <i class="ri-star-fill star-yellow"></i>
-                  <i class="ri-star-fill star-yellow"></i>
-                  <i class="ri-star-fill star-yellow"></i>
-                  <i class="ri-star-fill star-gray"></i>
-                </div>
-                <span>4.0 & up</span>
-              </div>
-              <div className='rate_field'>
-                <input type="checkbox" id="" name="" value=""/>
-                <div>
-                  <i class="ri-star-fill star-yellow"></i>
-                  <i class="ri-star-fill star-yellow"></i>
-                  <i class="ri-star-fill star-yellow"></i>
-                  <i class="ri-star-fill star-gray"></i>
-                  <i class="ri-star-fill star-gray"></i>
-                </div>
-                <span>3.0 & up</span>
-              </div>
-              <div className='rate_field'>
-                <input type="checkbox" id="" name="" value=""/>
-                <div>
-                  <i class="ri-star-fill star-yellow"></i>
-                  <i class="ri-star-fill star-yellow"></i>
-                  <i class="ri-star-fill star-gray"></i>
-                  <i class="ri-star-fill star-gray"></i>
-                  <i class="ri-star-fill star-gray"></i>
-                </div>
-                <span>2.0 & up</span>
-              </div>
-              <div className='rate_field'>
-                <input type="checkbox" id="" name="" value=""/>
-                <div>
-                  <i class="ri-star-fill star-yellow"></i>
-                  <i class="ri-star-fill star-gray"></i>
-                  <i class="ri-star-fill star-gray"></i>
-                  <i class="ri-star-fill star-gray"></i>
-                  <i class="ri-star-fill star-gray"></i>
-                </div>
-                <span>1.0 & up</span>
-              </div>
-              <span style={{ marginTop: '30px', display: 'block' }}>Price</span>
+              <p>Rating</p>
+               <RatingFilter selectedRatings={ratings} onChange={setRatings} />
+              <p style={{ marginTop: '30px', display: 'block' }}>Price</p>
               <PriceSlider />
             </div>
           </div>
+
           <div className='product_align'>
             <div className='product'>
               <div className='product_out_of_stock'>Out of stock</div>
@@ -92,7 +42,7 @@ function ListProduct() {
                     <i class="ri-star-fill star-gray"></i>
                   </div>
                 </div>
-                  <i class="ri-shopping-bag-line"></i>
+                <i className="ri-shopping-bag-line"/>
               </div>
             </div>
 
