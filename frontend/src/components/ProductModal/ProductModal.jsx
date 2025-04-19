@@ -6,7 +6,9 @@ const ProductModal = ({ product, onClose }) => {
     <div className={styles.overlay}>
       <div className={styles.modal}>
         <div className={styles.productContainer}>
-            <div></div>
+            <div>
+                
+            </div>
             <div>
                 <h2>{product.name}</h2>
                 <p>Price: ${product.price}</p>

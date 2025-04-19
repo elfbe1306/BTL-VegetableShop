@@ -7,37 +7,6 @@ import styles from './HomePage.module.css'
 import PromoBanner1 from '../../assets/images/promo1.png'
 import apiService from '../../api';
 
-// const products = [
-//   {
-//     id: 1,
-//     name: 'Chainse Cabbage',
-//     price: 14.99,
-//     rating: 4,
-//     image: "/img/products/ChaniseCabbage.png",
-//   },
-//   {
-//     id: 2,
-//     name: 'Green Lettuce',
-//     price: 14.99,
-//     rating: 4,
-//     image: '/img/products/GreenLettuce.png',
-//   },
-//   {
-//     id: 3,
-//     name: 'Green Chili',
-//     price: 14.99,
-//     rating: 4,
-//     image: '/img/products/GreenChili.png',
-//   },
-//   {
-//     id: 4,
-//     name: 'Corn',
-//     price: 14.99,
-//     rating: 4,
-//     image: '/img/products/Corn.png',
-//   },
-// ]
-
 function HomePage() {
   const [products, setProducts] = useState([]);
 
