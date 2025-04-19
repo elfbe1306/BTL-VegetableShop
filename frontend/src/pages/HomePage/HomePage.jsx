@@ -1,43 +1,55 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import HomePageHeader from '../../components/HomePageHeader/HomePageHeader'
 import ImageSlider from '../../components/ImageSlider/ImageSlider';
 import BannerBar from '../../components/BannerBar/BannerBar';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import styles from './HomePage.module.css'
 import PromoBanner1 from '../../assets/images/promo1.png'
+import apiService from '../../api';
 
-const products = [
-  {
-    id: 1,
-    name: 'Chainse Cabbage',
-    price: 14.99,
-    rating: 4,
-    image: "/img/products/ChaniseCabbage.png",
-  },
-  {
-    id: 2,
-    name: 'Green Lettuce',
-    price: 14.99,
-    rating: 4,
-    image: '/img/products/GreenLettuce.png',
-  },
-  {
-    id: 3,
-    name: 'Green Chili',
-    price: 14.99,
-    rating: 4,
-    image: '/img/products/GreenChili.png',
-  },
-  {
-    id: 4,
-    name: 'Corn',
-    price: 14.99,
-    rating: 4,
-    image: '/img/products/Corn.png',
-  },
-]
+// const products = [
+//   {
+//     id: 1,
+//     name: 'Chainse Cabbage',
+//     price: 14.99,
+//     rating: 4,
+//     image: "/img/products/ChaniseCabbage.png",
+//   },
+//   {
+//     id: 2,
+//     name: 'Green Lettuce',
+//     price: 14.99,
+//     rating: 4,
+//     image: '/img/products/GreenLettuce.png',
+//   },
+//   {
+//     id: 3,
+//     name: 'Green Chili',
+//     price: 14.99,
+//     rating: 4,
+//     image: '/img/products/GreenChili.png',
+//   },
+//   {
+//     id: 4,
+//     name: 'Corn',
+//     price: 14.99,
+//     rating: 4,
+//     image: '/img/products/Corn.png',
+//   },
+// ]
 
 function HomePage() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await apiService.FetchProduct();
+      setProducts(response)
+    }
+
+    fetchData()
+  }, [])
+
   return (
     <div>
       <HomePageHeader />

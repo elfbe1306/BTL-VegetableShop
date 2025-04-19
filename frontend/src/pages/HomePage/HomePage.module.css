@@ -23,6 +23,9 @@
     position: relative;
     column-gap: 25px;
     margin: 0px 5%;
+
+
+    padding-bottom: 500px;
 }
 
 .promoBanner img {
