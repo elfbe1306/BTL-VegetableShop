@@ -11,11 +11,12 @@ class ApiService {
     ApiService.instance = this;
   }
 
-  async UserCreateAccount(userData) {
+  async FetchProduct() {
     try {
-      const response = await this.api.post(`/Users`, userData);
+      const response = await this.api.get('?action=fetchproducts');
       return response.data;
     } catch (error) {
+      console.error("Error fetching products:", error);
       throw error;
     }
   }

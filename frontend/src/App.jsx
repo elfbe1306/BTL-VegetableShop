@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom'//levy thêm chữ dom
 import 'remixicon/fonts/remixicon.css'
-import HomePage from './pages/HomePage'
+import HomePage from './pages/HomePage/HomePage'
 import ListProduct from './pages/ListProduct'
 
 function App() {

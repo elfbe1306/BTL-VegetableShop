@@ -31,5 +31,202 @@
     justify-content: space-between;
     align-items: center;
     padding: 20px 5%;
-    border-bottom: 1px solid #ddd;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 138px;
+    margin-right: 10px;
+}
+
+.searchBar {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 450px;
+    background-color: white;
+}
+
+.searchBar i {
+    font-size: 18px;
+    margin-left: 15px;
+}
+
+.searchInput {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    padding-left: 12px;
+}
+
+.searchButton {
+    background-color: #00B207;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.searchButton:hover {
+    background-color: #2C742F;
+}
+
+.userActions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.favorite-icon,
+.cart-icon {
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.divider {
+    height: 24px;
+    width: 1px;
+    background-color: #ccc;
+}
+
+.cart {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.cartBadge {
+    position: absolute;
+    top: -5px;
+    left: 14px;
+    background-color: #2C742F;
+    color: white;
+    font-size: 10px;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid white;
+}
+
+.cartText {
+    font-size: 11px;
+    color: #4d4d4d;
+}
+
+.cartValue {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.navBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #1A1A1A;
+    margin-bottom: 25px;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.navMenu {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+}
+
+.navLink {
+    text-decoration: none;
+    color: #666;
+    font-weight: 500;
+    font-size: 14px;
+    transition: color 0.3s ease-in-out;
+}
+
+.navLink:hover {
+    color: white;
+}
+
+.phoneNumber {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    color: white;
+}
+
+.hamburger {
+    display: none; 
+    font-size: 28px;
+    cursor: pointer;
+    color: white;
+}
+
+@media screen and (max-width: 768px) {
+    
+    .searchBar{
+        width: auto;
+    }
+    .navBar {
+        position: relative;
+        padding: 15px 5%;
+    }
+
+    .hamburger {
+        display: block;
+        margin-right: 15px;
+    }
+  
+    .navMenu {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color: white;
+        position: absolute;
+        top: 60px; 
+        left: 0;
+        padding: 10px 0;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        z-index: 1000;
+    }
+  
+    .navMenu.active {
+        display: flex;
+    }
+  
+    .navMenu li {
+        text-align: center;
+        padding: 10px 0;
+    }
+    .navMenu li:hover{
+        background-color: #f7f7ff;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .topBar{
+        justify-content: center;
+    }
+    .mainHeader{
+        flex-direction: column;
+        gap: 20px;
+    }
 }
