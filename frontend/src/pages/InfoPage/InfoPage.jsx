@@ -9,6 +9,7 @@ import { TfiHeadphoneAlt } from "react-icons/tfi";
 import { PiShoppingBagLight } from "react-icons/pi";
 import { PiPackageLight } from "react-icons/pi";
 import { FaCheck } from "react-icons/fa6";
+import { FaArrowRightLong } from "react-icons/fa6";
 
 function InfoPage() {
   return (
@@ -97,17 +98,24 @@ function InfoPage() {
                   </div>
                   <div className={styles.CheckEle}>
                     <div className={styles.icon}><FaCheck /></div>
-                    <div className={styles.SmallText}>Sed in metus pellentesque.</div>                
+                    <div className={styles.SmallText}>Fusce et ex commodo, aliquam nulla efficitur, tempus lorem.</div>                
                   </div>
                   <div className={styles.CheckEle}>
                     <div className={styles.icon}><FaCheck /></div>
-                    <div className={styles.SmallText}>Sed in metus pellentesque.</div>                
+                    <div className={styles.SmallText}>Maecenas ut nunc fringilla erat varius.</div>                
                   </div>
+                </div>
+                <div className={styles.Button}>
+                  <div>Shop now</div>
+                  <FaArrowRightLong />
                 </div>
               </div>
               <div className={styles.Image}>
-              <img src="src/assets/images/Delivery-man.png" alt="img" />  
+                <img src="src/assets/images/Delivery-man.png" alt="img" />  
               </div>
+            </div>
+            <div className={styles.Teams}>
+              text
             </div>
         </div>
       <Footer /> 
