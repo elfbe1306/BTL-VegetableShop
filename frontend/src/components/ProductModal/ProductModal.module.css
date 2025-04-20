@@ -15,14 +15,14 @@
   background: #fff;
   padding: 24px;
   border-radius: 12px;
-  width: 90%;
+  width: 80%;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   position: relative;
 }
 
 .productContainer {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 0.6fr;
 }
   
 .sliderContainer {
@@ -73,6 +73,7 @@
 
 .productContainer h2{
   margin: 0px;
+  font-size: 40px;
 }
 
 .rating {
@@ -102,18 +103,108 @@
   margin-top: 4px;
   padding-bottom: 14px;
   border-bottom: 2px solid #E6E6E6;
+  font-size: 18px;
 }
 
 .priceValue {
   color: #2C742F;
 }
 
-@media screen and (max-width: 769px) {
+.description {
+  color: gray;
+  padding-bottom: 14px;
+  border-bottom: 2px solid #E6E6E6;
+  text-align: justify;
+  height: 300px;
+  overflow-y: auto;
+}
+
+.quantitycomponent {
+  display: flex;
+  flex-direction: row;
+  gap: 2%;
+  margin-top: 20px;
+}
+
+.quantitycontainer {
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: 40px;
+  padding: 10px 4px;
+  border: 1px solid #eee;
+  width: fit-content;
+}
+
+.minusbutton, .addbutton {
+  background: #f0f0f0;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  cursor: pointer;
+  margin: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.addtocartbutton {
+  border-radius: 40px;
+  padding: 10px 4px;
+  width: 58%;
+  border: none;
+  background-color: #00B207;
+  color: white;
+  font-size: 20px;
+  font-weight:500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.addtocartbutton:hover {
+  background-color: #2C742F;
+}
+
+.favoriteButton {
+  display: flex;
+  width: 60px;
+  height: 60px;
+  border: none;
+  padding: 15px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 99px;
+  background-color: rgba(32, 181, 38, 0.1);
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.favoriteButton:hover {
+  background-color: #ebf3eb;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+@media screen and (max-width: 1212px) {
   .modal {
     width: 80%;
   }
   .sliderContainer img {
       height: 400px;
+  }
+
+  .productContainer {
+    grid-template-rows: 0.5fr 1fr;
+    grid-template-columns: none;
+  }
+  .description {
+    height: 200px;
+    overflow-y: auto;
   }
 }
 
@@ -121,4 +212,21 @@
   .sliderContainer img {
       height: 400px;
   }
+
+  .productContainer {
+    grid-template-rows: 0.5fr 1fr;
+    grid-template-columns: none;
+  }
+
+  .rightContainer {
+    margin-left: 10px;
+    margin-right: 10px !important;
+  }
+
+  .description {
+    height: 200px;
+    overflow-y: auto;
+  }
 }
+
+
