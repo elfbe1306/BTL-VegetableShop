@@ -16,6 +16,7 @@ const PriceSlider = () => {
   return (
     <div className='price_box'>
       <Slider
+        style={{width:'280px'}}
         range
         min={MIN}
         max={MAX}
