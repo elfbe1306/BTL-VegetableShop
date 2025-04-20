@@ -71,6 +71,43 @@
   width: 30px;
 }
 
+.productContainer h2{
+  margin: 0px;
+}
+
+.rating {
+  display: flex;
+  flex-direction: row;
+}
+
+.star {
+  fill: #FACC15;
+  width: 14px;
+  height: auto;
+}
+
+.nullstar {
+  fill: #D1D5DB;
+  width: 14px;
+  height: auto;
+}
+
+.rating span {
+  margin-left: 10px;
+  color: rgb(102,102,102);
+  font-size: 14px;
+}
+
+.price {
+  margin-top: 4px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid #E6E6E6;
+}
+
+.priceValue {
+  color: #2C742F;
+}
+
 @media screen and (max-width: 769px) {
   .modal {
     width: 80%;
@@ -85,40 +122,3 @@
       height: 400px;
   }
 }
-
-  .productContainer h2{
-    margin: 0px;
-  }
-
-  .rating {
-    display: flex;
-    flex-direction: row;
-  }
-
-  .star {
-    fill: #FACC15;
-    width: 14px;
-    height: auto;
-  }
-
-  .nullstar {
-    fill: #D1D5DB;
-    width: 14px;
-    height: auto;
-  }
-  
-  .rating span {
-    margin-left: 10px;
-    color: rgb(102,102,102);
-    font-size: 14px;
-  }
-
-  .price {
-    margin-top: 4px;
-    padding-bottom: 14px;
-    border-bottom: 2px solid #E6E6E6;
-  }
-
-  .priceValue {
-    color: #2C742F;
-  }
