@@ -6,7 +6,7 @@
 .AboutUs{
     display: flex;
     flex-direction: row;
-    margin-top: 50px;
+    margin-top: 40px;
     padding-inline: 200px;
     align-items: center;
     gap: 40px
@@ -27,11 +27,12 @@
     font-size: 12px;
     font-weight: 400;
     line-height: 150%;
+    color: var(--Gray-Scale-Gray-600, #666);
 }
 .AboutMeWrap{
     display: flex;
     flex-direction: row;
-    margin-top: 50px;
+    margin-top: 40px;
 }
 .AboutMe{
     background: linear-gradient(269deg, #FFF 18.88%, rgba(255, 255, 255, 0.00) 86.37%), url('src/assets/images/About-me-BG.png') lightgray 50% / cover no-repeat;
@@ -45,7 +46,7 @@
 .TextAndIconWrap{
     width: 100%;
     position: absolute;
-    left: 38.5rem;
+    left: 40rem;
 }
 .TextAndIconWrap .Text{
     margin-top: 20px;
@@ -57,9 +58,16 @@
     color: var(--Gray-Scale-Gray-500, #808080);
     line-height: 150%;
 }
+.FullIconWrap{
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
 .IAndT{
     display: flex;
     flex-direction: row;
+    gap: 10px;
+    margin-top: 15px;
 }
 .icon{
     background-color: rgba(0, 178, 7, 0.10);
@@ -67,10 +75,28 @@
     width: 40px;
     height: 40px;
     border-radius: 5000px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #00B207;
+}
+.IconText{
+    align-self: center;
+    justify-self: center;
 }
 .IconHeadText{
     font-size: 12px;
+    font-weight: 500;
 }
 .IconContentText{
     font-size: 8px;
+    color: var(--Gray-Scale-Gray-500, #808080);
+}
+.Delivery{
+    display: flex;
+    flex-direction: row;
+    margin-top: 40px;
+    padding-inline: 200px;
+    align-items: center;
+    gap: 40px
 }
