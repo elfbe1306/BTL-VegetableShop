@@ -1,6 +1,6 @@
 .productCardContainer {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: 3.5fr 1fr;
     border: 1px solid #E6E6E6;
     border-radius: 10px;
     position: relative;
@@ -12,6 +12,11 @@
 
 .productCardContainer img {
     border-radius: 10px;
+    width: 90%;
+    height: 100%;
+    margin-left: 5%;
+    margin-right: 5%;
+    object-fit: contain;
 }
 
 .product_description {

@@ -1,0 +1,47 @@
+.promoBanner {
+    border: 1px solid #E6E6E6;
+    border-radius: 10px;
+    position: relative;
+}
+
+.promoBanner img {
+    width: 100%;
+    height: 100%;
+}
+
+.promoBannerTextContainer {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.promoBannerTitle {
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 0;
+}
+
+.promoBannerDiscount {
+    font-size: 32px;
+    margin-top: 0;
+    font-weight: 500;
+    color: rgb(0, 178, 7);
+    margin-bottom: 0;
+}
+
+.promoBannerButton {
+    background-color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-size: 15px;
+    color: rgb(0, 178, 7);
+    font-weight: 500;
+    cursor: pointer;
+    width: 150px;
+}
