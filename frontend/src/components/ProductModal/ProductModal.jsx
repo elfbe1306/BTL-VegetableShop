@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react"; 
 import styles from "./ProductModal.module.css";
 import CloseIcon from "../../assets/icons/CloseIcon";
 import FullStar from "../../assets/icons/FullStar";
 import HalfStar from "../../assets/icons/HalfStar";
 import NullStar from "../../assets/icons/NullStar";
+import Favorite from "../../assets/icons/Favorite";
 
 const ProductModal = ({ product, onClose }) => {
     const [currentSlide, setCurrentSlide] = useState(0);
@@ -30,6 +31,11 @@ const ProductModal = ({ product, onClose }) => {
 
     const averageRating = product.total_user > 0 ? product.total_star / product.total_user : 0;
 
+    const [count, setCount] = useState(0);
+
+    const increment = () => setCount(count + 1);
+    const decrement = () => setCount(count > 0 ? count - 1 : 0);
+
     return (
         <div className={styles.overlay}>
             <div className={styles.modal}>
@@ -47,7 +53,7 @@ const ProductModal = ({ product, onClose }) => {
                             ))}
                         </div>
                     </div>
-                    <div>
+                    <div className={styles.rightContainer} style={{marginRight: '30px'}}>
                         <h2>{product.name}</h2>
                         <div className={styles.rating}>
                             {[...Array(5)].map((_, i) => {
@@ -63,6 +69,18 @@ const ProductModal = ({ product, onClose }) => {
                             <span>4 Review</span>
                         </div>
                         <p className={styles.price}>Price: <span className={styles.priceValue}>${product.price}</span></p>
+                        <p className={styles.description}>{product.description}</p>
+                        <div className={styles.quantitycomponent}>
+                          <div className={styles.quantitycontainer}>
+                            <button onClick={decrement} className={styles.minusbutton}>-</button>
+                              <span className={styles.quantitynumber}>{count}</span>
+                            <button onClick={increment} className={styles.addbutton}>+</button>
+                          </div>
+                          <button className={styles.addtocartbutton}>Add to Cart</button>
+                          <button className={styles.favoriteButton}>
+                            <Favorite/>
+                          </button>
+                        </div>
                     </div>
                 </div>
                 <button className={styles.closeButton} onClick={onClose}>
