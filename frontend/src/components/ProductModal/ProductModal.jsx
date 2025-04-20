@@ -7,13 +7,13 @@ const ProductModal = ({ product, onClose }) => {
 
     const slides = [
         {
-            image: product.image + "1.png",
+            image: "http://localhost/BTL-VegetableShop/backend/uploads/products/" + product.image + "1.png",
         },
         {
-            image: product.image + "2.png",
+            image: "http://localhost/BTL-VegetableShop/backend/uploads/products/" + product.image + "2.png",
         },
         {
-            image: product.image + "3.png",
+            image: "http://localhost/BTL-VegetableShop/backend/uploads/products/" + product.image + "3.png",
         },
     ];
 

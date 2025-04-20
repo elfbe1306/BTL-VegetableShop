@@ -15,7 +15,7 @@ const ProductCard = ({ product }) => {
 
     return(
         <div className={styles.productCardContainer}>
-            <img src={product.image + "1.png"}/>
+            <img src={"http://localhost/BTL-VegetableShop/backend/uploads/products/" + product.image + "1.png"}/>
             <div className={styles.product_description}>
                 <div className={styles.product_title_container}>
                     <p className={styles.product_name}>{product.name}</p>
