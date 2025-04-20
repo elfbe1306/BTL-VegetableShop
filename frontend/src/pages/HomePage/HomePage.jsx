@@ -13,6 +13,7 @@ function HomePage() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await apiService.FetchProduct();
+      console.log(response)
       setProducts(response)
     }
 
@@ -40,7 +41,7 @@ function HomePage() {
           </div>
         </div>
         {products.map((p) => (
-          <ProductCard key={p.id} product={p}/>
+          <ProductCard key={p.product_id} product={p}/>
         ))}
       </div>
       

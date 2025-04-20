@@ -3,6 +3,7 @@
     flex-direction: column;
     border: 1px solid #E6E6E6;
     border-radius: 10px;
+    position: relative;
 }
 
 .productCardContainer:hover {
@@ -29,10 +30,42 @@
     margin-bottom: 0;
 }
 
-.product_price {
+.product_price, .originalPrice, .discountedPrice {
     margin-top: 0;
     margin-bottom: 0;
+}
+
+.product_price {
     font-weight: 400;
+}
+
+.priceContainer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+  
+.originalPrice {
+    text-decoration: line-through;
+    color: gray;
+    font-size: 0.9rem;
+}
+
+.discountedPrice {
+    color: rgb(0, 178, 1);
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.saleTag {
+    color: white;
+    background-color: red;
+    position: absolute;
+    font-size: 14px;
+    padding: 5px 5px;
+    border-radius: 5px;
+    top: 10px;
+    left: 10px;
 }
 
 .rating {
