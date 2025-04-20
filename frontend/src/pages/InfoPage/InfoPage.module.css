@@ -92,11 +92,23 @@
     font-size: 8px;
     color: var(--Gray-Scale-Gray-500, #808080);
 }
-.Delivery{
+.DeliveryWrap{
     display: flex;
     flex-direction: row;
     margin-top: 40px;
-    padding-inline: 200px;
-    align-items: center;
-    gap: 40px
+    padding-left: 200px;
+}
+.CheckEle{
+    display: flex;
+    flex-direction: row;
+}
+.CheckEle .icon{
+    color: #2C742F;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+}
+.CheckEle .SmallText{
+    margin-top: 0px;
+    align-self: center;
 }

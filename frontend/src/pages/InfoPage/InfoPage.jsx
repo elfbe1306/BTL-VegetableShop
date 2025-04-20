@@ -8,6 +8,7 @@ import { PiTruckLight } from "react-icons/pi";
 import { TfiHeadphoneAlt } from "react-icons/tfi";
 import { PiShoppingBagLight } from "react-icons/pi";
 import { PiPackageLight } from "react-icons/pi";
+import { FaCheck } from "react-icons/fa6";
 
 function InfoPage() {
   return (
@@ -83,11 +84,31 @@ function InfoPage() {
                 </div>
               </div>
             </div>
-            <div className={styles.Delivery}>
-                  <div className={styles.Image}>
-                      <img src="src/assets/images/About-us-img.png" alt="img" />
+            <div className={styles.DeliveryWrap}>
+              <div className={styles.DeText}> 
+                <div className={styles.Text}>
+                  <div className={styles.BoldText}>We Delivered, You Enjoy Your Order.</div>
+                  <div className={styles.SmallText}>Ut suscipit egestas suscipit. Sed posuere pellentesque nunc, ultrices consectetur velit dapibus eu. Mauris sollicitudin dignissim diam, ac mattis eros accumsan rhoncus. Curabitur auctor bibendum nunc eget elementum.</div>                
+                </div>
+                <div className={styles.CheckText}>
+                  <div className={styles.CheckEle}>
+                    <div className={styles.icon}><FaCheck /></div>
+                    <div className={styles.SmallText}>Sed in metus pellentesque.</div>                
                   </div>
+                  <div className={styles.CheckEle}>
+                    <div className={styles.icon}><FaCheck /></div>
+                    <div className={styles.SmallText}>Sed in metus pellentesque.</div>                
+                  </div>
+                  <div className={styles.CheckEle}>
+                    <div className={styles.icon}><FaCheck /></div>
+                    <div className={styles.SmallText}>Sed in metus pellentesque.</div>                
+                  </div>
+                </div>
               </div>
+              <div className={styles.Image}>
+              <img src="src/assets/images/Delivery-man.png" alt="img" />  
+              </div>
+            </div>
         </div>
       <Footer /> 
     </div>
