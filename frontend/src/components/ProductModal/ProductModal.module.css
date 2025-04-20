@@ -26,20 +26,21 @@
 }
   
 .sliderContainer {
-  padding-left: 5%;
-  padding-right: 5%;
   position: relative;
+  display: flex;
+  justify-content: center;
+  height: 560px;
 }
 
 .sliderContainer img {
-  width: 100%;
-  height: 560px;
-  object-fit: cover;
+  width: 90%;
+  height: 90%;
+  margin: 0;
 }
 
 .dots {
   position: absolute;
-  bottom: 5%;
+  bottom: 10%;
   left: 10%;
   display: flex;
   gap: 10px;
@@ -116,13 +117,12 @@
   border-bottom: 2px solid #E6E6E6;
   text-align: justify;
   height: 300px;
-  overflow-y: auto;
 }
 
 .quantitycomponent {
   display: flex;
   flex-direction: row;
-  gap: 2%;
+  justify-content: space-between;
   margin-top: 20px;
 }
 
@@ -145,25 +145,18 @@
   font-size: 24px;
   cursor: pointer;
   margin: 0 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   transition: background 0.2s ease;
 }
 
 .addtocartbutton {
   border-radius: 40px;
-  padding: 10px 4px;
-  width: 58%;
+  padding: 5px 15px;
   border: none;
   background-color: #00B207;
   color: white;
-  font-size: 20px;
-  font-weight:500;
+  font-size: 18px;
+  font-weight: 500;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   transition: background 0.2s ease;
 }
 
@@ -172,13 +165,10 @@
 }
 
 .favoriteButton {
-  display: flex;
   width: 60px;
   height: 60px;
   border: none;
   padding: 15px;
-  justify-content: center;
-  align-items: center;
   border-radius: 99px;
   background-color: rgba(32, 181, 38, 0.1);
   cursor: pointer;
@@ -193,29 +183,34 @@
 @media screen and (max-width: 1212px) {
   .modal {
     width: 80%;
+    height: 80%;
+    overflow-y: scroll;
   }
+
+  .sliderContainer {
+    align-items: center;
+  }
+
   .sliderContainer img {
-      height: 400px;
+      height: 80%;
+      width: 60%;
+  }
+
+  .dots {
+    left: 45%;
+    bottom: 5%;
   }
 
   .productContainer {
-    grid-template-rows: 0.5fr 1fr;
+    grid-template-rows: 1fr 1fr;
     grid-template-columns: none;
-  }
-  .description {
-    height: 200px;
-    overflow-y: auto;
   }
 }
 
 @media screen and (max-width: 480px) {
   .sliderContainer img {
-      height: 400px;
-  }
-
-  .productContainer {
-    grid-template-rows: 0.5fr 1fr;
-    grid-template-columns: none;
+    width: 100%;
+    height: 60%;
   }
 
   .rightContainer {
@@ -223,9 +218,14 @@
     margin-right: 10px !important;
   }
 
-  .description {
-    height: 200px;
-    overflow-y: auto;
+  .dots {
+    left: 40%;
+    bottom: 5%;
+  }
+
+  .productContainer {
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: none;
   }
 }
 
