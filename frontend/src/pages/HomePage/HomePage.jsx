@@ -4,6 +4,7 @@ import ImageSlider from '../../components/ImageSlider/ImageSlider';
 import BannerBar from '../../components/BannerBar/BannerBar';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import PromoBanner from '../../components/PromoBanner/PromoBanner';
+import VideoPlayer from '../../components/VideoPlayer/VideoPlayer';
 import styles from './HomePage.module.css'
 import apiService from '../../api';
 
@@ -36,6 +37,8 @@ function HomePage() {
           <ProductCard key={p.product_id} product={p}/>
         ))}
       </div>
+
+      <VideoPlayer />
       
     </div>
   )

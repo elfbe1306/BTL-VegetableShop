@@ -23,9 +23,7 @@
     row-gap: 25px;
     column-gap: 25px;
     margin: 0px 5%;
-
-
-    padding-bottom: 500px;
+    margin-bottom: 5%;
 }
 
 @media (max-width: 1500px) {

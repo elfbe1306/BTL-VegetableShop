@@ -1,5 +1,5 @@
 <?php
-function fetchAllProducts($conn) {
+function fetchAllProductsWithDiscountOrNot($conn) {
     $sql = "SELECT \n"
     . "products.id AS product_id, \n"
     . "sales.id AS sale_id,\n"

@@ -10,7 +10,7 @@ $action = $_GET['action'] ?? '';
 
 switch ($action) {
     case 'fetchproducts':
-        echo json_encode(fetchAllProducts($conn));
+        echo json_encode(fetchAllProductsWithDiscountOrNot($conn));
         break;
 
     default:
