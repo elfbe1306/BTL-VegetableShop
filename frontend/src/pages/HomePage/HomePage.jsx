@@ -13,8 +13,7 @@ function HomePage() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await apiService.FetchProduct();
-      console.log(response)
-      setProducts(response)
+      setProducts(response.slice(0, 4));
     }
 
     fetchData()
