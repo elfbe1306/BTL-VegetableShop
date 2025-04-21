@@ -78,6 +78,7 @@
     margin: 0.5rem 0 1rem;
     font-weight: 500;
     text-align: left;
+    cursor: pointer;
 }
 
 .blog_title:hover {
