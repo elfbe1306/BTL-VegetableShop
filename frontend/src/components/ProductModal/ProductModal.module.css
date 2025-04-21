@@ -74,7 +74,7 @@
 
 .productContainer h2{
   margin: 0px;
-  font-size: 40px;
+  font-size: 30px;
 }
 
 .rating {
@@ -180,10 +180,10 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-@media screen and (max-width: 1212px) {
+@media screen and (max-width: 1212px) and (min-width: 481px) {
   .modal {
     width: 80%;
-    height: 80%;
+    height: 70%;
     overflow-y: scroll;
   }
 
@@ -208,6 +208,12 @@
 }
 
 @media screen and (max-width: 480px) {
+  .modal {
+    width: 80%;
+    height: 80%;
+    overflow-y: scroll;
+  }
+
   .sliderContainer img {
     width: 100%;
     height: 60%;
@@ -226,6 +232,10 @@
   .productContainer {
     grid-template-rows: 1fr 1fr;
     grid-template-columns: none;
+  }
+
+  .description {
+    height: auto;
   }
 }
 
