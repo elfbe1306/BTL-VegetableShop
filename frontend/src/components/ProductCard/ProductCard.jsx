@@ -5,6 +5,7 @@ import HalfStar from "../../assets/icons/HalfStar";
 import NullStar from "../../assets/icons/NullStar";
 import ShoppingBagLevy from "../../assets/icons/ShoppingBagLevy";
 import ProductModal from "../ProductModal/ProductModal";
+import { Link } from 'react-router-dom';
 
 const ProductCard = ({ product }) => {
     const averageRating = product.total_user > 0 ? product.total_star / product.total_user : 0;
@@ -20,6 +21,8 @@ const ProductCard = ({ product }) => {
 
     return(
         <div className={styles.productCardContainer}>
+            {/* levy them vo cai link */}
+            <Link to={`/vegetable/${product.name}`}>
             <img src={"http://localhost/BTL-VegetableShop/backend/uploads/products/" + product.image + "1.png"}/>
             <div className={styles.product_description}>
                 <div className={styles.product_title_container}>
@@ -60,7 +63,9 @@ const ProductCard = ({ product }) => {
                     <div className={styles.saleTag}>Sale {Number(product.discount_percentage)}%</div>
                 )}
                 
+                
             </div>
+            </Link>
         </div>
     )
 }
