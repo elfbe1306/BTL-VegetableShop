@@ -26,6 +26,43 @@
     margin-bottom: 5%;
 }
 
+.customerReviewContainer {
+    background-color: #F2F2F2;
+    flex-direction: column;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    margin-top: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
+
+    margin-bottom: 400px;
+}
+
+.customerReviewTitle {
+    color: rgb(0, 178, 7);
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0;
+    text-align: center;
+}
+
+.customerReviewSubTitle {
+    font-size: 32px;
+    font-weight: 600;
+    margin: 0;
+    text-align: center;
+}
+
+.reviewContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 15px;
+    row-gap: 45px;
+    margin-top: 15px;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
 @media (max-width: 1500px) {
     .productFirstRowContainer {
         grid-template-columns: repeat(3, 1fr);
@@ -36,10 +73,18 @@
     .productFirstRowContainer {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    .reviewContainer {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media (max-width: 550px) {
     .productFirstRowContainer {
+        grid-template-columns: 1fr;
+    }
+
+    .reviewContainer {
         grid-template-columns: 1fr;
     }
 }

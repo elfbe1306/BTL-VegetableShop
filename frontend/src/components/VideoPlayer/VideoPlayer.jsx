@@ -16,9 +16,9 @@ const VideoPlayer = () => {
                 </div>
             ) : (
                 <video 
-                    className={styles.video} 
-                    controls 
-                    autoPlay 
+                    className={styles.video}  
+                    autoPlay
+                    loop
                     src="/CommercialVideo.mp4" >
                 </video>
             )}

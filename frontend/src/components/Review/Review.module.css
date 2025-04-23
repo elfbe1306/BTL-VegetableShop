@@ -1,0 +1,33 @@
+.reviewContainer {
+    display: grid;
+    grid-template-rows: 1fr 0.5fr;
+}
+
+.commentText {
+    margin: 0;
+}
+
+.userRatingContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
+.rating {
+    display: flex;
+    flex-direction: row;
+    margin-right: 15px;
+}
+
+.star {
+    fill: #FACC15;
+    width: 14px;
+    height: auto;
+}
+
+.nullstar {
+    fill: #D1D5DB;
+    width: 14px;
+    height: auto;
+}
