@@ -59,7 +59,7 @@ function HomePage() {
         <p className={styles.customerReviewSubTitle}>What our Client Says</p>
         <div className={styles.reviewContainer}>
           {reviews.slice(0, windowWidth <= 880 ? 4 : 3).map((r) => (
-              <Review key={r.id} review={r} />
+            <Review key={r.id} review={r} />
           ))}
         </div>
       </div>
