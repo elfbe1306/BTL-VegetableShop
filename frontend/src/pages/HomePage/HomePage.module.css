@@ -34,8 +34,6 @@
     margin-top: 5%;
     margin-left: 5%;
     margin-right: 5%;
-
-    margin-bottom: 400px;
 }
 
 .customerReviewTitle {
@@ -61,6 +59,28 @@
     margin-top: 15px;
     margin-left: 5%;
     margin-right: 5%;
+}
+
+.sponsorContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 25px;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 5%;
+    border: 1px solid #E6E6E6;
+    padding: 60px 100px;
+    margin-bottom: 5%;
+}
+
+.sponsorColor {
+    fill: #CCCCCC;
+}
+
+.sponsorColor:hover {
+    fill:rgb(0, 178, 7)
 }
 
 @media (max-width: 1500px) {

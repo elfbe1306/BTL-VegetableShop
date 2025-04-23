@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from 'react'
 
-import HomePageHeader from '../../components/HomePageHeader/HomePageHeader'
+import HomePageHeader from '../../components/HomePageHeader/HomePageHeader';
+import Footer from '../../components/Footer/Footer'
 import ImageSlider from '../../components/ImageSlider/ImageSlider';
 import BannerBar from '../../components/BannerBar/BannerBar';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import PromoBanner from '../../components/PromoBanner/PromoBanner';
 import VideoPlayer from '../../components/VideoPlayer/VideoPlayer';
 import Review from '../../components/Review/Review';
+
+import Sponsor1 from '../../assets/icons/Sponsor1';
+import Sponsor2 from '../../assets/icons/Sponsor2';
+import Sponsor3 from '../../assets/icons/Sponsor3';
+import Sponsor4 from '../../assets/icons/Sponsor4';
+import Sponsor5 from '../../assets/icons/Sponsor5';
+import Sponsor6 from '../../assets/icons/Sponsor6';
 
 import styles from './HomePage.module.css'
 import apiService from '../../api';
@@ -63,6 +71,17 @@ function HomePage() {
           ))}
         </div>
       </div>
+
+      <div className={styles.sponsorContainer}>
+        <Sponsor1 className={styles.sponsorColor}/>
+        <Sponsor2 className={styles.sponsorColor}/>
+        <Sponsor3 className={styles.sponsorColor}/>
+        <Sponsor4 className={styles.sponsorColor}/>
+        <Sponsor5 className={styles.sponsorColor}/>
+        <Sponsor6 className={styles.sponsorColor}/>
+      </div>
+
+      <Footer/>
       
     </div>
   )
