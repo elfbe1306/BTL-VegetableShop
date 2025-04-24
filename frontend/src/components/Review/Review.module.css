@@ -3,6 +3,10 @@
     grid-template-rows: 1fr 0.5fr;
 }
 
+.detailReview {
+    display: flex;
+}
+
 .commentText {
     margin: 0;
 }

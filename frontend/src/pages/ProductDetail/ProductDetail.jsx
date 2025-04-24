@@ -38,6 +38,9 @@ const ProductDetail = () => {
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
       }, []);
+
+    const [showAll, setShowAll] = useState(false);
+    const reviewsToShow = showAll ? reviews : reviews.slice(0, 3);      
     
     return (
         <div>
@@ -49,9 +52,12 @@ const ProductDetail = () => {
 
           <MakingReview />
           <div className={styles.reviewContainer}>
-            {reviews.slice(0, windowWidth <= 880 ? 4 : 3).map((r) => (
-              <Review key={r.id} review={r} />
+            {reviewsToShow.map((r) => (
+              <Review key={r.id} review={r} showComment={false}/>
             ))}
+            <button onClick={() => setShowAll(!showAll)} className={styles.loadMoreBtn}>
+            {showAll ? ">>> Show Less <<<" : "<<< Show More >>>"}
+            </button>
           </div>
           
           <div className={styles.customerfb}>

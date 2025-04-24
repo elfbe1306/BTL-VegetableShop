@@ -5,11 +5,12 @@ import FullStar from "../../assets/icons/FullStar";
 import HalfStar from "../../assets/icons/HalfStar";
 import NullStar from "../../assets/icons/NullStar";
 
-const Review = ({ review }) => {
+const Review = ({ review, showComment = true }) => {
+    const containerClass = showComment ? styles.reviewContainer : styles.detailReview;
     return(
-        <div className={styles.reviewContainer}>
+        <div className={styles.containerClass}>
             <div>
-                <ReviewIcon/>
+                {showComment && (<div><ReviewIcon /></div>)}
                 <p className={styles.commentText}>{review.comment}</p>
             </div>
             <div className={styles.userRatingContainer}>

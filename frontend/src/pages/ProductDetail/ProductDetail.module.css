@@ -15,9 +15,13 @@
 .reviewContainer {
     display: flex;
     flex-direction: column;
-    margin-top: 15px;
-    margin-left: 5%;
-    margin-right: 5%;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 30px;
+    padding: 20px 30px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .productFirstRowContainer {
@@ -27,4 +31,33 @@
     column-gap: 25px;
     margin: 2% 10%;
     margin-bottom: 5%;
+}
+
+.loadMoreBtn {
+    background-color: white;
+    align-self: flex-end;
+    margin-top: 16px;
+    border: none;
+    cursor: pointer;
+    color: #2C742F;
+    font-weight: 500;
+    font-size: 14px;
+  }
+
+  @media (max-width: 1500px) {
+    .productFirstRowContainer {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 880px) {
+    .productFirstRowContainer {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 550px) {
+    .productFirstRowContainer {
+        grid-template-columns: 1fr;
+    }
 }
