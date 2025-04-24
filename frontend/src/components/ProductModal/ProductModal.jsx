@@ -6,6 +6,8 @@ import HalfStar from "../../assets/icons/HalfStar";
 import NullStar from "../../assets/icons/NullStar";
 import Favorite from "../../assets/icons/Favorite";
 
+import { useCart } from "../../CartContext";
+
 const ProductModal = ({ product, onClose, mode = "modal" }) => {
     const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -35,6 +37,11 @@ const ProductModal = ({ product, onClose, mode = "modal" }) => {
 
     const increment = () => setCount(count + 1);
     const decrement = () => setCount(count > 0 ? count - 1 : 0);
+
+    const productPrice = 
+        product.discount_percentage ? 
+        Math.round(product.price * (100 - Number(product.discount_percentage))) / 100 :
+        product.price;
 
     const { addToCart, cartItems } = useCart();
 
@@ -80,9 +87,9 @@ const ProductModal = ({ product, onClose, mode = "modal" }) => {
                                 return <NullStar key={i} className={styles.nullstar} />;
                             }
                             })}
-                            <span>4 Review</span>
+                            <span>{product.total_user ? product.total_user : 0} Review</span>
                         </div>
-                        <p className={styles.price}>Price: <span className={styles.priceValue}>${product.price}</span></p>
+                        <p className={styles.price}>Price: <span className={styles.priceValue}>${productPrice}</span></p>
                         <p className={styles.description}>{product.description}</p>
                         <div className={styles.quantitycomponent}>
                           <div className={styles.quantitycontainer}>
