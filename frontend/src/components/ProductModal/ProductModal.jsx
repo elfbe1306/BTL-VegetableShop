@@ -6,6 +6,8 @@ import HalfStar from "../../assets/icons/HalfStar";
 import NullStar from "../../assets/icons/NullStar";
 import Favorite from "../../assets/icons/Favorite";
 
+import { useCart } from "../../CartContext.jsx";
+
 const ProductModal = ({ product, onClose }) => {
     const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -35,6 +37,20 @@ const ProductModal = ({ product, onClose }) => {
 
     const increment = () => setCount(count + 1);
     const decrement = () => setCount(count > 0 ? count - 1 : 0);
+
+    const { addToCart, cartItems } = useCart();
+
+    const handleAddToCart = () => {
+        if (count > 0) {
+            addToCart(product, count);
+            setCount(0);
+        }
+    };
+
+    useEffect(() => {
+        console.log("Cart Items:", cartItems);
+    }, [cartItems]);
+      
 
     return (
         <div className={styles.overlay}>
@@ -76,7 +92,7 @@ const ProductModal = ({ product, onClose }) => {
                               <span className={styles.quantitynumber}>{count}</span>
                             <button onClick={increment} className={styles.addbutton}>+</button>
                           </div>
-                          <button className={styles.addtocartbutton}>Add to Cart</button>
+                          <button className={styles.addtocartbutton} onClick={handleAddToCart}>Add to Cart</button>
                           <button className={styles.favoriteButton}>
                             <Favorite/>
                           </button>

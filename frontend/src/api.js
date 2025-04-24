@@ -13,7 +13,7 @@ class ApiService {
 
   async FetchProduct() {
     try {
-      const response = await this.api.get('?action=fetchproducts');
+      const response = await this.api.get('?action=fetchproducts'); 
       return response.data;
     } catch (error) {
       console.error("Error fetching products:", error);
