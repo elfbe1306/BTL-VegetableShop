@@ -1,16 +1,26 @@
 import React , {useState} from "react";
 import "../Header/header.css";
-import { useLocation } from 'react-router-dom'; //levy add
+import { useLocation, useParams } from 'react-router-dom'; //levy add
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const { productName } = useParams();
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  const formatProductName = (name) => {
+    return name.replace(/([a-z])([A-Z])/g, '$1 $2');
+  };
   //levy làm
+  
   const location = useLocation();
   const getPageTitle = () => {
+    if (location.pathname.startsWith('/vegetable/') && productName) {
+      return 'Vegetable/' + `${formatProductName(productName)}` ;
+    }
     switch (location.pathname) {
       case '/blog':
         return 'Blog';
@@ -92,7 +102,15 @@ const Header = () => {
         <div className="breadcrumb-address">
             <span className="material-symbols-outlined">home</span>
             <span className="material-symbols-outlined">chevron_right</span>
-            <span className="page">{getPageTitle()}</span> //levy sửa chút
+            {location.pathname.startsWith('/vegetable/') && productName ? (
+                <>
+                  <a href="/vegetable" className="breadcrumb-link">Vegetable</a>
+                  <span className="material-symbols-outlined">chevron_right</span>
+                  <span className="page">{formatProductName(productName)}</span>
+                </>
+              ) : (
+                <span className="page">{getPageTitle()}</span>
+              )}
         </div>
       </div>
     </header>

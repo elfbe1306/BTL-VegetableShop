@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import Header from '../components/Header/Header'
-import Footer from '../components/Footer/Footer'
-import Filter from '../components/Filter'
-import Pagination from '../components/Pagination'
-import PriceSlider from '../components/PriceSlider/PriceSlider'
-import RatingFilter from '../components/RatingFilter/RatingFilter'
-import "../style/ListProduct.css"; 
-import apiService from '../api';
-import ProductCard from '../components/ProductCard/ProductCard';
+import Header from '../../components/Header/Header'
+import Footer from '../../components/Footer/Footer'
+import Filter from '../../components/Filter/Filter'
+import Pagination from '../../components/Pagination/Pagination'
+import PriceSlider from '../../components/PriceSlider/PriceSlider'
+import RatingFilter from '../../components/RatingFilter/RatingFilter'
+import styles from "../ListProduct/ListProduct.module.css"; 
+import apiService from '../../api';
+import ProductCard from '../../components/ProductCard/ProductCard';
 
 function ListProduct() {
   const [ratings, setRatings] = useState([]);
@@ -29,9 +29,9 @@ function ListProduct() {
       <Header />       
       <main className="home-content">
         <Filter/>
-        <div className='main_container'>
+        <div className={styles.main_container}>
           <div>
-            <div className='filter_field'>
+            <div className={styles.filter_field}>
               <p>Rating</p>
                <RatingFilter selectedRatings={ratings} onChange={setRatings} />
               <p style={{ marginTop: '30px', display: 'block' }}>Price</p>
@@ -39,9 +39,9 @@ function ListProduct() {
             </div>
           </div>
 
-          <div className='product_align'>
+          <div className={styles.product_align}>
             {products.map((p) => (
-              <ProductCard key={p.id} product={p}/>
+              <ProductCard key={p.id || p.name} product={p} />
             ))}
           </div>
         </div>
