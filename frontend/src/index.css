@@ -5,3 +5,12 @@ body {
 h1, h2, h3, h4, h5, h6, p, a, div, button, input, textarea {
   font-family: 'Poppins', sans-serif !important;
 }
+
+.rc-slider-track {
+  background-color: #00B207 !important;
+}
+
+.rc-slider-handle {
+  border-color: #00B207 !important;
+  background-color: #ffffff !important;
+}
