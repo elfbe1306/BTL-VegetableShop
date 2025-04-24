@@ -30,6 +30,16 @@ class ApiService {
       throw error;
     }
   }
+
+  async FetchProductByName(productname) {
+    try {
+      const response = await this.api.post('?action=fetchbyname', {name: productname});
+      return response.data;
+    } catch(error) {
+      console.error("Error fetching product by name", error);
+      throw error;
+    }
+  }
 }
 
 // Singleton instance

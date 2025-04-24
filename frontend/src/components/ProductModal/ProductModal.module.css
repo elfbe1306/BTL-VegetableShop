@@ -180,6 +180,19 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.inlineWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inlineBox {
+  padding: 24px;
+  border-radius: 12px;
+  width: 80%;
+  position: relative;
+}
+
 @media screen and (max-width: 1212px) and (min-width: 481px) {
   .modal {
     width: 80%;
