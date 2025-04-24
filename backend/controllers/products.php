@@ -32,4 +32,13 @@ function fetchAllProductsWithDiscountOrNot($conn) {
 
     return $products;
 }
+function fetchProductByName($conn, $name) {
+    $stmt = $conn->prepare("SELECT * FROM products WHERE name = ?");
+    $stmt->bind_param("s", $name);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $product = $result->fetch_assoc();
+    return $product;
+}
+
 ?>

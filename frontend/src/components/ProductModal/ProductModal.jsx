@@ -6,9 +6,7 @@ import HalfStar from "../../assets/icons/HalfStar";
 import NullStar from "../../assets/icons/NullStar";
 import Favorite from "../../assets/icons/Favorite";
 
-import { useCart } from "../../CartContext.jsx";
-
-const ProductModal = ({ product, onClose }) => {
+const ProductModal = ({ product, onClose, mode = "modal" }) => {
     const [currentSlide, setCurrentSlide] = useState(0);
 
     const slides = [
@@ -53,8 +51,8 @@ const ProductModal = ({ product, onClose }) => {
       
 
     return (
-        <div className={styles.overlay}>
-            <div className={styles.modal}>
+        <div className={mode === "modal" ? styles.overlay : styles.inlineWrapper}>
+            <div className={mode === "modal" ? styles.modal : styles.inlineBox}>
                 <div className={styles.productContainer}>
                     <div className={styles.sliderContainer}>
                         <img src={slides[currentSlide].image}/>
@@ -99,9 +97,11 @@ const ProductModal = ({ product, onClose }) => {
                         </div>
                     </div>
                 </div>
-                <button className={styles.closeButton} onClick={onClose}>
-                    <CloseIcon/>
-                </button>
+                {mode === "modal" && (
+                    <button className={styles.closeButton} onClick={onClose}>
+                        <CloseIcon />
+                    </button>
+                )}
             </div>
         </div>
     );

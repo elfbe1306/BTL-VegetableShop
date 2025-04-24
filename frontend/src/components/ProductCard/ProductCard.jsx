@@ -24,7 +24,7 @@ const ProductCard = ({ product }) => {
             <img src={"http://localhost/BTL-VegetableShop/backend/uploads/products/" + product.image + "1.png"}/>
             <div className={styles.product_description}>
                 <div className={styles.product_title_container}>
-                    <Link to={`/vegetable/${product.name.replace(/\s+/g, '')}`} className={styles.productlink}>
+                    <Link to={`/vegetable/${product.name}`} className={styles.productlink}>
                     <p className={styles.product_name}>{product.name}</p>
                     <div className={styles.priceContainer}>
                     {product.discount_percentage ? (
@@ -56,7 +56,7 @@ const ProductCard = ({ product }) => {
                 </button>
                 
                 {isModalOpen && (
-                    <ProductModal product={product} onClose={handleModalClose}/>
+                    <ProductModal product={product} onClose={handleModalClose} mode="modal"/>
                 )}
 
                 {product.discount_percentage && (
