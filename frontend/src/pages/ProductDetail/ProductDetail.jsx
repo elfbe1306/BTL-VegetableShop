@@ -10,8 +10,8 @@ function ProductDetail() {
     const { productName } = useParams();
     return (
         <div>
-          <h1>Details for: {productName}</h1>
-          {/* You can fetch product data using this name */}
+          <Header /> 
+          <Footer />
         </div>
       );
 }

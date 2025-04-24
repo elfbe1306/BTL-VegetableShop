@@ -235,7 +235,8 @@
   }
 
   .description {
-    height: auto;
+    height: 300px;
+    overflow-y: scroll;
   }
 }
 
