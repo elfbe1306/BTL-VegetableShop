@@ -20,6 +20,16 @@ class ApiService {
       throw error;
     }
   }
+
+  async FetchReview() {
+    try {
+      const response = await this.api.get('?action=fetchreviews');
+      return response.data;
+    } catch(error) {
+      console.error("Error fetching reviews:", error);
+      throw error;
+    }
+  }
 }
 
 // Singleton instance

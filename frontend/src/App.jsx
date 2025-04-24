@@ -6,10 +6,6 @@ import ProductDetail from './pages/ProductDetail/ProductDetail'
 
 function App() {
   return (
-    // <Routes>
-    //   {/* <Route index element={<HomePage />}></Route> */}
-    //   <Route index element={<ListProduct />}></Route>
-    // </Routes>
     <Routes>
         <Route index element={<HomePage />}></Route>
         <Route path="/vegetable" element={<ListProduct/>} />
@@ -24,30 +20,3 @@ function App() {
 }
 
 export default App
-
-// import React, { useEffect, useState } from 'react';
-// import axios from 'axios';
-
-// function App() {
-//   const [message, setMessage] = useState('');
-
-//   useEffect(() => {
-//     axios.get('http://localhost/BTL-VegetableShop/backend/api.php')
-//       .then(response => {
-//         setMessage(response.data.message);
-//       })
-//       .catch(error => {
-//         console.error('Error fetching from PHP:', error);
-//       });
-//   }, []);
-
-//   return (
-//     <div>
-//       <h1>React + PHP + Axios + Ngrok</h1>
-//       <p>Message from backend: {message}</p>
-//     </div>
-//   );
-// }
-
-// export default App;
-
