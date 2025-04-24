@@ -1,6 +1,6 @@
 import React , {useState} from "react";
 import "../Header/header.css";
-import { useLocation } from 'react-router-dom'; //levy add
+import { useLocation } from 'react-router-dom'; 
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -8,7 +8,7 @@ const Header = () => {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-  //levy làm
+
   const location = useLocation();
   const getPageTitle = () => {
     switch (location.pathname) {
@@ -92,7 +92,7 @@ const Header = () => {
         <div className="breadcrumb_address">
           <span className="material-symbols-outlined">home</span>
           <span className="material-symbols-outlined">chevron_right</span>
-          <span className="page">{getPageTitle()}</span> //levy sửa chút
+          <span className="page">{getPageTitle()}</span>
         </div>
       </div>
     </header>
