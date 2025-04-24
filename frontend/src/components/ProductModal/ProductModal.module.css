@@ -77,6 +77,36 @@
   font-size: 30px;
 }
 
+.priceContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.originalPrice {
+  text-decoration: line-through;
+  color: gray;
+  font-size: 0.9rem;
+}
+
+.discountedPrice {
+  color: rgb(0, 178, 1);
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.saleTag {
+  color: white;
+  background-color: red;
+  position: absolute;
+  font-size: 14px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  top: 20px;
+  left: 20px;
+}
+
 .rating {
   display: flex;
   flex-direction: row;

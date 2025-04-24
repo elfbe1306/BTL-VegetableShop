@@ -89,7 +89,17 @@ const ProductModal = ({ product, onClose, mode = "modal" }) => {
                             })}
                             <span>{product.total_user ? product.total_user : 0} Review</span>
                         </div>
-                        <p className={styles.price}>Price: <span className={styles.priceValue}>${productPrice}</span></p>
+                        <div className={styles.priceContainer}>
+                        {product.discount_percentage ? (
+                            <>
+                                <p className={styles.originalPrice}>${product.price}</p>
+                                <p className={styles.discountedPrice}>${productPrice}</p>
+                            </>
+                        ) : (
+                            <p className={styles.product_price}>${product.price}</p>
+                        )}
+                        </div>
+                        {/* <p className={styles.price}>Price: <span className={styles.priceValue}>${productPrice}</span></p> */}
                         <p className={styles.description}>{product.description}</p>
                         <div className={styles.quantitycomponent}>
                           <div className={styles.quantitycontainer}>
@@ -109,6 +119,9 @@ const ProductModal = ({ product, onClose, mode = "modal" }) => {
                         <CloseIcon />
                     </button>
                 )}
+                {product.discount_percentage && (
+                                    <div className={styles.saleTag}>Sale {Number(product.discount_percentage)}%</div>
+                                )}
             </div>
         </div>
     );
