@@ -1,0 +1,74 @@
+.HeadText{
+    color: var(--Gray-Scale-Gray-900, #1A1A1A);
+    text-align: center;
+    font-size: 35px;
+    font-weight: 600;
+    line-height: 120%; /* 57.6px */
+}
+.SmallText{
+    color: var(--Gray-Scale-Gray-600, #666);
+    text-align: center;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 150%; /* 24px */
+}
+.ImageBlockWrap{
+    margin-left: 15px ;
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+.ImageBlock {
+    position: relative;
+    overflow: hidden;
+    width: 300px;
+    height: 368px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: var(--Gray-Scale-White, #FFF);
+    box-shadow: 0px 20px 48px 0px rgba(0, 38, 3, 0.08);
+}
+.ImageBlock .Image{
+    width: 300px;
+    height: 280px;
+    border-radius: 8px 8px 0px 0px;
+    background:  url("src/assets/images/ImageSample1.jpg") lightgray 0% / cover no-repeat;
+    background-position: center;
+    
+}
+.BlockText{
+    margin-top: 15px;
+    margin-inline: 20px;
+}
+.BlockText .HeadText{
+    color: var(--Gray-Scale-Gray-900, #1A1A1A);
+    text-align: left;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%; /* 27px */
+}
+.BlockText .SmallText{
+    color: var(--Gray-Scale-Gray-500, #808080);
+    text-align: left;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 150%; /* 21px */
+}
+.ImageBlock .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 280px;
+    background-color: rgba(0, 0, 0, 0.4); /* Tối ảnh */
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s ease;
+  }
+  
+.ImageBlock:hover .overlay {
+    opacity: 1;
+  }
