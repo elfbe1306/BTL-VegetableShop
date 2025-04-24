@@ -41,7 +41,7 @@
 .dots {
   position: absolute;
   bottom: 10%;
-  left: 10%;
+  left: 45%;
   display: flex;
   gap: 10px;
 }
