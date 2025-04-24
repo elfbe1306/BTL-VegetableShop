@@ -115,8 +115,11 @@ function InfoPage() {
                 <img src="src/assets/images/Delivery-man.png" alt="img" />  
               </div>
             </div>
-
+            <div className={styles.Teams}>
+              <div className={styles.BoldText}>Our Awesome Team</div>
+              <div className={styles.SmallText}>Pellentesque a ante vulputate leo porttitor luctus sed eget eros. Nulla et rhoncus neque. Duis non diam eget est luctus tincidunt a a mi.</div>
             <OurTeam/>
+            </div>
         </div>
       <Footer /> 
     </div>
