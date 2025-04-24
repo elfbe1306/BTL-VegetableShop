@@ -1,6 +1,8 @@
-import React , {useState} from "react";
+import React , {useState, useEffect} from "react";
 import "../Header/header.css";
-import { useLocation, useParams } from 'react-router-dom'; //levy add
+import { useLocation, useParams, Link } from 'react-router-dom'; //levy add
+
+import { useCart } from "../../CartContext";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -39,6 +41,26 @@ const Header = () => {
     }
   };
 
+  const [productCount, setProductCount] = useState(0);
+  const [productPrice, setProductPrice] = useState(0);
+
+  const { cartItems } = useCart();
+
+  useEffect(() => {
+    const total = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+    setProductCount(total);
+
+    const totalPrice = cartItems.reduce((sum, item) => {
+      const price = item.product.price;
+      const discount = item.product.discount_percentage 
+        ? price * (1 - Number(item.product.discount_percentage) / 100)
+        : price;
+      return sum + discount * item.quantity;
+    }, 0);
+    setProductPrice(Math.round(totalPrice * 100) / 100);
+
+  }, [cartItems]);
+
   return (
     <header className="header">
       <div className="top-bar">
@@ -59,7 +81,9 @@ const Header = () => {
 
       <div className="main-header">
         <div className="logo">
-          <img src="/img/Logo-black.png" alt="Logo" />
+          <Link to={`/`}>
+            <img src="/img/Logo-black.png" alt="Logo" />
+          </Link>
         </div>
         <div className="search-bar">
           <i className="fa-solid fa-magnifying-glass"></i>
@@ -71,10 +95,10 @@ const Header = () => {
           <span className="divider"></span>
           <div className="cart">
             <span className="material-symbols-outlined cart-icon">shopping_bag</span>
-            <span className="cart-badge">2</span>
+            <span className="cart-badge">{productCount}</span>
             <div>
               <div className="cart-text">Shopping cart:</div>
-              <div className="cart-value">$57.00</div>
+              <div className="cart-value">${productPrice}</div>
             </div>
           </div>
         </div>

@@ -52,9 +52,10 @@ const ProductModal = ({ product, onClose, mode = "modal" }) => {
         }
     };
 
-    useEffect(() => {
-        console.log("Cart Items:", cartItems);
-    }, [cartItems]);
+    // Delete useEffect nay
+    // useEffect(() => {
+    //     console.log("Cart Items:", cartItems);
+    // }, [cartItems]);
       
 
     return (
