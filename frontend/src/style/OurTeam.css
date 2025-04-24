@@ -13,14 +13,16 @@
     line-height: 150%; /* 24px */
 }
 .ImageBlockWrap{
-    margin-left: 15px ;
+    padding: 20px;
     display: flex;
     flex-direction: row;
     gap: 15px;
+    justify-content: center;
 }
 .ImageBlock {
     position: relative;
     overflow: hidden;
+    margin: 0 auto ;
     width: 300px;
     height: 368px;
     flex-shrink: 0;
@@ -28,16 +30,13 @@
     background: var(--Gray-Scale-White, #FFF);
     box-shadow: 0px 20px 48px 0px rgba(0, 38, 3, 0.08);
 }
-.ImageBlock .Image{
+.ImageBlock img{
     width: 300px;
     height: 280px;
     border-radius: 8px 8px 0px 0px;
-    background:  url("src/assets/images/ImageSample1.jpg") lightgray 0% / cover no-repeat;
-    background-position: center;
-    
 }
 .BlockText{
-    margin-top: 15px;
+    margin-top: 10px;
     margin-inline: 20px;
 }
 .BlockText .HeadText{
@@ -71,4 +70,22 @@
   
 .ImageBlock:hover .overlay {
     opacity: 1;
-  }
+}
+
+  @media screen and (max-width: 768px) {
+    .ImageBlockWrap{
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        justify-content: center;
+    }
+   
+}
+
+@media screen and (max-width: 480px) {
+    .ImageBlockWrap{
+        display: block;
+    }
+    .ImageBlock{
+        margin-bottom: 15px;
+    }
+}

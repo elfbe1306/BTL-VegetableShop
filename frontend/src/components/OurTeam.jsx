@@ -4,13 +4,9 @@ import "../style/OurTeam.css";
 const OurTeam = () => {
     return (
       <div>
-        <div className="Text">
-            <div className="HeadText">Our Awesome Team</div>
-            <div className="SmallText">Pellentesque a ante vulputate leo porttitor luctus sed eget eros. Nulla et rhoncus neque. Duis non diam eget est luctus tincidunt a a mi.</div>
-        </div>
         <div className="ImageBlockWrap">
             <div className="ImageBlock">
-                <div className="Image"></div>
+            <img src="src/assets/images/ImageSample1.png" alt="img" />
                 <div  className="overlay">
                     <div className="social-icons">
                         <a href="#" className="social-icon facebook"><i className="fab fa-facebook-f"></i></a>
@@ -26,7 +22,7 @@ const OurTeam = () => {
             </div>
             
             <div className="ImageBlock">
-                <div className="Image"></div>
+                <img src="src/assets/images/ImageSample2.png" alt="img" />
                 <div  className="overlay">
                     <div className="social-icons">
                         <a href="#" className="social-icon facebook"><i className="fab fa-facebook-f"></i></a>
@@ -36,13 +32,13 @@ const OurTeam = () => {
                     </div>
                 </div>
                 <div className="BlockText">
-                    <div className="HeadText">Jenny Wilson</div>
-                    <div className="SmallText">Ceo & Founder</div>
+                    <div className="HeadText">Jane Cooper</div>
+                    <div className="SmallText">Worker</div>
                 </div>
             </div>
 
             <div className="ImageBlock">
-                <div className="Image"></div>
+                <img src="src/assets/images/ImageSample3.png" alt="img" />
                 <div  className="overlay">
                     <div className="social-icons">
                         <a href="#" className="social-icon facebook"><i className="fab fa-facebook-f"></i></a>
@@ -52,13 +48,13 @@ const OurTeam = () => {
                     </div>
                 </div>
                 <div className="BlockText">
-                    <div className="HeadText">Jenny Wilson</div>
-                    <div className="SmallText">Ceo & Founder</div>
+                    <div className="HeadText">Cody Fisher</div>
+                    <div className="SmallText">Security Guard</div>
                 </div>
             </div>
 
             <div className="ImageBlock">
-                <div className="Image"></div>
+            <img src="src/assets/images/ImageSample4.png" alt="img" />
                 <div  className="overlay">
                     <div className="social-icons">
                         <a href="#" className="social-icon facebook"><i className="fab fa-facebook-f"></i></a>
@@ -68,8 +64,8 @@ const OurTeam = () => {
                     </div>
                 </div>
                 <div className="BlockText">
-                    <div className="HeadText">Jenny Wilson</div>
-                    <div className="SmallText">Ceo & Founder</div>
+                    <div className="HeadText">Robert Fox</div>
+                    <div className="SmallText">Senior Farmer Manager</div>
                 </div>
             </div>
         </div>
