@@ -1,21 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from './PromoBanner.module.css'
-import PromoBanner1 from '../../assets/images/promo1.png';
 import { Link } from 'react-router-dom';
+import apiService from "../../api";
 
 const PromoBanner = () => {
-    return(
-        <div className={styles.promoBanner}>
-          <img src={PromoBanner1} alt="" />
-          <div className={styles.promoBannerTextContainer}>
-            <p className={styles.promoBannerTitle}>SUMMER SALE</p>
-            <p className={styles.promoBannerDiscount}>75% off</p>
-            <Link to="/vegetable">
-              <button className={styles.promoBannerButton}>Shop Now ➜</button>
-            </Link>
-          </div>
-        </div>
-    )
+  const [promotion, setPromotion] = useState({});
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await apiService.FetchPromotion();
+      setPromotion(response.slice(0,1)[0]);
+    };
+    
+    fetchData();
+  }, [])
+  
+
+  return(
+    <div className={styles.promoBanner}>
+      <img src={"http://localhost/BTL-VegetableShop/backend/uploads/promotion/" + promotion.image + "1.png"} alt="" />
+      <div className={styles.promoBannerTextContainer}>
+        <p className={styles.promoBannerTitle}>{promotion.sale_name}</p>
+        <p className={styles.promoBannerDiscount}>{Number(promotion.discount_percentage)}% off</p>
+        <Link to="/vegetable">
+          <button className={styles.promoBannerButton}>Shop Now ➜</button>
+        </Link>
+      </div>
+    </div>
+  )
 }
 
 export default PromoBanner;
