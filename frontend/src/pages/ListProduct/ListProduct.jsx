@@ -12,7 +12,7 @@ import 'rc-slider/assets/index.css';
 
 
 const getPageNumbers = (totalPages, currentPage) => {
-  const maxVisiblePages = 5;
+  const maxVisiblePages = 3;
   const pages = [];
 
   if (totalPages <= maxVisiblePages + 2) {
@@ -70,7 +70,7 @@ const ListProduct = () => {
   }, [])
 
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 4; // tuy chinh so san pham moi trang
+  const itemsPerPage = 6; // tuy chinh so san pham moi trang
   const endIndex = currentPage * itemsPerPage;
   const startIndex = endIndex - itemsPerPage;
   const totalPages = Math.ceil(products.length / itemsPerPage);
