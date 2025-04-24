@@ -70,7 +70,7 @@ const ListProduct = () => {
   }, [])
 
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const itemsPerPage = 4; // tuy chinh so san pham moi trang
   const endIndex = currentPage * itemsPerPage;
   const startIndex = endIndex - itemsPerPage;
   const totalPages = Math.ceil(products.length / itemsPerPage);
@@ -118,35 +118,37 @@ const ListProduct = () => {
               <FilterIcon className={styles.FilterIcon}/>
             </button>
 
-            <p className={styles.ratingFilter}>Rating</p>
-            {ratings.map((rate) => (
-              <div key={rate.value} className={styles.rateField}>
-                <input
-                  type="checkbox"
-                  value={rate.value}
-                  checked={selectedRatings.includes(rate.value)}
-                  onChange={() => handleRatingChange(rate.value)}
-                />
-                <div>{renderStars(rate.value)}</div>
-                <span>{rate.label}</span>
-              </div>
-            ))}
+            <div className={styles.filterTool}>
+              <p className={styles.ratingFilter}>Rating</p>
+              {ratings.map((rate) => (
+                <div key={rate.value} className={styles.rateField}>
+                  <input
+                    type="checkbox"
+                    value={rate.value}
+                    checked={selectedRatings.includes(rate.value)}
+                    onChange={() => handleRatingChange(rate.value)}
+                  />
+                  <div>{renderStars(rate.value)}</div>
+                  <span>{rate.label}</span>
+                </div>
+              ))}
 
-            <p>Price</p>
-            <div className={styles.price_box}>
-              <Slider
-                range
-                min={MIN}
-                max={MAX}
-                step={1}
-                value={values}
-                onChange={handlePriceChange}
-              />
-              <div style={{ display: 'flex',gap: '10px', marginTop: '10px' }}>
-                <span style={{color:'gray'}}>Price:</span>
-                <span>${values[0]}</span>
-                <span>-</span>
-                <span>${values[1]}</span>
+              <p>Price</p>
+              <div className={styles.price_box}>
+                <Slider
+                  range
+                  min={MIN}
+                  max={MAX}
+                  step={1}
+                  value={values}
+                  onChange={handlePriceChange}
+                />
+                <div style={{ display: 'flex',gap: '10px', marginTop: '10px' }}>
+                  <span style={{color:'gray'}}>Price:</span>
+                  <span>${values[0]}</span>
+                  <span>-</span>
+                  <span>${values[1]}</span>
+                </div>
               </div>
             </div>
           </div>
