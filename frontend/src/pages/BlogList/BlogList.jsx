@@ -25,43 +25,46 @@ function BlogList(){
                     </aside>
 
                     <main className="blog_content">
-                    <BlogCard
-                        image={cover}
-                        date={{ day: '18', month: 'Nov' }}
-                        category="Food"
-                        author="Admin"
-                        comments={65}
-                        title="Curabitur porttitor orci eget neque accumsan venenatis. Nunc fermentum."
-                        link="#"
-                    />
-                    <BlogCard
-                        image={cover}
-                        date={{ day: '18', month: 'Nov' }}
-                        category="Food"
-                        author="Admin"
-                        comments={65}
-                        title="Curabitur porttitor orci eget neque accumsan venenatis. Nunc fermentum."
-                        link="#"
-                    />
-                    <BlogCard
-                        image={cover}
-                        date={{ day: '18', month: 'Nov' }}
-                        category="Food"
-                        author="Admin"
-                        comments={65}
-                        title="Curabitur porttitor orci eget neque accumsan venenatis. Nunc fermentum."
-                        link="#"
-                    />
-                    <BlogCard
-                        image={cover}
-                        date={{ day: '18', month: 'Nov' }}
-                        category="Food"
-                        author="Admin"
-                        comments={65}
-                        title="Curabitur porttitor orci eget neque accumsan venenatis. Nunc fermentum."
-                        link="#"
-                    />
-                    {/* <Pagination/> */}
+                        <div className="blog_post">
+                            <BlogCard
+                                image={cover}
+                                date={{ day: '18', month: 'Nov' }}
+                                category="Food"
+                                author="Admin"
+                                comments={65}
+                                title="Curabitur porttitor orci eget neque accumsan venenatis. Nunc fermentum."
+                                link="#"
+                            />
+                            <BlogCard
+                                image={cover}
+                                date={{ day: '18', month: 'Nov' }}
+                                category="Food"
+                                author="Admin"
+                                comments={65}
+                                title="Curabitur porttitor orci eget neque accumsan venenatis. Nunc fermentum."
+                                link="#"
+                            />
+                            <BlogCard
+                                image={cover}
+                                date={{ day: '18', month: 'Nov' }}
+                                category="Food"
+                                author="Admin"
+                                comments={65}
+                                title="Curabitur porttitor orci eget neque accumsan venenatis. Nunc fermentum."
+                                link="#"
+                            />
+                            <BlogCard
+                                image={cover}
+                                date={{ day: '18', month: 'Nov' }}
+                                category="Food"
+                                author="Admin"
+                                comments={65}
+                                title="Curabitur porttitor orci eget neque accumsan venenatis. Nunc fermentum."
+                                link="#"
+                            />
+                        </div>
+                    
+                    <Pagination/>
                     </main>
                 </div>
 
