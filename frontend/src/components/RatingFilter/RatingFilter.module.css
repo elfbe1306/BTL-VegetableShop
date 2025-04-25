@@ -20,3 +20,7 @@
     width: 14px;
     height: auto;
 }
+
+input[type="checkbox"] {
+    accent-color: rgb(0, 178, 1);
+}

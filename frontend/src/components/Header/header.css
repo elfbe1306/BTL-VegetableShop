@@ -118,6 +118,8 @@
     display: flex;
     align-items: center;
     gap: 15px;
+    text-decoration: none;
+    color: black;
 }
 
 .cart-badge {
