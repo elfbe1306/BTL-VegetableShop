@@ -24,6 +24,7 @@
     font-size: 32px;
     flex-wrap: wrap;
     line-height: 40px;
+    margin-bottom: 0px;
 }
 
 .contentSubTitle {
@@ -44,7 +45,7 @@
     color: #FFFFFF;
     font-weight: 400;
     font-size: 24px;
-    margin-left: 10px;
+    margin-left: 0;
     opacity: 60%;
 }
 
@@ -55,7 +56,15 @@
     padding: 12px 24px;
     font-weight: 500;
     cursor: pointer;
+}
+
+.contentButtonText {
+    text-decoration: none;
     color: white;
+}
+
+.contentButtonText p {
+    margin: 0;
 }
 
 .dots {

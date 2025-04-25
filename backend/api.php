@@ -7,6 +7,7 @@ header("Access-Control-Allow-Methods: POST, GET");
 require_once "db.php";
 require_once "controllers/products.php";
 require_once "controllers/reviews.php";
+require_once "controllers/promotions.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $action = $_GET['action'] ?? '';
@@ -17,6 +18,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             break;
         case 'fetchreviews':
             echo json_encode(fetchAllReviews($conn));
+            break;
+        case 'fetchpromotions':
+            echo json_encode(fetchPromotions($conn));
             break;
         default:
             http_response_code(404);

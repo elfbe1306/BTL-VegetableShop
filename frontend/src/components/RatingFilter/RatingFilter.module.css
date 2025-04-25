@@ -1,0 +1,22 @@
+.ratingFilter {
+    margin: 0;
+}
+
+.rateField {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    flex-wrap: wrap;
+}
+
+.star {
+    fill: #FACC15;
+    width: 14px;
+    height: auto;
+}
+
+.nullstar {
+    fill: #D1D5DB;
+    width: 14px;
+    height: auto;
+}

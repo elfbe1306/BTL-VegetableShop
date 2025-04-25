@@ -40,6 +40,16 @@ class ApiService {
       throw error;
     }
   }
+
+  async FetchPromotion() {
+    try {
+      const response = await this.api.get('?action=fetchpromotions');
+      return response.data;
+    } catch(error) {
+      console.log("Error fetching promotion:", error);
+      throw error;
+    }
+  }
 }
 
 // Singleton instance

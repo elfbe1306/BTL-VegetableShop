@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 
 const CartContext = createContext();
 // CartContext is like a shared space where your cart data (state + functions) will live.
@@ -12,7 +12,15 @@ export const useCart = () => useContext(CartContext);
 // This is a React component that stores the actual cart data and provides functions to manipulate it.
 // children means whatever is wrapped inside this provider—like your whole app.
 export const CartProvider = ({ children }) => {
-    const [cartItems, setCartItems] = useState([]);
+    const [cartItems, setCartItems] = useState(() => {
+        const storedCart = localStorage.getItem("cartItems");
+        return storedCart ? JSON.parse(storedCart) : [];
+    });
+
+    // Save cartItems to localStorage whenever it changes
+    useEffect(() => {
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    }, [cartItems]);
 
     const addToCart = (product, quantity) => {
         setCartItems(prev => {
