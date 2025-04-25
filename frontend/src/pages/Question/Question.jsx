@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
-import './ContactPage.css';
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
+import './Question.css';
 
-function ContactPage() {
+function Question() {
   const [selected, setSelected] = useState(null);
 
   const data = [
@@ -66,4 +66,4 @@ function ContactPage() {
   );
 }
 
-export default ContactPage;
+export default Question;
