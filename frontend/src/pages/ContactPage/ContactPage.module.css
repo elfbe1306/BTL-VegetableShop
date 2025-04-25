@@ -1,6 +1,14 @@
 .Wrapper{
     display: flex;
     flex-direction: row;
+    margin-top: 40px;
+}
+.Text {
+    color: var(--Gray-Scale-Gray-900, #1A1A1A);
+    font-size: 35px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 120%; 
 }
 .RightCol img{
     width: 30rem;
@@ -27,7 +35,7 @@
 }
   
 .accordionHeader {
-    width: 500px;
+    width: 100%;
     background-color: inherit;
     border: none;
     /* padding: 12px 16px; */
@@ -45,7 +53,7 @@
 }
   
 .accordionBody {
-    width: 500px;
+    width: 600px;
     /* padding: 0 16px 16px 16px; */
     color: #4b5563;
     font-size: 15px;

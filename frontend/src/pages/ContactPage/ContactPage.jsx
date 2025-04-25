@@ -67,7 +67,7 @@ function ContactPage() {
           </div>
         </div>
         <div className={styles.RightCol}>
-          <img src="src/assets/images/About-me-img.png" alt="img" />
+          <img src="src/assets/images/ContactImage.png" alt="img" />
         </div>
       </div>
       <Footer />
