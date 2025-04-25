@@ -41,7 +41,6 @@ function ContactPage() {
         <div className={styles.LeftCol}>
           <div className={styles.Text}>Welcome, Let’s Talk About Our Ecobazar</div>
 
-          {/* Accordion Section */}
           <div className={styles.accordion}>
             {data.map((item, index) => {
               const isOpen = index === activeIndex;
