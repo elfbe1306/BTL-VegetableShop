@@ -4,6 +4,7 @@ import HomePage from './pages/HomePage/HomePage'
 import ListProduct from './pages/ListProduct/ListProduct'
 import ProductDetail from './pages/ProductDetail/ProductDetail'
 import Checkout from './pages/Checkout/Checkout'
+import ContactPage from './pages/ContactPage/ContactPage'
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
         <Route path="/vegetable/:productName" element={<ProductDetail/>} />
         <Route path="/checkout" element={<Checkout/>}/>
         <Route path="/blog" element={<div>Welcome to the Blog Page</div>} />
-        <Route path="/contact" element={<div>Contact Us Here</div>} />
+        <Route path="/contact" element={<ContactPage />} />
         <Route path="/about" element={<div>Contact Us Here</div>} />
         <Route path="/faqs" element={<div>Contact Us Here</div>} />
         <Route path="/shoppingcart" element={<div>Contact Us Here</div>} />
