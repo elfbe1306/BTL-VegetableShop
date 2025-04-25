@@ -1,7 +1,6 @@
 .Wrapper{
     height: 100%;
     width: 100%;
-    font-family: Pop;
 }
 .AboutUs{
     display: flex;
@@ -9,13 +8,14 @@
     margin-top: 40px;
     padding-inline: 200px;
     align-items: center;
-    gap: 40px
+    gap: 40px;
+    justify-self: center;
 }
 .AboutUs img {
-    width: 30rem;
+    width: 25rem;
 }
-.Text {
-    width: 607px;
+.Text{
+    width: 350px;
 }
 .BoldText{
     font-size: 35px;
