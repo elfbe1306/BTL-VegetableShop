@@ -1,0 +1,53 @@
+.Wrapper{
+    display: flex;
+    flex-direction: row;
+    margin-top: 40px;
+}
+.Text{
+    color: var(--Gray-Scale-Gray-900, #1A1A1A);
+    font-size: 35px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 120%; 
+}
+.RightCol img{
+    width: 30rem;
+    flex-shrink: 0;
+    box-shadow: none;
+}
+
+.accordion{
+    width: 500px;
+}
+.item{
+    margin-bottom: 5px;
+    padding: 10px 20px;
+    border-radius: 6px;
+    background-color: var(--Gray-Scale-Gray-50, #F2F2F2);
+}
+.ItemHeader{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+    cursor: pointer;
+    background-color: var(--Gray-Scale-Gray-50, #F2F2F2);
+}
+.HeaderShow{
+    color: var(--Branding-Success-Dark, #2C742F);
+}
+.Content{
+    color: var(--Gray-Scale-Gray-600, #666);
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0,1,0,1);
+}
+.ContentShow{
+    height: auto;
+    color: var(--Gray-Scale-Gray-600, #666);
+    max-height:9999px;
+    transition: all 0.5s cubic-bezier(1,0,1,0);
+    overflow: hidden;
+    background-color: white;
+}

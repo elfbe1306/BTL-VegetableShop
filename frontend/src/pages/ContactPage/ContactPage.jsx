@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import styles from './ContactPage.module.css';
+import './ContactPage.css';
 
 function ContactPage() {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [selected, setSelected] = useState(null);
 
   const data = [
     {
@@ -14,7 +14,7 @@ function ContactPage() {
     },
     {
       title: 'Etiam lobortis massa eu nibh tempor elementum.',
-      content: '',
+      content: 'hhh',
     },
     {
       title: 'In elementum est a ante sodales iaculis.',
@@ -30,43 +30,33 @@ function ContactPage() {
     },
   ];
 
-  const toggle = (index) => {
-    setActiveIndex(index === activeIndex ? null : index);
+  const toggle = (i) => {
+    if (selected === i)
+      return setSelected(null)
+    setSelected(i)
   };
 
   return (
     <div>
       <Header />
-      <div className={styles.Wrapper}>
-        <div className={styles.LeftCol}>
-          <div className={styles.Text}>Welcome, Let’s Talk About Our Ecobazar</div>
+      <div className='Wrapper'>
+        <div className='LeftCol'>
+          <div className='Text'>Welcome, Let’s Talk About Our Ecobazar</div>
 
-          <div className={styles.accordion}>
-            {data.map((item, index) => {
-              const isOpen = index === activeIndex;
-              return (
-                <div
-                  key={index}
-                  className={`${styles.accordionItem} ${isOpen ? styles.active : ''}`}
-                >
-                  <button
-                    className={styles.accordionHeader}
-                    onClick={() => toggle(index)}
-                  >
-                    <span className={styles.title}>{item.title}</span>
-                    <span className={styles.icon}>+</span>
-                  </button>
-                  {isOpen && item.content && (
-                    <div className={styles.accordionBody}>
-                      {item.content}
-                    </div>
-                  )}
+          <div className='accordion'>
+            {data.map((item,i)=> (
+              <div className='item'>
+                <div className='ItemHeader' onClick={() => toggle(i)}>
+                  <div className={selected === i ? 'HeaderShow': 'ItemHeader' }>{item.title}</div>
+                  <span>+</span>
                 </div>
-              );
-            })}
+                <div className={selected === i ? 'ContentShow': 'Content' }>{item.content}</div>
+              </div>
+            ))}
           </div>
+
         </div>
-        <div className={styles.RightCol}>
+        <div className='RightCol'>
           <img src="src/assets/images/ContactImage.png" alt="img" />
         </div>
       </div>
