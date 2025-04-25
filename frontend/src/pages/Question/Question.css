@@ -1,0 +1,80 @@
+.Wrapper{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 40px;
+  gap: 8%;
+  justify-self: center;    
+}
+.Text{
+  color: var(--Gray-Scale-Gray-900, #1A1A1A);
+  font-size: 35px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120%; 
+  margin-bottom: 30px;
+  width: 500px;
+}
+.RightCol img{
+  width: 30rem;
+  flex-shrink: 0;
+  box-shadow: none;
+}
+
+.accordion {
+  width: 500px;
+}
+
+.item {
+  margin-bottom: 5px;
+  padding: 10px 20px;
+  background-color: var(--Gray-Scale-Gray-50, #F2F2F2);
+  border-radius: 6px;
+}
+
+.ItemHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.ItemTitle {
+  transition: color 0.3s;
+}
+
+.Icon {
+  font-size: 20px;
+  transition: transform 0.3s;
+}
+
+.Content {
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  color: var(--Gray-Scale-Gray-600, #666);
+}
+
+/* Khi item được active */
+.item.active {
+  background-color: white;
+  border:  solid var(--Branding-Success-Bright, #84D187);
+}
+.item.active .ItemHeader{
+  border-bottom: 1px solid  #059669;
+  padding-bottom: 2px;
+}
+.item.active .ItemTitle {
+  color: #059669;
+}
+
+.item.active .Icon {
+  /* transform: rotate(30deg); */
+  color: #059669;
+}
+
+.item.active .Content {
+  max-height: 500px; 
+  padding-top: 8px;
+}
