@@ -11,11 +11,42 @@ class ApiService {
     ApiService.instance = this;
   }
 
-  async UserCreateAccount(userData) {
+  async FetchProduct() {
     try {
-      const response = await this.api.post(`/Users`, userData);
+      const response = await this.api.get('?action=fetchproducts'); 
       return response.data;
     } catch (error) {
+      console.error("Error fetching products:", error);
+      throw error;
+    }
+  }
+
+  async FetchReview() {
+    try {
+      const response = await this.api.get('?action=fetchreviews');
+      return response.data;
+    } catch(error) {
+      console.error("Error fetching reviews:", error);
+      throw error;
+    }
+  }
+
+  async FetchProductByName(productname) {
+    try {
+      const response = await this.api.post('?action=fetchbyname', {name: productname});
+      return response.data;
+    } catch(error) {
+      console.error("Error fetching product by name", error);
+      throw error;
+    }
+  }
+
+  async FetchPromotion() {
+    try {
+      const response = await this.api.get('?action=fetchpromotions');
+      return response.data;
+    } catch(error) {
+      console.log("Error fetching promotion:", error);
       throw error;
     }
   }

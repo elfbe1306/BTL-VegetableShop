@@ -1,0 +1,83 @@
+.bannerBarContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    column-gap: 10px;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 15px;
+}
+
+.bannerBarBox {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    padding-bottom: 10px;
+    border-bottom: 2px solid transparent;
+}
+
+.bannerBarBox:hover {
+    border-bottom: solid 2px #00B207;
+}
+
+.icon {
+    fill: #00B207;
+    background-color: #EDF2EE;
+    width: 40px;
+    height: 40px;
+    border-radius: 90%;
+    padding: 15px;
+}
+
+.bannerBarBox:hover .icon {
+    fill: #FFFF;
+    background-color: #00B207;
+}
+
+.titleBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.title {
+    font-weight: 600;
+    font-size: 18px;
+    margin: 0;
+}
+
+.subTitle {
+    font-family: 400;
+    color: #999999;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+@media screen and (max-width: 769px) {
+    .bannerBarBox {
+        column-gap: 10px;
+        grid-template-columns: 60px 1fr;
+    }
+
+    .icon {
+        width: 32px;
+        height: 32px;
+    }
+
+    .titleBox {
+        margin-top: 0px;
+    }
+
+    .title {
+        font-size: 12px;
+    }
+    
+    .subTitle {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .bannerBarContainer {
+        display: none;
+    }
+}
+  

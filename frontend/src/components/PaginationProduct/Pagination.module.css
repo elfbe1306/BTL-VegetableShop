@@ -1,0 +1,31 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.pageButton {
+    border: none;
+    background-color: transparent;
+    color: #666666;
+    font-size: 16px;
+    border-radius: 99px;
+    width: 32px;
+    height: 32px;
+}
+
+.pagePreviousButton, .pageAfterButton {
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 99px;
+    font-size: 20px;
+}
+
+.active {
+    background-color: #00B207;
+    color: white;
+}

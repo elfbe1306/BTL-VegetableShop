@@ -1,19 +1,20 @@
 import { Routes, Route } from 'react-router-dom'//levy thêm chữ dom
 import 'remixicon/fonts/remixicon.css'
-import HomePage from './pages/HomePage'
-import ListProduct from './pages/ListProduct'
+import HomePage from './pages/HomePage/HomePage'
+import ListProduct from './pages/ListProduct/ListProduct'
+import ProductDetail from './pages/ProductDetail/ProductDetail'
+import Cart from './pages/Cart/Cart'
+import ContactPage from './pages/ContactPage/ContactPage'
 import InfoPage from './pages/InfoPage/InfoPage'
 import ContactPage from './pages/ContactPage/ContactPage'
 
 function App() {
   return (
-    // <Routes>
-    //   {/* <Route index element={<HomePage />}></Route> */}
-    //   <Route index element={<ListProduct />}></Route>
-    // </Routes>
     <Routes>
         <Route index element={<HomePage />}></Route>
         <Route path="/vegetable" element={<ListProduct/>} />
+        <Route path="/vegetable/:productName" element={<ProductDetail/>} />
+        <Route path="/cart" element={<Cart/>}/>
         <Route path="/blog" element={<div>Welcome to the Blog Page</div>} />
         <Route path="/contact" element={<ContactPage/>} />
         <Route path="/about" element={<InfoPage/>} />
@@ -24,30 +25,3 @@ function App() {
 }
 
 export default App
-
-// import React, { useEffect, useState } from 'react';
-// import axios from 'axios';
-
-// function App() {
-//   const [message, setMessage] = useState('');
-
-//   useEffect(() => {
-//     axios.get('http://localhost/BTL-VegetableShop/backend/api.php')
-//       .then(response => {
-//         setMessage(response.data.message);
-//       })
-//       .catch(error => {
-//         console.error('Error fetching from PHP:', error);
-//       });
-//   }, []);
-
-//   return (
-//     <div>
-//       <h1>React + PHP + Axios + Ngrok</h1>
-//       <p>Message from backend: {message}</p>
-//     </div>
-//   );
-// }
-
-// export default App;
-
