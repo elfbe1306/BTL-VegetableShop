@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from './HomePageHeader.module.css'
 import storeLocationIcon from '../../assets/icons/location_on.svg'
 import downArrow from '../../assets/icons/arrow-down-s-line.svg'
+import { Link } from 'react-router-dom'
 
 import { useCart } from "../../CartContext";
 
@@ -63,14 +64,14 @@ const HomePageHeader = () => {
 				<div className={styles.userActions}>
 					<span className="material-symbols-outlined favorite-icon">favorite</span>
 					<span className={styles.divider}></span>
-					<div className={styles.cart}>
+					<Link className={styles.cart} to={`/cart`}>
 						<span className="material-symbols-outlined cart-icon">shopping_bag</span>
 						<span className={styles.cartBadge}>{productCount}</span>
 						<div>
 							<div className={styles.cartText}>Shopping cart:</div>
 							<div className={styles.cartValue}>${productPrice}</div>
 						</div>
-					</div>
+					</Link>
 				</div>
 			</div>
 
