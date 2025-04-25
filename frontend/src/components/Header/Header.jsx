@@ -28,8 +28,8 @@ const Header = () => {
         return 'Blog';
       case '/vegetable':
         return 'Vegetable';
-      case '/checkout':
-        return 'Checkout';
+      case '/cart':
+        return 'Shopping Cart';
       case '/contact':
         return 'Contact';
       case '/about':
@@ -95,7 +95,7 @@ const Header = () => {
         <div className="user-actions">
           <span className="material-symbols-outlined favorite-icon">favorite</span>
           <span className="divider"></span>
-            <Link className="cart" to={'/checkout'}>
+            <Link className="cart" to={'/cart'}>
               <span className="material-symbols-outlined cart-icon">shopping_bag</span>
               <span className="cart-badge">{productCount}</span>
               <div>
