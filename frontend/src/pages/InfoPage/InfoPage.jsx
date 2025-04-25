@@ -1,7 +1,7 @@
 import React from 'react'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
-import OurTeam from '../../components/OurTeam'
+import OurTeam from '../../components/OurTeam/OurTeam'
 import styles from './InfoPage.module.css'
 import { PiLeafLight } from "react-icons/pi";
 import { CiStar } from "react-icons/ci";
