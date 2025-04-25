@@ -3,7 +3,7 @@ import 'remixicon/fonts/remixicon.css'
 import HomePage from './pages/HomePage/HomePage'
 import ListProduct from './pages/ListProduct/ListProduct'
 import ProductDetail from './pages/ProductDetail/ProductDetail'
-import Cart from './pages/Cart/Cart'
+import Checkout from './pages/Checkout/Checkout'
 import ContactPage from './pages/ContactPage/ContactPage'
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
         <Route index element={<HomePage />}></Route>
         <Route path="/vegetable" element={<ListProduct/>} />
         <Route path="/vegetable/:productName" element={<ProductDetail/>} />
-        <Route path="/cart" element={<Cart/>}/>
+        <Route path="/checkout" element={<Checkout/>}/>
         <Route path="/blog" element={<div>Welcome to the Blog Page</div>} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/about" element={<div>Contact Us Here</div>} />
