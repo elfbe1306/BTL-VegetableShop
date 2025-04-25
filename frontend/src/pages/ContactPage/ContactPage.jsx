@@ -44,16 +44,17 @@ function ContactPage() {
           <div className='Text'>Welcome, Let’s Talk About Our Ecobazar</div>
 
           <div className='accordion'>
-            {data.map((item,i)=> (
-              <div className='item'>
+            {data.map((item, i) => (
+              <div className={`item ${selected === i ? 'active' : ''}`} key={i}>
                 <div className='ItemHeader' onClick={() => toggle(i)}>
-                  <div className={selected === i ? 'HeaderShow': 'ItemHeader' }>{item.title}</div>
-                  <span>+</span>
+                  <div className='ItemTitle'>{item.title}</div>
+                  <span className='Icon'>{selected === i ? '-' : '+'}</span>
                 </div>
-                <div className={selected === i ? 'ContentShow': 'Content' }>{item.content}</div>
+                <div className='Content'>{item.content}</div>
               </div>
             ))}
           </div>
+
 
         </div>
         <div className='RightCol'>
