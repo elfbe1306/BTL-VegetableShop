@@ -1,70 +1,73 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
+import { useLocation } from 'react-router-dom';
 import Header from '../../components/Header/Header'
 import Footer from '../../components/Footer/Footer'
 import Filter from '../../components/Filter'
 import Pagination from '../../components/Pagination'
 import "../BlogList/bloglist.css";
 import BlogCard from '../../components/BlogCard/BlogCard'
-import cover from '../../assets/images/blogImg/cover.png';
 import Sidebar from '../../components/BlogSidebar/Sidebar'
+import apiService from '../../api';
 
 
-function BlogList(){
+function BlogList() {
+    const location = useLocation();
+    const query = new URLSearchParams(location.search).get('query');
+    const [posts, setPosts]     = useState([]);
+    const [page, setPage]       = useState(1);
+    const [loading, setLoading] = useState(true);
+    const [error, setError]     = useState("");
+    const uploadsBase = apiService.api.defaults.baseURL.replace('api.php', 'uploads');
+  
+    useEffect(() => {
+        setLoading(true);
+        const fetch = query
+          ? apiService.searchPosts(query)
+          : apiService.fetchPostList(page, 8);
+      
+        fetch
+          .then(data => {
+            setPosts(data);
+            setError("");
+          })
+          .catch(err => {
+            console.error(err);
+            setError("Could not load posts.");
+          })
+          .finally(() => setLoading(false));
+    }, [page, query]);
+    
     return(
         <div>
             <Header/>
             <div className="container">
                 <Filter/>
                 <div className="blog_layout">
-                    <aside className="blog_filter">
-                        <div className="blog_search_bar">
-                            <i className="fa-solid fa-magnifying-glass"></i>
-                            <input type="text" className="search_input" placeholder="Search" />
-                        </div>
-                        <Sidebar/>
-                    </aside>
-
+                    <Sidebar/>
                     <main className="blog_content">
                         <div className="blog_post">
-                            <BlogCard
-                                image={cover}
-                                date={{ day: '18', month: 'Nov' }}
-                                category="Food"
-                                author="Admin"
-                                comments={65}
-                                title="Curabitur porttitor orci eget neque accumsan venenatis. Nunc fermentum."
-                                link="#"
+                            {!loading && !error && posts.length === 0 && (
+                            <p>No posts found for "{query}"</p>
+                            )}
+                            {posts.map(p => (
+                                <BlogCard
+                                    key={p.id}
+                                    id={p.id}
+                                    image={`${uploadsBase}/${p.cover_file}`}
+                                    date={p.date}
+                                    category={p.tag}               // <-- use the tag column here
+                                    author={p.author_name}
+                                    comments={p.comments || 0}     // if you added a comment_count later
+                                    title={p.title}
                             />
-                            <BlogCard
-                                image={cover}
-                                date={{ day: '18', month: 'Nov' }}
-                                category="Food"
-                                author="Admin"
-                                comments={65}
-                                title="Curabitur porttitor orci eget neque accumsan venenatis. Nunc fermentum."
-                                link="#"
-                            />
-                            <BlogCard
-                                image={cover}
-                                date={{ day: '18', month: 'Nov' }}
-                                category="Food"
-                                author="Admin"
-                                comments={65}
-                                title="Curabitur porttitor orci eget neque accumsan venenatis. Nunc fermentum."
-                                link="#"
-                            />
-                            <BlogCard
-                                image={cover}
-                                date={{ day: '18', month: 'Nov' }}
-                                category="Food"
-                                author="Admin"
-                                comments={65}
-                                title="Curabitur porttitor orci eget neque accumsan venenatis. Nunc fermentum."
-                                link="#"
-                            />
+                            ))}
                         </div>
-                    
-                    <Pagination/>
+                        {!query && (
+                        <Pagination
+                            currentPage={page}
+                            onPageChange={(newPage) => setPage(newPage)}
+                        />
+                        )}
                     </main>
                 </div>
 

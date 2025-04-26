@@ -1,0 +1,17 @@
+.section_title{
+    font-weight: 500;
+    font-size: 24px;
+    margin-top: 2rem;
+}
+.comment_box{
+    display: flex;
+    flex-direction: column;
+}
+
+textarea {
+    border: 1px solid #e6e6e6;
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 15px;
+    font-size: 16px;
+}

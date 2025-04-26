@@ -10,24 +10,39 @@ const Header = () => {
   };
 
   const location = useLocation();
+  // const getPageTitle = () => {
+  //   switch (location.pathname) {
+  //     case '/blog':
+  //       return 'Blog';
+  //     case '/vegetable':
+  //       return 'Vegetable';
+  //     case '/contact':
+  //       return 'Contact';
+  //     case '/about':
+  //       return 'About';
+  //     case '/faqs':
+  //       return 'Faqs';
+  //     case '/shoppingcart':
+  //       return 'Shopping cart';
+  //     default:
+  //       return 'Home';
+  //   }
+  // };
   const getPageTitle = () => {
-    switch (location.pathname) {
-      case '/blog':
-        return 'Blog';
-      case '/vegetable':
-        return 'Vegetable';
-      case '/contact':
-        return 'Contact';
-      case '/about':
-        return 'About';
-      case '/faqs':
-        return 'Faqs';
-      case '/shoppingcart':
-        return 'Shopping cart';
-      default:
-        return 'Home';
-    }
+    const pathnames = location.pathname.split('/').filter(Boolean);
+    const lastSegment = pathnames[pathnames.length - 1] || '';
+  
+    if (lastSegment === 'blog') return 'Blog';
+    if (lastSegment === 'vegetable') return 'Vegetable';
+    if (lastSegment === 'contact') return 'Contact';
+    if (lastSegment === 'about') return 'About';
+    if (lastSegment === 'faqs') return 'Faqs';
+    if (lastSegment === 'shoppingcart') return 'Shopping cart';
+    if (lastSegment === 'singlepost' || !isNaN(lastSegment)) return 'Single Blog';
+  
+    return lastSegment.charAt(0).toUpperCase() + lastSegment.slice(1) || 'Home';
   };
+  
 
   return (
     <header className="header">

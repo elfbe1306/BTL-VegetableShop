@@ -19,9 +19,30 @@ class ApiService {
       throw error;
     }
   }
+  async fetchPostById(postId) {
+    const { data } = await this.api.get(`?action=fetchpost&postId=${postId}`);
+    if (data.error) throw new Error(data.error);
+    return data;
+  }
+  async fetchPostList(page = 1, limit = 8) {
+    const { data } = await this.api.get(
+      `?action=fetchpostlist&page=${page}&limit=${limit}`
+    );
+    if (data.error) throw new Error(data.error);
+    return data;
+  }
+  async fetchTags() {
+    const { data } = await this.api.get(`?action=fetchtags`);
+    return data;
+  }
+  async searchPosts(query) {
+    const { data } = await this.api.get(`?action=searchposts&query=${encodeURIComponent(query)}`);
+    return data;
+  }
+  
 }
 
 // Singleton instance
-const apiService = new ApiService("http://localhost/BTL-VegetableShop/backend/api.php");
+const apiService = new ApiService("http://localhost/veggieShop/BTL-VegetableShop/backend/api.php");
 
 export default apiService;

@@ -1,11 +1,13 @@
+.blog_card_link {
+    text-decoration: none;
+    color: inherit;
+}
 .blog_card {
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     background: #fff;
     transition: transform 0.3s;
-    /* width: 424px;
-    height: 494px; */
 }
   
 .blog_card:hover {
@@ -19,6 +21,7 @@
 .blog_card_img img {
     width: 100%;
     height: auto;
+    min-height: 325px;
     display: block;
 }
   
