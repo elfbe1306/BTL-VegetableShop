@@ -4,7 +4,7 @@
 
 .CartContainerTitle {
     text-align: center;
-    font-size: 26px;
+    font-size: 32px;
     font-weight: 600;
 }
 
@@ -16,10 +16,6 @@
     margin-right: 8%;
 }
 
-.productContainer {
-
-}
-
 table {
     width: 100%;
     border-collapse: separate;
@@ -29,18 +25,26 @@ table {
     overflow: hidden; 
 }
 
+th {
+    border-bottom: 1px solid #ccc;
+}
 
-.columns {
-    border-bottom: 1px solid #E6E6E6;
+.actionRow {
+    padding-right: 5px;
 }
 
 .productColumn {
     text-align: left;
-    padding-left: 15px;
+    padding: 16px 20px;
+    color: rgb(128, 128, 128);
+    font-weight: 400;
 }
 
 .priceColumn, .quantityColmun, .subTotalColumn {
     text-align: center;
+    color: rgb(128, 128, 128);
+    font-weight: 400;
+    padding: 16px;
 }
 
 .productRow {
@@ -48,15 +52,19 @@ table {
     flex-direction: row;
     align-items: center;
     justify-content: left;
-    gap: 15px;
+    padding: 20px;
 }
 
 .productRow img {
-    width: 128px;
-    height: 128px;
+    width: 100px;
+    height: 100px;
 }
 
-.priceRow, .quantityRow, .subTotalRow {
+.productRow, .priceRow, .quantityRow, .subTotalRow, .actionRow {
+    border-bottom: 1px solid #ccc;
+  }
+
+.priceRow, .subTotalRow {
     text-align: center;
 }
 
@@ -89,6 +97,10 @@ table {
     flex-direction: row;
 }
 
+.subTotalPriceContainer, .ShippingFeeContainer{
+    border-bottom: 1px solid #ccc;
+}
+
 .buttonContainer {
     display: flex;
     justify-content: center;
@@ -98,10 +110,175 @@ table {
     background-color: rgb(0, 178, 1);
     border: none;
     color: white;
-    padding: 15px 0;
+    padding: 10px 0;
     border-radius: 25px;
     flex-grow: 1;
-    font-size: 14px;
+    font-weight: 500;
+    font-size: 16px;
 }
 
+.returnRow {
+    height: 70px;
+}
 
+.returnButton {
+    margin-left: 20px;
+    border: none;
+    padding: 14px 32px;
+    background-color: rgb(242, 242, 242);
+    color: black;
+    font-size: 14px;
+    border-radius: 42px;
+    cursor: pointer;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.returnButton:hover {
+    background-color: #adacac;
+}
+
+.quantitycontainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .minusbutton, .addbutton {
+    background: #f0f0f0;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    cursor: pointer;
+    margin: 0 10px;
+    transition: background 0.2s ease;
+  }
+
+  @media (max-width: 769px) {
+    .CartContainer {
+        margin-bottom: 80px;
+    }
+
+    .MainContainer {
+      grid-template-columns: 1fr;
+      margin-left: 5%;
+      margin-right: 5%;
+      gap: 3%;
+    }
+  
+    table {
+      font-size: 14px;
+    }
+    .productRow {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 10px;
+    }
+  
+    .productRow img {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 8px;
+    }
+  
+    .priceRow, .quantityRow, .subTotalRow, .actionRow {
+      padding: 8px;
+    }
+  
+    .quantitycontainer {
+      gap: 8px;
+    }
+  
+    .minusbutton, .addbutton {
+      width: 32px;
+      height: 32px;
+      font-size: 20px;
+      margin: 0 5px;
+    }
+  
+    .returnButton {
+      padding: 12px 24px;
+      font-size: 13px;
+    }
+  
+    .buttonContainer button {
+      font-size: 14px;
+      padding: 10px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .MainContainer {
+        margin-left: 5%;
+        margin-right: 5%;
+        font-size: 11px;
+    } 
+    .CartContainer {
+        margin-bottom: 10px;
+    }
+    .returnRow, .cartTotal {
+        display: none;
+    }
+
+    .subTotalPriceContainer, .ShippingFeeContainer, .TotalPriceContainer {
+        width: 98%;
+    }
+    table, .totalContainer {
+        font-size: 11px;
+        border: none;
+    }
+
+    .totalContainer {
+        background-color: rgb(235, 255, 233);
+        margin-bottom: 20px;
+    }
+    
+    .productRow img {
+        display: none;
+    }
+
+    .minusbutton, .addbutton {
+        width: 20px;
+        height: 20px;
+        font-size: 12px;
+    }
+
+    .returnButton {
+        padding: 0;
+        background-color: white;
+        font-size: 11px;
+      }
+
+    .closeIcon {
+    width: 10px;
+    }
+
+    .buttonContainer button {
+        padding: 8px;
+    }
+
+    .productRow, .priceRow, .quantityRow, .subTotalRow, .actionRow {
+        padding-left: 0px;
+        padding-right: 0px;
+        border-bottom: none;
+    }
+
+    .subTotalColumn, .quantityColmun {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .actionRow button {
+        border: none;
+        background-color: white;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+  }
