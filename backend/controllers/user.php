@@ -1,21 +1,28 @@
 <?php
-  use Firebase\JWT\JWT;
-  use Firebase\JWT\Key;
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 
-  function createAccount($conn, $userData) {
-    $secret_key = "congabietgay"; 
+function createAccount($conn, $userData) {
+    $hashedPassword = password_hash($userData['password'], PASSWORD_DEFAULT); 
 
-    $payload = [
-      "password" => $userData['password'],
-      "iat" => time(),              // issued at
-      "exp" => time() + (60 * 60)    // token expires in 1 hour (optional)
-    ];
+    $sql = "INSERT INTO `userAccount` (`name`, `role`, `email`, `password`) 
+            VALUES (?, ?, ?, ?);";
 
-    // // Encode password into JWT
-    $jwt = JWT::encode($payload, $secret_key, 'HS256');
+    $stmt = $conn->prepare($sql);
+    
+    if ($stmt === false) {
+        return "Error: Unable to prepare statement.";
+    }
 
-    // You can now save $jwt into database instead of plain password
-    return $jwt;
-  }
+    $role = "Customer"; // Default role
+    
+    $stmt->bind_param('ssss', $userData['name'], $role, $userData['email'], $hashedPassword);
+    $stmt->execute();
 
+    if ($stmt->affected_rows > 0) {
+        return "Account created successfully.";
+    } else {
+        return "Error: Unable to create account.";
+    }
+}
 ?>
