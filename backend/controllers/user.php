@@ -1,20 +1,21 @@
 <?php
-  require '../../../vendor/autoload.php';
-
   use Firebase\JWT\JWT;
   use Firebase\JWT\Key;
 
-  $secret_key = "congabietgay";
+  function createAccount($conn, $userData) {
+    $secret_key = "congabietgay"; 
 
-  $user = 130628; 
+    $payload = [
+      "password" => $userData['password'],
+      "iat" => time(),              // issued at
+      "exp" => time() + (60 * 60)    // token expires in 1 hour (optional)
+    ];
 
-  $payload = array(
-    "user_id" => $user,
-    "iat" => time(),
-    "exp" => time() + 3600  
-  );
-  
-  $jwt = JWT::encode($payload, $secret_key, 'HS256');
-  echo "JWT Token: " . $jwt;
+    // // Encode password into JWT
+    $jwt = JWT::encode($payload, $secret_key, 'HS256');
+
+    // You can now save $jwt into database instead of plain password
+    return $jwt;
+  }
 
 ?>
