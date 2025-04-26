@@ -16,7 +16,7 @@
     padding: 20px;
     display: flex;
     flex-direction: row;
-    gap: 15px;
+    gap: 1%;
     justify-content: center;
 }
 .ImageBlock {
@@ -25,7 +25,6 @@
     margin: 0 auto ;
     width: 300px;
     height: 368px;
-    flex-shrink: 0;
     border-radius: 8px;
     background: var(--Gray-Scale-White, #FFF);
     box-shadow: 0px 20px 48px 0px rgba(0, 38, 3, 0.08);

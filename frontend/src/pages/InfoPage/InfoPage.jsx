@@ -1,8 +1,18 @@
-import React from 'react'
-import Header from '../../components/Header/Header'
-import Footer from '../../components/Footer/Footer'
-import OurTeam from '../../components/OurTeam/OurTeam'
-import styles from './InfoPage.module.css'
+import React, { useEffect, useState } from 'react'
+
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
+import OurTeam from '../../components/OurTeam/OurTeam';
+import Review from '../../components/Review/Review';
+import styles from './InfoPage.module.css';
+
+import Sponsor1 from '../../assets/icons/Sponsor1';
+import Sponsor2 from '../../assets/icons/Sponsor2';
+import Sponsor3 from '../../assets/icons/Sponsor3';
+import Sponsor4 from '../../assets/icons/Sponsor4';
+import Sponsor5 from '../../assets/icons/Sponsor5';
+import Sponsor6 from '../../assets/icons/Sponsor6';
+
 import { PiLeafLight } from "react-icons/pi";
 import { CiStar } from "react-icons/ci";
 import { PiTruckLight } from "react-icons/pi";
@@ -12,7 +22,30 @@ import { PiPackageLight } from "react-icons/pi";
 import { FaCheck } from "react-icons/fa6";
 import { FaArrowRightLong } from "react-icons/fa6";
 
+import apiService from '../../api';
+
 function InfoPage() {
+  const [products, setProducts] = useState([]);
+  const [reviews, setReviews] = useState([]);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response1 = await apiService.FetchProduct();
+      setProducts(response1.slice(0, 4));
+
+      const response2 = await apiService.FetchReview();
+      setReviews(response2);
+    }
+
+    fetchData();
+  }, [])
   return (
     <div>
       <Header />       
@@ -118,7 +151,24 @@ function InfoPage() {
             <div className={styles.Teams}>
               <div className={styles.BoldText}>Our Awesome Team</div>
               <div className={styles.SmallText}>Pellentesque a ante vulputate leo porttitor luctus sed eget eros. Nulla et rhoncus neque. Duis non diam eget est luctus tincidunt a a mi.</div>
-            <OurTeam/>
+              <OurTeam/>
+            </div>
+            <div className={styles.customerReviewContainer}>
+              <p className={styles.customerReviewTitle}>CLIENT TESTIOMIAL</p>
+              <p className={styles.customerReviewSubTitle}>What our Client Says</p>
+              <div className={styles.reviewContainer}>
+                {reviews.slice(0, windowWidth <= 880 ? 4 : 3).map((r) => (
+                  <Review key={r.id} review={r} />
+                ))}
+              </div>
+            </div>
+            <div className={styles.sponsorContainer}>
+              <Sponsor1 className={styles.sponsorColor}/>
+              <Sponsor2 className={styles.sponsorColor}/>
+              <Sponsor3 className={styles.sponsorColor}/>
+              <Sponsor4 className={styles.sponsorColor}/>
+              <Sponsor5 className={styles.sponsorColor}/>
+              <Sponsor6 className={styles.sponsorColor}/>
             </div>
         </div>
       <Footer /> 
