@@ -16,21 +16,22 @@
     padding: 20px;
     display: flex;
     flex-direction: row;
-    gap: 1%;
+    flex-wrap: wrap;
+    gap: 8px; 
     justify-content: center;
 }
 .ImageBlock {
     position: relative;
     overflow: hidden;
     margin: 0 auto ;
-    width: 300px;
+    max-width: 300px;
     height: 368px;
     border-radius: 8px;
     background: var(--Gray-Scale-White, #FFF);
     box-shadow: 0px 20px 48px 0px rgba(0, 38, 3, 0.08);
 }
 .ImageBlock img{
-    width: 300px;
+    width: 100%;
     height: 280px;
     border-radius: 8px 8px 0px 0px;
 }
@@ -74,8 +75,10 @@
   @media screen and (max-width: 768px) {
     .ImageBlockWrap{
         display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: 1fr 1fr;
         justify-content: center;
+        display: flex;
+        flex-wrap: wrap;
     }
    
 }

@@ -40,11 +40,6 @@
     /* align-items: center; */
     align-content: center;
 }
-.AboutMe{
-    /* background: linear-gradient(269deg, #FFF 18.88%, rgba(255, 255, 255, 0.00) 86.37%), url('src/assets/images/About-me-BG.png') lightgray 50% / cover no-repeat; */
-    /* width: 650px;
-    height: 350px; */
-}
 .AboutMe img{
     width: 100%;
     /* height: auto; */
@@ -164,6 +159,7 @@
     padding-top: 35px;
     padding-bottom: 35px ;
     background: linear-gradient(180deg, #F2F2F2 0%, #FFF 100%);
+    width: 100%;
 }
 .Teams .BoldText{
     text-align: center;
@@ -175,6 +171,7 @@
     text-align: center;
     font-weight: 400;
     line-height: 150%; /* 24px */
+    padding-inline: 20px ;
 }
 .customerReviewContainer {
     background-color: #F2F2F2;
@@ -272,10 +269,10 @@
     }
     .TextAndIconWrap{
         display: flex;
-        padding-inline: 30px ;
+        gap: 5%;
     }
     .TextAndIconWrap .Text{
-        width: 40%;
+        width: 50%;
     }
     .IconHeadText{
         font-size: 10px;
@@ -331,7 +328,7 @@
     }
     .AboutMeWrap{
         display: block;
-        padding-inline: 30px;
+        padding-inline: 50px;
         margin-top: 10px;
     }
     .AboutMe {
@@ -343,9 +340,12 @@
     .TextAndIconWrap{
         display: contents;
         display: grid;
+        gap: 0px;
         justify-self: center;
+        
     }
     .TextAndIconWrap .Text{
         width: 100%;
+        text-align: center;
     }
 }
