@@ -3,7 +3,6 @@ import styles from "./Cart.module.css";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import CloseIcon from "../../assets/icons/CloseIcon";
-import { Link } from 'react-router-dom';
 
 import { useCart } from "../../CartContext";
 
@@ -14,9 +13,6 @@ const Cart = () => {
   const productPrice = (discount_percentage, price) => {
       return discount_percentage ? Math.round(price * (100 - Number(discount_percentage))) / 100 : price
   }
-
-  const increment = () => setCount(count + 1);
-  const decrement = () => setCount(count > 0 ? count - 1 : 0);
 
   const [totalPrice, setTotalPrice] = useState(0);
   const [shippingFee, setShippingFee] = useState(0);
@@ -50,10 +46,10 @@ const Cart = () => {
               <table>
                 <thead>
                   <tr className={styles.columns}>
-                    <th className={styles.productColumn}>PRODUCT</th>
-                    <th className={styles.priceColumn}>PRICE</th>
-                    <th className={styles.quantityColmun}>QUANTITY</th>
-                    <th className={styles.subTotalColumn}>SUBTOTAL</th>
+                    <th className={styles.productColumn}>Product</th>
+                    <th className={styles.priceColumn}>Price</th>
+                    <th className={styles.quantityColmun}>Quantity</th>
+                    <th className={styles.subTotalColumn}>SubTotal</th>
                     <th className={styles.actionColumn}></th>
                   </tr>
                 </thead>
@@ -65,13 +61,7 @@ const Cart = () => {
                           <p>{item.product.name}</p>
                         </td>
                         <td className={styles.priceRow}>{productPrice(item.product.discount_percentage, item.product.price)}</td>
-                        <td className={styles.quantityRow}>
-                          <div className={styles.quantitycontainer}>
-                            <button onClick={decrement} className={styles.minusbutton}>-</button>
-                              <span className={styles.quantitynumber}>{item.quantity}</span>
-                            <button onClick={increment} className={styles.addbutton}>+</button>
-                          </div>
-                        </td>
+                        <td className={styles.quantityRow}>{item.quantity}</td>
                         <td className={styles.subTotalRow}>{productPrice(item.product.discount_percentage, item.product.price) * item.quantity}</td>
                         <td className={styles.actionRow}>
                           <button onClick={() => removeFromCart(item.product.product_id)}>
@@ -80,28 +70,23 @@ const Cart = () => {
                         </td>
                       </tr>
                     ))}
-                    <tr> 
-                      <td className={styles.returnRow}>
-                        <Link to="/vegetable" className={styles.returnButton}>Back</Link>
-                      </td>
-                    </tr>
                 </tbody>
               </table>
             </div>
             <div>
               <div className={styles.totalContainer}>
-                <p className={styles.cartTotal}>Cart Total</p>
+                <p>Cart Total</p>
                 <div className={styles.subTotalPriceContainer}>
-                  <p style={{color:'rgb(128, 128, 128)'}}>Subtotal</p>
+                  <p>Subtotal</p>
                   <p>${totalPrice}</p>
                 </div>
                 <div className={styles.ShippingFeeContainer}>
-                  <p style={{color:'rgb(128, 128, 128)'}}>Shipping (10%):</p>
+                  <p>Shipping (10%):</p>
                   <p>${shippingFee}</p>
                 </div>
                 <div className={styles.TotalPriceContainer}>
-                  <p style={{color:'rgb(128, 128, 128)'}}>Total:</p>
-                  <p style={{fontWeight: "500"}}>${finalPrice}</p>
+                  <p>Total:</p>
+                  <p>${finalPrice}</p>
                 </div>
                 <div className={styles.buttonContainer}>
                   <button>Proceed to checkout</button>
