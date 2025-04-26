@@ -75,7 +75,7 @@
     }
 }
 
-@media screen and (max-width: 630px) {
+@media screen and (max-width: 480px) {
     .bannerBarContainer {
         display: none;
     }
