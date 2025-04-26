@@ -8,6 +8,7 @@ import ProductCard from '../../components/ProductCard/ProductCard';
 import PromoBanner from '../../components/PromoBanner/PromoBanner';
 import VideoPlayer from '../../components/VideoPlayer/VideoPlayer';
 import Review from '../../components/Review/Review';
+import OurTeam from '../../components/OurTeam/OurTeam';
 
 import Sponsor1 from '../../assets/icons/Sponsor1';
 import Sponsor2 from '../../assets/icons/Sponsor2';
@@ -61,6 +62,14 @@ function HomePage() {
       </div>
 
       <VideoPlayer />
+      
+      <div className={styles.ourTeamContainer}>
+        <div className={styles.ourTeamTextContainer}>
+          <p className={styles.ourTeamSubTitle}>Team</p>
+          <p className={styles.ourTeamTitle}>Our Professional Members</p>
+        </div>
+        <OurTeam />
+      </div>
 
       <div className={styles.customerReviewContainer}>
         <p className={styles.customerReviewTitle}>CLIENT TESTIOMIAL</p>
