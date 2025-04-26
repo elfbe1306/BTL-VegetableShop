@@ -1,6 +1,6 @@
 .productCardContainer {
     display: grid;
-    grid-template-rows: 2fr 1fr;
+    grid-template-rows: 3.5fr 1fr;
     border: 1px solid #E6E6E6;
     border-radius: 10px;
     position: relative;
