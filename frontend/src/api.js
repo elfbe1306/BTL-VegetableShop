@@ -50,6 +50,16 @@ class ApiService {
       throw error;
     }
   }
+
+  async CreateAccount(userData) {
+    try {
+      const response = await this.api.post('?action=createaccount', userData);
+      return response.data;
+    } catch(error) {
+      console.log("Error creating user:", error);
+      throw error;
+    }
+  }
 }
 
 // Singleton instance
