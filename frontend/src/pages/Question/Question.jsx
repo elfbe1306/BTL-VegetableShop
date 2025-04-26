@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
-import './Question.css';
+import styles from './Question.module.css';
 
 function Question() {
   const [selected, setSelected] = useState(null);
@@ -39,25 +39,25 @@ function Question() {
   return (
     <div>
       <Header />
-      <div className='Wrapper'>
-        <div className='LeftCol'>
-          <div className='Text'>Welcome, Let’s Talk About Our Ecobazar</div>
+      <div className={styles.Wrapper}>
+        <div className={styles.LeftCol}>
+          <div className={styles.Text}>Welcome, Let’s Talk About Our Ecobazar</div>
 
-          <div className='accordion'>
+          <div className={styles.accordion}>
             {data.map((item, i) => (
-              <div className={`item ${selected === i ? 'active' : ''}`} key={i}>
-                <div className='ItemHeader' onClick={() => toggle(i)}>
-                  <div className='ItemTitle'>{item.title}</div>
-                  <span className='Icon'>{selected === i ? '-' : '+'}</span>
+              <div className={`${styles.item} ${selected === i ? styles.active : ''}`} key={i}>
+                <div className={styles.ItemHeader} onClick={() => toggle(i)}>
+                  <div className={styles.ItemTitle}>{item.title}</div>
+                  <span className={styles.Icon}>{selected === i ? '-' : '+'}</span>
                 </div>
-                <div className='Content'>{item.content}</div>
+                <div className={styles.Content}>{item.content}</div>
               </div>
             ))}
           </div>
 
 
         </div>
-        <div className='RightCol'>
+        <div className={styles.RightCol}>
           <img src="src/assets/images/ContactImage.png" alt="img" />
         </div>
       </div>
