@@ -124,6 +124,16 @@ class ApiService {
       throw error;
     }
   }
+
+  async FetchTeam() {
+    try {
+      const response = await this.api.get('?action=fetchteam');
+      return response.data;
+    } catch(error) {
+      console.error("Error fetching team:", error);
+      throw error;
+    }
+  }
 }
 
 
