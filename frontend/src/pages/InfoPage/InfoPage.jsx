@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
@@ -28,6 +29,7 @@ function InfoPage() {
   const [products, setProducts] = useState([]);
   const [reviews, setReviews] = useState([]);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
@@ -46,6 +48,10 @@ function InfoPage() {
 
     fetchData();
   }, [])
+
+  const handleSubmit = () => {
+    navigate('/vegetable'); 
+  };
   return (
     <div>
       <Header />       
@@ -139,7 +145,7 @@ function InfoPage() {
                     <div className={styles.SmallText}>Maecenas ut nunc fringilla erat varius.</div>                
                   </div>
                 </div>
-                <div className={styles.Button}>
+                <div className={styles.Button} onClick={handleSubmit} style={{ cursor: 'pointer' }}>
                     <div>Shop now</div>
                     <FaArrowRightLong />
                   </div>
