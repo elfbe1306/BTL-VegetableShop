@@ -118,6 +118,8 @@
     display: flex;
     align-items: center;
     gap: 15px;
+    text-decoration: none;
+    color: black;
 }
 
 .cart_badge {
@@ -196,6 +198,12 @@
 }
 
 .breadcrumb_address .material-symbols-outlined{
+.breadcrumb-address a {
+    text-decoration: none;
+    color:#00B207;
+}
+
+.breadcrumb-address .material-symbols-outlined{
     font-weight: 200;
     color: #808080;
 }

@@ -1,0 +1,136 @@
+.productTitleContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.productTitle {
+    color: rgb(0, 178, 7);
+    margin-bottom: 5px;
+}
+
+.productSubTitle {
+    font-weight: 600;
+    font-size: 30px;
+    margin-top: 0;
+    text-align: center;
+}
+
+.productFirstRowContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    row-gap: 25px;
+    column-gap: 25px;
+    margin: 0px 5%;
+    margin-bottom: 5%;
+}
+
+.ourTeamContainer {
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.ourTeamTextContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.ourTeamSubTitle {
+    color: rgb(0, 178, 7);
+    margin-top: 5%;
+    margin-bottom: 0;
+}
+
+.ourTeamTitle {
+    margin-top: 0;
+    font-weight: 600;
+    font-size: 32px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.customerReviewContainer {
+    background-color: #F2F2F2;
+    flex-direction: column;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    margin-top: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.customerReviewTitle {
+    color: rgb(0, 178, 7);
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0;
+    text-align: center;
+}
+
+.customerReviewSubTitle {
+    font-size: 32px;
+    font-weight: 600;
+    margin: 0;
+    text-align: center;
+}
+
+.reviewContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 15px;
+    row-gap: 45px;
+    margin-top: 15px;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.sponsorContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 25px;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 5%;
+    border: 1px solid #E6E6E6;
+    padding: 60px 100px;
+    margin-bottom: 5%;
+}
+
+.sponsorColor {
+    fill: #CCCCCC;
+}
+
+.sponsorColor:hover {
+    fill:rgb(0, 178, 7)
+}
+
+@media (max-width: 1500px) {
+    .productFirstRowContainer {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 880px) {
+    .productFirstRowContainer {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .reviewContainer {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 550px) {
+    .productFirstRowContainer {
+        grid-template-columns: 1fr;
+    }
+
+    .reviewContainer {
+        grid-template-columns: 1fr;
+    }
+}

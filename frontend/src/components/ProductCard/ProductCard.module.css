@@ -1,0 +1,121 @@
+.productCardContainer {
+    display: grid;
+    grid-template-rows: 3.5fr 1fr;
+    border: 1px solid #E6E6E6;
+    border-radius: 10px;
+    position: relative;
+}
+
+.productCardContainer:hover {
+    box-shadow: 0 0px 24px #d0cfcf; 
+}
+
+.productCardContainer img {
+    border-radius: 10px;
+    width: 90%;
+    height: 100%;
+    margin-left: 5%;
+    margin-right: 5%;
+    object-fit: contain;
+}
+
+.product_description {
+    display: flex;
+    align-items: center;
+    padding-bottom: 10px;
+    justify-content: space-between;
+}
+
+.product_title_container {
+    margin-left: 15px;
+}
+
+.product_name {
+    color: #4D4D4D;
+    margin-bottom: 0;
+}
+
+.product_price, .originalPrice, .discountedPrice {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.product_price {
+    font-weight: 400;
+    color: black
+}
+
+.productlink {
+    text-decoration: none;
+}
+
+.priceContainer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+  
+.originalPrice {
+    text-decoration: line-through;
+    color: gray;
+    font-size: 0.9rem;
+}
+
+.discountedPrice {
+    color: rgb(0, 178, 1);
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.saleTag {
+    color: white;
+    background-color: red;
+    position: absolute;
+    font-size: 14px;
+    padding: 5px 5px;
+    border-radius: 5px;
+    top: 10px;
+    left: 10px;
+}
+
+.rating {
+    display: flex;
+    flex-direction: row;
+}
+
+.star {
+    fill: #FACC15;
+    width: 14px;
+    height: auto;
+}
+
+.nullstar {
+    fill: #D1D5DB;
+    width: 14px;
+    height: auto;
+}
+
+.buttonProduct {
+    background-color: #F2F2F2;
+    border: none;
+    border-radius: 50%;
+    width: 48px;         
+    height: 48px;
+    margin-top: 20px;
+    margin-right: 10px;
+    padding: 12px;
+    transition: box-shadow 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.buttonProduct:hover {
+    box-shadow: 0 0px 10px #20B526; 
+}
+
+.shoppingBag {
+    width: 24px;
+    height: auto;
+}

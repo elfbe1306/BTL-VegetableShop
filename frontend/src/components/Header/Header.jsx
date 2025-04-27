@@ -1,14 +1,23 @@
-import React , {useState} from "react";
+import React , {useState, useEffect} from "react";
 import "../Header/header.css";
-import { useLocation } from 'react-router-dom'; 
+import { useLocation, useParams, Link } from 'react-router-dom'; //levy add
+
+import { useCart } from "../../CartContext";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const { productName } = useParams();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const formatProductName = (name) => {
+    return name.replace(/([a-z])([A-Z])/g, '$1 $2');
+  };
+  //levy làm
+  
   const location = useLocation();
   // const getPageTitle = () => {
   //   switch (location.pathname) {
@@ -31,18 +40,58 @@ const Header = () => {
   const getPageTitle = () => {
     const pathnames = location.pathname.split('/').filter(Boolean);
     const lastSegment = pathnames[pathnames.length - 1] || '';
-  
-    if (lastSegment === 'blog') return 'Blog';
-    if (lastSegment === 'vegetable') return 'Vegetable';
-    if (lastSegment === 'contact') return 'Contact';
-    if (lastSegment === 'about') return 'About';
-    if (lastSegment === 'faqs') return 'Faqs';
-    if (lastSegment === 'shoppingcart') return 'Shopping cart';
-    if (lastSegment === 'singlepost' || !isNaN(lastSegment)) return 'Single Blog';
-  
-    return lastSegment.charAt(0).toUpperCase() + lastSegment.slice(1) || 'Home';
+
+    if (location.pathname.startsWith('/vegetable/') && productName) {
+      return 'Vegetable/' + `${formatProductName(productName)}`;
+    }
+
+    switch (lastSegment) {
+      case 'blog':
+        return 'Blog';
+      case 'vegetable':
+        return 'Vegetable';
+      case 'cart':
+        return 'Shopping Cart';
+      case 'contact':
+        return 'Contact';
+      case 'about':
+        return 'About';
+      case 'faqs':
+        return 'Faqs';
+      case 'shoppingcart':
+        return 'Shopping cart';
+      case 'singlepost':
+        return 'Single Blog';
+      default:
+        // If lastSegment is a number (like blog post ID), treat it as Single Blog
+        if (!isNaN(lastSegment)) {
+          return 'Single Blog';
+        }
+        // Capitalize first letter
+        return lastSegment.charAt(0).toUpperCase() + lastSegment.slice(1) || 'Home';
+    }
   };
   
+
+  const [productCount, setProductCount] = useState(0);
+  const [productPrice, setProductPrice] = useState(0);
+
+  const { cartItems } = useCart();
+
+  useEffect(() => {
+    const total = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+    setProductCount(total);
+
+    const totalPrice = cartItems.reduce((sum, item) => {
+      const price = item.product.price;
+      const discount = item.product.discount_percentage 
+        ? price * (1 - Number(item.product.discount_percentage) / 100)
+        : price;
+      return sum + discount * item.quantity;
+    }, 0);
+    setProductPrice(Math.round(totalPrice * 100) / 100);
+
+  }, [cartItems]);
 
   return (
     <header className="header">
@@ -64,7 +113,9 @@ const Header = () => {
 
       <div className="main_header">
         <div className="logo">
-          <img src="/img/Logo-black.png" alt="Logo" />
+          <Link to={`/`}>
+            <img src="/img/Logo-black.png" alt="Logo" />
+          </Link>
         </div>
         <div className="search_bar">
           <i className="fa-solid fa-magnifying-glass"></i>
@@ -74,14 +125,14 @@ const Header = () => {
         <div className="user_actions">
           <span className="material-symbols-outlined favorite_icon">favorite</span>
           <span className="divider"></span>
-          <div className="cart">
-            <span className="material-symbols-outlined cart_icon">shopping_bag</span>
-            <span className="cart_badge">2</span>
-            <div>
-              <div className="cart_text">Shopping cart:</div>
-              <div className="cart_value">$57.00</div>
-            </div>
-          </div>
+            <Link className="cart" to={'/cart'}>
+              <span className="material-symbols-outlined cart-icon">shopping_bag</span>
+              <span className="cart-badge">{productCount}</span>
+              <div>
+                <div className="cart-text">Shopping cart:</div>
+                <div className="cart-value">${productPrice}</div>
+              </div>
+            </Link>
         </div>
       </div>
 
@@ -104,10 +155,18 @@ const Header = () => {
       </nav>
 
       <div className="breadcrumb">
-        <div className="breadcrumb_address">
-          <span className="material-symbols-outlined">home</span>
-          <span className="material-symbols-outlined">chevron_right</span>
-          <span className="page">{getPageTitle()}</span>
+        <div className="breadcrumb-address">
+            <span className="material-symbols-outlined">home</span>
+            <span className="material-symbols-outlined">chevron_right</span>
+            {location.pathname.startsWith('/vegetable/') && productName ? (
+                <>
+                  <a href="/vegetable" className="breadcrumb-link">Vegetable</a>
+                  <span className="material-symbols-outlined">chevron_right</span>
+                  <span className="page">{formatProductName(productName)}</span>
+                </>
+              ) : (
+                <span className="page">{getPageTitle()}</span>
+              )}
         </div>
       </div>
     </header>

@@ -1,0 +1,53 @@
+.ratingContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin: 24px;
+  }
+  
+  .stars {
+    display: flex;
+    gap: 10px;
+    font-size: 32px;
+    cursor: pointer;
+  }
+  
+  .star {
+    color: #aaa;
+    transition: color 0.2s;
+  }
+  
+  .filled {
+    color: #f4b400;
+  }
+  
+  .textarea {
+    width: 80%;
+    height: 100px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 17px;
+    resize: none;
+    outline: none;
+  }
+
+  .summitbutton {
+    border-radius: 40px;
+    padding: 5px 20px;
+    border: none;
+    background-color: #00B207;
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    align-self: flex-end;
+    margin-right: 9%;
+  }
+
+  .summitbutton:hover {
+    background-color: #2C742F;
+  }
+  
