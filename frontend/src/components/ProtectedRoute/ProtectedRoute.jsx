@@ -30,7 +30,7 @@ const ProtectedRoute = ({ allowedRoles, children }) => {
   }
 
   if (loading) {
-    return <div>Loading...</div>; // hoặc spinner tùy bạn
+    return <div>Loading...</div>;
   }
 
   if (allowedRoles && !allowedRoles.includes(userRole)) {
