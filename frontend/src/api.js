@@ -60,6 +60,16 @@ class ApiService {
       throw error;
     }
   }
+
+  async Login(userData) {
+    try {
+      const response = await this.api.post('?action=login', userData);
+      return response.data;
+    } catch(error) {
+      console.error("Error login:", error);
+      throw error
+    }
+  }
 }
 
 // Singleton instance

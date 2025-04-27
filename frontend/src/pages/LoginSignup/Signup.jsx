@@ -4,13 +4,12 @@ import apiService from '../../api';
 import { Link } from 'react-router-dom';
 
 const SignUp = () => {
-    const [email, setEmail] = useState('test123@gmail.com');
-    const [password, setPassword] = useState('12345');
-    const [name, setName] = useState('elfbe');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [name, setName] = useState('');
     const handleSubmit = async (e) => {
         e.preventDefault();
         const response = await apiService.CreateAccount({name: name, email: email, password: password});
-        console.log(response)
     };
 
 

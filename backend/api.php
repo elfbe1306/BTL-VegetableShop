@@ -54,6 +54,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo json_encode(["error" => "Missing user data"]);
             }
             break;
+        case 'login':
+            if (isset($data)) {
+                echo json_encode(Login($conn, $data));
+            } else {
+                http_response_code(400);
+                echo json_encode(["error" => "Missing user data"]);
+            }
+            break;
+
         default:
             http_response_code(404);
             echo json_encode(["error" => "Invalid route"]);
