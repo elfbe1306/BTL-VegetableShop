@@ -53,7 +53,7 @@ function InfoPage() {
             <div className={styles.AboutUs}>
                 <div className={styles.Text}>
                     <div className={styles.BoldText}>100% Trusted Organic Food Store</div>
-                    <div className={styles.SmallText}>Morbi porttitor ligula in nunc varius sagittis. Proin dui nisi, laoreet ut tempor ac, cursus vitae eros. Cras quis ultricies elit. Proin ac lectus arcu. Maecenas aliquet vel tellus at accumsan. Donec a eros non massa vulputate ornare. Vivamus ornare commodo ante, at commodo felis congue vitae. </div>
+                    <div className={styles.SmallText}>We proudly offer high-quality organic products, grown and harvested naturally. With a 100% trust guarantee, our store is committed to prioritizing your health and satisfaction in every product we deliver. </div>
                 </div>
                 <div className={styles.Image}>
                     <img src="src/assets/images/About-us-img.png" alt="img" />
@@ -61,7 +61,7 @@ function InfoPage() {
             </div>
             <div className={styles.AboutMeWrap}>
               <div className={styles.AboutMe}>
-                <img src="src/assets/images/About-me-img.png" alt="img" />  
+                <img src="src/assets/images/About-me-2.png" alt="img" />  
               </div>
               <div className={styles.TextAndIconWrap}>
                 <div className={styles.Text}>
@@ -140,9 +140,9 @@ function InfoPage() {
                   </div>
                 </div>
                 <div className={styles.Button}>
-                  <div>Shop now</div>
-                  <FaArrowRightLong />
-                </div>
+                    <div>Shop now</div>
+                    <FaArrowRightLong />
+                  </div>
               </div>
               <div className={styles.Image}>
                 <img src="src/assets/images/Delivery-man.png" alt="img" />  

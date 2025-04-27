@@ -3,16 +3,19 @@
     width: 100%;
 }
 .AboutUs{
-    display: flex;
-    flex-direction: row;
+    display: grid ;
+    grid-template-columns: 1fr 1fr; ;
     margin-top: 40px;
-    padding-inline: 200px;
+    padding-inline: 30px;
     align-items: center;
     gap: 40px;
     justify-self: center;
 }
 .AboutUs img {
-    width: 25rem;
+    width: 100%;
+    height: 100%;
+    max-height: 15rem;
+    max-width: 22rem;
 }
 .Text{
     width: 350px;
@@ -30,27 +33,27 @@
     color: var(--Gray-Scale-Gray-600, #666);
 }
 .AboutMeWrap{
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
     margin-top: 40px;
-}
-.AboutMe{
-    background: linear-gradient(269deg, #FFF 18.88%, rgba(255, 255, 255, 0.00) 86.37%), url('src/assets/images/About-me-BG.png') lightgray 50% / cover no-repeat;
-    width: 900px;
-    height: 350px;
+    /* align-items: center; */
+    align-content: center;
 }
 .AboutMe img{
-    width: 23.8rem;
-    margin-left: 25%;
+    width: 100%;
+    /* height: auto; */
+    min-height: 319px;
+    /* height: 319px; */
+    /* margin-left: 180px; */
 }
 .TextAndIconWrap{
-    width: 100%;
-    position: absolute;
-    left: 50%;
+    /* width: 100%;  */
+    align-self: center;
 }
 .TextAndIconWrap .Text{
     margin-top: 20px;
-    width: 23rem;
+    /* width: 23rem; */
 }
 .TextAndIconWrap .SmallText{
     font-size: 10px;
@@ -61,7 +64,7 @@
 .FullIconWrap{
     display: flex;
     flex-direction: row;
-    gap: 30px;
+    gap: 10%;
 }
 .IAndT{
     display: flex;
@@ -96,22 +99,25 @@
     display: flex;
     flex-direction: row;
     margin-top: 40px;
-    padding-left: 250px;
+    padding-inline: 30px;
     position: relative;
     height: 300px;
+    justify-self: center;
 }
 .DeliveryWrap img{
-    width: 30rem;
-    position: absolute;
-    left: 50%;
-    top: -24px;
+    width: 100%;
+    max-width: 30rem;
+    min-height: 253px;
+    /* position: absolute;
+    left: 50%; */
+    margin-top: -24px;
 }
 .DeText{
     justify-self: center;
     align-self: center;
 }
 .DeText .BoldText{
-    width: 300px;
+    /* width: 300px; */
     font-size: 28px;
 }
 .DeText .SmallText{
@@ -153,6 +159,7 @@
     padding-top: 35px;
     padding-bottom: 35px ;
     background: linear-gradient(180deg, #F2F2F2 0%, #FFF 100%);
+    width: 100%;
 }
 .Teams .BoldText{
     text-align: center;
@@ -164,6 +171,7 @@
     text-align: center;
     font-weight: 400;
     line-height: 150%; /* 24px */
+    padding-inline: 20px ;
 }
 .customerReviewContainer {
     background-color: #F2F2F2;
@@ -206,7 +214,7 @@
     gap: 25px;
     margin-left: 1%;
     margin-right: 1%;
-    margin-top: 3%;
+    margin-top: 2%;
     padding: 60px 100px;
     margin-bottom: 3%;
 }
@@ -223,9 +231,121 @@
         grid-template-columns: repeat(2, 1fr);
     }
 }
+@media (max-width: 768px){
+    .AboutUs{
+        gap: 10px;
+        justify-self:auto ;
+        padding-inline: 30px ;
+    }
+    .AboutUs img {
+        max-width:20rem;
+    }
+    .AboutUs .Text{
+        width: 100%;
+        height: auto;
+        max-width: 300px;
+    }
+    .AboutUs .BoldText{
+        font-size: 30px;
+    }
+    .AboutUs .SmallText{
+        font-size: 12px;
+    }
+    .AboutMe {
+        display: none;
+    }
+    .AboutMe img{
+        display: none;
+    }
+    .AboutMeWrap{
+        display: block;
+        padding-inline: 30px;
+    }
+    .TextAndIconWrap .BoldText{
+        font-size: 30px;
+    }
+    .TextAndIconWrap .SmallText{
+        display: none;
+    }
+    .TextAndIconWrap{
+        display: flex;
+        gap: 5%;
+    }
+    .TextAndIconWrap .Text{
+        width: 50%;
+    }
+    .IconHeadText{
+        font-size: 10px;
+    }
+    .IconContentText{
+        font-size: 6px;
+    }
+    .IAndT{
+        margin-top: 8px;
+    }
+    .icon{
+        background-color: rgba(0, 178, 7, 0.10);
+        font-size: 20px;
+        width: 30px;
+        height: 30px;
+    }
+    .DeliveryWrap{
+        display: block;
+        padding-inline: 30px;
+        height: 100%;
+        margin-bottom: 40px;
+    }
+    .DeliveryWrap img{
+        display: none;
+    }
+    .DeText .Text{
+        text-align: center;
+        width: 100%;
+    }
+    .DeText .SmallText {
+        width: 100%;
+    }
+    .CheckText{
+        display: flex;
+    }
+    .Button{
+        margin-top: 40px;
+        display: flex;
+        justify-self: center;
+    }
 
+}
 @media (max-width: 550px) {
     .reviewContainer {
         grid-template-columns: 1fr;
+    }
+    
+}
+@media (max-width: 480px){
+    .AboutUs{
+        display: flex;
+        flex-direction: column;
+    }
+    .AboutMeWrap{
+        display: block;
+        padding-inline: 50px;
+        margin-top: 10px;
+    }
+    .AboutMe {
+        display: contents;
+    }
+    .AboutMe img {
+        display: none;
+    }
+    .TextAndIconWrap{
+        display: contents;
+        display: grid;
+        gap: 0px;
+        justify-self: center;
+        
+    }
+    .TextAndIconWrap .Text{
+        width: 100%;
+        text-align: center;
     }
 }

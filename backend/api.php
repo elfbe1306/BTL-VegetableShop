@@ -11,6 +11,8 @@ require_once "controllers/reviews.php";
 require_once "controllers/promotions.php";
 require_once "controllers/user.php";
 
+require_once "controllers/faqs.php";
+
 require_once __DIR__ . '/../backend-library/vendor/autoload.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
@@ -60,6 +62,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 break;
             }
             echo json_encode(checkRole($conn, $jwt));
+        
+        case 'fetchquestions':
+            echo json_encode(fetchQuestions($conn));
             break;
             
         default:

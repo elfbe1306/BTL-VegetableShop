@@ -104,6 +104,16 @@ class ApiService {
       throw error;
     }
   }
+
+  async FetchQuestion() {
+    try {
+      const response = await this.api.get('?action=fetchquestions');
+      return response.data;
+    } catch(error) {
+      console.error("Error fetching questions:", error);
+      throw error;
+    }
+  }
 }
 
 // Singleton instance
