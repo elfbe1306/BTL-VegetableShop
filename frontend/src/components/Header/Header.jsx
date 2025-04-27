@@ -1,6 +1,6 @@
 import React , {useState, useEffect} from "react";
 import "../Header/header.css";
-import { useLocation, useParams, Link } from 'react-router-dom'; //levy add
+import { useLocation, useParams, Link, useNavigate } from 'react-router-dom'; //levy add
 
 import { useCart } from "../../CartContext";
 
@@ -16,27 +16,9 @@ const Header = () => {
   const formatProductName = (name) => {
     return name.replace(/([a-z])([A-Z])/g, '$1 $2');
   };
-  //levy làm
   
   const location = useLocation();
-  // const getPageTitle = () => {
-  //   switch (location.pathname) {
-  //     case '/blog':
-  //       return 'Blog';
-  //     case '/vegetable':
-  //       return 'Vegetable';
-  //     case '/contact':
-  //       return 'Contact';
-  //     case '/about':
-  //       return 'About';
-  //     case '/faqs':
-  //       return 'Faqs';
-  //     case '/shoppingcart':
-  //       return 'Shopping cart';
-  //     default:
-  //       return 'Home';
-  //   }
-  // };
+
   const getPageTitle = () => {
     const pathnames = location.pathname.split('/').filter(Boolean);
     const lastSegment = pathnames[pathnames.length - 1] || '';
@@ -63,15 +45,12 @@ const Header = () => {
       case 'singlepost':
         return 'Single Blog';
       default:
-        // If lastSegment is a number (like blog post ID), treat it as Single Blog
         if (!isNaN(lastSegment)) {
           return 'Single Blog';
         }
-        // Capitalize first letter
         return lastSegment.charAt(0).toUpperCase() + lastSegment.slice(1) || 'Home';
     }
   };
-  
 
   const [productCount, setProductCount] = useState(0);
   const [productPrice, setProductPrice] = useState(0);
@@ -93,6 +72,17 @@ const Header = () => {
 
   }, [cartItems]);
 
+  const navigate = useNavigate();
+  const [userID, setUserID] = useState(localStorage.getItem('userID'));
+
+	const handleLogout = async (e) => {
+		e.preventDefault();
+
+		await localStorage.removeItem("userID");
+		setUserID(null);
+		navigate('/');
+	};
+
   return (
     <header className="header">
       <div className="top-bar">
@@ -105,8 +95,17 @@ const Header = () => {
             <span className="currency-selector">USD <i className="fa-solid fa-chevron-down fa-sm"></i></span>
           </div>
           <span className="top-bar-divider"></span>
-          <div>
-            <span><a href="#" className="auth-links">Sign In</a> / <a href="#" className="auth-links">Sign Up</a></span>
+          <div className="LoginSignInContainer">
+            {userID ? (
+              <button onClick={handleLogout}>
+                <p>Logout</p>
+              </button>
+            ) : (
+              <Link className="LoginSignInContainer" to={'/login'}>
+                <p>Sign in /</p>
+                <p>Sign up</p>
+              </Link>
+            )}
           </div>
         </div>
       </div>
