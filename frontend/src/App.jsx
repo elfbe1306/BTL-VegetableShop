@@ -23,7 +23,7 @@ function App() {
         <Route path="/blog/:postId" element={<SinglePost />} />
         <Route path="/contact" element={<div>Contact Us Here</div>} />
         <Route path="/about" element={<div><InfoPage /></div>} />
-        <Route path="/faqs" element={<div>Contact Us Here</div>} />
+        <Route path="/faqs" element={<div><Question/></div>} />
         <Route path="/vegetable/:productName" element={<ProductDetail/>} />
         <Route path="/cart" element={<Cart/>}/>
         <Route path="/blog" element={<div>Welcome to the Blog Page</div>} />

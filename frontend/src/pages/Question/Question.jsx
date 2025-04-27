@@ -1,10 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import styles from './Question.module.css';
+import apiService from '../../api';
 
 function Question() {
   const [selected, setSelected] = useState(null);
+  const [question, setQuestion] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response1 = await apiService.FetchQuestion();
+      setReviews(response1);
+    }
+    fetchData();
+  }, [])
 
   const data = [
     {
