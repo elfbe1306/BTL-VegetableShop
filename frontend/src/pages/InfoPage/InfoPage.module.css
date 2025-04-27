@@ -44,6 +44,7 @@
     width: 100%;
     /* height: auto; */
     min-height: 319px;
+    max-height: 30rem;
     /* height: 319px; */
     /* margin-left: 180px; */
 }

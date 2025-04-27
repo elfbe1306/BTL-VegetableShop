@@ -114,7 +114,18 @@ class ApiService {
       throw error;
     }
   }
+
+  async FetchInfo() {
+    try {
+      const response = await this.api.get('?action=fetchinfo');
+      return response.data;
+    } catch(error) {
+      console.error("Error fetching information:", error);
+      throw error;
+    }
+  }
 }
+
 
 // Singleton instance
 const apiService = new ApiService("http://localhost/BTL-VegetableShop/backend/api.php");
