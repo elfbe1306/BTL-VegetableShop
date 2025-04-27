@@ -1,0 +1,131 @@
+.blog_search_bar {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    height: 48px;
+    background-color: white;
+    margin-bottom: 1.5rem;
+}
+
+.blog_search_bar i {
+    font-size: 18px;
+    margin-left: 15px;
+}
+
+.blog_search_input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    padding-left: 12px;
+}
+  
+.category_section, .tag_section, .recently_added {
+    margin-bottom: 1.5rem;
+    border-top: 1px solid #ccc;
+}
+  
+.section_title {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.category_list {
+    list-style: none;
+    padding: 0;
+}
+  
+.category_list li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    color: #1a1a1a;
+    font-size: 14px;
+    font-weight: 400;
+}
+.category_list li, .tag_item{
+    color: #1a1a1a;
+    font-size: 14px;
+    font-weight: 400;
+}
+.category_count {
+    color: #888;
+}
+  
+.tag_list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+  
+.tag_item {
+    padding: 0.4rem 0.8rem;
+    background-color: #f0f0f0;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+  
+.tag_item.active, .tag_item:hover {
+    background-color: #00B207;
+    color: white;
+}
+
+  
+.recent_list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+  
+.recent_item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1.2rem;
+}
+  
+.recent_img {
+    width: 100px;
+    height: auto;
+    border-radius: 6px;
+}
+  
+.recent_text {
+    text-align: left;
+}
+  
+.recent_title {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0;
+}
+  
+.recent_date {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 400;
+    color: #666;
+}
+  
+.recent_date .material-symbols-outlined {
+    color: #00b300;
+    margin-right: 0.2rem;
+}
+
+.recent_link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    gap: 10px;
+}
+
+.recent_link:hover .recent_title {
+    color: #00B207;
+}
+  

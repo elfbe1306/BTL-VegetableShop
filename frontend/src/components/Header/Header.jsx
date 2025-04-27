@@ -19,29 +19,59 @@ const Header = () => {
   //levy làm
   
   const location = useLocation();
+  // const getPageTitle = () => {
+  //   switch (location.pathname) {
+  //     case '/blog':
+  //       return 'Blog';
+  //     case '/vegetable':
+  //       return 'Vegetable';
+  //     case '/contact':
+  //       return 'Contact';
+  //     case '/about':
+  //       return 'About';
+  //     case '/faqs':
+  //       return 'Faqs';
+  //     case '/shoppingcart':
+  //       return 'Shopping cart';
+  //     default:
+  //       return 'Home';
+  //   }
+  // };
   const getPageTitle = () => {
+    const pathnames = location.pathname.split('/').filter(Boolean);
+    const lastSegment = pathnames[pathnames.length - 1] || '';
+
     if (location.pathname.startsWith('/vegetable/') && productName) {
-      return 'Vegetable/' + `${formatProductName(productName)}` ;
+      return 'Vegetable/' + `${formatProductName(productName)}`;
     }
-    switch (location.pathname) {
-      case '/blog':
+
+    switch (lastSegment) {
+      case 'blog':
         return 'Blog';
-      case '/vegetable':
+      case 'vegetable':
         return 'Vegetable';
-      case '/cart':
+      case 'cart':
         return 'Shopping Cart';
-      case '/contact':
+      case 'contact':
         return 'Contact';
-      case '/about':
+      case 'about':
         return 'About';
-      case '/faqs':
+      case 'faqs':
         return 'Faqs';
-      case '/shoppingcart':
+      case 'shoppingcart':
         return 'Shopping cart';
+      case 'singlepost':
+        return 'Single Blog';
       default:
-        return 'Home';
+        // If lastSegment is a number (like blog post ID), treat it as Single Blog
+        if (!isNaN(lastSegment)) {
+          return 'Single Blog';
+        }
+        // Capitalize first letter
+        return lastSegment.charAt(0).toUpperCase() + lastSegment.slice(1) || 'Home';
     }
   };
+  
 
   const [productCount, setProductCount] = useState(0);
   const [productPrice, setProductPrice] = useState(0);
@@ -65,35 +95,35 @@ const Header = () => {
 
   return (
     <header className="header">
-      <div className="top-bar">
-        <p className="store-location">
+      <div className="top_bar">
+        <p className="store_location">
           <span className="material-symbols-outlined">location_on</span> Store Location: Lincoln- 344, Illinois, Chicago, USA
         </p>
-        <div className="top-bar-right">
+        <div className="top_bar_right">
           <div className="selector">
-            <span className="language-selector">Eng <i className="fa-solid fa-chevron-down fa-sm"></i></span>
-            <span className="currency-selector">USD <i className="fa-solid fa-chevron-down fa-sm"></i></span>
+            <span className="language_selector">Eng <i className="fa-solid fa-chevron-down fa-sm"></i></span>
+            <span className="currency_selector">USD <i className="fa-solid fa-chevron-down fa-sm"></i></span>
           </div>
-          <span className="top-bar-divider"></span>
+          <span className="top_bar_divider"></span>
           <div>
-            <span><a href="#" className="auth-links">Sign In</a> / <a href="#" className="auth-links">Sign Up</a></span>
+            <span><a href="#" className="auth_links">Sign In</a> / <a href="#" className="auth_links">Sign Up</a></span>
           </div>
         </div>
       </div>
 
-      <div className="main-header">
+      <div className="main_header">
         <div className="logo">
           <Link to={`/`}>
             <img src="/img/Logo-black.png" alt="Logo" />
           </Link>
         </div>
-        <div className="search-bar">
+        <div className="search_bar">
           <i className="fa-solid fa-magnifying-glass"></i>
-          <input type="text" className="search-input" placeholder="Search" />
-          <button className="search-button">Search</button>
+          <input type="text" className="search_input" placeholder="Search" />
+          <button className="search_button">Search</button>
         </div>
-        <div className="user-actions">
-          <span className="material-symbols-outlined favorite-icon">favorite</span>
+        <div className="user_actions">
+          <span className="material-symbols-outlined favorite_icon">favorite</span>
           <span className="divider"></span>
             <Link className="cart" to={'/cart'}>
               <span className="material-symbols-outlined cart-icon">shopping_bag</span>
@@ -106,19 +136,19 @@ const Header = () => {
         </div>
       </div>
 
-      <nav className="nav-bar">
+      <nav className="nav_bar">
         <div className="hamburger" onClick={toggleMenu}>
           <span className="material-symbols-outlined">menu</span>
         </div>
-        <ul className={`nav-menu ${isMenuOpen ? "active" : ""}`}>
-          <li><a href="#" className="nav-link">Home <i className="fa-solid fa-chevron-down fa-sm"></i></a></li>
-          <li><a href="#" className="nav-link">Shop <i className="fa-solid fa-chevron-down fa-sm"></i></a></li>
-          <li><a href="#" className="nav-link">Pages <i className="fa-solid fa-chevron-down fa-sm"></i></a></li>
-          <li><a href="#" className="nav-link">Blog <i className="fa-solid fa-chevron-down fa-sm"></i></a></li>
-          <li><a href="#" className="nav-link">About Us</a></li>
-          <li><a href="#" className="nav-link">Contact Us</a></li>
+        <ul className={`nav_menu ${isMenuOpen ? "active" : ""}`}>
+          <li><a href="#" className="nav_link">Home <i className="fa-solid fa-chevron-down fa-sm"></i></a></li>
+          <li><a href="#" className="nav_link">Shop <i className="fa-solid fa-chevron-down fa-sm"></i></a></li>
+          <li><a href="#" className="nav_link">Pages <i className="fa-solid fa-chevron-down fa-sm"></i></a></li>
+          <li><a href="#" className="nav_link">Blog <i className="fa-solid fa-chevron-down fa-sm"></i></a></li>
+          <li><a href="#" className="nav_link">About Us</a></li>
+          <li><a href="#" className="nav_link">Contact Us</a></li>
         </ul>
-        <div className="phone-number">
+        <div className="phone_number">
           <span className="material-symbols-outlined">phone_in_talk</span>
           <span className="number">(219) 555-0114</span>
         </div>

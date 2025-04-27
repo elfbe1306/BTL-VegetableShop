@@ -7,9 +7,10 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Login submitted:', { email, password });
+        const response = await apiService.Login({email: email, password: password})
+        console.log(response);
     };
 
     return(

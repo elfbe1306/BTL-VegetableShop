@@ -20,6 +20,27 @@ class ApiService {
       throw error;
     }
   }
+  async fetchPostById(postId) {
+    const { data } = await this.api.get(`?action=fetchpost&postId=${postId}`);
+    if (data.error) throw new Error(data.error);
+    return data;
+  }
+  async fetchPostList(page = 1, limit = 8) {
+    const { data } = await this.api.get(
+      `?action=fetchpostlist&page=${page}&limit=${limit}`
+    );
+    if (data.error) throw new Error(data.error);
+    return data;
+  }
+  async fetchTags() {
+    const { data } = await this.api.get(`?action=fetchtags`);
+    return data;
+  }
+  async searchPosts(query) {
+    const { data } = await this.api.get(`?action=searchposts&query=${encodeURIComponent(query)}`);
+    return data;
+  }
+  
 
   async FetchReview() {
     try {
@@ -58,6 +79,16 @@ class ApiService {
     } catch(error) {
       console.error("Error creating user:", error);
       throw error;
+    }
+  }
+
+  async Login(userData) {
+    try {
+      const response = await this.api.post('?action=login', userData);
+      return response.data;
+    } catch(error) {
+      console.error("Error login:", error);
+      throw error
     }
   }
 }
