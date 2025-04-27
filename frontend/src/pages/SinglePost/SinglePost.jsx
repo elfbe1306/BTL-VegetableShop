@@ -87,7 +87,7 @@ export default function SinglePost() {
             <div className="blog_meta">
                 <div className="tag">
                     <span className="material-symbols-outlined">sell</span>
-                    <span>Food</span>
+                    <span>{post.tag}</span>
                 </div>
                 <div className="author">
                     <span className="material-symbols-outlined">person</span>
@@ -95,7 +95,7 @@ export default function SinglePost() {
                 </div>
                 <div className="cmt">
                     <span className="material-symbols-outlined">chat_bubble</span>
-                    <span>65 Comments</span>
+                    <span>{post.comments || 0} Comments</span>
                 </div>          
             
             </div>

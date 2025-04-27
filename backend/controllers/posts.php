@@ -8,6 +8,7 @@ function fetchPostById($conn, int $postId) {
         p.slug,
         p.content,
         p.created_at,
+        p.tag                   AS tag,
         u.name        AS author_name,
         img.file_name AS cover_file
       FROM posts p

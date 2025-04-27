@@ -197,18 +197,18 @@
     font-size: 16px;
 }
 
-.breadcrumb_address .material-symbols-outlined,
-.breadcrumb-address a {
+.breadcrumb_address a {
     text-decoration: none;
     color:#00B207;
 }
 
-.breadcrumb-address .material-symbols-outlined{
+.breadcrumb_address .material-symbols-outlined{
     font-weight: 200;
     color: #808080;
 }
 .page {
     color: #00B207; 
+    font-size: 16px;
 }
 
 .hamburger {

@@ -5,8 +5,6 @@ header("Content-Type: application/json");
 header("Access-Control-Allow-Methods: POST, GET");
 
 require_once "db.php";
-// require_once "controllers/products.php";
-// require_once "controllers/reviews.php";
 require_once "controllers/posts.php";
 require_once "controllers/products.php";
 require_once "controllers/reviews.php";
@@ -37,12 +35,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             }
             echo json_encode(fetchPostById($conn, $id));
             break;
+
         case 'fetchpostlist':
             $page   = isset($_GET['page'])  ? max(1, (int)$_GET['page'])  : 1;
             $limit  = isset($_GET['limit']) ? max(1, (int)$_GET['limit']) : 8;
             $offset = ($page - 1) * $limit;
-            echo json_encode(fetchPostList($conn, $limit, $offset));
+        
+            // 1. Query to get total number of posts
+            $totalQuery = $conn->query("SELECT COUNT(*) AS total FROM posts");
+            $totalRow = $totalQuery->fetch_assoc();
+            $totalPosts = (int) $totalRow['total'];
+        
+            // 2. Query to get the actual posts for this page
+            $posts = fetchPostList($conn, $limit, $offset);
+        
+            // 3. Return both posts and totalPosts together
+            $result = [
+                "posts" => $posts,
+                "totalPosts" => $totalPosts
+            ];
+        
+            echo json_encode($result, JSON_UNESCAPED_SLASHES);
             break;
+            
+
         case 'fetchtags':
             echo json_encode(fetchAllTags($conn));
             break;

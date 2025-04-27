@@ -13,6 +13,7 @@ function BlogList() {
     const location = useLocation();
     const query = new URLSearchParams(location.search).get('query');
     const [posts, setPosts]     = useState([]);
+    const [totalPosts, setTotalPosts] = useState(0);
     const [page, setPage]       = useState(1);
     const [loading, setLoading] = useState(true);
     const [error, setError]     = useState("");
@@ -25,8 +26,14 @@ function BlogList() {
           : apiService.fetchPostList(page, 8);
       
         fetch
-          .then(data => {
-            setPosts(data);
+          .then((data) => {
+            if (query) {
+              setPosts(data);        
+              setTotalPosts(data.length);
+            } else {
+              setPosts(data.posts);  
+              setTotalPosts(data.totalPosts); 
+            }
             setError("");
           })
           .catch(err => {
@@ -35,6 +42,10 @@ function BlogList() {
           })
           .finally(() => setLoading(false));
     }, [page, query]);
+
+    const postsPerPage = 8;
+    const totalPages = Math.ceil(totalPosts / postsPerPage);
+
     
     return(
         <div>
@@ -53,9 +64,9 @@ function BlogList() {
                                     id={p.id}
                                     image={`${uploadsBase}/${p.cover_file}`}
                                     date={p.date}
-                                    category={p.tag}               // <-- use the tag column here
+                                    category={p.tag}               
                                     author={p.author_name}
-                                    comments={p.comments || 0}     // if you added a comment_count later
+                                    comments={p.comments || 0}     
                                     title={p.title}
                             />
                             ))}
@@ -63,6 +74,7 @@ function BlogList() {
                         {!query && (
                         <Pagination
                             currentPage={page}
+                            totalPages={totalPages || 1}          
                             onPageChange={(newPage) => setPage(newPage)}
                         />
                         )}

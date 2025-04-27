@@ -27,7 +27,7 @@ const Sidebar = () => {
   useEffect(() => {
     apiService
       .fetchPostList(1, 3)
-      .then((data) => setRecentPosts(data))
+      .then((data) => setRecentPosts(data.posts))
       .catch((err) => console.error("Failed to load recent posts", err));
 
     apiService

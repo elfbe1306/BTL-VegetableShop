@@ -19,24 +19,7 @@ const Header = () => {
   //levy làm
   
   const location = useLocation();
-  // const getPageTitle = () => {
-  //   switch (location.pathname) {
-  //     case '/blog':
-  //       return 'Blog';
-  //     case '/vegetable':
-  //       return 'Vegetable';
-  //     case '/contact':
-  //       return 'Contact';
-  //     case '/about':
-  //       return 'About';
-  //     case '/faqs':
-  //       return 'Faqs';
-  //     case '/shoppingcart':
-  //       return 'Shopping cart';
-  //     default:
-  //       return 'Home';
-  //   }
-  // };
+  
   const getPageTitle = () => {
     const pathnames = location.pathname.split('/').filter(Boolean);
     const lastSegment = pathnames[pathnames.length - 1] || '';
@@ -126,11 +109,11 @@ const Header = () => {
           <span className="material-symbols-outlined favorite_icon">favorite</span>
           <span className="divider"></span>
             <Link className="cart" to={'/cart'}>
-              <span className="material-symbols-outlined cart-icon">shopping_bag</span>
-              <span className="cart-badge">{productCount}</span>
+              <span className="material-symbols-outlined cart_icon">shopping_bag</span>
+              <span className="cart_badge">{productCount}</span>
               <div>
-                <div className="cart-text">Shopping cart:</div>
-                <div className="cart-value">${productPrice}</div>
+                <div className="cart_text">Shopping cart:</div>
+                <div className="cart_value">${productPrice}</div>
               </div>
             </Link>
         </div>
@@ -155,18 +138,25 @@ const Header = () => {
       </nav>
 
       <div className="breadcrumb">
-        <div className="breadcrumb-address">
+        <div className="breadcrumb_address">
             <span className="material-symbols-outlined">home</span>
             <span className="material-symbols-outlined">chevron_right</span>
             {location.pathname.startsWith('/vegetable/') && productName ? (
-                <>
-                  <a href="/vegetable" className="breadcrumb-link">Vegetable</a>
-                  <span className="material-symbols-outlined">chevron_right</span>
-                  <span className="page">{formatProductName(productName)}</span>
-                </>
-              ) : (
+              <>
+                <a href="/vegetable" className="breadcrumb-link">Vegetable</a>
+                <span className="material-symbols-outlined">chevron_right</span>
+                <span className="page">{formatProductName(productName)}</span>
+              </>
+            ) : location.pathname.startsWith('/blog/') ? (
+              <>
+                <a href="/blog" className="breadcrumb-link">Blog</a>
+                <span className="material-symbols-outlined">chevron_right</span>
                 <span className="page">{getPageTitle()}</span>
-              )}
+              </>
+            ) : (
+              <a href={location.pathname} className="page">{getPageTitle()}</a>
+            )}
+
         </div>
       </div>
     </header>
