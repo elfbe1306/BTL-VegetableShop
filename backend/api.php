@@ -13,6 +13,8 @@ require_once "controllers/reviews.php";
 require_once "controllers/promotions.php";
 require_once "controllers/user.php";
 
+require_once "controllers/faqs.php";
+
 require_once __DIR__ . '/../backend-library/vendor/autoload.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
@@ -53,6 +55,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             } else {
                 echo json_encode(searchPosts($conn, $query));
             }
+            break;
+        
+        case 'fetchquestions':
+            echo json_encode(fetchQuestions($conn));
             break;
             
         default:
