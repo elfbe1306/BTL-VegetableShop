@@ -1,16 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import styles from '../../pages/LoginSignup/Login.module.css'
 import apiService from '../../api';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const response = await apiService.Login({email: email, password: password})
-        console.log(response);
+        
+        if(response.permission) {
+            localStorage.setItem("userID", response.userID);
+            navigate('/');
+        }
+
+        if(!response.permission) {
+            alert(response.message);
+        }
     };
 
     return(

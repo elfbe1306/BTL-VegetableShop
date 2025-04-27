@@ -11,6 +11,9 @@ import Cart from './pages/Cart/Cart'
 import ContactPage from './pages/ContactPage/ContactPage'
 import InfoPage from './pages/InfoPage/InfoPage'
 import Question from './pages/Question/Question'
+import AdminDashboard from './pages/AdminDashboard/AdminDashboard'
+
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
 
 function App() {
   return (
@@ -18,19 +21,19 @@ function App() {
         <Route index element={<HomePage />}></Route>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/vegetable" element={<ListProduct/>} />
+        <Route path="/admin" element={
+          <ProtectedRoute allowedRoles={['Admin']}>
+            <AdminDashboard />
+          </ProtectedRoute>
+        }/>
+        <Route path="/vegetable" element={<ListProduct/>}/>
         <Route path="/blog" element={<BlogList/>} />
         <Route path="/blog/:postId" element={<SinglePost />} />
-        <Route path="/contact" element={<div>Contact Us Here</div>} />
-        <Route path="/about" element={<div>Contact Us Here</div>} />
-        <Route path="/faqs" element={<div>Contact Us Here</div>} />
         <Route path="/vegetable/:productName" element={<ProductDetail/>} />
         <Route path="/cart" element={<Cart/>}/>
-        <Route path="/blog" element={<div>Welcome to the Blog Page</div>} />
         <Route path="/contact" element={<ContactPage/>} />
         <Route path="/about" element={<InfoPage/>} />
         <Route path="/faqs" element={<Question/>} />
-        <Route path="/shoppingcart" element={<div>Contact Us Here</div>} />
     </Routes>
   )
 }

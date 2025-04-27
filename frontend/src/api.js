@@ -20,11 +20,13 @@ class ApiService {
       throw error;
     }
   }
+
   async fetchPostById(postId) {
     const { data } = await this.api.get(`?action=fetchpost&postId=${postId}`);
     if (data.error) throw new Error(data.error);
     return data;
   }
+
   async fetchPostList(page = 1, limit = 8) {
     const { data } = await this.api.get(
       `?action=fetchpostlist&page=${page}&limit=${limit}`
@@ -32,15 +34,16 @@ class ApiService {
     if (data.error) throw new Error(data.error);
     return data;
   }
+
   async fetchTags() {
     const { data } = await this.api.get(`?action=fetchtags`);
     return data;
   }
+
   async searchPosts(query) {
     const { data } = await this.api.get(`?action=searchposts&query=${encodeURIComponent(query)}`);
     return data;
   }
-  
 
   async FetchReview() {
     try {
@@ -88,7 +91,17 @@ class ApiService {
       return response.data;
     } catch(error) {
       console.error("Error login:", error);
-      throw error
+      throw error;
+    }
+  }
+
+  async CheckRole(userID) {
+    try {
+      const response = await this.api.get('?action=checkrole', { params: { userID } });
+      return response.data;
+    } catch(error) {
+      console.error("Error fetching:", error);
+      throw error;
     }
   }
 }

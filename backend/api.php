@@ -5,8 +5,6 @@ header("Content-Type: application/json");
 header("Access-Control-Allow-Methods: POST, GET");
 
 require_once "db.php";
-// require_once "controllers/products.php";
-// require_once "controllers/reviews.php";
 require_once "controllers/posts.php";
 require_once "controllers/products.php";
 require_once "controllers/reviews.php";
@@ -53,6 +51,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             } else {
                 echo json_encode(searchPosts($conn, $query));
             }
+            break;
+        case 'checkrole':
+            $jwt = $_GET['userID'] ?? '';
+            if (empty($jwt)) {
+                http_response_code(400);
+                echo json_encode(["error" => "Missing token"]);
+                break;
+            }
+            echo json_encode(checkRole($conn, $jwt));
             break;
             
         default:
