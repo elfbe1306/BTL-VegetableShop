@@ -1,5 +1,7 @@
 import { Routes, Route } from 'react-router-dom'//levy thêm chữ dom
 import 'remixicon/fonts/remixicon.css'
+import Login from './pages/LoginSignup/Login'
+import SignUp from './pages/LoginSignup/Signup'
 import HomePage from './pages/HomePage/HomePage'
 import ListProduct from './pages/ListProduct/ListProduct'
 import ProductDetail from './pages/ProductDetail/ProductDetail'
@@ -12,6 +14,8 @@ function App() {
   return (
     <Routes>
         <Route index element={<HomePage />}></Route>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route path="/vegetable" element={<ListProduct/>} />
         <Route path="/vegetable/:productName" element={<ProductDetail/>} />
         <Route path="/cart" element={<Cart/>}/>

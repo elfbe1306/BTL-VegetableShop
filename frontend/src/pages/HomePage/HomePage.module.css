@@ -26,6 +26,32 @@
     margin-bottom: 5%;
 }
 
+.ourTeamContainer {
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.ourTeamTextContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.ourTeamSubTitle {
+    color: rgb(0, 178, 7);
+    margin-top: 5%;
+    margin-bottom: 0;
+}
+
+.ourTeamTitle {
+    margin-top: 0;
+    font-weight: 600;
+    font-size: 32px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
 .customerReviewContainer {
     background-color: #F2F2F2;
     flex-direction: column;

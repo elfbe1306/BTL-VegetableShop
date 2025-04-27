@@ -8,6 +8,9 @@ require_once "db.php";
 require_once "controllers/products.php";
 require_once "controllers/reviews.php";
 require_once "controllers/promotions.php";
+require_once "controllers/user.php";
+
+require_once __DIR__ . '/../backend-library/vendor/autoload.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $action = $_GET['action'] ?? '';
@@ -41,6 +44,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             } else {
                 http_response_code(400);
                 echo json_encode(["error" => "Missing product name"]);
+            }
+            break;
+        case 'createaccount':
+            if (isset($data)) {
+                echo json_encode(createAccount($conn, $data));
+            } else {
+                http_response_code(400);
+                echo json_encode(["error" => "Missing user data"]);
             }
             break;
         default:

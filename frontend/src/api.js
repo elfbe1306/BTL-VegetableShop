@@ -46,7 +46,17 @@ class ApiService {
       const response = await this.api.get('?action=fetchpromotions');
       return response.data;
     } catch(error) {
-      console.log("Error fetching promotion:", error);
+      console.error("Error fetching promotion:", error);
+      throw error;
+    }
+  }
+
+  async CreateAccount(userData) {
+    try {
+      const response = await this.api.post('?action=createaccount', userData);
+      return response.data;
+    } catch(error) {
+      console.error("Error creating user:", error);
       throw error;
     }
   }
