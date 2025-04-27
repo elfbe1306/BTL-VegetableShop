@@ -19,15 +19,15 @@ const ProductDetail = () => {
         const response1 = await apiService.FetchProductByName(productName);
         setProduct(response1)
 
-        const response2 = await apiService.FetchProduct();
+        const response2 = await apiService.FetchProductExceptOne(response1.product_id);
         setProducts(response2.slice(0, 5));
 
-        const response3 = await apiService.FetchReview();
+        const response3 = await apiService.FetchReviewByID(response1.product_id);
         setReviews(response3);
       }
   
       fetchData();
-    }, [])
+    }, [productName])
 
     const [products, setProducts] = useState([]);
     const [reviews, setReviews] = useState([]);
