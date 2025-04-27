@@ -95,34 +95,34 @@ const Header = () => {
 
   return (
     <header className="header">
-      <div className="top_bar">
-        <p className="store_location">
+      <div className="top-bar">
+        <p className="store-location">
           <span className="material-symbols-outlined">location_on</span> Store Location: Lincoln- 344, Illinois, Chicago, USA
         </p>
-        <div className="top_bar_right">
+        <div className="top-bar-right">
           <div className="selector">
-            <span className="language_selector">Eng <i className="fa-solid fa-chevron-down fa-sm"></i></span>
-            <span className="currency_selector">USD <i className="fa-solid fa-chevron-down fa-sm"></i></span>
+            <span className="language-selector">Eng <i className="fa-solid fa-chevron-down fa-sm"></i></span>
+            <span className="currency-selector">USD <i className="fa-solid fa-chevron-down fa-sm"></i></span>
           </div>
-          <span className="top_bar_divider"></span>
+          <span className="top-bar-divider"></span>
           <div>
-            <span><a href="#" className="auth_links">Sign In</a> / <a href="#" className="auth_links">Sign Up</a></span>
+            <span><a href="#" className="auth-links">Sign In</a> / <a href="#" className="auth-links">Sign Up</a></span>
           </div>
         </div>
       </div>
 
-      <div className="main_header">
+      <div className="main-header">
         <div className="logo">
           <Link to={`/`}>
             <img src="/img/Logo-black.png" alt="Logo" />
           </Link>
         </div>
-        <div className="search_bar">
+        <div className="search-bar">
           <i className="fa-solid fa-magnifying-glass"></i>
-          <input type="text" className="search_input" placeholder="Search" />
-          <button className="search_button">Search</button>
+          <input type="text" className="search-input" placeholder="Search" />
+          <button className="search-button">Search</button>
         </div>
-        <div className="user_actions">
+        <div className="user-actions">
           <span className="material-symbols-outlined favorite_icon">favorite</span>
           <span className="divider"></span>
             <Link className="cart" to={'/cart'}>
@@ -136,19 +136,19 @@ const Header = () => {
         </div>
       </div>
 
-      <nav className="nav_bar">
+      <nav className="nav-bar">
         <div className="hamburger" onClick={toggleMenu}>
           <span className="material-symbols-outlined">menu</span>
         </div>
-        <ul className={`nav_menu ${isMenuOpen ? "active" : ""}`}>
-          <li><a href="#" className="nav_link">Home <i className="fa-solid fa-chevron-down fa-sm"></i></a></li>
-          <li><a href="#" className="nav_link">Shop <i className="fa-solid fa-chevron-down fa-sm"></i></a></li>
-          <li><a href="#" className="nav_link">Pages <i className="fa-solid fa-chevron-down fa-sm"></i></a></li>
-          <li><a href="#" className="nav_link">Blog <i className="fa-solid fa-chevron-down fa-sm"></i></a></li>
-          <li><a href="#" className="nav_link">About Us</a></li>
-          <li><a href="#" className="nav_link">Contact Us</a></li>
+        <ul className={`nav-menu ${isMenuOpen ? "active" : ""}`}>
+          <li><a href="#" className="nav-link">Home <i className="fa-solid fa-chevron-down fa-sm"></i></a></li>
+          <li><a href="#" className="nav-link">Shop <i className="fa-solid fa-chevron-down fa-sm"></i></a></li>
+          <li><a href="#" className="nav-link">Pages <i className="fa-solid fa-chevron-down fa-sm"></i></a></li>
+          <li><a href="#" className="nav-link">Blog <i className="fa-solid fa-chevron-down fa-sm"></i></a></li>
+          <li><a href="#" className="nav-link">About Us</a></li>
+          <li><a href="#" className="nav-link">Contact Us</a></li>
         </ul>
-        <div className="phone_number">
+        <div className="phone-number">
           <span className="material-symbols-outlined">phone_in_talk</span>
           <span className="number">(219) 555-0114</span>
         </div>
