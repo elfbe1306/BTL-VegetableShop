@@ -94,6 +94,6 @@ class ApiService {
 }
 
 // Singleton instance
-const apiService = new ApiService("http://localhost/veggieShop/BTL-VegetableShop/backend/api.php");
+const apiService = new ApiService("http://localhost/BTL-VegetableShop/backend/api.php");
 
 export default apiService;

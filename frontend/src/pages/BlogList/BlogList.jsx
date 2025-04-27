@@ -2,8 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { useLocation } from 'react-router-dom';
 import Header from '../../components/Header/Header'
 import Footer from '../../components/Footer/Footer'
-import Filter from '../../components/Filter'
-import Pagination from '../../components/Pagination'
+import Pagination from '../../components/Pagination/Pagination'
 import "../BlogList/bloglist.css";
 import BlogCard from '../../components/BlogCard/BlogCard'
 import Sidebar from '../../components/BlogSidebar/Sidebar'
@@ -41,7 +40,6 @@ function BlogList() {
         <div>
             <Header/>
             <div className="container">
-                <Filter/>
                 <div className="blog_layout">
                     <Sidebar/>
                     <main className="blog_content">
