@@ -8,11 +8,11 @@ const OurTeam = () => {
             <div className={styles.ImageBlock}>
             <img src="src/assets/images/ImageSample1.png" alt="img" />
                 <div  className={styles.overlay}>
-                    <div className="social-icons">
-                        <a href="#" className="social-icon facebook"><i className="fab fa-facebook-f"></i></a>
-                        <a href="#" className="social-icon twitter"><i className="fab fa-twitter"></i></a>
-                        <a href="#" className="social-icon pinterest"><i className="fab fa-pinterest-p"></i></a>
-                        <a href="#" className="social-icon instagram"><i className="fab fa-instagram"></i></a>
+                    <div className= {styles.SocialIcons}>
+                        <a href="#" className={`${styles.socialIcon} ${styles.facebook}`}><i className="fab fa-facebook-f"></i></a>
+                        <a href="#" className={`${styles.socialIcon} ${styles.twitter}`}><i className="fab fa-twitter"></i></a>
+                        <a href="#" className={`${styles.socialIcon} ${styles.pinterest}`}><i className="fab fa-pinterest-p"></i></a>
+                        <a href="#" className={`${styles.socialIcon} ${styles.instagram}`}><i className="fab fa-instagram"></i></a>
                     </div>
                 </div>
                 <div className={styles.BlockText}>
@@ -24,11 +24,11 @@ const OurTeam = () => {
             <div className={styles.ImageBlock}>
                 <img src="src/assets/images/ImageSample2.png" alt="img" />
                 <div  className={styles.overlay}>
-                    <div className="social-icons">
-                        <a href="#" className="social-icon facebook"><i className="fab fa-facebook-f"></i></a>
-                        <a href="#" className="social-icon twitter"><i className="fab fa-twitter"></i></a>
-                        <a href="#" className="social-icon pinterest"><i className="fab fa-pinterest-p"></i></a>
-                        <a href="#" className="social-icon instagram"><i className="fab fa-instagram"></i></a>
+                    <div className= {styles.SocialIcons}>
+                        <a href="#" className={`${styles.socialIcon} ${styles.facebook}`}><i className="fab fa-facebook-f"></i></a>
+                        <a href="#" className={`${styles.socialIcon} ${styles.twitter}`}><i className="fab fa-twitter"></i></a>
+                        <a href="#" className={`${styles.socialIcon} ${styles.pinterest}`}><i className="fab fa-pinterest-p"></i></a>
+                        <a href="#" className={`${styles.socialIcon} ${styles.instagram}`}><i className="fab fa-instagram"></i></a>
                     </div>
                 </div>
                 <div className={styles.BlockText}>
@@ -40,11 +40,11 @@ const OurTeam = () => {
             <div className={styles.ImageBlock}>
                 <img src="src/assets/images/ImageSample3.png" alt="img" />
                 <div  className={styles.overlay}>
-                    <div className="social-icons">
-                        <a href="#" className="social-icon facebook"><i className="fab fa-facebook-f"></i></a>
-                        <a href="#" className="social-icon twitter"><i className="fab fa-twitter"></i></a>
-                        <a href="#" className="social-icon pinterest"><i className="fab fa-pinterest-p"></i></a>
-                        <a href="#" className="social-icon instagram"><i className="fab fa-instagram"></i></a>
+                    <div className= {styles.SocialIcons}>
+                        <a href="#" className={`${styles.socialIcon} ${styles.facebook}`}><i className="fab fa-facebook-f"></i></a>
+                        <a href="#" className={`${styles.socialIcon} ${styles.twitter}`}><i className="fab fa-twitter"></i></a>
+                        <a href="#" className={`${styles.socialIcon} ${styles.pinterest}`}><i className="fab fa-pinterest-p"></i></a>
+                        <a href="#" className={`${styles.socialIcon} ${styles.instagram}`}><i className="fab fa-instagram"></i></a>
                     </div>
                 </div>
                 <div className={styles.BlockText}>
@@ -56,11 +56,11 @@ const OurTeam = () => {
             <div className={styles.ImageBlock}>
             <img src="src/assets/images/ImageSample4.png" alt="img" />
                 <div  className={styles.overlay}>
-                    <div className="social-icons">
-                        <a href="#" className="social-icon facebook"><i className="fab fa-facebook-f"></i></a>
-                        <a href="#" className="social-icon twitter"><i className="fab fa-twitter"></i></a>
-                        <a href="#" className="social-icon pinterest"><i className="fab fa-pinterest-p"></i></a>
-                        <a href="#" className="social-icon instagram"><i className="fab fa-instagram"></i></a>
+                    <div className= {styles.SocialIcons}>
+                        <a href="#" className={`${styles.socialIcon} ${styles.facebook}`}><i className="fab fa-facebook-f"></i></a>
+                        <a href="#" className={`${styles.socialIcon} ${styles.twitter}`}><i className="fab fa-twitter"></i></a>
+                        <a href="#" className={`${styles.socialIcon} ${styles.pinterest}`}><i className="fab fa-pinterest-p"></i></a>
+                        <a href="#" className={`${styles.socialIcon} ${styles.instagram}`}><i className="fab fa-instagram"></i></a>
                     </div>
                 </div>
                 <div className={styles.BlockText}>

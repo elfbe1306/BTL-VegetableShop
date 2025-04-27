@@ -48,7 +48,7 @@ function InfoPage() {
   }, [])
   return (
     <div>
-      {/* <Header />        */}
+      <Header />       
         <div className={styles.Wrapper}>
             <div className={styles.AboutUs}>
                 <div className={styles.Text}>
@@ -171,7 +171,7 @@ function InfoPage() {
               <Sponsor6 className={styles.sponsorColor}/>
             </div>
         </div>
-      {/* <Footer />  */}
+      <Footer /> 
     </div>
   )
 }
