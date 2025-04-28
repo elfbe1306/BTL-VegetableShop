@@ -8,20 +8,20 @@
     margin-top: 40px;
     padding-inline: 30px;
     align-items: center;
-    gap: 40px;
+    gap: 20px;
     justify-self: center;
 }
 .AboutUs img {
     width: 100%;
     height: 100%;
     min-height: 15rem;
-    width: 22rem;
+    max-width: 30rem;
 }
 .Text{
-    width: 350px;
+    width: 450px;
 }
 .BoldText{
-    font-size: 35px;
+    font-size: 40px;
     line-height: 120%;
     font-weight: 600;
 }
@@ -119,7 +119,7 @@
 }
 .DeText .BoldText{
     /* width: 300px; */
-    font-size: 28px;
+    font-size: 30px;
 }
 .DeText .SmallText{
     font-size: 10px;
@@ -239,7 +239,7 @@
         padding-inline: 30px ;
     }
     .AboutUs img {
-        max-width:20rem;
+        max-width: 20rem;
     }
     .AboutUs .Text{
         width: 100%;
