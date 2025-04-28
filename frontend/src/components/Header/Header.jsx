@@ -58,8 +58,6 @@ const Header = () => {
         return 'About';
       case 'faqs':
         return 'Faqs';
-      case 'shoppingcart':
-        return 'Shopping cart';
       case 'singlepost':
         return 'Single Blog';
       default:
@@ -158,15 +156,23 @@ const Header = () => {
         <div className="breadcrumb-address">
             <span className="material-symbols-outlined">home</span>
             <span className="material-symbols-outlined">chevron_right</span>
-            {location.pathname.startsWith('/vegetable/') && productName ? (
-                <>
-                  <a href="/vegetable" className="breadcrumb-link">Vegetable</a>
-                  <span className="material-symbols-outlined">chevron_right</span>
-                  <span className="page">{formatProductName(productName)}</span>
-                </>
-              ) : (
-                <span className="page">{getPageTitle()}</span>
-              )}
+            {location.pathname === '/checkout' ? (
+              <>
+                <Link to="/" className="breadcrumb-link">Home</Link>
+                <span className="material-symbols-outlined">chevron_right</span>
+                <Link to="/cart" className="breadcrumb-link">Shopping Cart</Link>
+                <span className="material-symbols-outlined">chevron_right</span>
+                <span className="page">Check Out</span>
+              </>
+            ) : location.pathname.startsWith('/vegetable/') && productName ? (
+              <>
+                <Link to="/vegetable" className="breadcrumb-link">Vegetable</Link>
+                <span className="material-symbols-outlined">chevron_right</span>
+                <span className="page">{formatProductName(productName)}</span>
+              </>
+            ) : (
+              <span className="page">{getPageTitle()}</span>
+            )}
         </div>
       </div>
     </header>

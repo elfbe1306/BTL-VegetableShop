@@ -8,6 +8,7 @@ import Login from './pages/LoginSignup/Login'
 import SignUp from './pages/LoginSignup/Signup'
 import ProductDetail from './pages/ProductDetail/ProductDetail'
 import Cart from './pages/Cart/Cart'
+import Checkout from './pages/Checkout/Checkout'
 import ContactPage from './pages/ContactPage/ContactPage'
 import InfoPage from './pages/InfoPage/InfoPage'
 import Question from './pages/Question/Question'
@@ -31,6 +32,7 @@ function App() {
         <Route path="/blog/:postId" element={<SinglePost />} />
         <Route path="/vegetable/:productName" element={<ProductDetail/>} />
         <Route path="/cart" element={<Cart/>}/>
+        <Route path="/checkout" element={<Checkout/>}/>
         <Route path="/contact" element={<ContactPage/>} />
         <Route path="/about" element={<InfoPage/>} />
         <Route path="/faqs" element={<Question/>} />
