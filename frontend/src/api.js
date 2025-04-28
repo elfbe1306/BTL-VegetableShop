@@ -1,4 +1,5 @@
 import axios from "axios";
+import { use } from "react";
 
 class ApiService {
   static instance = null;
@@ -131,6 +132,21 @@ class ApiService {
       return response.data;
     } catch(error) {
       console.error("Error fetching questions:", error);
+      throw error;
+    }
+  }
+
+  async CreateReviewByProductID(userID, productID, review, rating) {
+    try {
+      const response = await this.api.post('?action=createreviewproduct', {
+        userID: userID,
+        productID: productID,
+        review: review,
+        rating: rating
+      });
+      return response.data;
+    } catch(error) {
+      console.error("Error Creating Review:", error);
       throw error;
     }
   }

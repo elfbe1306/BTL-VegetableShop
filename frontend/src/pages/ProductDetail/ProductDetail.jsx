@@ -41,6 +41,14 @@ const ProductDetail = () => {
 
     const [showAll, setShowAll] = useState(false);
     const reviewsToShow = showAll ? reviews : reviews.slice(0, 3);      
+
+    const refreshProduct = async () => {
+      const response1 = await apiService.FetchProductByName(productName);
+      setProduct(response1);
+      
+      const response3 = await apiService.FetchReviewByID(response1.product_id);
+      setReviews(response3);
+    }
     
     return (
         <div>
@@ -50,7 +58,8 @@ const ProductDetail = () => {
             <h3>Customer Feedback</h3>
           </div>
 
-          <MakingReview />
+          <MakingReview product={product} onReviewPosted={refreshProduct}/>
+
           <div className={styles.reviewContainer}>
             {reviewsToShow.map((r) => (
               <Review key={r.id} review={r} showComment={false}/>

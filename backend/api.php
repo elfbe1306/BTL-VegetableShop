@@ -119,7 +119,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo json_encode(["error" => "Missing user data"]);
             }
             break;
-
+        case 'createreviewproduct':
+            if(isset($data)) {
+                echo json_encode(CreateReviewByProductID(
+                    $conn, $data['userID'],$data['productID'],$data['review'], $data['rating']
+                ));
+            } else {
+                http_response_code(400);
+                echo json_encode(["error" => "Missing review data"]);
+            }
+            break;
         default:
             http_response_code(404);
             echo json_encode(["error" => "Invalid route"]);
