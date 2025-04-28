@@ -118,10 +118,10 @@ class ApiService {
 
   async CheckRole(userID) {
     try {
-      const response = await this.api.get('?action=checkrole', { params: { userID } });
+      const response = await this.api.post('?action=checkroleuser', { userID: userID});
       return response.data;
     } catch(error) {
-      console.error("Error fetching:", error);
+      console.error("Error fetching:", error.response);
       throw error;
     }
   }

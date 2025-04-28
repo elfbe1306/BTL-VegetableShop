@@ -56,14 +56,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 echo json_encode(searchPosts($conn, $query));
             }
             break;
-        case 'checkrole':
-            $jwt = $_GET['userID'] ?? '';
-            if (empty($jwt)) {
-                http_response_code(400);
-                echo json_encode(["error" => "Missing token"]);
-                break;
-            }
-            echo json_encode(checkRole($conn, $jwt));
         case 'fetchquestions':
             echo json_encode(fetchQuestions($conn));
             break;
@@ -127,6 +119,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             } else {
                 http_response_code(400);
                 echo json_encode(["error" => "Missing user data"]);
+            }
+            break;
+        case 'checkroleuser':
+            if(isset($data['userID'])) {
+                echo json_encode(checkRole($conn, $data['userID']));
+            } else {
+                http_response_code(400);
+                echo json_encode(["error" => "Missing user id"]);
             }
             break;
         case 'createreviewproduct':
