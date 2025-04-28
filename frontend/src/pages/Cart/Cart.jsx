@@ -9,7 +9,6 @@ import { useCart } from "../../CartContext";
 
 const Cart = () => {
   const { cartItems, removeFromCart } = useCart();
-  console.log(cartItems)
 
   const productPrice = (discount_percentage, price) => {
       return discount_percentage ? Math.round(price * (100 - Number(discount_percentage))) / 100 : price
