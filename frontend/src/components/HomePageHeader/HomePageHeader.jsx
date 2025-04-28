@@ -43,6 +43,8 @@ const HomePageHeader = () => {
 		navigate('/');
 	};
 
+	const [searching, setSearching] = useState("");
+
 	return (
 		<>
 			<div className={styles.topBar}>
@@ -81,8 +83,19 @@ const HomePageHeader = () => {
 
 				<div className={styles.searchBar}>
 					<i className="fa-solid fa-magnifying-glass"></i>
-					<input type="text" className={styles.searchInput} placeholder="Search" />
+					<input 
+						type="text" 
+						className={styles.searchInput} 
+						placeholder="Search" 
+						value={searching} 
+						onChange={(e) => setSearching(e.target.value)}
+					/>
 					<button className={styles.searchButton}>Search</button>
+					{searching.length > 0 && (
+						<div className={styles.suggestionContainer}>
+							<p>Hi</p>
+						</div>
+					)}
 				</div>
 				<div className={styles.userActions}>
 					<span className="material-symbols-outlined favorite-icon">favorite</span>
