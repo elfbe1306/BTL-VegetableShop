@@ -70,7 +70,7 @@ const Cart = () => {
                   </tr>
                 </thead>
                 <tbody>
-                    {catItems.map((item) => (
+                    {cartItems.map((item) => (
                       <tr key={item.product.product_id}>
                         <td className={styles.productRow}>
                           <img src={"http://localhost/BTL-VegetableShop/backend/uploads/products/" + item.product.image + "1.png"} alt="" />
