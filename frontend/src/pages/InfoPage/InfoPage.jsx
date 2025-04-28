@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
@@ -27,7 +28,9 @@ import apiService from '../../api';
 function InfoPage() {
   const [products, setProducts] = useState([]);
   const [reviews, setReviews] = useState([]);
+  const [information, setInformation] = useState([]);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
@@ -42,31 +45,60 @@ function InfoPage() {
 
       const response2 = await apiService.FetchReview();
       setReviews(response2);
+
+      const response3 = await apiService.FetchInfo();
+      setInformation(response3);
+
     }
 
     fetchData();
   }, [])
+
+  const handleSubmit = () => {
+    navigate('/vegetable'); 
+  };
   return (
     <div>
       <Header />       
         <div className={styles.Wrapper}>
             <div className={styles.AboutUs}>
-                <div className={styles.Text}>
-                    <div className={styles.BoldText}>100% Trusted Organic Food Store</div>
-                    <div className={styles.SmallText}>We proudly offer high-quality organic products, grown and harvested naturally. With a 100% trust guarantee, our store is committed to prioritizing your health and satisfaction in every product we deliver. </div>
-                </div>
+              <div className={styles.Text}>
+                {information.length > 0 && (
+                  <>
+                    <div className={styles.BoldText}>
+                      {information[0].title}
+                    </div>
+                    <div className={styles.SmallText}>
+                      {information[0].description}
+                    </div>
+                  </>
+                )}
+              </div>
+              
                 <div className={styles.Image}>
-                    <img src="src/assets/images/About-us-img.png" alt="img" />
+                  {information.length > 0 && (
+                    <img src={`http://localhost/BTL-VegetableShop/backend/uploads/${information[0].img}`} alt="img" />
+                  )}
                 </div>
             </div>
             <div className={styles.AboutMeWrap}>
               <div className={styles.AboutMe}>
-                <img src="src/assets/images/About-me-2.png" alt="img" />  
+                  {information.length > 1 && (
+                    <img src={`http://localhost/BTL-VegetableShop/backend/uploads/${information[1].img}`} alt="img" />
+                  )}
               </div>
               <div className={styles.TextAndIconWrap}>
                 <div className={styles.Text}>
-                    <div className={styles.BoldText}>100% Trusted Organic Food Store</div>
-                    <div className={styles.SmallText}>Pellentesque a ante vulputate leo porttitor luctus sed eget eros. Nulla et rhoncus neque. Duis non diam eget est luctus tincidunt a a mi. Nulla eu eros consequat tortor tincidunt feugiat. </div>
+                    {information.length > 1 && (
+                      <>
+                        <div className={styles.BoldText}>
+                          {information[1].title}
+                        </div>
+                        <div className={styles.SmallText}>
+                          {information[1].description}
+                        </div>
+                      </>
+                    )}
                 </div>
                 <div className={styles.FullIconWrap}>
                     <div className={styles.FirstCol}>
@@ -122,35 +154,45 @@ function InfoPage() {
             <div className={styles.DeliveryWrap}>
               <div className={styles.DeText}> 
                 <div className={styles.Text}>
-                  <div className={styles.BoldText}>We Delivered, You Enjoy Your Order.</div>
-                  <div className={styles.SmallText}>Ut suscipit egestas suscipit. Sed posuere pellentesque nunc, ultrices consectetur velit dapibus eu. Mauris sollicitudin dignissim diam, ac mattis eros accumsan rhoncus. Curabitur auctor bibendum nunc eget elementum.</div>                
+                  {information.length > 2 && (
+                      <>
+                        <div className={styles.BoldText}>
+                          {information[2].title}
+                        </div>
+                        <div className={styles.SmallText}>
+                          {information[2].description}
+                        </div>
+                      </>
+                    )}
                 </div>
                 <div className={styles.CheckText}>
                   <div className={styles.CheckEle}>
                     <div className={styles.icon}><FaCheck /></div>
-                    <div className={styles.SmallText}>Sed in metus pellentesque.</div>                
+                    <div className={styles.SmallText}>Enjoy fast and reliable delivery for every order.</div>                
                   </div>
                   <div className={styles.CheckEle}>
                     <div className={styles.icon}><FaCheck /></div>
-                    <div className={styles.SmallText}>Fusce et ex commodo, aliquam nulla efficitur, tempus lorem.</div>                
+                    <div className={styles.SmallText}>Fresh, organic products carefully packed for maximum quality.</div>                
                   </div>
                   <div className={styles.CheckEle}>
                     <div className={styles.icon}><FaCheck /></div>
-                    <div className={styles.SmallText}>Maecenas ut nunc fringilla erat varius.</div>                
+                    <div className={styles.SmallText}>Support your healthy lifestyle with our trusted organic selections.</div>                
                   </div>
                 </div>
-                <div className={styles.Button}>
+                <div className={styles.Button} onClick={handleSubmit} style={{ cursor: 'pointer' }}>
                     <div>Shop now</div>
                     <FaArrowRightLong />
                   </div>
               </div>
               <div className={styles.Image}>
-                <img src="src/assets/images/Delivery-man.png" alt="img" />  
+                  {information.length > 2 && (
+                    <img src={`http://localhost/BTL-VegetableShop/backend/uploads/${information[2].img}`} alt="img" />
+                  )}
               </div>
             </div>
             <div className={styles.Teams}>
               <div className={styles.BoldText}>Our Awesome Team</div>
-              <div className={styles.SmallText}>Pellentesque a ante vulputate leo porttitor luctus sed eget eros. Nulla et rhoncus neque. Duis non diam eget est luctus tincidunt a a mi.</div>
+              <div className={styles.SmallText}>Our team is dedicated to delivering fresh organic products with care and passion.</div>
               <OurTeam/>
             </div>
             <div className={styles.customerReviewContainer}>

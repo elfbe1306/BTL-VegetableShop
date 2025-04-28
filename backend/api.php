@@ -12,6 +12,8 @@ require_once "controllers/promotions.php";
 require_once "controllers/user.php";
 
 require_once "controllers/faqs.php";
+require_once "controllers/about.php";
+require_once "controllers/team.php";
 
 require_once __DIR__ . '/../backend-library/vendor/autoload.php';
 
@@ -56,6 +58,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             break;
         case 'fetchquestions':
             echo json_encode(fetchQuestions($conn));
+            break;
+
+        case 'fetchinfo':
+            echo json_encode(fetchInfo($conn));
+            break;
+        
+        case 'fetchteam':
+            echo json_encode(fetchTeam($conn));
             break;
             
         default:

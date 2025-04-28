@@ -136,6 +136,25 @@ class ApiService {
     }
   }
 
+  async FetchInfo() {
+    try {
+      const response = await this.api.get('?action=fetchinfo');
+      return response.data;
+    } catch(error) {
+      console.error("Error fetching information:", error);
+      throw error;
+    }
+  }
+
+  async FetchTeam() {
+    try {
+      const response = await this.api.get('?action=fetchteam');
+      return response.data;
+    } catch(error) {
+      console.error("Error fetching team:", error);
+   }
+  }
+  
   async CreateReviewByProductID(userID, productID, review, rating) {
     try {
       const response = await this.api.post('?action=createreviewproduct', {
@@ -151,6 +170,7 @@ class ApiService {
     }
   }
 }
+
 
 // Singleton instance
 const apiService = new ApiService("http://localhost/BTL-VegetableShop/backend/api.php");
