@@ -59,6 +59,12 @@
     top: 40px;
     width: 50vh;
 }
+
+.noProduct {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
   
 
 @media (max-width: 769px) {

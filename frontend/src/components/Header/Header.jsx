@@ -81,6 +81,14 @@ const Header = () => {
 		navigate('/');
 	};
 
+  const [searchText, setSearchText] = useState("");
+  const handleSearching = () => {
+    if(searchText.length === 0) {
+			return;
+		}
+    navigate(`/vegetable/search/${searchText}`)
+  }
+
   return (
     <header className="header">
       <div className="top-bar">
@@ -116,8 +124,19 @@ const Header = () => {
         </div>
         <div className="search-bar">
           <i className="fa-solid fa-magnifying-glass"></i>
-          <input type="text" className="search-input" placeholder="Search" />
-          <button className="search-button">Search</button>
+          <input 
+            type="text" 
+            className="search-input" 
+            placeholder="Search" 
+            value={searchText} 
+						onChange={(e) => setSearchText(e.target.value)}
+						onKeyDown={(e) => {
+							if (e.key === "Enter") {
+								handleSearching();
+							}
+						}}
+          />
+          <button className="search-button" onClick={handleSearching}>Search</button>
         </div>
         <div className="user-actions">
           <span className="material-symbols-outlined favorite_icon">favorite</span>

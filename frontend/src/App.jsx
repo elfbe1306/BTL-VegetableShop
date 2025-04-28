@@ -28,9 +28,10 @@ function App() {
           </ProtectedRoute>
         }/>
         <Route path="/vegetable" element={<ListProduct/>}/>
+        <Route path="/vegetable/search/:searchText" element={<ListProduct/>} />
         <Route path="/blog" element={<BlogList/>} />
         <Route path="/blog/:postId" element={<SinglePost />} />
-        <Route path="/vegetable/:productName" element={<ProductDetail/>} />
+        <Route path="/vegetable/detail/:productName" element={<ProductDetail/>} />
         <Route path="/cart" element={<Cart/>}/>
         <Route path="/checkout" element={<Checkout/>}/>
         <Route path="/contact" element={<ContactPage/>} />

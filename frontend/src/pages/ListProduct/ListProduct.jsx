@@ -10,7 +10,11 @@ import RatingFilter from '../../components/RatingFilter/RatingFilter';
 import PriceFilter from '../../components/PriceFilter/PriceFilter';
 import Pagination from '../../components/PaginationProduct/Pagination';
 
+import { useParams } from 'react-router';
+
 const ListProduct = () => {
+  const { searchText } = useParams();
+
   // Fetch Products
   const [products, setProducts] = useState([]);
   useEffect(() => {
@@ -52,8 +56,14 @@ const ListProduct = () => {
       product.price;
     const isPriceMatch = productPrice >= values[0] && productPrice <= values[1];
   
-    return isRatingMatch && isPriceMatch;
+    const isSearchMatch = !searchText || (
+      product.name &&
+      product.name.toLowerCase().includes(searchText.toLowerCase())
+    );
+  
+    return isRatingMatch && isPriceMatch && isSearchMatch;
   });
+  
 
   // Pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -95,11 +105,15 @@ const ListProduct = () => {
           </div>
 
           <div>
-            <div className={styles.productAlign}>
-              {filteredProducts.slice(startIndex, endIndex).map((p) => (
-                <ProductCard key={p.product_id} product={p} />
-              ))}
-            </div>
+            {filteredProducts.length === 0 ? (
+              <p className={styles.noProduct}>No products was found.</p>
+            ) : (
+              <div className={styles.productAlign}>
+                {filteredProducts.slice(startIndex, endIndex).map((p) => (
+                  <ProductCard key={p.product_id} product={p} />
+                ))}
+              </div>
+            )}
 
             <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={totalPages}/>
           </div>

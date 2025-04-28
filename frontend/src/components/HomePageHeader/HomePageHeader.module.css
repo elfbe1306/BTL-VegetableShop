@@ -77,7 +77,6 @@
     align-items: center;
     border: 1px solid #ccc;
     border-radius: 8px;
-    overflow: hidden;
     width: 450px;
     background-color: white;
 }
@@ -216,6 +215,7 @@
     .searchBar{
         width: auto;
     }
+
     .navBar {
         position: relative;
         padding: 15px 5%;

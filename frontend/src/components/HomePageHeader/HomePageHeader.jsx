@@ -43,7 +43,13 @@ const HomePageHeader = () => {
 		navigate('/');
 	};
 
-	const [searching, setSearching] = useState("");
+	const [searchText, setSearchText] = useState("");
+  const handleSearching = () => {
+		if(searchText.length === 0) {
+			return;
+		}
+    navigate(`/vegetable/search/${searchText}`)
+  }
 
 	return (
 		<>
@@ -87,16 +93,17 @@ const HomePageHeader = () => {
 						type="text" 
 						className={styles.searchInput} 
 						placeholder="Search" 
-						value={searching} 
-						onChange={(e) => setSearching(e.target.value)}
+						value={searchText} 
+						onChange={(e) => setSearchText(e.target.value)}
+						onKeyDown={(e) => {
+							if (e.key === "Enter") {
+								handleSearching();
+							}
+						}}
 					/>
-					<button className={styles.searchButton}>Search</button>
-					{searching.length > 0 && (
-						<div className={styles.suggestionContainer}>
-							<p>Hi</p>
-						</div>
-					)}
+					<button className={styles.searchButton} onClick={handleSearching}>Search</button>
 				</div>
+
 				<div className={styles.userActions}>
 					<span className="material-symbols-outlined favorite-icon">favorite</span>
 					<span className={styles.divider}></span>
