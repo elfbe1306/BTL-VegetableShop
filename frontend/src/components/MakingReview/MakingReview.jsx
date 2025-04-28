@@ -1,11 +1,23 @@
 import React, { useState } from 'react';
 import styles from '../MakingReview/MakingReview.module.css';
+import apiService from '../../api';
 
-function MakingReview() {
+const MakingReview = ({ product, onReviewPosted }) => {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
   const [review, setReview] = useState('');
-  const handleReviewPost = () => {
+  const handleReviewPost = async () => {
+    const userID = localStorage.getItem("userID");
+    const response = await apiService.CreateReviewByProductID(userID, product.product_id, review, rating);
+    
+    if(response.success) {
+      setRating(0);
+      setReview('');
+      alert(response.message);
+      if (onReviewPosted) {
+        await onReviewPosted();
+      }
+    }
   }
 
   return (

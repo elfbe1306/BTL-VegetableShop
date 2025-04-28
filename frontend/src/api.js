@@ -1,4 +1,5 @@
 import axios from "axios";
+import { use } from "react";
 
 class ApiService {
   static instance = null;
@@ -55,12 +56,32 @@ class ApiService {
     }
   }
 
+  async FetchReviewByID(productID) {
+    try {
+      const response = await this.api.post("?action=fetchreviewbyid", {productID: productID});
+      return response.data;
+    } catch(error) {
+      console.error("Error fetching reivew by ID:", error);
+      throw error;
+    }
+  }
+
   async FetchProductByName(productname) {
     try {
       const response = await this.api.post('?action=fetchbyname', {name: productname});
       return response.data;
     } catch(error) {
-      console.error("Error fetching product by name", error);
+      console.error("Error fetching product by name: ", error);
+      throw error;
+    }
+  }
+
+  async FetchProductExceptOne(productID) {
+    try {
+      const response = await this.api.post("?action=fetchproductexceptone", {productID: productID});
+      return response.data;
+    } catch(error) {
+      console.error("Error fetching product except one:", error);
       throw error;
     }
   }
@@ -111,6 +132,21 @@ class ApiService {
       return response.data;
     } catch(error) {
       console.error("Error fetching questions:", error);
+      throw error;
+    }
+  }
+
+  async CreateReviewByProductID(userID, productID, review, rating) {
+    try {
+      const response = await this.api.post('?action=createreviewproduct', {
+        userID: userID,
+        productID: productID,
+        review: review,
+        rating: rating
+      });
+      return response.data;
+    } catch(error) {
+      console.error("Error Creating Review:", error);
       throw error;
     }
   }

@@ -121,8 +121,8 @@ const ProductModal = ({ product, onClose, mode = "modal" }) => {
                     </button>
                 )}
                 {product.discount_percentage && (
-                                    <div className={styles.saleTag}>Sale {Number(product.discount_percentage)}%</div>
-                                )}
+                    <div className={styles.saleTag}>Sale {Number(product.discount_percentage)}%</div>
+                )}
             </div>
         </div>
     );
