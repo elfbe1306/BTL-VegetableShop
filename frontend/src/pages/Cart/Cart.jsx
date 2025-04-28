@@ -3,24 +3,36 @@ import styles from "./Cart.module.css";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import CloseIcon from "../../assets/icons/CloseIcon";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { useCart } from "../../CartContext";
 
 const Cart = () => {
-  const { cartItems, removeFromCart } = useCart();
-  console.log(cartItems)
+  const { cartItems, addToCart, removeFromCart } = useCart();
 
   const productPrice = (discount_percentage, price) => {
       return discount_percentage ? Math.round(price * (100 - Number(discount_percentage))) / 100 : price
   }
 
-  const increment = () => setCount(count + 1);
-  const decrement = () => setCount(count > 0 ? count - 1 : 0);
+  const increment = (item) => {
+    addToCart(item.product, 1);
+  };
+  
+  const decrement = (item) => {
+    if (item.quantity > 1) {
+      addToCart(item.product, -1);
+    }
+  };
+
 
   const [totalPrice, setTotalPrice] = useState(0);
   const [shippingFee, setShippingFee] = useState(0);
   const [finalPrice, setFinalPrice] = useState(0);
+  const navigate = useNavigate();
+  const handleSummit = () => {
+    navigate('/checkout');
+  };
+  
   useEffect(() => {
     const totalPrice = cartItems.reduce((sum, item) => {
       const price = item.product.price;
@@ -67,9 +79,9 @@ const Cart = () => {
                         <td className={styles.priceRow}>{productPrice(item.product.discount_percentage, item.product.price)}</td>
                         <td className={styles.quantityRow}>
                           <div className={styles.quantitycontainer}>
-                            <button onClick={decrement} className={styles.minusbutton}>-</button>
+                            <button onClick={() => decrement(item)} className={styles.minusbutton}>-</button>
                               <span className={styles.quantitynumber}>{item.quantity}</span>
-                            <button onClick={increment} className={styles.addbutton}>+</button>
+                            <button onClick={() => increment(item)} className={styles.addbutton}>+</button>
                           </div>
                         </td>
                         <td className={styles.subTotalRow}>{productPrice(item.product.discount_percentage, item.product.price) * item.quantity}</td>
@@ -104,7 +116,9 @@ const Cart = () => {
                   <p style={{fontWeight: "500"}}>${finalPrice}</p>
                 </div>
                 <div className={styles.buttonContainer}>
-                  <button>Proceed to checkout</button>
+                  <button onClick={handleSummit}>
+                    Proceed to checkout
+                  </button>
                 </div>
               </div>
             </div>

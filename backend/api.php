@@ -64,7 +64,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 break;
             }
             echo json_encode(checkRole($conn, $jwt));
-        
         case 'fetchquestions':
             echo json_encode(fetchQuestions($conn));
             break;
@@ -98,6 +97,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo json_encode(["error" => "Missing product name"]);
             }
             break;
+        case 'fetchproductexceptone':
+            if(isset($data['productID'])) {
+                echo json_encode(FetchAllProductExceptOne($conn, $data['productID']));
+            } else {
+                http_response_code(400);
+                echo json_encode(["error" => "Missing product id"]);
+            }
+            break;
+        case 'fetchreviewbyid':
+            if(isset($data['productID'])) {
+                echo json_encode(fetchReviewByID($conn, $data['productID']));
+            } else {
+                http_response_code(400);
+                echo json_encode(["error" => "Missing product id"]);
+            }
+            break;
         case 'createaccount':
             if (isset($data)) {
                 echo json_encode(createAccount($conn, $data));
@@ -114,7 +129,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo json_encode(["error" => "Missing user data"]);
             }
             break;
-
+        case 'createreviewproduct':
+            if(isset($data)) {
+                echo json_encode(CreateReviewByProductID(
+                    $conn, $data['userID'],$data['productID'],$data['review'], $data['rating']
+                ));
+            } else {
+                http_response_code(400);
+                echo json_encode(["error" => "Missing review data"]);
+            }
+            break;
         default:
             http_response_code(404);
             echo json_encode(["error" => "Invalid route"]);

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from './HomePageHeader.module.css'
 import storeLocationIcon from '../../assets/icons/location_on.svg'
 import downArrow from '../../assets/icons/arrow-down-s-line.svg'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { useCart } from "../../CartContext";
 
@@ -10,6 +10,7 @@ const HomePageHeader = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const [productCount, setProductCount] = useState(0);
 	const [productPrice, setProductPrice] = useState(0);
+	const [userID, setUserID] = useState(localStorage.getItem('userID'));
 
 	const toggleMenu = () => {
 		setIsMenuOpen(!isMenuOpen);
@@ -32,21 +33,43 @@ const HomePageHeader = () => {
 
 	}, [cartItems]);
 
-	return(
-		<div>
+	const navigate = useNavigate();
+
+	const handleLogout = async (e) => {
+		e.preventDefault();
+
+		await localStorage.removeItem("userID");
+		setUserID(null);
+		navigate('/');
+	};
+
+	return (
+		<>
 			<div className={styles.topBar}>
 				<p className={styles.storeLocation}>
-					<img src={storeLocationIcon}/>
+					<img src={storeLocationIcon} alt="Location"/>
 					Store Location: Lincoln- 344, Illinois, Chicago, USA
 				</p>
 				<div className={styles.selector}>
 					<div className={styles.languageSelector}>
 						<p>ENG</p>
-						<img src={downArrow}/>
+						<img src={downArrow} alt="Arrow"/>
 					</div>
 					<div className={styles.currencySelector}>
 						<p>USD</p>
-						<img src={downArrow}/>
+						<img src={downArrow} alt="Arrow"/>
+					</div>
+					<div className={styles.SignInLoginContainer}>
+						{userID ? (
+							<button onClick={handleLogout}>
+								<p>Logout</p>
+							</button>
+						) : (
+							<Link className={styles.SignInLoginContainer} to={'/login'}>
+								<p>Sign in /</p>
+								<p>Sign up</p>
+							</Link>
+						)}
 					</div>
 				</div>
 			</div>
@@ -92,8 +115,8 @@ const HomePageHeader = () => {
 					<span className="number">(219) 555-0114</span>
 				</div>
 			</nav>
-		</div>
+		</>
 	)
-}
+};
 
 export default HomePageHeader;
