@@ -11,6 +11,7 @@ require_once "controllers/reviews.php";
 require_once "controllers/promotions.php";
 require_once "controllers/user.php";
 require_once "controllers/orders.php";
+require_once "controllers/contact.php";
 
 require_once "controllers/faqs.php";
 require_once "controllers/about.php";
@@ -152,10 +153,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             break;
         case 'createcontact':
             if(isset($data)) {
-                echo json_encode();
+                echo json_encode(CreateContact($conn, $data['userID'], $data['userData']));
             } else {
                 http_response_code(400);
-                echo json_encode(["error" => "Missing review data"]);
+                echo json_encode(["error" => "Missing contact data"]);
             }
             break;
         default:

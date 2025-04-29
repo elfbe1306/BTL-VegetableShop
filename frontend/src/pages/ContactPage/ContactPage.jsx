@@ -5,13 +5,14 @@ import styles from '../ContactPage/ContactPage.module.css';
 import Location from '../../assets/icons/Location'
 import MailContact from '../../assets/icons/MailContact';
 import Phone from '../../assets/icons/Phone';
+import apiService from '../../api';
 
 const ContactPage = () => {
     const [contact, setContact] = useState({
         name: "",
-        phone: "",
+        phonenum: "",
         subject: "",
-        message: ""
+        content: ""
     });
 
     const handleChange = (e) => {
@@ -22,9 +23,15 @@ const ContactPage = () => {
         }));
     };
 
-    const handleContactPost = (e) => {
+    const handleContactPost = async (e) => {
         e.preventDefault(); 
-        
+        const userID = localStorage.getItem("userID");
+        const response = await apiService.CreateContact(userID, {
+            phonenum: contact.phonenum,
+            subject: contact.subject,
+            content: contact.content
+        });
+        console.log(response);
     }
 
     return(
@@ -65,8 +72,8 @@ const ContactPage = () => {
                                 className={styles.forminput} 
                                 placeholder="Phone number" 
                                 type="text" 
-                                name="phone"
-                                value={contact.phone}
+                                name="phonenum"
+                                value={contact.phonenum}
                                 onChange={handleChange}
                             />
                         </div>
@@ -81,8 +88,8 @@ const ContactPage = () => {
                         />
                         <textarea 
                             placeholder="Enter your message" 
-                            name="message"
-                            value={contact.message}
+                            name="content"
+                            value={contact.content}
                             onChange={handleChange}
                             className={styles.textarea}
                         />

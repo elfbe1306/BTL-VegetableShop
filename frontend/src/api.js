@@ -180,16 +180,15 @@ class ApiService {
       return response.data;
     } catch(error) {
       console.error("Error Creating Order:", error);
+      throw error;
     }
   }
 
-  async CreateContact(name, phonenum, subject, content){
+  async CreateContact(userID, userData) {
     try {
       const response = await this.api.post('?action=createcontact', {
-        name: name,
-        phonenum: phonenum,
-        subject: subject,
-        content: content
+        userID: userID,
+        userData: userData
       });
       return response.data;
     } catch(error) {
