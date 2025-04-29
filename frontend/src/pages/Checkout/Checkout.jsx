@@ -48,6 +48,13 @@ const Checkout = () => {
             }
 
             const userID = localStorage.getItem("userID");
+
+            if(!userID) {
+                setDisplayModal(true);
+                setResponseMessage("You are required to login to place order");
+                return;
+            }
+
             const response = await apiService.CreateCustomerOrder(userID, formData, cartItems);
             setDisplayModal(response.success);
             setResponseMessage(response.message);
