@@ -1,10 +1,10 @@
 .card {
-    background-color: rgba(31, 41, 55, 0.5); /* bg-gray-800 + bg-opacity-50 */
+    background-color: #e8f4e8; /* bg-gray-800 + bg-opacity-50 */
     backdrop-filter: blur(12px); /* backdrop-blur-md */
     overflow: hidden;
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); /* shadow-lg */
     border-radius: 0.75rem; /* rounded-xl */
-    border: 1px solid #374151; /* border-gray-700 */
+    
     transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
   
@@ -23,7 +23,7 @@
     align-items: center;
     font-size: 0.875rem; /* text-sm */
     font-weight: 500; /* font-medium */
-    color: #9ca3af; /* text-gray-400 */
+    color: #2C742F; /* text-gray-400 */
   }
   
   .icon {
@@ -34,6 +34,6 @@
     margin-top: 0.25rem; /* mt-1 */
     font-size: 1.875rem; /* text-3xl */
     font-weight: 600; /* font-semibold */
-    color: #f3f4f6; /* text-gray-100 */
+    color: #FF8A00; /* text-gray-100 */
   }
   

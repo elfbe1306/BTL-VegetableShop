@@ -7,7 +7,7 @@
   
 .sidebarInner {
     height: 100%;
-    background-color: rgba(31, 41, 55); /* bg-gray-800 + opacity */
+    background-color: black;/* bg-gray-800 + opacity */
     backdrop-filter: blur(12px); /* backdrop-blur-md */
     padding: 1rem;
     display: flex;
