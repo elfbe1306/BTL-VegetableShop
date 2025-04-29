@@ -150,6 +150,21 @@ class ApiService {
       throw error;
     }
   }
+
+  async CreateContact(name, phonenum, subject, content){
+    try {
+      const response = await this.api.post('?action=createcontact', {
+        name: name,
+        phonenum: phonenum,
+        subject: subject,
+        content: content
+      });
+      return response.data;
+    } catch(error) {
+      console.error("Error Creating Response:", error);
+      throw error;
+    }
+  }
 }
 
 // Singleton instance

@@ -129,6 +129,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo json_encode(["error" => "Missing review data"]);
             }
             break;
+        case 'createcontact':
+            if(isset($data)) {
+                echo json_encode();
+            } else {
+                http_response_code(400);
+                echo json_encode(["error" => "Missing review data"]);
+            }
+            break;
         default:
             http_response_code(404);
             echo json_encode(["error" => "Invalid route"]);
