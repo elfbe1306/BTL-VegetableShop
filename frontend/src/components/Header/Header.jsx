@@ -157,12 +157,12 @@ const Header = () => {
           <span className="material-symbols-outlined">menu</span>
         </div>
         <ul className={`nav-menu ${isMenuOpen ? "active" : ""}`}>
-          <li><a href="#" className="nav-link">Home <i className="fa-solid fa-chevron-down fa-sm"></i></a></li>
-          <li><a href="#" className="nav-link">Shop <i className="fa-solid fa-chevron-down fa-sm"></i></a></li>
-          <li><a href="#" className="nav-link">Pages <i className="fa-solid fa-chevron-down fa-sm"></i></a></li>
-          <li><a href="#" className="nav-link">Blog <i className="fa-solid fa-chevron-down fa-sm"></i></a></li>
-          <li><a href="#" className="nav-link">About Us</a></li>
-          <li><a href="#" className="nav-link">Contact Us</a></li>
+          <li><a href="/" className="nav-link">Home</a></li>
+          <li><a href="/vegetable" className="nav-link">Shop</a></li>
+          <li><a href="/faqs" className="nav-link">FaQs</a></li>
+          <li><a href="/blog" className="nav-link">Blog <i className="fa-solid fa-chevron-down fa-sm"></i></a></li>
+          <li><a href="/about" className="nav-link">About Us</a></li>
+          <li><a href="/contact" className="nav-link">Contact Us</a></li>
         </ul>
         <div className="phone-number">
           <span className="material-symbols-outlined">phone_in_talk</span>
@@ -176,8 +176,6 @@ const Header = () => {
             <span className="material-symbols-outlined">chevron_right</span>
             {location.pathname === '/checkout' ? (
               <>
-                <Link to="/" className="breadcrumb-link">Home</Link>
-                <span className="material-symbols-outlined">chevron_right</span>
                 <Link to="/cart" className="breadcrumb-link">Shopping Cart</Link>
                 <span className="material-symbols-outlined">chevron_right</span>
                 <span className="page">Check Out</span>
