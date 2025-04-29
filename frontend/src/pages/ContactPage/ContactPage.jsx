@@ -7,11 +7,28 @@ import MailContact from '../../assets/icons/MailContact';
 import Phone from '../../assets/icons/Phone';
 
 const ContactPage = () => {
-     const [contact, setContact] = useState('');
-     const handleContactPost = () => {
+    const [contact, setContact] = useState({
+        name: "",
+        phone: "",
+        subject: "",
+        message: ""
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setContact(prev => ({
+            ...prev,
+            [name]: value
+        }));
+    };
+
+    const handleContactPost = (e) => {
+        e.preventDefault(); 
+        
     }
+
     return(
-        <div>
+        <>
             <Header />
             <div className={styles.mainbox}>
                 <div className={styles.companycontact}>
@@ -34,21 +51,47 @@ const ContactPage = () => {
                     <h2>Contact Us</h2>
                     <h3>For any inquiries or assistance from us, please leave your info here.</h3>
                     <h3>We will review and respond as soon as possible.</h3>
-                    <form style={{display:'flex', flexDirection:'column'}}>
+                    <form style={{display:'flex', flexDirection:'column'}} onSubmit={handleContactPost}>
                         <div className={styles.forminfo}>
-                            <input className={styles.forminput} placeholder="Your name" type="text" id="name" name="name"/>
-                            <input className={styles.forminput} placeholder="Phone number" type="text" id="phonenum" name="phonenum"/>
+                            <input 
+                                className={styles.forminput} 
+                                placeholder="Your name" 
+                                type="text" 
+                                name="name"
+                                value={contact.name}
+                                onChange={handleChange}
+                            />
+                            <input 
+                                className={styles.forminput} 
+                                placeholder="Phone number" 
+                                type="text" 
+                                name="phone"
+                                value={contact.phone}
+                                onChange={handleChange}
+                            />
                         </div>
-                        <input className={styles.textarea} style={{height:'auto'}} placeholder="Subject" type="text" id="subject" name="subject"/>
-                        <textarea placeholder="Enter your message" value={contact} onChange={(c) => setContact(c.target.value)} className={styles.textarea}/>
-                        <button onClick={handleContactPost} className={styles.summitbutton}>Send</button>
+                        <input 
+                            className={styles.textarea} 
+                            style={{height:'auto'}} 
+                            placeholder="Subject" 
+                            type="text" 
+                            name="subject"
+                            value={contact.subject}
+                            onChange={handleChange}                    
+                        />
+                        <textarea 
+                            placeholder="Enter your message" 
+                            name="message"
+                            value={contact.message}
+                            onChange={handleChange}
+                            className={styles.textarea}
+                        />
+                        <button type='submit' className={styles.summitbutton}>Send</button>
                     </form>
                 </div>   
             </div>
-            <div>
-            </div>
             <Footer />
-        </div> 
+        </> 
     );
 }
 
