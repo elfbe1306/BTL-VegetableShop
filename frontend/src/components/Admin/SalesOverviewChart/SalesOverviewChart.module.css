@@ -8,14 +8,14 @@
     transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
   
-  .title {
+.title {
     font-size: 1.125rem; /* text-lg */
     font-weight: 500; /* font-medium */
     margin-bottom: 1rem; /* mb-4 */
     color: #f3f4f6; /* text-gray-100 */
-  }
+}
   
-  .chartWrapper {
+.chartWrapper {
     height: 20rem; /* h-80 */
-  }
+}
   

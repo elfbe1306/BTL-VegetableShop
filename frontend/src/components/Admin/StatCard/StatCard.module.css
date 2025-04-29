@@ -8,7 +8,7 @@
     transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
   
-  .content {
+.content {
     padding: 1.25rem 1rem; /* px-4 py-5 */
   }
   
