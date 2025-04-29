@@ -154,6 +154,15 @@ class ApiService {
       console.error("Error fetching team:", error);
    }
   }
+
+  async FetchAdminAccount() {
+    try {
+      const response = await this.api.get('?action=fetchadminAccount');
+      return response.data;
+    } catch(error) {
+      console.error("Error fetching account:", error);
+   }
+  }
   
   async CreateReviewByProductID(userID, productID, review, rating) {
     try {

@@ -1,24 +1,27 @@
-import { useState } from "react";
+import React, { useEffect, useState } from 'react';
 import { motion } from "framer-motion";
 import { Search } from "lucide-react";
 import styles from "./UsersTable.module.css";
-
-const userData = [
-  { id: 1, name: "Khue Doe", email: "john@example.com", status: "Active" },
-  { id: 2, name: "Jane Smith", email: "jane@example.com", status: "Active" },
-  { id: 3, name: "Bob Johnson", email: "bob@example.com", status: "Inactive" },
-  { id: 4, name: "Alice Brown", email: "alice@example.com",  status: "Active" },
-  { id: 5, name: "Charlie Wilson", email: "charlie@example.com", status: "Active" },
-];
+import apiService from '../../../api';
 
 const UsersTable = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredUsers, setFilteredUsers] = useState(userData);
-
+  const [accountData, setaccountData] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState(accountData);
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await apiService.FetchAdminAccount();
+      setaccountData(response);
+      setFilteredUsers(response);
+    }
+    fetchData();
+  }, [])
+  
   const handleSearch = (e) => {
     const term = e.target.value.toLowerCase();
     setSearchTerm(term);
-    const filtered = userData.filter(
+    const filtered = accountData.filter(
       (user) =>
         user.name.toLowerCase().includes(term) || user.email.toLowerCase().includes(term)
     );
@@ -50,7 +53,7 @@ const UsersTable = () => {
         <table className={styles.table}>
           <thead>
             <tr>
-              {["Name", "Email", "Status", "Actions"].map((head) => (
+              {["Name", "Email", "Actions"].map((head) => (
                 <th key={head} className={styles.th}>
                   {head}
                 </th>
@@ -79,19 +82,6 @@ const UsersTable = () => {
                 </td>
 
                 <td className={styles.td}>
-                  <span
-                    className={
-                      user.status === "Active"
-                        ? styles.statusActive
-                        : styles.statusInactive
-                    }
-                  >
-                    {user.status}
-                  </span>
-                </td>
-
-                <td className={styles.td}>
-                  <button className={styles.activeBtn}>Active</button>
                   <button className={styles.deleteBtn}>Delete</button>
                 </td>
               </motion.tr>

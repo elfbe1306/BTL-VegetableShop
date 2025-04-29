@@ -67,6 +67,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         case 'fetchteam':
             echo json_encode(fetchTeam($conn));
             break;
+
+        case 'fetchadminAccount':
+            echo json_encode(fetchAdminAccount($conn));
+            break;
             
         default:
             http_response_code(404);
