@@ -50,6 +50,36 @@ const Checkout = () => {
     };
 
     const { cartItems } = useCart();
+    
+    const productPrice = (discount_percentage, price) => {
+        return discount_percentage ? Math.round(price * (100 - Number(discount_percentage))) / 100 : price
+    }
+
+    const [totalPrice, setTotalPrice] = useState(0);
+    const [shippingFee, setShippingFee] = useState(0);
+    const [finalPrice, setFinalPrice] = useState(0);
+    
+
+    useEffect(() => {
+        const totalPrice = cartItems.reduce((sum, item) => {
+          const price = item.product.price;
+          const discount = item.product.discount_percentage 
+            ? price * (1 - Number(item.product.discount_percentage) / 100)
+            : price;
+          return sum + discount * item.quantity;
+        }, 0);
+    
+        const roundedTotal = Math.round(totalPrice * 100) / 100;
+        const shipping = Math.round((roundedTotal * 0.1) * 100) / 100;  
+        const final = Math.round(totalPrice * 100 + shipping * 100) / 100;
+    
+        setTotalPrice(roundedTotal);
+        setShippingFee(shipping);
+        setFinalPrice(final);
+      }, [cartItems]);
+
+    
+     
 
     return(
         <>
@@ -91,7 +121,39 @@ const Checkout = () => {
             </div>
 
             <div>
-                <h3>Order Summary</h3>
+                <div className={styles.orderSummary}>
+                    <h3>Order Summary</h3>
+                    {cartItems.map((item) => (
+                        <div className={styles.productTotal} key={item.product.product_id}>
+                            <div className={styles.productName}>
+                                <img src={"http://localhost/BTL-VegetableShop/backend/uploads/products/" + item.product.image + "1.png"} alt="" />
+                                <p>{item.product.name}</p>
+                                <p> x{item.quantity}</p>
+                            </div>
+                            <div className={styles.productPrice}>${productPrice(item.product.discount_percentage, item.product.price)}</div>
+                        </div>
+                    ))}
+                    <div className={styles.totalContainer}>
+                        <div className={styles.subTotalPriceContainer}>
+                            <p style={{color:'rgb(128, 128, 128)'}}>Subtotal</p>
+                            <p>${totalPrice}</p>
+                        </div>
+                        <div className={styles.ShippingFeeContainer}>
+                            <p style={{color:'rgb(128, 128, 128)'}}>Shipping (10%):</p>
+                            <p>${shippingFee}</p>
+                        </div>
+                        <div className={styles.TotalPriceContainer}>
+                            <p style={{color:'rgb(128, 128, 128)'}}>Total:</p>
+                            <p style={{fontWeight: "500"}}>${finalPrice}</p>
+                        </div>
+                    </div>
+
+                    <div className={styles.buttonContainer}>
+                        <button>
+                        Order
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
         <Footer/>

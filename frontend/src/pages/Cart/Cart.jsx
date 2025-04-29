@@ -76,7 +76,7 @@ const Cart = () => {
                           <img src={"http://localhost/BTL-VegetableShop/backend/uploads/products/" + item.product.image + "1.png"} alt="" />
                           <p>{item.product.name}</p>
                         </td>
-                        <td className={styles.priceRow}>{productPrice(item.product.discount_percentage, item.product.price)}</td>
+                        <td className={styles.priceRow}>${productPrice(item.product.discount_percentage, item.product.price)}</td>
                         <td className={styles.quantityRow}>
                           <div className={styles.quantitycontainer}>
                             <button onClick={() => decrement(item)} className={styles.minusbutton}>-</button>
