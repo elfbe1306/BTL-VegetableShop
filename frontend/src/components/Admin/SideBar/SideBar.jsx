@@ -1,4 +1,4 @@
-import { BarChart2, Phone, Menu, Settings, ShoppingBag, ShoppingCart, TrendingUp, Users, House, CircleHelp, Newspaper } from 'lucide-react';
+import { BarChart2, Phone, Menu, Settings, ShoppingBag, CircleUser, Users, House, CircleHelp, Newspaper } from 'lucide-react';
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -6,13 +6,13 @@ import styles from './Sidebar.module.css';
 
 const SIDEBAR_ITEMS = [
   { name: "Overview", icon: BarChart2, color: "#E6E6E6", href: "/" },
+  { name: "Users", icon: CircleUser, color: "#6366f1", href: "/admin/users" },
   { name: "Home", icon: House, color: "#FF8A00", href: "/products" },
   { name: "Shop", icon: ShoppingBag, color: "#EA4B48", href: "/products" },
   { name: "FaQs", icon: CircleHelp, color: "#EC4899", href: "/users" },
   { name: "Blog", icon: Newspaper, color: "#10B981", href: "/sales" },
   { name: "About Us", icon: Users, color: "#F59E0B", href: "/orders" },
   { name: "Contact Us", icon: Phone, color: "#3B82F6", href: "/analytics" },
-  { name: "Settings", icon: Settings, color: "#6EE7B7", href: "/settings" },
 ];
 
 const Sidebar = () => {
