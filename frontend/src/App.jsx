@@ -27,6 +27,11 @@ function App() {
             <AdminDashboard />
           </ProtectedRoute>
         }/>
+          <Route path="/admin/blog" element={
+          <ProtectedRoute allowedRoles={['Admin']}>
+            <AdminDashboard />
+          </ProtectedRoute>
+        }/>
         <Route path="/vegetable" element={<ListProduct/>}/>
         <Route path="/blog" element={<BlogList/>} />
         <Route path="/blog/:postId" element={<SinglePost />} />
