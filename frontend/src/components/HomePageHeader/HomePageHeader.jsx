@@ -103,12 +103,12 @@ const HomePageHeader = () => {
 					<span className="material-symbols-outlined">menu</span>
 				</div>
 				<ul className={`${styles.navMenu} ${isMenuOpen ? styles.active : ""}`}>
-					<li><a href="#" className={styles.navLink}>Home <i className="fa-solid fa-chevron-down fa-sm"></i></a></li>
-					<li><a href="#" className={styles.navLink}>Shop <i className="fa-solid fa-chevron-down fa-sm"></i></a></li>
-					<li><a href="#" className={styles.navLink}>Pages <i className="fa-solid fa-chevron-down fa-sm"></i></a></li>
-					<li><a href="#" className={styles.navLink}>Blog <i className="fa-solid fa-chevron-down fa-sm"></i></a></li>
-					<li><a href="#" className={styles.navLink}>About Us</a></li>
-					<li><a href="#" className={styles.navLink}>Contact Us</a></li>
+				<li><a href="/" className="nav-link">Home</a></li>
+				<li><a href="/vegetable" className="nav-link">Shop</a></li>
+				<li><a href="/faqs" className="nav-link">FaQs</a></li>
+				<li><a href="/blog" className="nav-link">Blog <i className="fa-solid fa-chevron-down fa-sm"></i></a></li>
+				<li><a href="/about" className="nav-link">About Us</a></li>
+				<li><a href="/contact" className="nav-link">Contact Us</a></li>
 				</ul>
 				<div className={styles.phoneNumber}>
 					<span className="material-symbols-outlined">phone_in_talk</span>
