@@ -10,6 +10,7 @@ require_once "controllers/products.php";
 require_once "controllers/reviews.php";
 require_once "controllers/promotions.php";
 require_once "controllers/user.php";
+require_once "controllers/orders.php";
 
 require_once "controllers/faqs.php";
 require_once "controllers/about.php";
@@ -137,6 +138,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             } else {
                 http_response_code(400);
                 echo json_encode(["error" => "Missing review data"]);
+            }
+            break;
+        case 'createorder':
+            if(isset($data)) {
+                echo json_encode(CreateCustomerOrder(
+                    $conn, $data['userID'], $data['userAddress'], $data['orderItem']
+                ));
+            } else {
+                http_response_code(400);
+                echo json_encode(["error" => "Missing order data"]);
             }
             break;
         default:

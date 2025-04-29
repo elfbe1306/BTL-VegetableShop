@@ -74,9 +74,6 @@ const ListProduct = () => {
 
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const handleFilter = () => {
-    console.log(selectedRatings)
-  }
 
   return (
     <>

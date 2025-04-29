@@ -69,7 +69,7 @@ function Login($conn, $userData) {
 
   $key = "congabietgay";
     $issuedAt = time();
-    $expirationTime = $issuedAt + 3600;
+    $expirationTime = $issuedAt + 86400;
     $payload = array(
         "iat" => $issuedAt,
         "exp" => $expirationTime,

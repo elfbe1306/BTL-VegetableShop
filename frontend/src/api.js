@@ -169,6 +169,20 @@ class ApiService {
       throw error;
     }
   }
+
+  async CreateCustomerOrder(userID, userAddress, orderItem) {
+    try {
+      const response = await this.api.post('?action=createorder', { 
+        userID: userID,
+        userAddress: userAddress, 
+        orderItem: orderItem
+      });
+      return response.data;
+    } catch(error) {
+      console.error("Error Creating Order:", error);
+      throw error;
+    }
+  }
 }
 
 
