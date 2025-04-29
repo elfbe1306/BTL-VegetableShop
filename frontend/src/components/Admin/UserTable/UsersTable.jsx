@@ -4,11 +4,11 @@ import { Search } from "lucide-react";
 import styles from "./UsersTable.module.css";
 
 const userData = [
-  { id: 1, name: "John Doe", email: "john@example.com", role: "Customer", status: "Active" },
-  { id: 2, name: "Jane Smith", email: "jane@example.com", role: "Admin", status: "Active" },
-  { id: 3, name: "Bob Johnson", email: "bob@example.com", role: "Customer", status: "Inactive" },
-  { id: 4, name: "Alice Brown", email: "alice@example.com", role: "Customer", status: "Active" },
-  { id: 5, name: "Charlie Wilson", email: "charlie@example.com", role: "Moderator", status: "Active" },
+  { id: 1, name: "Khue Doe", email: "john@example.com", status: "Active" },
+  { id: 2, name: "Jane Smith", email: "jane@example.com", status: "Active" },
+  { id: 3, name: "Bob Johnson", email: "bob@example.com", status: "Inactive" },
+  { id: 4, name: "Alice Brown", email: "alice@example.com",  status: "Active" },
+  { id: 5, name: "Charlie Wilson", email: "charlie@example.com", status: "Active" },
 ];
 
 const UsersTable = () => {
@@ -50,7 +50,7 @@ const UsersTable = () => {
         <table className={styles.table}>
           <thead>
             <tr>
-              {["Name", "Email", "Role", "Status", "Actions"].map((head) => (
+              {["Name", "Email", "Status", "Actions"].map((head) => (
                 <th key={head} className={styles.th}>
                   {head}
                 </th>
@@ -79,10 +79,6 @@ const UsersTable = () => {
                 </td>
 
                 <td className={styles.td}>
-                  <span className={styles.role}>{user.role}</span>
-                </td>
-
-                <td className={styles.td}>
                   <span
                     className={
                       user.status === "Active"
@@ -95,7 +91,7 @@ const UsersTable = () => {
                 </td>
 
                 <td className={styles.td}>
-                  <button className={styles.editBtn}>Edit</button>
+                  <button className={styles.activeBtn}>Active</button>
                   <button className={styles.deleteBtn}>Delete</button>
                 </td>
               </motion.tr>

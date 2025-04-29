@@ -1,85 +1,84 @@
 .card {
-    background-color: rgba(31, 41, 55, 0.5);
+    background-color: #e8f4e8;
     backdrop-filter: blur(12px);
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     border-radius: 0.75rem;
     padding: 1.5rem;
-    border: 1px solid #374151;
   }
   
-  .header {
+.header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1.5rem;
-  }
+}
   
-  .title {
+.title {
     font-size: 1.25rem;
     font-weight: 600;
-    color: #f3f4f6;
-  }
+    color: #2C742F;
+}
   
-  .searchWrapper {
+.searchWrapper {
     position: relative;
   }
   
-  .searchInput {
-    background-color: #374151;
-    color: white;
+.searchInput {
+    background-color: white;
+    color: #374151;
     padding: 0.5rem 1rem 0.5rem 2.5rem;
     border-radius: 0.5rem;
     border: none;
     outline: none;
-  }
+}
   
-  .searchInput::placeholder {
+.searchInput::placeholder {
     color: #9ca3af;
-  }
+}
   
-  .searchInput:focus {
+.searchInput:focus {
     box-shadow: 0 0 0 2px #3b82f6;
-  }
+}
   
-  .searchIcon {
+.searchIcon {
     position: absolute;
     left: 0.75rem;
     top: 0.625rem;
     color: #9ca3af;
-  }
+}
   
-  .tableWrapper {
+.tableWrapper {
     overflow-x: auto;
-  }
+}
   
-  .table {
+.table {
     width: 100%;
     border-collapse: collapse;
     color: #f3f4f6;
-  }
+}
   
-  .th {
+.th {
     text-align: left;
     padding: 0.75rem 1.5rem;
     font-size: 0.75rem;
     font-weight: 500;
-    color: #9ca3af;
+    color: #2C742F;
     text-transform: uppercase;
     border-bottom: 1px solid #374151;
-  }
+}
   
-  .td {
+.td {
     padding: 1rem 1.5rem;
     white-space: nowrap;
     font-size: 0.875rem;
-  }
+}
   
   .userInfo {
     display: flex;
     align-items: center;
   }
   
-  .avatar {
+.avatar {
     width: 2.5rem;
     height: 2.5rem;
     background: linear-gradient(to right, #a78bfa, #60a5fa);
@@ -89,59 +88,55 @@
     justify-content: center;
     color: white;
     font-weight: 600;
-  }
+}
   
-  .userName {
+.userName {
     margin-left: 1rem;
-  }
+    color: #2C742F;
+}
   
-  .email {
-    color: #d1d5db;
-  }
+.email {
+    color: #2C742F;
+}
   
-  .role {
+.statusActive {
     font-size: 0.75rem;
     font-weight: 600;
-    background-color: #1e3a8a;
-    color: #dbeafe;
+    background-color: #00B207;
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 9999px;
+}
+  
+.statusInactive {
+    font-size: 0.75rem;
+    font-weight: 600;
+    background-color: #ED0006;
+    color: white;
     padding: 0.25rem 0.5rem;
     border-radius: 9999px;
   }
   
-  .statusActive {
-    font-size: 0.75rem;
-    font-weight: 600;
-    background-color: #065f46;
-    color: #d1fae5;
-    padding: 0.25rem 0.5rem;
-    border-radius: 9999px;
-  }
-  
-  .statusInactive {
-    font-size: 0.75rem;
-    font-weight: 600;
-    background-color: #7f1d1d;
-    color: #fecaca;
-    padding: 0.25rem 0.5rem;
-    border-radius: 9999px;
-  }
-  
-  .editBtn {
-    color: #818cf8;
+.activeBtn {
+    color: #27ae05;
     margin-right: 0.5rem;
     cursor: pointer;
-  }
+    background-color: transparent;
+    border: none;
+}
   
-  .editBtn:hover {
-    color: #a5b4fc;
-  }
+.activeBtn:hover {
+    color: #b5edb9;
+}
   
-  .deleteBtn {
+.deleteBtn {
     color: #f87171;
     cursor: pointer;
-  }
+    background-color: transparent;
+    border: none;
+}
   
-  .deleteBtn:hover {
+.deleteBtn:hover {
     color: #fca5a5;
-  }
+}
   

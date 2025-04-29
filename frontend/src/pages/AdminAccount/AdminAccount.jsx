@@ -1,4 +1,4 @@
-import styles from './AdminUsers.module.css'
+import styles from './AdminAccount.module.css'
 
 import Header from "../../components/Admin/Header/Header";
 import SideBar from "../../components/Admin/SideBar/SideBar";
@@ -9,7 +9,7 @@ const AdminUsers = () => {
     <div className={styles.BigWrapper}>
       <SideBar/>
       <div className={styles.Wrapper}>
-        <Header title='Users' />
+        <Header title='Account' />
         <main className={styles.main}>
 
 			<UsersTable />

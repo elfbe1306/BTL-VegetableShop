@@ -6,7 +6,7 @@ import styles from './Sidebar.module.css';
 
 const SIDEBAR_ITEMS = [
   { name: "Overview", icon: BarChart2, color: "#E6E6E6", href: "/" },
-  { name: "Users", icon: CircleUser, color: "#6366f1", href: "/admin/users" },
+  { name: "Account", icon: CircleUser, color: "#6366f1", href: "/admin/account" },
   { name: "Home", icon: House, color: "#FF8A00", href: "/products" },
   { name: "Shop", icon: ShoppingBag, color: "#EA4B48", href: "/products" },
   { name: "FaQs", icon: CircleHelp, color: "#EC4899", href: "/users" },
