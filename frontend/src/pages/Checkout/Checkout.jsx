@@ -42,22 +42,31 @@ const Checkout = () => {
     const handleSubmit = async () => {
         if(validateForm()) {
             if(cartItems.length === 0) {
-                setDisplayModal(true);
-                setResponseMessage("Shopping cart is empty")
+                setDisplayModal({
+                    message: "Shopping cart is empty!",
+                    redirectPath: "/vegetable",
+                    redirectText: "Go to Shop"
+                });
                 return;
             }
 
             const userID = localStorage.getItem("userID");
 
             if(!userID) {
-                setDisplayModal(true);
-                setResponseMessage("You are required to login to place order");
+                setDisplayModal({
+                    message: "You are required to login to place order",
+                    redirectPath: "/login",
+                    redirectText: "Go to Login"
+                  });
                 return;
             }
 
             const response = await apiService.CreateCustomerOrder(userID, formData, cartItems);
-            setDisplayModal(response.success);
-            setResponseMessage(response.message);
+            setDisplayModal({
+                message: response.success ? "Order placed successfully!" : response.message,
+                redirectPath: response.success ? "/" : "/vegetable", // Adjust the redirect path based on success/failure
+                redirectText: response.success ? "Home" : "Go to Shop"
+            });
             clearCart();
 
             setFormData({
@@ -185,7 +194,12 @@ const Checkout = () => {
             <Footer />
 
             {displayModal && (
-                <AlertModal message={responseMessage} onClose={setDisplayModal}/>
+                <AlertModal
+                    message={displayModal.message}
+                    redirectPath={displayModal.redirectPath}
+                    redirectText={displayModal.redirectText}
+                    onClose={() => setDisplayModal(null)}
+                />
             )}
         </>
     );

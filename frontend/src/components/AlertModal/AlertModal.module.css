@@ -12,16 +12,45 @@
 }
 
 .AlertModalContainer {
-  background: #fff;
+  background: #ffffff;
   padding: 24px;
   border-radius: 12px;
-  width: 40%;
+  width: 30%;
+  height: 20%;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   position: relative;
 }
 
 .AlertModalContainer p {
   text-align: center;
+  font-weight: 500;
+  color: rgb(0, 178, 7);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttonWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.redirectButton {
+  width: 60%;
+  padding: 10px 0px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  background-color: rgb(214, 255, 216);
+  color: rgb(0, 178, 7);
+  font-weight: 500;
+}
+
+.CheckIcon {
+  margin-top: 10px;
+  width: 50px;
 }
 
 .closeButton {
@@ -35,4 +64,18 @@
   font-weight: 600;
   cursor: pointer;
   width: 30px;
+}
+
+@media screen and (max-width: 769px) {
+  .AlertModalContainer {
+    height: 22%;
+    padding-bottom: 10%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .AlertModalContainer {
+    width: 40%;
+    padding-bottom: 10%;
+  }
 }
