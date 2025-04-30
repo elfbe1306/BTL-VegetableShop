@@ -108,4 +108,19 @@ function checkRole($conn, $jwtToken) {
         return ["error" => "User not found"];
     }
 }
+
+function fetchAdminAccount($conn) {
+        $sql = "SELECT * FROM `userAccount` WHERE role ='customer' ";
+    
+        $result = $conn->query($sql);
+    
+        $user = [];
+    
+        while($row = $result->fetch_assoc()) {
+            $user[] = $row;
+        }
+    
+        return $user;
+    }
+    
 ?>

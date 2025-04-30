@@ -13,6 +13,7 @@ import ContactPage from './pages/ContactPage/ContactPage'
 import InfoPage from './pages/InfoPage/InfoPage'
 import Question from './pages/Question/Question'
 import AdminDashboard from './pages/AdminDashboard/AdminDashboard'
+import AdminUsers from './pages/AdminAccount/AdminAccount'
 
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
 
@@ -25,6 +26,11 @@ function App() {
         <Route path="/admin" element={
           <ProtectedRoute allowedRoles={['Admin']}>
             <AdminDashboard />
+          </ProtectedRoute>
+        }/>
+          <Route path="/admin/account" element={
+          <ProtectedRoute allowedRoles={['Admin']}>
+            <AdminUsers />
           </ProtectedRoute>
         }/>
         <Route path="/vegetable" element={<ListProduct/>}/>

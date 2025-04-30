@@ -1,0 +1,142 @@
+.card {
+    background-color: #e8f4e8;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+  }
+  
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+  
+.title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #2C742F;
+}
+  
+.searchWrapper {
+    position: relative;
+  }
+  
+.searchInput {
+    background-color: white;
+    color: #374151;
+    padding: 0.5rem 1rem 0.5rem 2.5rem;
+    border-radius: 0.5rem;
+    border: none;
+    outline: none;
+}
+  
+.searchInput::placeholder {
+    color: #9ca3af;
+}
+  
+.searchInput:focus {
+    box-shadow: 0 0 0 2px #3b82f6;
+}
+  
+.searchIcon {
+    position: absolute;
+    left: 0.75rem;
+    top: 0.625rem;
+    color: #9ca3af;
+}
+  
+.tableWrapper {
+    overflow-x: auto;
+}
+  
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #f3f4f6;
+}
+  
+.th {
+    text-align: left;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #2C742F;
+    text-transform: uppercase;
+    border-bottom: 1px solid #374151;
+}
+  
+.td {
+    padding: 1rem 1.5rem;
+    white-space: nowrap;
+    font-size: 0.875rem;
+}
+  
+  .userInfo {
+    display: flex;
+    align-items: center;
+  }
+  
+.avatar {
+    width: 2.5rem;
+    height: 2.5rem;
+    background: linear-gradient(to right, #a78bfa, #60a5fa);
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+}
+  
+.userName {
+    margin-left: 1rem;
+    color: #2C742F;
+}
+  
+.email {
+    color: #2C742F;
+}
+  
+.statusActive {
+    font-size: 0.75rem;
+    font-weight: 600;
+    background-color: #00B207;
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 9999px;
+}
+  
+.statusInactive {
+    font-size: 0.75rem;
+    font-weight: 600;
+    background-color: #ED0006;
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 9999px;
+  }
+  
+.activeBtn {
+    color: #27ae05;
+    margin-right: 0.5rem;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+}
+  
+.activeBtn:hover {
+    color: #b5edb9;
+}
+  
+.deleteBtn {
+    color: #f87171;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+}
+  
+.deleteBtn:hover {
+    color: #fca5a5;
+}
+  
