@@ -215,6 +215,36 @@ class ApiService {
       throw error;
     }
   }
+
+  async CountTotalProduct() {
+    try {
+      const response = await this.api.get('?action=counttotalproduct');
+      return response.data;
+    } catch(error) {
+      console.error("Error counting total product:", error);
+      throw error;
+    }
+  }
+
+  async CountTotalUser() {
+    try {
+      const response = await this.api.get('?action=counttotaluser');
+      return response.data;
+    } catch(error) {
+      console.error("Error counting total user:", error);
+      throw error;
+    }
+  }
+
+  async CountTotalReview() {
+    try {
+      const response = await this.api.get('?action=counttotalreview');
+      return response.data;
+    } catch(error) {
+      console.error("Error counting total review:", error);
+      throw error;
+    }
+  }
 }
 
 

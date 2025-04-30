@@ -110,17 +110,31 @@ function checkRole($conn, $jwtToken) {
 }
 
 function fetchAdminAccount($conn) {
-        $sql = "SELECT * FROM `userAccount` WHERE role ='customer' ";
-    
-        $result = $conn->query($sql);
-    
-        $user = [];
-    
-        while($row = $result->fetch_assoc()) {
-            $user[] = $row;
-        }
-    
-        return $user;
+    $sql = "SELECT * FROM `userAccount` WHERE role ='customer' ";
+
+    $result = $conn->query($sql);
+
+    $user = [];
+
+    while($row = $result->fetch_assoc()) {
+        $user[] = $row;
     }
+
+    return $user;
+}
+
+function CountTotalUser($conn) {
+    $sql = "SELECT COUNT(*) AS total_user FROM userAccount WHERE userAccount.role != 'Admin';";
+    
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($row = $result->fetch_assoc()) {
+        return $row['total_user'];
+    } else {
+        return 0;
+    }
+}
     
 ?>

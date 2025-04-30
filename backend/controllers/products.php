@@ -103,5 +103,19 @@ function FetchAllProductExceptOne($conn, $productID) {
     return $products;
 }
 
+function CountTotalProduct($conn) {
+    $sql = "SELECT COUNT(*) AS total_product FROM products;";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($row = $result->fetch_assoc()) {
+        return $row['total_product'];
+    } else {
+        return 0;
+    }
+}
+
 
 ?>

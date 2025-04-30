@@ -73,6 +73,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         case 'fetchadminAccount':
             echo json_encode(fetchAdminAccount($conn));
             break;
+
+        case 'counttotalproduct':
+            echo json_encode(CountTotalProduct($conn));
+            break;
+
+        case 'counttotaluser':
+            echo json_encode(CountTotalUser($conn));
+            break;
+
+        case 'counttotalreview':
+            echo json_encode(CountTotalReview($conn));
+            break;
             
         default:
             http_response_code(404);

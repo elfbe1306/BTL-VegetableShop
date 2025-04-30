@@ -71,4 +71,18 @@ function CreateReviewByProductID($conn, $userID, $productID, $review, $rating) {
     }
 }
 
+function CountTotalReview($conn) {
+    $sql = "SELECT COUNT(*) AS total_review FROM reviews;";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($row = $result->fetch_assoc()) {
+        return $row['total_review'];
+    } else {
+        return 0;
+    }
+}
+
 ?>
