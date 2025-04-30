@@ -14,6 +14,9 @@ export default function SinglePost() {
   const [post, setPost]       = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError]     = useState('');
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
+  
 
   useEffect(() => {
     apiService
@@ -74,6 +77,9 @@ export default function SinglePost() {
       <Header />
 
       <div className="single_post_page">
+        <button className="filter_toggle_btn" onClick={toggleSidebar}>
+          Filters
+        </button>
         <div className="post">
             {post.cover_file && (
             <div className="post_featured">
@@ -123,7 +129,12 @@ export default function SinglePost() {
             <Comment/>
           
         </div>
-                <Sidebar />
+        <div className="sidebar_drawer">
+          <div className={`sidebar_backdrop ${isSidebarOpen ? "show" : ""}`} onClick={() => setSidebarOpen(false)}></div>
+          <div className={`sidebar_slide ${isSidebarOpen ? "open" : ""}`}>
+            <Sidebar />
+          </div>
+        </div>
       </div>
 
       <Footer />

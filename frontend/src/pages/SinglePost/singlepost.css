@@ -58,3 +58,21 @@
     font-weight: 400;
     color: #808080;
 }
+
+.filter_toggle_btn {
+  display: none;
+  margin: 1rem 0;
+  margin-top: 0;
+}
+
+@media (max-width: 769px) {
+  .single_post_page {
+    display: block;
+    padding: 1.5rem;
+  }
+
+  .filter_toggle_btn {
+    display: block;
+  }
+}
+

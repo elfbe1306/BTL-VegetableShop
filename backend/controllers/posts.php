@@ -78,6 +78,28 @@ function fetchAllTags(mysqli $conn): array {
   return $tags;
 }
 
+function fetchTagCounts(mysqli $conn): array {
+  $sql = "
+      SELECT tag, COUNT(*) AS count
+      FROM posts
+      WHERE tag IS NOT NULL AND tag != ''
+      GROUP BY tag
+      ORDER BY count DESC
+  ";
+
+  $res = $conn->query($sql);
+
+  $tags = [];
+  while ($row = $res->fetch_assoc()) {
+      $tags[] = [
+          'name' => $row['tag'],
+          'count' => (int) $row['count']
+      ];
+  }
+  return $tags;
+}
+
+
 function searchPosts(mysqli $conn, string $query): array {
   $wildcard = '%' . $conn->real_escape_string($query) . '%';
 

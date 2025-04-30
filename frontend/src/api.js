@@ -36,6 +36,11 @@ class ApiService {
     const { data } = await this.api.get(`?action=fetchtags`);
     return data;
   }
+  async fetchTagCounts() {
+    const { data } = await this.api.get(`?action=fetchtagcounts`);
+    return data;
+  }
+  
   async searchPosts(query) {
     const { data } = await this.api.get(`?action=searchposts&query=${encodeURIComponent(query)}`);
     return data;
