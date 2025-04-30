@@ -159,6 +159,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo json_encode(["error" => "Missing contact data"]);
             }
             break;
+        case 'fetchusername':
+            if(isset($data)) {
+                echo json_encode(FetchUserName($conn, $data['userID']));
+            } else {
+                http_response_code(400);
+                echo json_encode(["error" => "Missing userID"]);
+            }
+            break;
         default:
             http_response_code(404);
             echo json_encode(["error" => "Invalid route"]);

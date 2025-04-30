@@ -9,7 +9,6 @@ import apiService from '../../api';
 
 const ContactPage = () => {
     const [contact, setContact] = useState({
-        name: "",
         phonenum: "",
         subject: "",
         content: ""
@@ -31,8 +30,20 @@ const ContactPage = () => {
             subject: contact.subject,
             content: contact.content
         });
-        console.log(response);
     }
+
+    const [userName, setUserName] = useState("Not found");
+    useEffect(() => {
+        const FetchData = async () => {
+            const userID = localStorage.getItem("userID");
+            if(!userID) return;
+
+            const response = await apiService.FetchUserName(userID);
+            setUserName(response.username)
+        }
+
+        FetchData();
+    }, [])
 
     return(
         <>
@@ -62,11 +73,10 @@ const ContactPage = () => {
                         <div className={styles.forminfo}>
                             <input 
                                 className={styles.forminput} 
-                                placeholder="Your name" 
-                                type="text" 
-                                name="name"
-                                value={contact.name}
-                                onChange={handleChange}
+                                placeholder={userName}
+                                type="text"
+                                value={userName}
+                                readOnly
                             />
                             <input 
                                 className={styles.forminput} 

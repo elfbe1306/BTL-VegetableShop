@@ -24,4 +24,36 @@ function CreateContact($conn, $jwtToken, $userData) {
         return array("error" => $stmt->error, "success" => false);
     }
 }
+
+function FetchUserName($conn, $jwtToken) {
+    $key = "congabietgay";
+
+    $decoded = JWT::decode($jwtToken, new Key($key, 'HS256'));
+    $userID = $decoded->userId ?? null;
+
+    $sql = "SELECT name FROM `contacts` INNER JOIN `userAccount` ON userAccount.id = ?";
+
+    $stmt = $conn->prepare($sql);
+
+    if ($stmt === false) {
+        return "Error: Unable to prepare statement.";
+    }
+
+    $stmt->bind_param("i", $userID);
+
+    if ($stmt->execute()) {
+        $result = $stmt->get_result();
+        if ($row = $result->fetch_assoc()) {
+            return array(
+                "message" => "Fetching user name successfully",
+                "success" => true,
+                "username" => $row['name']
+            );
+        } else {
+            return array("error" => "User not found", "success" => false);
+        }
+    } else {
+        return array("error" => $stmt->error, "success" => false);
+    }
+}
 ?>

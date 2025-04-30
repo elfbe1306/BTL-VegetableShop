@@ -196,6 +196,16 @@ class ApiService {
       throw error;
     }
   }
+
+  async FetchUserName(userID) {
+    try {
+      const response = await this.api.post('?action=fetchusername', {userID: userID});
+      return response.data;
+    } catch(error) {
+      console.error("Error fetching user name:", error);
+      throw error;
+    }
+  }
 }
 
 
