@@ -70,6 +70,7 @@ const AdminQuestion = () => {
                     value={newAns}
                     onChange={(e) => setNewAns(e.target.value)}
                     className={styles.textarea}
+                    rows={4}
                 />
                 <div className={styles.modalButtons}>
                     <button onClick={handleAdd} className={styles.submitBtn}>Submit</button>
