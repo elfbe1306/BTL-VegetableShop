@@ -11,6 +11,10 @@ require_once "controllers/reviews.php";
 require_once "controllers/promotions.php";
 require_once "controllers/user.php";
 
+require_once "controllers/faqs.php";
+require_once "controllers/about.php";
+require_once "controllers/team.php";
+
 require_once __DIR__ . '/../backend-library/vendor/autoload.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
@@ -70,6 +74,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 echo json_encode(searchPosts($conn, $query));
             }
             break;
+        case 'fetchquestions':
+            echo json_encode(fetchQuestions($conn));
+            break;
+
+        case 'fetchinfo':
+            echo json_encode(fetchInfo($conn));
+            break;
+        
+        case 'fetchteam':
+            echo json_encode(fetchTeam($conn));
+            break;
+
+        case 'fetchadminAccount':
+            echo json_encode(fetchAdminAccount($conn));
+            break;
             
         default:
             http_response_code(404);
@@ -92,6 +111,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo json_encode(["error" => "Missing product name"]);
             }
             break;
+        case 'fetchproductexceptone':
+            if(isset($data['productID'])) {
+                echo json_encode(FetchAllProductExceptOne($conn, $data['productID']));
+            } else {
+                http_response_code(400);
+                echo json_encode(["error" => "Missing product id"]);
+            }
+            break;
+        case 'fetchreviewbyid':
+            if(isset($data['productID'])) {
+                echo json_encode(fetchReviewByID($conn, $data['productID']));
+            } else {
+                http_response_code(400);
+                echo json_encode(["error" => "Missing product id"]);
+            }
+            break;
         case 'createaccount':
             if (isset($data)) {
                 echo json_encode(createAccount($conn, $data));
@@ -108,7 +143,147 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo json_encode(["error" => "Missing user data"]);
             }
             break;
+        case 'checkroleuser':
+            if(isset($data['userID'])) {
+                echo json_encode(checkRole($conn, $data['userID']));
+            } else {
+                http_response_code(400);
+                echo json_encode(["error" => "Missing user id"]);
+            }
+            break;
+        case 'createreviewproduct':
+            if(isset($data)) {
+                echo json_encode(CreateReviewByProductID(
+                    $conn, $data['userID'],$data['productID'],$data['review'], $data['rating']
+                ));
+            } else {
+                http_response_code(400);
+                echo json_encode(["error" => "Missing review data"]);
+            }
+            break;
 
+        case 'createquestion':
+            if (isset($data['question']) && isset($data['answer'])) {
+                echo json_encode(createQuestion($conn, $data['question'], $data['answer']));
+            } else {
+                http_response_code(400);
+                echo json_encode(["error" => "Missing question or answer"]);
+            }
+            break;
+
+        case 'deletequestion':
+            if (isset($data['questionID'])) {
+                echo json_encode(deleteQuestion($conn, (int)$data['questionID']));
+            } else {
+                    http_response_code(400);
+                    echo json_encode(["error" => "Missing question ID"]);
+                }
+            break;
+                
+        case 'updatequestion':
+            if (isset($data['questionID'], $data['question'], $data['answer'])) {
+                echo json_encode(updateQuestion($conn, (int)$data['questionID'], $data['question'], $data['answer']));
+            } else {
+                    http_response_code(400);
+                    echo json_encode(["error" => "Missing question update data"]);
+            }
+            break;
+                    
+        case 'updateinfo':
+            if (isset($_POST['title_id'], $_POST['title'], $_POST['description'])) {
+                $img = null;
+                    
+            if (isset($_FILES['img']) && $_FILES['img']['error'] === UPLOAD_ERR_OK) {
+                $imgName = uniqid() . "_" . basename($_FILES['img']['name']);
+                $uploadDir = __DIR__ . "/uploads/aboutImgs/"; 
+                $uploadPath = $uploadDir . $imgName;
+                    
+                if (!is_dir($uploadDir)) {
+                    mkdir($uploadDir, 0777, true);
+                }
+                    
+                if (move_uploaded_file($_FILES['img']['tmp_name'], $uploadPath)) {
+                    $img = $imgName;
+                } else {
+                    http_response_code(500);
+                    echo json_encode(["error" => "Upload image failed"]);
+                    exit;
+                }
+            }
+            echo json_encode(updateInfo($conn, (int)$_POST['title_id'], $_POST['title'], $_POST['description'], $img));
+            } else {
+                    http_response_code(400);
+                    echo json_encode(["error" => "Missing update info data"]);
+            }
+            break;
+
+        case 'deleteinfo':
+            if (isset($data['title_id'])) {
+                echo json_encode(deleteInfo($conn, (int)$data['title_id']));
+            } else {
+                http_response_code(400);
+                echo json_encode(["error" => "Missing title id"]);
+            }
+            break;
+        
+        case 'addteam':
+            if (isset($_POST['name'], $_POST['role'])) {
+                $img = null;
+            if (isset($_FILES['img']) && $_FILES['img']['error'] === UPLOAD_ERR_OK) {
+                $imgName = uniqid() . "_" . basename($_FILES['img']['name']);
+                    $uploadDir = __DIR__ . "/uploads/teams/";
+                    if (!is_dir($uploadDir)) {
+                        mkdir($uploadDir, 0755, true);
+                    }
+                    $uploadPath = $uploadDir . $imgName;
+                    if (move_uploaded_file($_FILES['img']['tmp_name'], $uploadPath)) {
+                        $img = $imgName;
+                    }
+                    }
+            
+                    echo json_encode(addTeam($conn, $_POST['name'], $_POST['role'], $img));
+                } else {
+                    http_response_code(400);
+                    echo json_encode(["error" => "Missing data for new team member"]);
+                }
+                break;
+            
+        case 'updateteam':
+            if (isset($_POST['team_id'], $_POST['name'], $_POST['role'])) {
+                $img = null;
+            if (isset($_FILES['img']) && $_FILES['img']['error'] === UPLOAD_ERR_OK) {
+                $imgName = uniqid() . "_" . basename($_FILES['img']['name']);
+                $uploadDir = __DIR__ . "/uploads/teams/";
+                $uploadPath = $uploadDir . $imgName;
+                if (!is_dir($uploadDir)) {
+                    mkdir($uploadDir, 0775, true);
+                }
+                if (move_uploaded_file($_FILES['img']['tmp_name'], $uploadPath)) {
+                    $img = $imgName;
+                } else {
+                    http_response_code(500);
+                    echo json_encode(["error" => "Upload image failed"]);
+                    exit;
+                }
+            }
+            
+            echo json_encode(updateTeam($conn, (int)$_POST['team_id'], $_POST['name'], $_POST['role'], $img));
+            } else {
+                http_response_code(400);
+                echo json_encode(["error" => "Missing update info data"]);
+            }
+            break;
+            
+        case 'deleteteam':
+            if (isset($data['team_id'])) {
+                echo json_encode(deleteTeam($conn, (int)$data['team_id']));
+            } else {
+                http_response_code(400);
+                echo json_encode(["error" => "Missing team id"]);
+            }
+            break;
+                    
+            
         default:
             http_response_code(404);
             echo json_encode(["error" => "Invalid route"]);

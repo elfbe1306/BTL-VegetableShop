@@ -16,21 +16,22 @@
     padding: 20px;
     display: flex;
     flex-direction: row;
-    gap: 1%;
+    flex-wrap: wrap;
+    gap: 8px; 
     justify-content: center;
 }
 .ImageBlock {
     position: relative;
     overflow: hidden;
     margin: 0 auto ;
-    width: 300px;
+    max-width: 300px;
     height: 368px;
     border-radius: 8px;
     background: var(--Gray-Scale-White, #FFF);
     box-shadow: 0px 20px 48px 0px rgba(0, 38, 3, 0.08);
 }
 .ImageBlock img{
-    width: 300px;
+    width: 100%;
     height: 280px;
     border-radius: 8px 8px 0px 0px;
 }
@@ -65,17 +66,41 @@
     align-items: center;
     justify-content: center;
     transition: 0.3s ease;
-  }
+}
   
 .ImageBlock:hover .overlay {
     opacity: 1;
 }
 
+.SocialIcons{
+    display: flex;
+    gap: 10px;
+    margin: auto;
+}
+.socialIcon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    font-size: 20px;
+    color: gray;
+    border-radius: 50%;
+    transition: 0.3s ease-in-out;
+}
+.facebook:hover { background: #00B207; color: white; }
+.twitter:hover { background: #1DA1F2; color: white; }
+.pinterest:hover { background: red; color: white; }
+.instagram:hover { background: #E1306C; color: white; }
+
   @media screen and (max-width: 768px) {
     .ImageBlockWrap{
         display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: 1fr 1fr;
         justify-content: center;
+        display: flex;
+        flex-wrap: wrap;
     }
    
 }

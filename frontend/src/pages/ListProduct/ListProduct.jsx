@@ -57,7 +57,7 @@ const ListProduct = () => {
 
   // Pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 4; // tuy chinh so san pham moi trang
+  const itemsPerPage = 6; // tuy chinh so san pham moi trang
   const endIndex = currentPage * itemsPerPage;
   const startIndex = endIndex - itemsPerPage;
   const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);

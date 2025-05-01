@@ -15,7 +15,7 @@ function createAccount($conn, $userData) {
   $stmt->store_result();
 
   if ($stmt->num_rows > 0) {
-      return "Error: Email already exists.";
+      return array("message" => "Error: Email already exists.", "permission" => false);
   }
 
   $hashedPassword = password_hash($userData['password'], PASSWORD_DEFAULT); 
@@ -35,9 +35,9 @@ function createAccount($conn, $userData) {
   $stmt->execute();
 
   if ($stmt->affected_rows > 0) {
-      return "Account created successfully.";
+      return array("message" => "Account created successfully.", "permission" => true);
   } else {
-      return "Error: Unable to create account.";
+      return array("message" => "Error: Unable to create account.", "permission" => false);
   }
 }
 function Login($conn, $userData) {
@@ -78,6 +78,49 @@ function Login($conn, $userData) {
 
     $jwt = JWT::encode($payload, $key, 'HS256');
 
-    return array("message" => "Login successful", "permission" => true, "userID" => $jwt, "role" => $userRole);
+    return array("message" => "Login successful", "permission" => true, "userID" => $jwt);
 }
+
+function checkRole($conn, $jwtToken) {
+    $key = "congabietgay";
+
+    $decoded = JWT::decode($jwtToken, new Key($key, 'HS256'));
+    $userID = $decoded->userId ?? null;
+
+    if (!$userID) {
+        return ["error" => "Invalid token"];
+    }
+
+    $sql = "SELECT role FROM userAccount WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+
+    if ($stmt === false) {
+        return ["error" => "Unable to prepare statement"];
+    }
+
+    $stmt->bind_param('i', $userID); 
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($user = $result->fetch_assoc()) {
+        return ["role" => $user['role']];
+    } else {
+        return ["error" => "User not found"];
+    }
+}
+
+function fetchAdminAccount($conn) {
+        $sql = "SELECT * FROM `userAccount` WHERE role ='customer' ";
+    
+        $result = $conn->query($sql);
+    
+        $user = [];
+    
+        while($row = $result->fetch_assoc()) {
+            $user[] = $row;
+        }
+    
+        return $user;
+    }
+    
 ?>
