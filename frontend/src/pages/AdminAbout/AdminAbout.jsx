@@ -3,6 +3,7 @@ import styles from './AdminAbout.module.css'
 import Header from "../../components/Admin/Header/Header";
 import SideBar from "../../components/Admin/SideBar/SideBar";
 import AdminAboutEdit from '../../components/Admin/AdminAboutEdit/AdminAboutEdit';
+import AdminTeamEdit from '../../components/Admin/AdminTeamEdit/AdminTeamEdit';
 
 const AdminAbout= () => {
     return (
@@ -12,6 +13,7 @@ const AdminAbout= () => {
         <Header title='About Page' />
         <main className={styles.main}>
             <AdminAboutEdit/>
+            <AdminTeamEdit/>
 		</main>
 
       </div>

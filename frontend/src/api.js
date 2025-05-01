@@ -228,6 +228,16 @@ class ApiService {
       throw error;
     }
   }
+
+  async DeleteInfo(title_id) {
+    try {
+      const res = await this.api.post('?action=deleteinfo', { title_id });
+      return res.data;
+    } catch (err) {
+      console.error("Error deleting information:", err);
+      throw err;
+    }
+  }
   
   
   

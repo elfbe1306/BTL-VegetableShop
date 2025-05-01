@@ -145,62 +145,69 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             break;
 
         case 'createquestion':
-                if (isset($data['question']) && isset($data['answer'])) {
-                    echo json_encode(createQuestion($conn, $data['question'], $data['answer']));
-                } else {
-                    http_response_code(400);
-                    echo json_encode(["error" => "Missing question or answer"]);
-                }
-                break;
+            if (isset($data['question']) && isset($data['answer'])) {
+                echo json_encode(createQuestion($conn, $data['question'], $data['answer']));
+            } else {
+                http_response_code(400);
+                echo json_encode(["error" => "Missing question or answer"]);
+            }
+            break;
 
-            case 'deletequestion':
-                    if (isset($data['questionID'])) {
-                        echo json_encode(deleteQuestion($conn, (int)$data['questionID']));
-                    } else {
-                        http_response_code(400);
-                        echo json_encode(["error" => "Missing question ID"]);
-                    }
-                    break;
+        case 'deletequestion':
+            if (isset($data['questionID'])) {
+                echo json_encode(deleteQuestion($conn, (int)$data['questionID']));
+            } else {
+                    http_response_code(400);
+                    echo json_encode(["error" => "Missing question ID"]);
+                }
+            break;
                 
-            case 'updatequestion':
-                    if (isset($data['questionID'], $data['question'], $data['answer'])) {
-                        echo json_encode(updateQuestion($conn, (int)$data['questionID'], $data['question'], $data['answer']));
-                    } else {
-                        http_response_code(400);
-                        echo json_encode(["error" => "Missing question update data"]);
-                    }
-                    break;
+        case 'updatequestion':
+            if (isset($data['questionID'], $data['question'], $data['answer'])) {
+                echo json_encode(updateQuestion($conn, (int)$data['questionID'], $data['question'], $data['answer']));
+            } else {
+                    http_response_code(400);
+                    echo json_encode(["error" => "Missing question update data"]);
+            }
+            break;
                     
-            case 'updateinfo':
-                    if (isset($_POST['title_id'], $_POST['title'], $_POST['description'])) {
-                        $img = null;
+        case 'updateinfo':
+            if (isset($_POST['title_id'], $_POST['title'], $_POST['description'])) {
+                $img = null;
                     
-                        if (isset($_FILES['img']) && $_FILES['img']['error'] === UPLOAD_ERR_OK) {
-                            $imgName = uniqid() . "_" . basename($_FILES['img']['name']);
-                            $uploadDir = __DIR__ . "/uploads/aboutImgs/";  // đường dẫn thư mục vật lý
-                            $uploadPath = $uploadDir . $imgName;
+            if (isset($_FILES['img']) && $_FILES['img']['error'] === UPLOAD_ERR_OK) {
+                $imgName = uniqid() . "_" . basename($_FILES['img']['name']);
+                $uploadDir = __DIR__ . "/uploads/aboutImgs/"; 
+                $uploadPath = $uploadDir . $imgName;
                     
-                                // Đảm bảo thư mục tồn tại
-                            if (!is_dir($uploadDir)) {
-                                mkdir($uploadDir, 0777, true);
-                            }
+                if (!is_dir($uploadDir)) {
+                    mkdir($uploadDir, 0777, true);
+                }
                     
-                            if (move_uploaded_file($_FILES['img']['tmp_name'], $uploadPath)) {
-                                    $img = $imgName;
-                            } else {
-                                http_response_code(500);
-                                echo json_encode(["error" => "Upload image failed"]);
-                                exit;
-                                }
-                            }
+                if (move_uploaded_file($_FILES['img']['tmp_name'], $uploadPath)) {
+                    $img = $imgName;
+                } else {
+                    http_response_code(500);
+                    echo json_encode(["error" => "Upload image failed"]);
+                    exit;
+                }
+            }
                     
-                            // Gọi hàm cập nhật vào DB
-                            echo json_encode(updateInfo($conn, (int)$_POST['title_id'], $_POST['title'], $_POST['description'], $img));
-                        } else {
-                            http_response_code(400);
-                            echo json_encode(["error" => "Missing update info data"]);
-                        }
-                        break;
+            echo json_encode(updateInfo($conn, (int)$_POST['title_id'], $_POST['title'], $_POST['description'], $img));
+            } else {
+                    http_response_code(400);
+                    echo json_encode(["error" => "Missing update info data"]);
+            }
+            break;
+
+        case 'deleteinfo':
+            if (isset($data['title_id'])) {
+                echo json_encode(deleteInfo($conn, (int)$data['title_id']));
+            } else {
+                http_response_code(400);
+                echo json_encode(["error" => "Missing title id"]);
+            }
+            break;
                     
                     
             

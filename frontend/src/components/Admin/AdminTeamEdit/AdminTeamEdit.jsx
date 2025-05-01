@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from "framer-motion";
-import styles from "./AdminAboutEdit.module.css";
+import styles from "./AdminTeamEdit.module.css";
 import apiService from '../../../api';
 
-const AdminAboutEdit = () => {
-    const [information, setInformation] = useState([]);
+const AdminTeamEdit = () => {
+    const [team, setTeam] = useState([]);
     const [formData, setFormData] = useState({ title: "", description: "", img: null });
     const [showPopup, setShowPopup] = useState(false);
     const [editing, setEditing] = useState(null);
@@ -13,8 +13,8 @@ const AdminAboutEdit = () => {
   
   useEffect(() => {
     const fetchData = async () => {
-      const response = await apiService.FetchInfo();
-      setInformation(response);
+      const response = await apiService.FetchTeam();
+      setTeam(response);
     }
     fetchData();
   }, [])
@@ -23,31 +23,6 @@ const AdminAboutEdit = () => {
     navigate('/about'); 
   };
 
-  const handleEdit = (item) => {
-    setEditing(item);
-    setFormData({ title: item.title, description: item.description, img: null });
-    setShowPopup(true);
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-  
-  const handleFileChange = (e) => {
-    setFormData((prev) => ({ ...prev, img: e.target.files[0] }));
-  };
-
-  const handleSave = async () => {
-    const title_id = editing.title_id;
-    const { title, description, img } = formData;
-  
-    await apiService.UpdateInfo(title_id, title, description, img);
-  
-    const response = await apiService.FetchInfo();
-    setInformation(response);
-    setShowPopup(false);
-  };
 
   return (
     <motion.div
@@ -57,7 +32,7 @@ const AdminAboutEdit = () => {
       transition={{ delay: 0.2 }}
     >
       <div className={styles.header}>
-        <h2 className={styles.title}>Information</h2>
+        <h2 className={styles.title}>Our Team</h2>
         <div className={styles.AddBtn} onClick={handleView}>View</div>
       </div>
 
@@ -65,7 +40,7 @@ const AdminAboutEdit = () => {
         <table className={styles.table}>
           <thead>
             <tr>
-              {["Title", "Description", "Image",""].map((head) => (
+              {["Name","Role", "Image",""].map((head) => (
                 <th key={head} className={styles.th}>
                   {head}
                 </th>
@@ -73,19 +48,19 @@ const AdminAboutEdit = () => {
             </tr>
           </thead>
           <tbody>
-            {information.map((item) => (
+            {team.map((item) => (
               <motion.tr
-                key={item.title_id}
+                key={item.team_id}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.3 }}
               >
                 <td className={styles.td}>
-                    <div className={styles.itemTitle}>{item.title}</div>
+                    <div className={styles.itemTitle}>{item.name}</div>
                 </td>
 
                 <td className={styles.td}>
-                  <div className={styles.itemDes}>{item.description}</div>
+                  <div className={styles.itemDes}>{item.role}</div>
                 </td>
 
                 <td className={styles.td}>
@@ -93,8 +68,8 @@ const AdminAboutEdit = () => {
                 </td>
 
                 <td className={styles.td}>
-                    <button className={styles.editBtn} onClick={() => handleEdit(item)}>Edit</button>
-
+                    <button className={styles.editBtn}>Edit</button>
+{/* 
                     {showPopup && (
                         <div className={styles.modalOverlay}>
                             <div className={styles.modal}>
@@ -128,17 +103,10 @@ const AdminAboutEdit = () => {
                             </div>
                             </div>
                         </div>
-                        )}
+                        )} */}
 
 
-                    <button className={styles.deleteBtn}
-                            onClick={async () => {
-                                if (window.confirm("Are you sure you want to delete this information?")) {
-                                await apiService.DeleteInfo(item.title_id);
-                                setInformation(await apiService.FetchInfo());
-                                }
-                            }}
-                            >Delete</button>
+                    <button className={styles.deleteBtn}>Delete</button>
                 </td>
               </motion.tr>
             ))}
@@ -149,4 +117,4 @@ const AdminAboutEdit = () => {
   );
 };
 
-export default AdminAboutEdit;
+export default AdminTeamEdit;
