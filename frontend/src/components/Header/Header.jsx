@@ -154,22 +154,6 @@ const Header = () => {
         <div className="breadcrumb_address">
             <span className="material-symbols-outlined">home</span>
             <span className="material-symbols-outlined">chevron_right</span>
-            {location.pathname.startsWith('/vegetable/') && productName ? (
-              <>
-                <a href="/vegetable" className="breadcrumb-link">Vegetable</a>
-                <span className="material-symbols-outlined">chevron_right</span>
-                <span className="page">{formatProductName(productName)}</span>
-              </>
-            ) : location.pathname.startsWith('/blog/') ? (
-              <>
-                <a href="/blog" className="breadcrumb-link">Blog</a>
-                <span className="material-symbols-outlined">chevron_right</span>
-                <span className="page">{getPageTitle()}</span>
-              </>
-            ) : (
-              <a href={location.pathname} className="page">{getPageTitle()}</a>
-            )}
-
             {location.pathname === '/checkout' ? (
               <>
                 <Link to="/" className="breadcrumb-link">Home</Link>
@@ -184,8 +168,14 @@ const Header = () => {
                 <span className="material-symbols-outlined">chevron_right</span>
                 <span className="page">{formatProductName(productName)}</span>
               </>
+            ) : location.pathname.startsWith('/blog/') ? (
+              <>
+                <a href="/blog" className="breadcrumb-link">Blog</a>
+                <span className="material-symbols-outlined">chevron_right</span>
+                <span className="page">{getPageTitle()}</span>
+              </>
             ) : (
-              <span className="page">{getPageTitle()}</span>
+              <a href={location.pathname} className="page">{getPageTitle()}</a>
             )}
         </div>
       </div>

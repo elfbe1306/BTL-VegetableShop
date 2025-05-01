@@ -43,7 +43,7 @@ const Sidebar = () => {
         <i className="fa-solid fa-magnifying-glass"></i>
         <input
           type="text"
-          className="search_input"
+          className="blog_search_input"
           placeholder="Search"
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
