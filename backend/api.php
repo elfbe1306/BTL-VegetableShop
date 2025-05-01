@@ -152,6 +152,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     echo json_encode(["error" => "Missing question or answer"]);
                 }
                 break;
+
+            case 'deletequestion':
+                    if (isset($data['questionID'])) {
+                        echo json_encode(deleteQuestion($conn, (int)$data['questionID']));
+                    } else {
+                        http_response_code(400);
+                        echo json_encode(["error" => "Missing question ID"]);
+                    }
+                    break;
+                
+            case 'updatequestion':
+                    if (isset($data['questionID'], $data['question'], $data['answer'])) {
+                        echo json_encode(updateQuestion($conn, (int)$data['questionID'], $data['question'], $data['answer']));
+                    } else {
+                        http_response_code(400);
+                        echo json_encode(["error" => "Missing question update data"]);
+                    }
+                    break;
+                
             
         default:
             http_response_code(404);

@@ -191,6 +191,27 @@ class ApiService {
       throw error;
     }
   }
+
+  async DeleteQuestion(questionID) {
+    try {
+      const res = await this.api.post('?action=deletequestion', { questionID });
+      return res.data;
+    } catch (err) {
+      console.error("Error deleting question:", err);
+      throw err;
+    }
+  }
+  
+  async UpdateQuestion(questionID, question, answer) {
+    try {
+      const res = await this.api.post('?action=updatequestion', { questionID, question, answer });
+      return res.data;
+    } catch (err) {
+      console.error("Error updating question:", err);
+      throw err;
+    }
+  }
+  
   
 }
 

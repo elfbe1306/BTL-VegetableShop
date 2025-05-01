@@ -7,6 +7,7 @@ import apiService from '../../../api';
 const AdminQuestion = () => {
     const [questions, setQuestion] = useState([]);
     const [showPopup, setShowPopup] = useState(false);
+    const [editing, setEditing] = useState(null);
     const [newQues, setNewQues] = useState("");
     const [newAns, setNewAns] = useState("");
     const navigate = useNavigate();
@@ -25,20 +26,22 @@ const AdminQuestion = () => {
 
   const handleAdd = async () => {
     try {
-      const result = await apiService.CreateQuestion(newQues, newAns);
-      if (result.success) {
-        const updated = await apiService.FetchQuestion();
-        setQuestion(updated);
-        setShowPopup(false);
-        setNewQues('');
-        setNewAns('');
+      if (editing) {
+        await apiService.UpdateQuestion(editing.question_id, newQues, newAns);
+      } else {
+        await apiService.CreateQuestion(newQues, newAns);
       }
+      const updated = await apiService.FetchQuestion();
+      setQuestion(updated);
+      setShowPopup(false);
+      setNewQues('');
+      setNewAns('');
+      setEditing(null);
     } catch (err) {
-      console.error("Failed to create question", err);
+      console.error("Failed to create/update question", err);
     }
   };
-  
-  
+    
 
   return (
     <motion.div
@@ -107,8 +110,21 @@ const AdminQuestion = () => {
 
                 <td className={styles.td}>
                     <button className={styles.viewBtn} onClick={handleView} >View</button>
-                    <button className={styles.editBtn}>Edit</button>
-                    <button className={styles.deleteBtn}>Delete</button>
+                    <button className={styles.editBtn}
+                      onClick={() => {
+                        setEditing(item);
+                        setNewQues(item.question);
+                        setNewAns(item.answer);
+                        setShowPopup(true);
+                      }}>Edit</button>
+                    <button className={styles.deleteBtn}
+                            onClick={async () => {
+                                if (window.confirm("Are you sure you want to delete this question?")) {
+                                await apiService.DeleteQuestion(item.question_id);
+                                setQuestion(await apiService.FetchQuestion());
+                                }
+                            }}
+                            >Delete</button>
                 </td>
               </motion.tr>
             ))}

@@ -22,5 +22,27 @@
             return ["success" => false, "error" => $stmt->error];
         }
     }
+
+    function updateQuestion($conn, $questionID, $question, $answer) {
+        $stmt = $conn->prepare("UPDATE faqs SET question = ?, answer = ? WHERE question_id = ?");
+        $stmt->bind_param("ssi", $question, $answer, $questionID);
+        if ($stmt->execute()) {
+            return ["success" => true];
+        } else {
+            return ["success" => false, "error" => $stmt->error];
+        }
+    }
+    
+
+    function deleteQuestion($conn, $questionID) {
+        $stmt = $conn->prepare("DELETE FROM faqs WHERE question_id = ?");
+        $stmt->bind_param("i", $questionID);
+        if ($stmt->execute()) {
+            return ["success" => true];
+        } else {
+            return ["success" => false, "error" => $stmt->error];
+        }
+    }
+    
     
 ?>
