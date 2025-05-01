@@ -239,8 +239,39 @@ class ApiService {
     }
   }
   
-  
-  
+  async AddTeam(name, role, imgFile) {
+    try {
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("role", role);
+      if (imgFile) {
+        formData.append("img", imgFile);
+      }
+
+      const response = await this.api.post("?action=addteam", formData);
+      return response.data;
+    } catch (error) {
+      console.error("Error adding team member:", error);
+      throw error;
+    }
+  }
+
+  async UpdateTeam(team_id, name, role, imgFile) {
+    try {
+      const formData = new FormData();
+      formData.append("team_id", team_id);
+      formData.append("name", name);
+      formData.append("role", role);
+      if (imgFile) {
+        formData.append("img", imgFile);
+      }
+      const response = await this.api.post("?action=updateteam", formData);
+      return response.data;
+    } catch (error) {
+      console.error("Error updating team member:", error);
+      throw error;
+    }
+  }  
 }
 
 

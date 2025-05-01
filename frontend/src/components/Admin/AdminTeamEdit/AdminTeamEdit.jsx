@@ -6,22 +6,62 @@ import apiService from '../../../api';
 
 const AdminTeamEdit = () => {
     const [team, setTeam] = useState([]);
-    const [formData, setFormData] = useState({ title: "", description: "", img: null });
+    const [formData, setFormData] = useState({ name: "", role: "", img: null });
     const [showPopup, setShowPopup] = useState(false);
     const [editing, setEditing] = useState(null);
     const navigate = useNavigate();
   
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await apiService.FetchTeam();
-      setTeam(response);
-    }
-    fetchData();
-  }, [])
+    const fetchTeam = async () => {
+        const response = await apiService.FetchTeam();
+        setTeam(response);
+      };
+      
+      useEffect(() => {
+        fetchTeam();
+      }, []);
+      
 
   const handleView = () => {
     navigate('/about'); 
   };
+
+  const handleEdit = (item) => {
+    setEditing(item);
+    setFormData({ name: item.name, role: item.role, img: null });
+    setShowPopup(true);
+  };
+
+  const handleAdd = () => {
+    setEditing(null);
+    setFormData({ name: "", role: "", img: null });
+    setShowPopup(true);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleFileChange = (e) => {
+    setFormData((prev) => ({ ...prev, img: e.target.files[0] }));
+  };
+
+  const handleSave = async () => {
+    try {
+      if (editing) {
+        await apiService.UpdateTeam(editing.team_id, formData.name, formData.role, formData.img);
+      } else {
+        await apiService.AddTeam(formData.name, formData.role, formData.img);
+      }
+  
+      await fetchTeam();
+      setShowPopup(false);
+    } catch (err) {
+      console.error("Save failed:", err);
+      alert("Failed to save. Please check console for errors.");
+    }
+  };
+  
 
 
   return (
@@ -33,7 +73,7 @@ const AdminTeamEdit = () => {
     >
       <div className={styles.header}>
         <h2 className={styles.title}>Our Team</h2>
-        <div className={styles.AddBtn} onClick={handleView}>View</div>
+        <div className={styles.AddBtn} onClick={handleAdd}>Add New</div>
       </div>
 
       <div className={styles.tableWrapper}>
@@ -68,44 +108,43 @@ const AdminTeamEdit = () => {
                 </td>
 
                 <td className={styles.td}>
-                    <button className={styles.editBtn}>Edit</button>
-{/* 
+                    <button className={styles.viewBtn} onClick={handleView}>View</button>
+                    <button className={styles.editBtn} onClick={() => handleEdit(item)}>Edit</button>
                     {showPopup && (
                         <div className={styles.modalOverlay}>
                             <div className={styles.modal}>
-                            <h3>Edit Information</h3>
-                            <label>Title</label>
+                            <h3>{editing ? "Edit Member" : "Add New Member"}</h3>
+                            <label>Name</label>
                             <input
                                 type="text"
-                                name="title"
-                                value={formData.title}
+                                name="name"
+                                value={formData.name}
                                 onChange={handleChange}
                             />
-
-                            <label>Description</label>
-                            <textarea
-                                name="description"
-                                value={formData.description}
-                                rows={5}
-                                onChange={handleChange}
-                            />
-
-                            <label>Image</label>
+                    
+                            <label>Role</label>
                             <input
-                                type="file"
-                                accept="image/*"
-                                onChange={handleFileChange}
+                                type="text"
+                                name="role"
+                                value={formData.role}
+                                onChange={handleChange}
                             />
-
+                    
+                            <label>Image</label>
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={handleFileChange}
+                                />
+                    
                             <div className={styles.popupButtons}>
                                 <button onClick={handleSave}>Save</button>
                                 <button onClick={() => setShowPopup(false)}>Cancel</button>
                             </div>
-                            </div>
                         </div>
-                        )} */}
-
-
+                        </div>
+                    )}
+                    
                     <button className={styles.deleteBtn}>Delete</button>
                 </td>
               </motion.tr>

@@ -192,7 +192,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     exit;
                 }
             }
-                    
             echo json_encode(updateInfo($conn, (int)$_POST['title_id'], $_POST['title'], $_POST['description'], $img));
             } else {
                     http_response_code(400);
@@ -208,7 +207,56 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo json_encode(["error" => "Missing title id"]);
             }
             break;
-                    
+        
+        case 'addteam':
+            if (isset($_POST['name'], $_POST['role'])) {
+                $img = null;
+            if (isset($_FILES['img']) && $_FILES['img']['error'] === UPLOAD_ERR_OK) {
+                $imgName = uniqid() . "_" . basename($_FILES['img']['name']);
+                    $uploadDir = __DIR__ . "/uploads/teams/";
+                    if (!is_dir($uploadDir)) {
+                        mkdir($uploadDir, 0755, true);
+                    }
+                    $uploadPath = $uploadDir . $imgName;
+                    if (move_uploaded_file($_FILES['img']['tmp_name'], $uploadPath)) {
+                        $img = $imgName;
+                    }
+                    }
+            
+                    echo json_encode(addTeam($conn, $_POST['name'], $_POST['role'], $img));
+                } else {
+                    http_response_code(400);
+                    echo json_encode(["error" => "Missing data for new team member"]);
+                }
+                break;
+            
+        case 'updateteam':
+            if (isset($_POST['team_id'], $_POST['name'], $_POST['role'])) {
+                $img = null;
+            if (isset($_FILES['img']) && $_FILES['img']['error'] === UPLOAD_ERR_OK) {
+                $imgName = uniqid() . "_" . basename($_FILES['img']['name']);
+                $uploadDir = __DIR__ . "/uploads/teams/";
+                $uploadPath = $uploadDir . $imgName;
+                if (!is_dir($uploadDir)) {
+                    mkdir($uploadDir, 0775, true);
+                }
+                if (move_uploaded_file($_FILES['img']['tmp_name'], $uploadPath)) {
+                    $img = $imgName;
+                } else {
+                    http_response_code(500);
+                    echo json_encode(["error" => "Upload image failed"]);
+                    exit;
+                }
+            }
+            
+            echo json_encode(updateTeam($conn, (int)$_POST['team_id'], $_POST['name'], $_POST['role'], $img));
+            } else {
+                http_response_code(400);
+                echo json_encode(["error" => "Missing update info data"]);
+            }
+            break;
+            
+            
                     
             
         default:
