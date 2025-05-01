@@ -6,10 +6,9 @@ import apiService from '../../../api';
 
 const AdminAboutEdit = () => {
     const [information, setInformation] = useState([]);
+    const [formData, setFormData] = useState({ title: "", description: "", img: null });
     const [showPopup, setShowPopup] = useState(false);
     const [editing, setEditing] = useState(null);
-    const [newQues, setNewQues] = useState("");
-    const [newAns, setNewAns] = useState("");
     const navigate = useNavigate();
   
   useEffect(() => {
@@ -24,24 +23,35 @@ const AdminAboutEdit = () => {
     navigate('/about'); 
   };
 
-//   const handleAdd = async () => {
-//     try {
-//       if (editing) {
-//         await apiService.UpdateQuestion(editing.question_id, newQues, newAns);
-//       } else {
-//         await apiService.CreateQuestion(newQues, newAns);
-//       }
-//       const updated = await apiService.FetchQuestion();
-//       setQuestion(updated);
-//       setShowPopup(false);
-//       setNewQues('');
-//       setNewAns('');
-//       setEditing(null);
-//     } catch (err) {
-//       console.error("Failed to create/update question", err);
-//     }
-//   };
-    
+  const handleEdit = (item) => {
+    setEditing(item);
+    setFormData({ title: item.title, description: item.description, img: null });
+    setShowPopup(true);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+  
+  const handleFileChange = (e) => {
+    setFormData((prev) => ({ ...prev, img: e.target.files[0] }));
+  };
+
+  const handleSave = async () => {
+    const title_id = editing.title_id;
+    const { title, description, img } = formData;
+  
+    await apiService.UpdateInfo(title_id, title, description, img);
+  
+    const response = await apiService.FetchInfo();
+    setInformation(response);
+    setShowPopup(false);
+  };
+  
+  
+  
+
 
   return (
     <motion.div
@@ -52,33 +62,7 @@ const AdminAboutEdit = () => {
     >
       <div className={styles.header}>
         <h2 className={styles.title}>Information</h2>
-        <div className={styles.AddBtn}>Add New</div>
-
-        {/* {showPopup && (
-            <div className={styles.modalOverlay}>
-                <div className={styles.modal}>
-                <h3 style={{color:'black'}}>Add New Question</h3>
-                <input
-                    type="text"
-                    placeholder="Enter question"
-                    value={newQues}
-                    onChange={(e) => setNewQues(e.target.value)}
-                    className={styles.input}
-                />
-                <textarea
-                    placeholder="Enter answer"
-                    value={newAns}
-                    onChange={(e) => setNewAns(e.target.value)}
-                    className={styles.textarea}
-                />
-                <div className={styles.modalButtons}>
-                    <button onClick={handleAdd} className={styles.submitBtn}>Submit</button>
-                    <button onClick={() => setShowPopup(false)} className={styles.cancelBtn}>Cancel</button>
-                </div>
-                </div>
-            </div>
-            )} */}
-
+        <div className={styles.AddBtn} onClick={handleView}>View</div>
       </div>
 
       <div className={styles.tableWrapper}>
@@ -95,7 +79,7 @@ const AdminAboutEdit = () => {
           <tbody>
             {information.map((item) => (
               <motion.tr
-                key={item.question_id}
+                key={item.title_id}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.3 }}
@@ -113,8 +97,44 @@ const AdminAboutEdit = () => {
                 </td>
 
                 <td className={styles.td}>
-                    <button className={styles.viewBtn} onClick={handleView} >View</button>
-                    <button className={styles.editBtn}>Edit</button>
+                    <button className={styles.editBtn} onClick={() => handleEdit(item)}>Edit</button>
+
+                    {showPopup && (
+                        <div className={styles.modalOverlay}>
+                            <div className={styles.modal}>
+                            <h3>Edit Information</h3>
+                            <label>Title</label>
+                            <input
+                                type="text"
+                                name="title"
+                                value={formData.title}
+                                onChange={handleChange}
+                            />
+
+                            <label>Description</label>
+                            <textarea
+                                name="description"
+                                value={formData.description}
+                                rows={5}
+                                onChange={handleChange}
+                            />
+
+                            <label>Image</label>
+                            <input
+                                type="file"
+                                accept="image/*"
+                                onChange={handleFileChange}
+                            />
+
+                            <div className={styles.popupButtons}>
+                                <button onClick={handleSave}>Save</button>
+                                <button onClick={() => setShowPopup(false)}>Cancel</button>
+                            </div>
+                            </div>
+                        </div>
+                        )}
+
+
                     <button className={styles.deleteBtn}>Delete</button>
                 </td>
               </motion.tr>

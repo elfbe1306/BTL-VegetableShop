@@ -211,6 +211,24 @@ class ApiService {
       throw err;
     }
   }
+
+  async UpdateInfo(title_id, title, description, imgFile) {
+    try {
+      const formData = new FormData();
+      formData.append('title_id', title_id);
+      formData.append('title', title);
+      formData.append('description', description);
+      if (imgFile) formData.append('img', imgFile);
+  
+      const response = await this.api.post('?action=updateinfo', formData);
+  
+      return response.data;
+    } catch (error) {
+      console.error("Error updating info:", error);
+      throw error;
+    }
+  }
+  
   
   
 }

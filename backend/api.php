@@ -170,7 +170,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         echo json_encode(["error" => "Missing question update data"]);
                     }
                     break;
-                
+                    
+            case 'updateinfo':
+                    if (isset($_POST['title_id'], $_POST['title'], $_POST['description'])) {
+                        $img = null;
+                    
+                        if (isset($_FILES['img']) && $_FILES['img']['error'] === UPLOAD_ERR_OK) {
+                            $imgName = uniqid() . "_" . basename($_FILES['img']['name']);
+                            $uploadDir = __DIR__ . "/uploads/aboutImgs/";  // đường dẫn thư mục vật lý
+                            $uploadPath = $uploadDir . $imgName;
+                    
+                                // Đảm bảo thư mục tồn tại
+                            if (!is_dir($uploadDir)) {
+                                mkdir($uploadDir, 0777, true);
+                            }
+                    
+                            if (move_uploaded_file($_FILES['img']['tmp_name'], $uploadPath)) {
+                                    $img = $imgName;
+                            } else {
+                                http_response_code(500);
+                                echo json_encode(["error" => "Upload image failed"]);
+                                exit;
+                                }
+                            }
+                    
+                            // Gọi hàm cập nhật vào DB
+                            echo json_encode(updateInfo($conn, (int)$_POST['title_id'], $_POST['title'], $_POST['description'], $img));
+                        } else {
+                            http_response_code(400);
+                            echo json_encode(["error" => "Missing update info data"]);
+                        }
+                        break;
+                    
+                    
             
         default:
             http_response_code(404);

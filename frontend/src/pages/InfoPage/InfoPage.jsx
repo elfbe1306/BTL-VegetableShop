@@ -77,14 +77,14 @@ function InfoPage() {
               
                 <div className={styles.Image}>
                   {information.length > 0 && (
-                    <img src={`http://localhost/BTL-VegetableShop/backend/uploads/${information[0].img}`} alt="img" />
+                    <img src={`http://localhost/BTL-VegetableShop/backend/uploads/aboutImgs/${information[0].img}`} alt="img" />
                   )}
                 </div>
             </div>
             <div className={styles.AboutMeWrap}>
               <div className={styles.AboutMe}>
                   {information.length > 1 && (
-                    <img src={`http://localhost/BTL-VegetableShop/backend/uploads/${information[1].img}`} alt="img" />
+                    <img src={`http://localhost/BTL-VegetableShop/backend/uploads//aboutImgs/${information[1].img}`} alt="img" />
                   )}
               </div>
               <div className={styles.TextAndIconWrap}>
@@ -186,7 +186,7 @@ function InfoPage() {
               </div>
               <div className={styles.Image}>
                   {information.length > 2 && (
-                    <img src={`http://localhost/BTL-VegetableShop/backend/uploads/${information[2].img}`} alt="img" />
+                    <img src={`http://localhost/BTL-VegetableShop/backend/uploads//aboutImgs/${information[2].img}`} alt="img" />
                   )}
               </div>
             </div>
