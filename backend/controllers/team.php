@@ -26,4 +26,13 @@
         return $stmt->execute();
     }
     
+    function deleteTeam($conn, $team_id) {
+        $stmt = $conn->prepare("DELETE FROM teams WHERE team_id = ?");
+        $stmt->bind_param("i", $team_id);
+        if ($stmt->execute()) {
+            return ["success" => true];
+        } else {
+            return ["success" => false, "error" => $stmt->error];
+        }
+    }
 ?>

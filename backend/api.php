@@ -256,7 +256,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             break;
             
-            
+        case 'deleteteam':
+            if (isset($data['team_id'])) {
+                echo json_encode(deleteTeam($conn, (int)$data['team_id']));
+            } else {
+                http_response_code(400);
+                echo json_encode(["error" => "Missing team id"]);
+            }
+            break;
                     
             
         default:

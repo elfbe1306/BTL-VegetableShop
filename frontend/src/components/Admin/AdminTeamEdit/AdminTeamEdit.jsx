@@ -145,7 +145,14 @@ const AdminTeamEdit = () => {
                         </div>
                     )}
                     
-                    <button className={styles.deleteBtn}>Delete</button>
+                    <button className={styles.deleteBtn}
+                            onClick={async () => {
+                                if (window.confirm("Are you sure you want to delete this teammate information?")) {
+                                await apiService.DeleteTeam(item.team_id);
+                                setTeam(await apiService.FetchTeam());
+                                }
+                            }}
+                            >Delete</button>
                 </td>
               </motion.tr>
             ))}

@@ -272,6 +272,16 @@ class ApiService {
       throw error;
     }
   }  
+
+  async DeleteTeam(team_id) {
+    try {
+      const res = await this.api.post('?action=deleteteam', { team_id });
+      return res.data;
+    } catch (err) {
+      console.error("Error deleting team:", err);
+      throw err;
+    }
+  }
 }
 
 
