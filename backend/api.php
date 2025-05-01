@@ -143,6 +143,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo json_encode(["error" => "Missing review data"]);
             }
             break;
+
+        case 'createquestion':
+                if (isset($data['question']) && isset($data['answer'])) {
+                    echo json_encode(createQuestion($conn, $data['question'], $data['answer']));
+                } else {
+                    http_response_code(400);
+                    echo json_encode(["error" => "Missing question or answer"]);
+                }
+                break;
+            
         default:
             http_response_code(404);
             echo json_encode(["error" => "Invalid route"]);

@@ -178,6 +178,20 @@ class ApiService {
       throw error;
     }
   }
+
+  async CreateQuestion(question, answer) {
+    try {
+      const response = await this.api.post('?action=createquestion', {
+        question,
+        answer
+      });
+      return response.data;
+    } catch (error) {
+      console.error("Error creating question:", error);
+      throw error;
+    }
+  }
+  
 }
 
 
