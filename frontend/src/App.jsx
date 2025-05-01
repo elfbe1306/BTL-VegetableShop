@@ -14,6 +14,7 @@ import InfoPage from './pages/InfoPage/InfoPage'
 import Question from './pages/Question/Question'
 import AdminDashboard from './pages/AdminDashboard/AdminDashboard'
 import AdminUsers from './pages/AdminAccount/AdminAccount'
+import AdminFAQs from './pages/AdminFAQs/AdminFAQs'
 
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
 
@@ -31,6 +32,11 @@ function App() {
           <Route path="/admin/account" element={
           <ProtectedRoute allowedRoles={['Admin']}>
             <AdminUsers />
+          </ProtectedRoute>
+        }/>
+          <Route path="/admin/faqs" element={
+          <ProtectedRoute allowedRoles={['Admin']}>
+            <AdminFAQs />
           </ProtectedRoute>
         }/>
         <Route path="/vegetable" element={<ListProduct/>}/>
