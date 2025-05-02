@@ -36,6 +36,22 @@ class ApiService {
     return data;
   }
 
+  async createPost(formData) {
+    const { data } = await this.api.post('?action=createpost', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    });
+    if (data.error) throw new Error(data.error);
+    return data;
+  }
+  
+  async updatePost(id, formData) {
+    const { data } = await this.api.post(`?action=updatepost&id=${id}`, formData, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    });
+    if (data.error) throw new Error(data.error);
+    return data;
+  }
+  
   async fetchTags() {
     const { data } = await this.api.get(`?action=fetchtags`);
     return data;
@@ -48,6 +64,12 @@ class ApiService {
 
   async searchPosts(query) {
     const { data } = await this.api.get(`?action=searchposts&query=${encodeURIComponent(query)}`);
+    return data;
+  }
+
+  async deletePost(postId) {
+    const { data } = await this.api.post(`?action=deletepost`, { id: postId });
+    if (data.error) throw new Error(data.error);
     return data;
   }
 

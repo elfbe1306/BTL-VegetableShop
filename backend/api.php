@@ -282,7 +282,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo json_encode(["error" => "Missing team id"]);
             }
             break;
-                    
+
+        case 'createpost':
+            echo json_encode(createPost($conn, $_POST, $_FILES));
+            break;
+        
+        case 'updatepost':
+            $id = (int) ($_GET['id'] ?? 0);
+            echo json_encode(updatePost($conn, $id, $_POST, $_FILES));
+            break;
+            
+        case 'deletepost':
+            $input = json_decode(file_get_contents("php://input"), true);
+            $id = (int) ($input['id'] ?? 0);
+        
+            if ($id < 1) {
+                http_response_code(400);
+                echo json_encode(["error" => "Invalid post ID"]);
+                break;
+            }
+        
+            $stmt = $conn->prepare("SELECT file_name FROM images WHERE post_id = ?");
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+            $res = $stmt->get_result();
+            $image = $res->fetch_assoc();
+        
+            if ($image && !empty($image['file_name'])) {
+                $filePath = __DIR__ . '/uploads/postsImg/' . $image['file_name'];
+                if (file_exists($filePath)) {
+                    unlink($filePath); 
+                }
+            }
+            $stmt = $conn->prepare("DELETE FROM images WHERE post_id = ?");
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+        
+            $stmt = $conn->prepare("DELETE FROM posts WHERE id = ?");
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+        
+            echo json_encode(["success" => true]);
+            break;
+            
+            
             
         default:
             http_response_code(404);

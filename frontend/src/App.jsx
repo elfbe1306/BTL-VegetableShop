@@ -19,6 +19,9 @@ import AdminFAQs from './pages/AdminFAQs/AdminFAQs'
 import AdminAbout from './pages/AdminAbout/AdminAbout'
 
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
+import AdminBlog from './pages/AdminBlog/AdminBlog'
+import AdminCreatePost from './pages/AdminBlog/AdminCreatePost'
+import AdminEditPost from './pages/AdminBlog/AdminEditPost'
 
 function App() {
   return (
@@ -42,6 +45,27 @@ function App() {
           </ProtectedRoute>
         }/>
         <Route path="/admin/about" element={
+          <ProtectedRoute allowedRoles={['Admin']}>
+            <AdminAbout />
+          </ProtectedRoute>
+        }/>
+        <Route path="/admin/blog" element={
+          <ProtectedRoute allowedRoles={['Admin']}>
+            <AdminBlog />
+          </ProtectedRoute>
+        }/>
+        <Route path="/admin/posts/create" element={
+          <ProtectedRoute allowedRoles={['Admin']}>
+            <AdminCreatePost />
+          </ProtectedRoute>
+        }/>
+
+        <Route path="/admin/posts/edit/:id" element={
+          <ProtectedRoute allowedRoles={['Admin']}>
+            <AdminEditPost />
+          </ProtectedRoute>
+        }/>
+        <Route path="/admin/comment" element={
           <ProtectedRoute allowedRoles={['Admin']}>
             <AdminAbout />
           </ProtectedRoute>

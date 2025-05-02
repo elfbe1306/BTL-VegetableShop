@@ -9,6 +9,7 @@ function fetchPostById($conn, int $postId) {
         p.content,
         p.created_at,
         p.tag                   AS tag,
+        p.author_id,
         u.name        AS author_name,
         img.file_name AS cover_file
       FROM posts p
@@ -144,5 +145,107 @@ function searchPosts(mysqli $conn, string $query): array {
 
   return $posts;
 }
+
+function handleImageUpload(array $file): ?int {
+  if ($file['error'] !== UPLOAD_ERR_OK) return null;
+
+  $uploadDir = __DIR__ . '/../uploads/postsImg/';
+  if (!is_dir($uploadDir)) {
+      mkdir($uploadDir, 0755, true);
+  }
+
+  $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
+  $filename = uniqid('post_', true) . '.' . $ext;
+  $target = $uploadDir . $filename;
+
+  if (!move_uploaded_file($file['tmp_name'], $target)) return null;
+
+  $filepath = 'postsImg/' . $filename;
+
+  // Insert into images table
+  global $conn;
+  $stmt = $conn->prepare("INSERT INTO images (file_name) VALUES (?)");
+  $stmt->bind_param("s", $filepath);
+  $stmt->execute();
+  return $stmt->insert_id;
+}
+
+function createPost(mysqli $conn, array $postData, ?array $file = null): array {
+  $title     = $postData['title'] ?? '';
+  $slug      = $postData['slug'] ?? '';
+  $content   = $postData['content'] ?? '';
+  $tag       = $postData['tag'] ?? '';
+  $author_id = (int)($postData['author_id'] ?? 0);
+
+  if (!$slug && $title) {
+    $slug = slugify($title);
+  }
+  if (!$title || !$slug || !$content || $author_id < 1) {
+    http_response_code(400);
+    return ["error" => "Missing required fields"];
+  }
+
+  $cover_image_id = null;
+  if ($file && isset($file['cover_image'])) {
+    $cover_image_id = handleImageUpload($file['cover_image']);
+  }
+
+  $stmt = $conn->prepare("INSERT INTO posts (title, slug, content, tag, author_id, cover_image_id, created_at, updated_at)
+                          VALUES (?, ?, ?, ?, ?, ?, NOW(), NOW())");
+  $stmt->bind_param("ssssii", $title, $slug, $content, $tag, $author_id, $cover_image_id);
+  $stmt->execute();
+
+  return ["success" => true, "post_id" => $stmt->insert_id];
+}
+
+function updatePost(mysqli $conn, int $id, array $postData, ?array $file = null): array {
+  $title     = $postData['title'] ?? '';
+  $slug      = $postData['slug'] ?? '';
+  $content   = $postData['content'] ?? '';
+  $tag       = $postData['tag'] ?? '';
+  $author_id = (int)($postData['author_id'] ?? 0);
+
+  if (!$slug && $title) {
+    $slug = slugify($title);
+  }
+
+  if ($id < 1 || !$title || !$slug || !$content || $author_id < 1) {
+    http_response_code(400);
+    return ["error" => "Missing or invalid data"];
+  }
+
+  $cover_image_id = null;
+  if ($file && isset($file['cover_image']) && $file['cover_image']['error'] === UPLOAD_ERR_OK) {
+    $cover_image_id = handleImageUpload($file['cover_image']);
+  }
+
+  if ($cover_image_id !== null) {
+    $sql = "UPDATE posts SET title=?, slug=?, content=?, tag=?, author_id=?, cover_image_id=?, updated_at=NOW() WHERE id=?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ssssiii", $title, $slug, $content, $tag, $author_id, $cover_image_id, $id);
+  } else {
+    $sql = "UPDATE posts SET title=?, slug=?, content=?, tag=?, author_id=?, updated_at=NOW() WHERE id=?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ssssii", $title, $slug, $content, $tag, $author_id, $id);
+  }
+
+  $stmt->execute();
+  return ["success" => true];
+}
+
+function slugify(string $text): string {
+  // Convert to ASCII
+  $text = iconv('UTF-8', 'ASCII//TRANSLIT', $text);
+  // Replace non letter or digits by -
+  $text = preg_replace('~[^\\pL\d]+~u', '-', $text);
+  // Trim
+  $text = trim($text, '-');
+  // Lowercase
+  $text = strtolower($text);
+  // Remove unwanted characters
+  $text = preg_replace('~[^-\w]+~', '', $text);
+  return $text ?: uniqid('post-'); // fallback
+}
+
 
 ?>
