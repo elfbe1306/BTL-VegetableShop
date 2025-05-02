@@ -14,6 +14,7 @@ import InfoPage from './pages/InfoPage/InfoPage'
 import Question from './pages/Question/Question'
 import AdminDashboard from './pages/AdminDashboard/AdminDashboard'
 import AdminUsers from './pages/AdminAccount/AdminAccount'
+import UserProfile from './pages/UserProfile/UserProfile'
 
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
 
@@ -33,6 +34,7 @@ function App() {
             <AdminUsers />
           </ProtectedRoute>
         }/>
+
         <Route path="/vegetable" element={<ListProduct/>}/>
         <Route path="/vegetable/search/:searchText" element={<ListProduct/>} />
         <Route path="/blog" element={<BlogList/>} />
@@ -43,6 +45,7 @@ function App() {
         <Route path="/contact" element={<ContactPage/>} />
         <Route path="/about" element={<InfoPage/>} />
         <Route path="/faqs" element={<Question/>} />
+        <Route path="/profile" element={<UserProfile />} />
     </Routes>
   )
 }
