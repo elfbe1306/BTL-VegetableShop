@@ -48,7 +48,7 @@ function Question() {
 
   return (
     <div className={styles.container}>
-      <Header />
+      {/* <Header /> */}
       <div className={styles.Wrapper}>
         <div className={styles.LeftCol}>
           <div className={styles.Text}>Welcome, Let’s Talk About Our Ecobazar</div>
@@ -71,7 +71,7 @@ function Question() {
           <img src="src/assets/images/ContactImage.png" alt="img" />
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
