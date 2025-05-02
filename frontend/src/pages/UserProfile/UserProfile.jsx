@@ -30,6 +30,7 @@ const UserProfile = () => {
         setNewPassword('')
         setShowPasswordForm(false)
     }
+    return (
         <>
             <Header />
             <div className={styles.mainbox}>
