@@ -13,7 +13,6 @@ const AdminContact = () => {
     useEffect(() => {
         const fetchData = async () => {
         const response = await apiService.FetchContact();
-        console.log(response)
         setaccountData(response.data);
         }
         fetchData();

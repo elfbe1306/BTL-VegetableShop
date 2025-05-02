@@ -353,6 +353,16 @@ class ApiService {
       throw error;
    }
   }
+
+  async CountTotalSale() {
+    try {
+      const response = await this.api.get('?action=counttotalsale');
+      return response.data;
+    } catch(error) {
+      console.error("Error counting total sale:", error);
+      throw error;
+    }
+  }
 }
 
 

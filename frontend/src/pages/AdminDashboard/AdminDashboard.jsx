@@ -13,6 +13,7 @@ const AdminDashboard = () => {
   const [totalProduct, setTotalProduct] = useState(0);
   const [totalUser, setTotalUser] = useState(0);
   const [totalReview, setTotalReview] = useState(0);
+  const [TotalSale, setTotalSale] = useState(0);
 
   useEffect(() => {
     const FetchData = async () => {
@@ -24,6 +25,9 @@ const AdminDashboard = () => {
 
       const response3 = await apiService.CountTotalReview();
       setTotalReview(response3);
+
+      const response4 = await apiService.CountTotalSale();
+      setTotalSale(response4.data[0].total_sale);
     }
 
     FetchData();
@@ -42,7 +46,7 @@ const AdminDashboard = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
           >
-            <StatCard name="Total Sales" icon={Zap} value="$12,345" color="#6366F1" />
+            <StatCard name="Total Sales" icon={Zap} value={TotalSale} color="#6366F1" />
             <StatCard name="New Users" icon={Users} value={totalUser} color="#8B5CF6" />
             <StatCard name="Total Products" icon={ShoppingBag} value={totalProduct} color="#EC4899" />
             <StatCard name="Total Reviews" icon={ MessageSquareText} value={totalReview} color="#10B981" />
