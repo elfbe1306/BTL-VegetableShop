@@ -19,7 +19,7 @@ const OurTeam = () => {
       <div className={styles.ImageBlockWrap}>
         {teams.map((member, index) => (
           <div key={index} className={styles.ImageBlock}>
-            <img src={`http://localhost/BTL-VegetableShop/backend/uploads/${member.img}`} alt={member.name} />
+            <img src={`http://localhost/BTL-VegetableShop/backend/uploads/teams/${member.img}`} alt={member.name} />
             <div className={styles.overlay}>
               <div className={styles.SocialIcons}>
                 <a href="#" className={`${styles.socialIcon} ${styles.facebook}`}><i className="fab fa-facebook-f"></i></a>

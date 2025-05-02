@@ -1,0 +1,177 @@
+.card {
+    background-color: #e8f4e8;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    margin-bottom: 40px;
+}
+  
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+  
+.title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #2C742F;
+}
+
+.AddBtn{
+    background-color: #00B207;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-size: 16px;
+    padding: 10px;
+    font-weight: 50 0;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.modalOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.304);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+  
+.modal {
+    background: white;
+    padding: 30px 40px;
+    border-radius: 12px;
+    max-width: 600px;
+    width: 90%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+  
+.modal h3 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+  
+.modal label {
+    display: block;
+    margin: 15px 0 5px;
+    font-weight: bold;
+    color: #333;
+}
+  
+.modal input[type="text"],
+.modal textarea,
+.modal input[type="file"] {
+    color: black;
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+  
+.modal textarea {
+    resize: vertical;
+}
+  
+.popupButtons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+  
+.popupButtons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+  
+.popupButtons button:first-child {
+    background-color: #28a745;
+    color: white;
+}
+  
+.popupButtons button:last-child {
+    background-color: #ccc;
+    color: #333;
+}
+  
+.popupButtons button:first-child:hover {
+    background-color: #218838;
+}
+  
+.popupButtons button:last-child:hover {
+    background-color: #bbb;
+}
+  
+  
+  
+.tableWrapper {
+    overflow-x: auto;
+}
+  
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #f3f4f6;
+}
+  
+.th {
+    text-align: left;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #2C742F;
+    text-transform: uppercase;
+    border-bottom: 1px solid #374151;
+}
+  
+.td {
+    padding: 1rem 1.5rem;
+    max-width: 260px;
+    white-space: normal;
+    word-break: break-word;     
+    font-size: 0.875rem;
+} 
+  
+.itemTitle {
+    color: #2C742F;
+}
+  
+.itemDes {
+    color: #2C742F;
+}
+
+
+.editBtn {
+    color: #66ae1f;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+}
+  
+.editBtn:hover {
+    color: #9ae2b6;
+}
+  
+.deleteBtn {
+    color: #f87171;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+}
+  
+.deleteBtn:hover {
+    color: #fca5a5;
+}
+  
