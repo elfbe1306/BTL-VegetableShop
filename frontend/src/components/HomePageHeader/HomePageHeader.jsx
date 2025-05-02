@@ -35,6 +35,10 @@ const HomePageHeader = () => {
 
 	const navigate = useNavigate();
 
+	const handleClick = () => {
+		navigate('/profile');
+	};
+
 	const handleLogout = async (e) => {
 		e.preventDefault();
 
@@ -105,7 +109,7 @@ const HomePageHeader = () => {
 				</div>
 
 				<div className={styles.userActions}>
-					<span className="material-symbols-outlined favorite-icon">favorite</span>
+					<i className="ri-user-line favorite_icon" onClick={handleClick} style={{ cursor: 'pointer' }}></i>
 					<span className={styles.divider}></span>
 					<Link className={styles.cart} to={`/cart`}>
 						<span className="material-symbols-outlined cart-icon">shopping_bag</span>

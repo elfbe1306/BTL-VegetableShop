@@ -85,6 +85,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         case 'counttotalreview':
             echo json_encode(CountTotalReview($conn));
             break;
+
+        case 'fetchcontact':
+            echo json_encode(FetchContact($conn));
+            break;
             
         default:
             http_response_code(404);
