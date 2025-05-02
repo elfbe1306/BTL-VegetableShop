@@ -189,15 +189,6 @@ class ApiService {
       return response.data;
     } catch(error) {
       console.error("Error Creating Order:", error);
-  async CreateQuestion(question, answer) {
-    try {
-      const response = await this.api.post('?action=createquestion', {
-        question,
-        answer
-      });
-      return response.data;
-    } catch (error) {
-      console.error("Error creating question:", error);
       throw error;
     }
   }
@@ -211,39 +202,6 @@ class ApiService {
       return response.data;
     } catch(error) {
       console.error("Error Creating Contact:", error);
-  async DeleteQuestion(questionID) {
-    try {
-      const res = await this.api.post('?action=deletequestion', { questionID });
-      return res.data;
-    } catch (err) {
-      console.error("Error deleting question:", err);
-      throw err;
-    }
-  }
-  
-  async UpdateQuestion(questionID, question, answer) {
-    try {
-      const res = await this.api.post('?action=updatequestion', { questionID, question, answer });
-      return res.data;
-    } catch (err) {
-      console.error("Error updating question:", err);
-      throw err;
-    }
-  }
-
-  async UpdateInfo(title_id, title, description, imgFile) {
-    try {
-      const formData = new FormData();
-      formData.append('title_id', title_id);
-      formData.append('title', title);
-      formData.append('description', description);
-      if (imgFile) formData.append('img', imgFile);
-  
-      const response = await this.api.post('?action=updateinfo', formData);
-  
-      return response.data;
-    } catch (error) {
-      console.error("Error updating info:", error);
       throw error;
     }
   }
@@ -254,29 +212,6 @@ class ApiService {
       return response.data;
     } catch(error) {
       console.error("Error fetching user name:", error);
-  async DeleteInfo(title_id) {
-    try {
-      const res = await this.api.post('?action=deleteinfo', { title_id });
-      return res.data;
-    } catch (err) {
-      console.error("Error deleting information:", err);
-      throw err;
-    }
-  }
-  
-  async AddTeam(name, role, imgFile) {
-    try {
-      const formData = new FormData();
-      formData.append("name", name);
-      formData.append("role", role);
-      if (imgFile) {
-        formData.append("img", imgFile);
-      }
-
-      const response = await this.api.post("?action=addteam", formData);
-      return response.data;
-    } catch (error) {
-      console.error("Error adding team member:", error);
       throw error;
     }
   }
@@ -308,30 +243,6 @@ class ApiService {
     } catch(error) {
       console.error("Error counting total review:", error);
       throw error;
-  async UpdateTeam(team_id, name, role, imgFile) {
-    try {
-      const formData = new FormData();
-      formData.append("team_id", team_id);
-      formData.append("name", name);
-      formData.append("role", role);
-      if (imgFile) {
-        formData.append("img", imgFile);
-      }
-      const response = await this.api.post("?action=updateteam", formData);
-      return response.data;
-    } catch (error) {
-      console.error("Error updating team member:", error);
-      throw error;
-    }
-  }  
-
-  async DeleteTeam(team_id) {
-    try {
-      const res = await this.api.post('?action=deleteteam', { team_id });
-      return res.data;
-    } catch (err) {
-      console.error("Error deleting team:", err);
-      throw err;
     }
   }
 }

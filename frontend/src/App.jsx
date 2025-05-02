@@ -12,12 +12,9 @@ import Checkout from './pages/Checkout/Checkout'
 import ContactPage from './pages/ContactPage/ContactPage'
 import InfoPage from './pages/InfoPage/InfoPage'
 import Question from './pages/Question/Question'
-
 import AdminDashboard from './pages/AdminDashboard/AdminDashboard'
 import AdminUsers from './pages/AdminAccount/AdminAccount'
 import UserProfile from './pages/UserProfile/UserProfile'
-import AdminFAQs from './pages/AdminFAQs/AdminFAQs'
-import AdminAbout from './pages/AdminAbout/AdminAbout'
 
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
 
@@ -38,16 +35,6 @@ function App() {
           </ProtectedRoute>
         }/>
 
-        <Route path="/admin/faqs" element={
-          <ProtectedRoute allowedRoles={['Admin']}>
-            <AdminFAQs />
-          </ProtectedRoute>
-        }/>
-        <Route path="/admin/about" element={
-          <ProtectedRoute allowedRoles={['Admin']}>
-            <AdminAbout />
-          </ProtectedRoute>
-        }/>
         <Route path="/vegetable" element={<ListProduct/>}/>
         <Route path="/vegetable/search/:searchText" element={<ListProduct/>} />
         <Route path="/blog" element={<BlogList/>} />
