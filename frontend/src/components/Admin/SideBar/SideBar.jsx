@@ -9,14 +9,14 @@ const SIDEBAR_ITEMS = [
   { name: "Account", icon: CircleUser, color: "#6366f1", href: "/admin/account" },
   { name: "Home", icon: House, color: "#FF8A00", href: "/admin/home" },
   { name: "Shop", icon: ShoppingBag, color: "#EA4B48", href: "/admin/products" },
-  { name: "FaQs", icon: CircleHelp, color: "#EC4899", href: "/users" },
+  { name: "FaQs", icon: CircleHelp, color: "#EC4899", href: "/admin/faqs" },
   { name: "Blog", icon: Newspaper, color: "#10B981", href: "/sales" },
-  { name: "About Us", icon: Users, color: "#F59E0B", href: "/orders" },
+  { name: "About Us", icon: Users, color: "#F59E0B", href: "/admin/about" },
   { name: "Contact Us", icon: Phone, color: "#3B82F6", href: "/analytics" },
 ];
 
 const Sidebar = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
     <motion.div
