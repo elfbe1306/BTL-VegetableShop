@@ -18,12 +18,18 @@ const Header = () => {
   };
   
   const location = useLocation();
+
   const getPageTitle = () => {
     const pathnames = location.pathname.split('/').filter(Boolean);
     const lastSegment = pathnames[pathnames.length - 1] || '';
+    const secondLastSegment = pathnames[pathnames.length - 2] || '';
 
     if (location.pathname.startsWith('/vegetable/') && productName) {
       return 'Vegetable/' + `${formatProductName(productName)}`;
+    }
+
+    if (location.pathname.startsWith('/blog/') && !isNaN(secondLastSegment)) {
+      return 'Single Post';
     }
 
     switch (lastSegment) {
@@ -42,12 +48,10 @@ const Header = () => {
       case 'singlepost':
         return 'Single Blog';
       default:
-        if (!isNaN(lastSegment)) {
-          return 'Single Blog';
-        }
         return lastSegment.charAt(0).toUpperCase() + lastSegment.slice(1) || 'Home';
     }
   };
+
 
   const [productCount, setProductCount] = useState(0);
   const [productPrice, setProductPrice] = useState(0);

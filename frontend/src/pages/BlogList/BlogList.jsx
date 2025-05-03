@@ -91,6 +91,7 @@ function BlogList() {
                                 author={p.author_name}
                                 comments={p.comments || 0}     
                                 title={p.title}
+                                slug={p.slug}
                         />
                         ))}
                     </div>
