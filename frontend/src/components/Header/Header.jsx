@@ -89,6 +89,10 @@ const Header = () => {
     navigate(`/vegetable/search/${searchText}`)
   }
 
+  const handleClick = () => {
+		navigate('/profile');
+	};
+
   return (
     <header className="header">
       <div className="top-bar">
@@ -139,7 +143,7 @@ const Header = () => {
           <button className="search-button" onClick={handleSearching}>Search</button>
         </div>
         <div className="user-actions">
-          <span className="material-symbols-outlined favorite_icon">favorite</span>
+          <i className="ri-user-line favorite_icon" onClick={handleClick} style={{ cursor: 'pointer' }}></i>
           <span className="divider"></span>
             <Link className="cart" to={'/cart'}>
               <span className="material-symbols-outlined cart-icon">shopping_bag</span>

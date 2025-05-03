@@ -343,6 +343,26 @@ class ApiService {
       throw err;
     }
   }
+
+  async FetchContact() {
+    try {
+      const response = await this.api.get('?action=fetchcontact');
+      return response.data;
+    } catch(error) {
+      console.error("Error fetching team:", error);
+      throw error;
+   }
+  }
+
+  async CountTotalSale() {
+    try {
+      const response = await this.api.get('?action=counttotalsale');
+      return response.data;
+    } catch(error) {
+      console.error("Error counting total sale:", error);
+      throw error;
+    }
+  }
 }
 
 

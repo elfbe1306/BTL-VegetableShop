@@ -60,4 +60,29 @@ function CreateCustomerOrder($conn, $jwtToken, $userAddress, $orderItem) {
   return $order_response;
 }
 
+function CountTotalSale($conn) {
+    $sql = "SELECT 
+    SUM(total_price) as total_sale
+    FROM orders";
+
+    $result = $conn->query($sql);
+
+    if ($result && $result->num_rows > 0) {
+        $contacts = [];
+        while ($row = $result->fetch_assoc()) {
+            $contacts[] = $row;
+        }
+        return array(
+            "message" => "Fetched total sale successfully",
+            "success" => true,
+            "data" => $contacts
+        );
+    } else {
+        return array(
+            "message" => "No order to count",
+            "success" => false
+        );
+    }
+}
+
 ?>

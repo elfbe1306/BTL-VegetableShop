@@ -56,4 +56,33 @@ function FetchUserName($conn, $jwtToken) {
         return array("error" => $stmt->error, "success" => false);
     }
 }
+
+function FetchContact($conn) {
+    $sql = "SELECT 
+                useraccount.name, 
+                contacts.phonenum, 
+                contacts.subject, 
+                contacts.content
+            FROM contacts
+            INNER JOIN useraccount ON contacts.customer_id = useraccount.id";
+
+    $result = $conn->query($sql);
+
+    if ($result && $result->num_rows > 0) {
+        $contacts = [];
+        while ($row = $result->fetch_assoc()) {
+            $contacts[] = $row;
+        }
+        return array(
+            "message" => "Fetched contacts successfully",
+            "success" => true,
+            "data" => $contacts
+        );
+    } else {
+        return array(
+            "message" => "No contact found",
+            "success" => false
+        );
+    }
+}
 ?>

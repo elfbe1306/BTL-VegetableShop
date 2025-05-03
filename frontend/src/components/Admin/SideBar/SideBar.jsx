@@ -12,7 +12,7 @@ const SIDEBAR_ITEMS = [
   { name: "FaQs", icon: CircleHelp, color: "#EC4899", href: "/admin/faqs" },
   { name: "Blog", icon: Newspaper, color: "#10B981", href: "/sales" },
   { name: "About Us", icon: Users, color: "#F59E0B", href: "/admin/about" },
-  { name: "Contact Us", icon: Phone, color: "#3B82F6", href: "/analytics" },
+  { name: "Contact Us", icon: Phone, color: "#3B82F6", href: "/admin/contact" },
 ];
 
 const Sidebar = () => {
