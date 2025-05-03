@@ -367,7 +367,7 @@ class ApiService {
   async UpdateProductByID(productData, imageFiles) {
     try {
       const formData = new FormData();
-      formData.append("id", productData.id);
+      formData.append("id", productData.product_id);
       formData.append("name", productData.name);
       formData.append("price", productData.price);
       formData.append("quantity", productData.quantity);

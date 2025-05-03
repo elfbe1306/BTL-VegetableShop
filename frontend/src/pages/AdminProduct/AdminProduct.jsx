@@ -49,6 +49,15 @@ const AdminProduct = () => {
       setIsEditProductModalOpen(false);
     };
 
+    const handleSaveProduct = (updatedProduct) => {
+      setProducts((prevProducts) =>
+        prevProducts.map((product) =>
+          product.product_id === updatedProduct.product_id ? updatedProduct : product
+        )
+      );
+    };
+
+
     return (
     <div className={styles.BigWrapper}>
       <SideBar/>
@@ -125,7 +134,7 @@ const AdminProduct = () => {
         )}
 
         {isEditProductModalOpen && (
-          <EditProductModal product={selectedEditProduct} onClose={handleCloseEditProductModal}/>
+          <EditProductModal product={selectedEditProduct} onClose={handleCloseEditProductModal} onSave={handleSaveProduct}/>
         )}
       </div>
     </div>

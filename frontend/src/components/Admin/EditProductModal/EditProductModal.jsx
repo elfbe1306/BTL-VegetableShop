@@ -3,7 +3,7 @@ import styles from './EditProductModal.module.css';
 import CloseIcon from "../../../assets/icons/CloseIcon";
 import apiService from "../../../api";
 
-const EditProductModal = ({ product, onClose }) => {
+const EditProductModal = ({ product, onClose, onSave }) => {
   const [name, setName] = useState(product.name);
   const [price, setPrice] = useState(product.price);
   const [description, setDescription] = useState(product.description);
@@ -24,7 +24,7 @@ const EditProductModal = ({ product, onClose }) => {
       setImages(newImages);
   
       const newImageFiles = [...imageFiles];
-      newImageFiles[index] = file; // just use the original file
+      newImageFiles[index] = file;
       setImageFiles(newImageFiles);
     } else {
       alert("Please upload a .png image file.");
@@ -33,7 +33,8 @@ const EditProductModal = ({ product, onClose }) => {
 
   const handleSave = async () => {
     const updatedProduct = {
-      id: product.product_id,
+      product_id: product.product_id,
+      discount_percentage: product.discount_percentage,
       name,
       price,
       quantity,
@@ -45,20 +46,14 @@ const EditProductModal = ({ product, onClose }) => {
     console.log(response)
     console.log(images)
 
-    // if (response.success) {
-    //   const updatedImageBase = `http://localhost/BTL-VegetableShop/backend/uploads/products/${response.pathName}`;
-      
-    //   setImages([
-    //     `${updatedImageBase + "1.png"}`,
-    //     `${updatedImageBase + "2.png"}`,
-    //     `${updatedImageBase + "3.png"}`
-    //   ]);      
-
-    //   setTimeout(() => {
-    //     console.log(images)
-    //     onClose();
-    //   }, 300);
-    // }
+    if (response.success) {
+      // Pass the updated product back to AdminProduct
+      updatedProduct.image = response.imagePath;
+      onSave(updatedProduct); 
+      setTimeout(() => {
+        onClose();
+      }, 300);
+    }
   }
 
   return (
