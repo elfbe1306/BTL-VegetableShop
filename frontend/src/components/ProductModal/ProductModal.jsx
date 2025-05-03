@@ -52,12 +52,6 @@ const ProductModal = ({ product, onClose, mode = "modal" }) => {
         }
     };
 
-    // Delete useEffect nay
-    // useEffect(() => {
-    //     console.log("Cart Items:", cartItems);
-    // }, [cartItems]);
-      
-
     return (
         <div className={mode === "modal" ? styles.overlay : styles.inlineWrapper}>
             <div className={mode === "modal" ? styles.modal : styles.inlineBox}>
@@ -76,7 +70,7 @@ const ProductModal = ({ product, onClose, mode = "modal" }) => {
                         </div>
                     </div>
                     <div className={styles.rightContainer} style={{marginRight: '30px'}}>
-                        <h2>{product.name}</h2>
+                        <h2 style={{color: 'black'}}>{product.name}</h2>
                         <div className={styles.rating}>
                             {[...Array(5)].map((_, i) => {
                             const currentStar = i + 1;
@@ -100,7 +94,6 @@ const ProductModal = ({ product, onClose, mode = "modal" }) => {
                             <p className={styles.product_price}>${product.price}</p>
                         )}
                         </div>
-                        {/* <p className={styles.price}>Price: <span className={styles.priceValue}>${productPrice}</span></p> */}
                         <p className={styles.description}>{product.description}</p>
                         <div className={styles.quantitycomponent}>
                           <div className={styles.quantitycontainer}>

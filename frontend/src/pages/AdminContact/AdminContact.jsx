@@ -27,7 +27,7 @@ const AdminContact = () => {
             <div className={styles.BigWrapper}>
                 <SideBar/>
                 <div className={styles.Wrapper}>
-                        <Header title='Contact Us' />
+                    <Header title='Contact Us' />
 
                     <main className={styles.main}>
                     <motion.div
@@ -74,7 +74,7 @@ const AdminContact = () => {
                             ))}
                             </tbody>
                         </table>
-                        </div>
+                    </div>
                     </motion.div>
                     
                     </main>
