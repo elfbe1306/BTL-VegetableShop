@@ -123,30 +123,60 @@ function UpdateProduct($conn, $data, $files) {
     $price = floatval($data['price']);
     $quantity = intval($data['quantity']);
     $description = trim($data['description']);
+    $oldname = trim($data['oldname']);
 
     $ProductPathName = preg_replace('/\s+/', '', $name);
-    $uploadDir = 'uploads/products/' . $ProductPathName;
+    $OldPathName = preg_replace('/\s+/', '', $oldname);
 
+    $baseDir = 'uploads/products/';
+    $oldFolder = $baseDir . $OldPathName;
+    $newFolder = $baseDir . $ProductPathName;
+
+    // Step 1: Rename folder if needed
+    if ($ProductPathName !== $OldPathName && is_dir($oldFolder)) {
+        rename($oldFolder, $newFolder);
+
+        // Step 2: Rename images inside the folder
+        for ($i = 1; $i <= 3; $i++) {
+            $oldImage = $newFolder . '/' . $OldPathName . $i . '.png';
+            $newImage = $newFolder . '/' . $ProductPathName . $i . '.png';
+
+            if (file_exists($oldImage)) {
+                rename($oldImage, $newImage);
+            }
+        }
+    } else {
+        // Make sure the folder exists if it's new
+        if (!is_dir($newFolder)) {
+            mkdir($newFolder, 0777, true);
+        }
+    }
+
+    // Step 3: Handle uploaded images
     for ($i = 1; $i <= 3; $i++) {
         $key = 'image' . $i;
-    
+
         if (isset($files[$key]) && $files[$key]['error'] === UPLOAD_ERR_OK) {
             $tmpName = $files[$key]['tmp_name'];
             $fileName = $ProductPathName . $i . '.png';
-            $destination = $uploadDir . '/' . $fileName;
+            $destination = $newFolder . '/' . $fileName;
 
-            // Overwrite the file
-            if (move_uploaded_file($tmpName, $destination)) {
-                // Success
-            } else {
+            if (!move_uploaded_file($tmpName, $destination)) {
                 echo "Failed to move file: $tmpName to $destination<br>";
                 echo "Is tmpName readable? " . (is_readable($tmpName) ? "Yes" : "No") . "<br>";
-                echo "Does destination dir exist? " . (is_dir($uploadDir) ? "Yes" : "No") . "<br>";
-                echo "Is destination writable? " . (is_writable($uploadDir) ? "Yes" : "No") . "<br>";
+                echo "Does destination dir exist? " . (is_dir($newFolder) ? "Yes" : "No") . "<br>";
+                echo "Is destination writable? " . (is_writable($newFolder) ? "Yes" : "No") . "<br>";
             }
-            
         }
     }
+
+    // Step 4: Update database
+    $imagePath = $ProductPathName . '/' . $ProductPathName;
+    $stmt = $conn->prepare("UPDATE products SET name=?, price=?, quantity=?, image=?, description=? WHERE id=?");
+    $stmt->bind_param("sdissi", $name, $price, $quantity, $imagePath, $description, $id);
+    $stmt->execute();
+
+    return ["success" => true, "message" => "Product updated successfully", "imagePath" => $imagePath];
 }
 
 

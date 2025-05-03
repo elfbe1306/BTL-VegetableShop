@@ -23,17 +23,13 @@ const EditProductModal = ({ product, onClose }) => {
       newImages[index] = URL.createObjectURL(file);
       setImages(newImages);
   
-      const renamedFile = new File([file], `${name.replace(/\s+/g, '')}${index + 1}.png`, {
-        type: "image/png",
-      });
-  
       const newImageFiles = [...imageFiles];
-      newImageFiles[index] = renamedFile;
+      newImageFiles[index] = file; // just use the original file
       setImageFiles(newImageFiles);
     } else {
       alert("Please upload a .png image file.");
     }
-  };
+  };  
 
   const handleSave = async () => {
     const updatedProduct = {
@@ -42,10 +38,27 @@ const EditProductModal = ({ product, onClose }) => {
       price,
       quantity,
       description,
+      oldname: product.name
     };
 
     const response = await apiService.UpdateProductByID(updatedProduct, imageFiles);
     console.log(response)
+    console.log(images)
+
+    // if (response.success) {
+    //   const updatedImageBase = `http://localhost/BTL-VegetableShop/backend/uploads/products/${response.pathName}`;
+      
+    //   setImages([
+    //     `${updatedImageBase + "1.png"}`,
+    //     `${updatedImageBase + "2.png"}`,
+    //     `${updatedImageBase + "3.png"}`
+    //   ]);      
+
+    //   setTimeout(() => {
+    //     console.log(images)
+    //     onClose();
+    //   }, 300);
+    // }
   }
 
   return (

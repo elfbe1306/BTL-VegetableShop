@@ -372,6 +372,7 @@ class ApiService {
       formData.append("price", productData.price);
       formData.append("quantity", productData.quantity);
       formData.append("description", productData.description);
+      formData.append("oldname", productData.oldname);
 
       imageFiles.forEach((file, index) => {
         if (file) {
