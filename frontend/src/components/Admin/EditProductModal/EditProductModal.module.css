@@ -13,7 +13,7 @@
 
 .modal {
   background: #fff;
-  padding: 24px;
+  padding: 48px;
   border-radius: 12px;
   width: 50%;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
@@ -22,12 +22,70 @@
 
 .insertContainer {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 5fr;
   margin-top: 15px;
 }
 
 .insertContainer p {
   color: black;
+  font-size: 14px;
+}
+
+.insertContainer input {
+  border: 1px solid black;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-size: 14px;
+}
+
+.insertContainer textarea {
+  resize: vertical;
+  overflow-y: auto;
+  min-height: 125px;
+  border: 1px solid black;
+  font-size: 14px;
+}
+
+.insertPicContainer p {
+  color: black;
+  font-size: 14px;
+  margin-top: 0;
+}
+
+.PicContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  justify-items: center;
+}
+
+.productImage {
+  width: 150px;
+  height: 150px;
+}
+
+.PicUploadContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.PicUploadContainer input {
+  color: black;
+}
+
+.SaveButton {
+  border: none;
+  color: white;
+  border-radius: 10px;
+  padding: 10px 40px;
+  background-color: rgb(0, 178, 7);
+}
+
+.SaveButtonContainer {
+  display: flex;
+  justify-content: end;
+  margin-top: 30px;
 }
 
 .closeButton {

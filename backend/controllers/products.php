@@ -117,5 +117,37 @@ function CountTotalProduct($conn) {
     }
 }
 
+function UpdateProduct($conn, $data, $files) {
+    $id = (int) $data['id'];
+    $name = trim($data['name']);
+    $price = floatval($data['price']);
+    $quantity = intval($data['quantity']);
+    $description = trim($data['description']);
+
+    $ProductPathName = preg_replace('/\s+/', '', $name);
+    $uploadDir = 'uploads/products/' . $ProductPathName;
+
+    for ($i = 1; $i <= 3; $i++) {
+        $key = 'image' . $i;
+    
+        if (isset($files[$key]) && $files[$key]['error'] === UPLOAD_ERR_OK) {
+            $tmpName = $files[$key]['tmp_name'];
+            $fileName = $ProductPathName . $i . '.png';
+            $destination = $uploadDir . '/' . $fileName;
+
+            // Overwrite the file
+            if (move_uploaded_file($tmpName, $destination)) {
+                // Success
+            } else {
+                echo "Failed to move file: $tmpName to $destination<br>";
+                echo "Is tmpName readable? " . (is_readable($tmpName) ? "Yes" : "No") . "<br>";
+                echo "Does destination dir exist? " . (is_dir($uploadDir) ? "Yes" : "No") . "<br>";
+                echo "Is destination writable? " . (is_writable($uploadDir) ? "Yes" : "No") . "<br>";
+            }
+            
+        }
+    }
+}
+
 
 ?>
