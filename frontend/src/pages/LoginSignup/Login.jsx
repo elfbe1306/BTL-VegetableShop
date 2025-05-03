@@ -10,15 +10,21 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await apiService.Login({email: email, password: password})
+        const response1 = await apiService.Login({email: email, password: password});
         
-        if(response.permission) {
-            localStorage.setItem("userID", response.userID);
-            navigate('/');
+        const response2 = await apiService.CheckRole(response1.userID);
+
+        if(response1.permission) {
+            localStorage.setItem("userID", response1.userID);
+            if(response2.role === "Admin") {
+                navigate('/admin');
+            } else {
+                navigate('/');
+            }
         }
 
-        if(!response.permission) {
-            alert(response.message);
+        if(!response1.permission) {
+            alert(response1.message);
         }
     };
 
