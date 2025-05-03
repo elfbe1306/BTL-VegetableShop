@@ -363,6 +363,19 @@ class ApiService {
       throw error;
     }
   }
+
+  async getUserInfo(userID) {
+    try {
+      const response = await this.api.post('?action=getuserinfo', { userID: userID});
+      return response.data;
+    } catch(error) {
+      console.error("Error fetching:", error.response);
+      throw error;
+    }
+  }
+  
+  //update password
+  
 }
 
 

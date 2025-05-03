@@ -5,18 +5,23 @@ import styles from '../../pages/UserProfile/UserProfile.module.css'
 import apiService from '../../api';
 
 const UserProfile = () => {
-    const [user, setUser] = useState({ name: '', email: '' })
+    const [accountData, setaccountData] = useState([]);
     const [showPasswordForm, setShowPasswordForm] = useState(false)
     const [newPassword, setNewPassword] = useState('')
 
     useEffect(() => {
-        // Replace this with real API/user context
-        const storedUser = JSON.parse(localStorage.getItem('user')) || {
-        name: 'John Doe',
-        email: 'john@example.com'
-        }
-        setUser(storedUser)
-    }, [])
+        const fetchData = async () => {
+          try {
+            const userID = localStorage.getItem("userID")
+            const response = await apiService.getUserInfo(userID);
+            setaccountData(response);
+            console.log(response)
+          } catch (error) {
+            console.error('Failed to fetch account data:', error);
+          }
+        };
+        fetchData();
+      }, []);
 
     const handlePasswordChange = (e) => {
         e.preventDefault()
@@ -38,11 +43,11 @@ const UserProfile = () => {
                 <div className={styles.infobox}>
                     <div className={styles.info}>
                         <div className={styles.avatar}>
-                            {user.name.charAt(0)}
+                            {accountData.name?.charAt(0)}
                         </div>
                         <div>
-                            <p><strong>Name:</strong> {user.name}</p>
-                            <p><strong>Email:</strong> {user.email}</p>
+                            <p><strong>Name: </strong>{accountData.name}</p>
+                            <p><strong>Email: </strong>{accountData.email}</p>
                         </div>
                     </div>
                 

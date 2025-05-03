@@ -136,5 +136,43 @@ function CountTotalUser($conn) {
         return 0;
     }
 }
+
+function getUserInfo($conn, $jwtToken) {
+    $key = "congabietgay";
+
+    try {
+        $decoded = JWT::decode($jwtToken, new Key($key, 'HS256'));
+        $userID = $decoded->userId ?? null;
+
+        if (!$userID) {
+            return ["error" => "Invalid token"];
+        }
+
+        $sql = "SELECT name, email FROM userAccount WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+
+        if ($stmt === false) {
+            return ["error" => "Unable to prepare statement"];
+        }
+
+        $stmt->bind_param('i', $userID);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($user = $result->fetch_assoc()) {
+            return [
+                "name" => $user['name'],
+                "email" => $user['email']
+            ];
+        } else {
+            return ["error" => "User not found"];
+        }
+    } catch (Exception $e) {
+        return ["error" => "Token decode failed: " . $e->getMessage()];
+    }
+}
+
+//ham update password
+
     
 ?>

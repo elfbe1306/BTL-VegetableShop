@@ -312,8 +312,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo json_encode(["error" => "Missing team id"]);
             }
             break;
-                    
-            
+
+        case 'getuserinfo':
+            if (isset($data['userID'])) {
+                echo json_encode(getUserInfo($conn, $data['userID']));
+            } else {
+                http_response_code(400);
+                echo json_encode(["error" => "Missing token"]);
+            }
+            break;
+ 
         default:
             http_response_code(404);
             echo json_encode(["error" => "Invalid route"]);
