@@ -78,13 +78,18 @@ class ApiService {
     return data; 
   }
 
+  async fetchAllComments() {
+    const { data } = await this.api.get(`?action=fetchallcomments`);
+    if (data.error) throw new Error(data.error);
+    return data;
+  }  
+
   async fetchCommentCount(postId) {
     const { data } = await this.api.get(`?action=fetchcommentcount&postId=${postId}`);
     if (data.error) throw new Error(data.error);
     return data.count;
   }
   
-
   async postComment(postId, token, message) {
     const { data } = await this.api.post(`?action=postcomment`, {
       postId, token, message
@@ -92,6 +97,12 @@ class ApiService {
     if (data.error) throw new Error(data.error);
     return data;
   }
+
+  async deleteComment(commentId) {
+    const { data } = await this.api.post(`?action=deletecomment`, { id: commentId });
+    if (data.error) throw new Error(data.error);
+    return data;
+  }  
 
   async FetchReview() {
     try {

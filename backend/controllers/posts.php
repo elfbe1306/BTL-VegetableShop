@@ -45,7 +45,7 @@ function fetchPostList($conn, int $limit = 8, int $offset = 0): array {
       ON p.author_id = u.id
     LEFT JOIN images img
       ON p.cover_image_id = img.id
-    ORDER BY p.created_at DESC
+    ORDER BY p.id ASC
     LIMIT ? OFFSET ?
   ";
 
@@ -185,6 +185,21 @@ function createPost(mysqli $conn, array $postData, ?array $file = null): array {
     http_response_code(400);
     return ["error" => "Missing required fields"];
   }
+  if (strlen($title) > 100) {
+    http_response_code(400);
+    return ["error" => "Title must be 100 characters or fewer"];
+  }
+
+  if (!preg_match('/^[a-z0-9-]+$/', $slug)) {
+    http_response_code(400);
+    return ["error" => "Slug must only contain lowercase letters, numbers, and hyphens"];
+  }
+
+  if (strlen($slug) > 100) {
+    http_response_code(400);
+    return ["error" => "Slug must be 100 characters or fewer"];
+  }
+
 
   $cover_image_id = null;
   if ($file && isset($file['cover_image'])) {
@@ -213,6 +228,20 @@ function updatePost(mysqli $conn, int $id, array $postData, ?array $file = null)
   if ($id < 1 || !$title || !$slug || !$content || $author_id < 1) {
     http_response_code(400);
     return ["error" => "Missing or invalid data"];
+  }
+  if (strlen($title) > 100) {
+    http_response_code(400);
+    return ["error" => "Title must be 100 characters or fewer"];
+  }
+
+  if (!preg_match('/^[a-z0-9-]+$/', $slug)) {
+    http_response_code(400);
+    return ["error" => "Slug must only contain lowercase letters, numbers, and hyphens"];
+  }
+
+  if (strlen($slug) > 100) {
+    http_response_code(400);
+    return ["error" => "Slug must be 100 characters or fewer"];
   }
 
   $cover_image_id = null;
@@ -288,6 +317,30 @@ function fetchComments(mysqli $conn, int $postId): array {
   $stmt->bind_param("i", $postId);
   $stmt->execute();
   $res = $stmt->get_result();
+
+  $out = [];
+  while ($row = $res->fetch_assoc()) {
+    $out[] = $row;
+  }
+  return $out;
+}
+
+function fetchAllComments(mysqli $conn): array {
+  $sql = "
+    SELECT 
+      c.id,
+      c.message,
+      c.created_at,
+      u.name     AS user_name,
+      u.id       AS user_id,
+      c.post_id,
+      p.title    AS post_title
+    FROM comments c
+    JOIN useraccount u ON c.user_id = u.id
+    JOIN posts p       ON c.post_id = p.id
+    ORDER BY c.created_at ASC
+  ";
+  $res = $conn->query($sql);
 
   $out = [];
   while ($row = $res->fetch_assoc()) {

@@ -54,7 +54,7 @@ export default function AdminPostForm({ mode }) {
   };
 
   return (
-    <div className="card">
+    <div className="card m-5">
       <div className="card-header">
         <h4>{isEdit ? 'Edit Post' : 'Create New Post'}</h4>
       </div>
@@ -62,7 +62,7 @@ export default function AdminPostForm({ mode }) {
         {error && <p className="text-danger">{error}</p>}
         <form onSubmit={handleSubmit} encType="multipart/form-data">
           <div className="mb-3">
-            <label className="form-label">Title</label>
+            <label className="form-label">Title<span className="text-danger">*</span></label>
             <input
               type="text"
               name="title"
@@ -81,12 +81,11 @@ export default function AdminPostForm({ mode }) {
               value={form.slug}
               onChange={handleChange}
               className="form-control"
-              required
             />
           </div>
 
           <div className="mb-3">
-            <label className="form-label">Content</label>
+            <label className="form-label">Content<span className="text-danger">*</span></label>
             <textarea
               name="content"
               rows="6"

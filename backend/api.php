@@ -79,6 +79,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             echo json_encode(fetchComments($conn, $postId));
             break;
 
+        case 'fetchallcomments':
+            echo json_encode(fetchAllComments($conn));
+            break;
+
         case 'fetchcommentcount':
             $postId = isset($_GET['postId']) ? (int)$_GET['postId'] : 0;
             if ($postId < 1) {
@@ -364,7 +368,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo json_encode(postComment($conn, $postId, $userId, $message));
             break;
         
-        
+        case 'deletecomment':
+            $input = json_decode(file_get_contents("php://input"), true);
+            $id = (int)($input['id'] ?? 0);
+            $stmt = $conn->prepare("DELETE FROM comments WHERE id = ?");
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+            echo json_encode(['success' => true]);
+            break;
+              
         default:
         http_response_code(404);
         echo json_encode(["error" => "Invalid route"]);

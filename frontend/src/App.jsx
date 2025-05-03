@@ -22,6 +22,7 @@ import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
 import AdminBlog from './pages/AdminBlog/AdminBlog'
 import AdminCreatePost from './pages/AdminBlog/AdminCreatePost'
 import AdminEditPost from './pages/AdminBlog/AdminEditPost'
+import AdminComment from './pages/AdminComment/AdminComment'
 
 function App() {
   return (
@@ -67,7 +68,7 @@ function App() {
         }/>
         <Route path="/admin/comment" element={
           <ProtectedRoute allowedRoles={['Admin']}>
-            <AdminAbout />
+            <AdminComment />
           </ProtectedRoute>
         }/>
         <Route path="/vegetable" element={<ListProduct/>}/>
