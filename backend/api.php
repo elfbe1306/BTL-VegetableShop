@@ -264,7 +264,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo json_encode(["error" => "Missing team id"]);
             }
             break;
-                    
+                
+        case 'deleteUser':
+            if (isset($data['id'])) {
+                echo json_encode(deleteUserAccount($conn, (int)$data['id']));
+            } else {
+                http_response_code(400);
+                echo json_encode(["error" => "Missing user id"]);
+            }
+            break;
             
         default:
             http_response_code(404);

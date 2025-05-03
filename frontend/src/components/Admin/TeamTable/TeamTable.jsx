@@ -82,7 +82,12 @@ const UsersTable = () => {
                 </td>
 
                 <td className={styles.td}>
-                  <button className={styles.deleteBtn}>Delete</button>
+                  <button className={styles.deleteBtn}                            onClick={async () => {
+                                if (window.confirm("Are you sure you want to delete this teammate information?")) {
+                                await apiService.DeleteTeam(user.team_id);
+                                setFilteredUsers(await apiService.FetchTeam());
+                                }
+                            }}>Delete</button>
                 </td>
               </motion.tr>
             ))}

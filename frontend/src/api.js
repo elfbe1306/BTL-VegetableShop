@@ -282,6 +282,16 @@ class ApiService {
       throw err;
     }
   }
+
+  async DeleteUserAccount(id) {
+    try {
+      const res = await this.api.post('?action=deleteUser', { id });
+      return res.data;
+    } catch (err) {
+      console.error("Error deleting user account:", err);
+      throw err;
+    }
+  }
 }
 
 
