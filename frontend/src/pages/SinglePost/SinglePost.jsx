@@ -4,8 +4,8 @@ import apiService from '../../api';
 import Header from '../../components/Header/Header';
 import Sidebar from '../../components/BlogSidebar/Sidebar';
 import Footer from '../../components/Footer/Footer';
-import Comment from '../../components/Comment/Comment'
 import '../SinglePost/singlepost.css';
+import CommentSection from '../../components/Comment/Comment';
 
 
 export default function SinglePost() {
@@ -14,17 +14,24 @@ export default function SinglePost() {
   const [post, setPost]       = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError]     = useState('');
+  const [commentCount, setCommentCount] = useState(0);
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
   
 
   useEffect(() => {
+    setLoading(true);
     apiService
       .fetchPostById(postId)
-      .then(data => setPost(data))
+      .then(data => {
+        setPost(data);
+        return apiService.fetchCommentCount(postId);
+      })
+      .then(count => setCommentCount(count))
       .catch(err => setError(err.message))
       .finally(() => setLoading(false));
   }, [postId]);
+  
 
   if (loading) {
     return (
@@ -71,7 +78,6 @@ export default function SinglePost() {
   const formattedDate = new Date(post.created_at)
     .toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
 
-
   return (
     <>
       <Header />
@@ -101,7 +107,7 @@ export default function SinglePost() {
                 </div>
                 <div className="cmt">
                     <span className="material-symbols-outlined">chat_bubble</span>
-                    <span>{post.comments || 0} Comments</span>
+                    <span>{commentCount} Comments</span>
                 </div>          
             
             </div>
@@ -126,7 +132,7 @@ export default function SinglePost() {
 
             <div className="post_content" dangerouslySetInnerHTML={{ __html: post.content }}/>
 
-            <Comment/>
+            <CommentSection postId={post.id}/>
           
         </div>
         <div className="sidebar_drawer">

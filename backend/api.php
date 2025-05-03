@@ -74,6 +74,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 echo json_encode(searchPosts($conn, $query));
             }
             break;
+        case 'fetchcomments':
+            $postId = (int)($_GET['postId'] ?? 0);
+            echo json_encode(fetchComments($conn, $postId));
+            break;
+
+        case 'fetchcommentcount':
+            $postId = isset($_GET['postId']) ? (int)$_GET['postId'] : 0;
+            if ($postId < 1) {
+                http_response_code(400);
+                echo json_encode(["error" => "Invalid postId"]);
+                break;
+            }
+            $stmt = $conn->prepare("SELECT COUNT(*) as count FROM comments WHERE post_id = ?");
+            $stmt->bind_param("i", $postId);
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_assoc();
+            echo json_encode(["count" => (int)$result['count']]);
+            break;
+
         case 'fetchquestions':
             echo json_encode(fetchQuestions($conn));
             break;
@@ -324,12 +343,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
             echo json_encode(["success" => true]);
             break;
-            
-            
-            
+        
+        case 'postcomment':
+            $data = json_decode(file_get_contents("php://input"), true);
+            $jwtToken = $data['token'] ?? null;
+
+            if (!$jwtToken) {
+                http_response_code(401);
+                echo json_encode(["error" => "Missing token"]);
+                exit;
+            }
+            $userId = decodeJwtUserId($jwtToken);
+            if (!$userId) {
+              http_response_code(401);
+              echo json_encode(["error"=>"Invalid token"]);
+              exit;
+            }
+            $postId  = (int)($data['postId']  ?? 0);
+            $message = trim($data['message'] ?? '');
+            echo json_encode(postComment($conn, $postId, $userId, $message));
+            break;
+        
+        
         default:
-            http_response_code(404);
-            echo json_encode(["error" => "Invalid route"]);
+        http_response_code(404);
+        echo json_encode(["error" => "Invalid route"]);
     }
 }
 

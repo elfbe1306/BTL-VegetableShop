@@ -1,4 +1,6 @@
 <?php
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 
 function fetchPostById($conn, int $postId) {
     $sql = "
@@ -162,7 +164,6 @@ function handleImageUpload(array $file): ?int {
 
   $filepath = 'postsImg/' . $filename;
 
-  // Insert into images table
   global $conn;
   $stmt = $conn->prepare("INSERT INTO images (file_name) VALUES (?)");
   $stmt->bind_param("s", $filepath);
@@ -234,18 +235,65 @@ function updatePost(mysqli $conn, int $id, array $postData, ?array $file = null)
 }
 
 function slugify(string $text): string {
-  // Convert to ASCII
   $text = iconv('UTF-8', 'ASCII//TRANSLIT', $text);
-  // Replace non letter or digits by -
   $text = preg_replace('~[^\\pL\d]+~u', '-', $text);
-  // Trim
   $text = trim($text, '-');
-  // Lowercase
   $text = strtolower($text);
-  // Remove unwanted characters
   $text = preg_replace('~[^-\w]+~', '', $text);
-  return $text ?: uniqid('post-'); // fallback
+  return $text ?: uniqid('post-'); 
 }
 
+function decodeJwtUserId($jwtToken): ?int {
+  $key = "congabietgay";             
+  try {
+      $decoded = JWT::decode($jwtToken, new Key($key, 'HS256'));
+      return property_exists($decoded, 'userId')
+           ? (int)$decoded->userId
+           : null;
+  } catch (\Exception $e) {
+      return null;
+  }
+}
+
+function postComment(mysqli $conn, int $postId, int $userId, string $message): array {
+  // server‐side validation
+  if ($postId < 1 || $userId < 1 || trim($message) === "") {
+    http_response_code(400);
+    return ["error" => "Invalid input"];
+  }
+  $stmt = $conn->prepare("
+    INSERT INTO comments (post_id, user_id, message, created_at)
+    VALUES (?, ?, ?, NOW())
+  ");
+  $stmt->bind_param("iis", $postId, $userId, $message);
+  $stmt->execute();
+  return ["success" => true, "comment_id" => $stmt->insert_id];
+}
+
+function fetchComments(mysqli $conn, int $postId): array {
+  $sql = "
+    SELECT
+      c.id,
+      c.message,
+      c.created_at,
+      u.name    AS user_name,
+      u.id      AS user_id
+    FROM comments c
+    JOIN useraccount u
+      ON c.user_id = u.id
+    WHERE c.post_id = ?
+    ORDER BY c.created_at DESC
+  ";
+  $stmt = $conn->prepare($sql);
+  $stmt->bind_param("i", $postId);
+  $stmt->execute();
+  $res = $stmt->get_result();
+
+  $out = [];
+  while ($row = $res->fetch_assoc()) {
+    $out[] = $row;
+  }
+  return $out;
+}
 
 ?>

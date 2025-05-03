@@ -20,27 +20,35 @@ function BlogList() {
     const uploadsBase = apiService.api.defaults.baseURL.replace('api.php', 'uploads');
   
     useEffect(() => {
-        setLoading(true);
-        const fetch = query
-          ? apiService.searchPosts(query)
-          : apiService.fetchPostList(page, 8);
-      
-        fetch
-          .then((data) => {
-            if (query) {
-              setPosts(data);        
-              setTotalPosts(data.length);
-            } else {
-              setPosts(data.posts);  
-              setTotalPosts(data.totalPosts); 
-            }
-            setError("");
-          })
-          .catch(err => {
-            console.error(err);
-            setError("Could not load posts.");
-          })
-          .finally(() => setLoading(false));
+      setLoading(true);
+      const fetch = query
+        ? apiService.searchPosts(query)
+        : apiService.fetchPostList(page, 8);
+    
+      fetch
+        .then(async (data) => {
+          let rawPosts = query ? data : data.posts;
+          const postsWithCounts = await Promise.all(
+            rawPosts.map(async (post) => {
+              try {
+                const count = await apiService.fetchCommentCount(post.id);
+                return { ...post, comments: count };
+              } catch (err) {
+                console.error(`Error fetching comment count for post ${post.id}`, err);
+                return { ...post, comments: 0 };
+              }
+            })
+          );
+    
+          setPosts(postsWithCounts);
+          setTotalPosts(query ? data.length : data.totalPosts);
+          setError("");
+        })
+        .catch(err => {
+          console.error(err);
+          setError("Could not load posts.");
+        })
+        .finally(() => setLoading(false));
     }, [page, query]);
     
 
