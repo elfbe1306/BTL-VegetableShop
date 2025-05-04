@@ -98,3 +98,17 @@
 .viewButton {
   color: blue;
 }
+
+.statusContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 15px;
+  margin-top: 15px;
+}
+
+.statusContainer button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}

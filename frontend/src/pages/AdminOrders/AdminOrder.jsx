@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Search } from "lucide-react";
+import { Search, TruckElectric, ArchiveRestore, ClipboardCheck } from "lucide-react";
 
 import Header from "../../components/Admin/Header/Header";
 import SideBar from '../../components/Admin/SideBar/SideBar';
@@ -32,6 +32,27 @@ const AdminOrder = () => {
   };
   const handleCloseListProduct = () => setIsListProductOpen(false);
   const [selectedOrder, setSelectedOrder] = useState(null);
+
+  const handleChangeToShipping = async (orderId) => {
+    const response = await apiService.ChangeStatusToShipping(orderId)
+    if(response.success) {
+      await FetchCustomerOrders();
+    }
+  }
+
+  const handleChangeToComplete = async (orderId) => {
+    const response = await apiService.ChangeStatusToComplete(orderId)
+    if(response.success) {
+      await FetchCustomerOrders();
+    }
+  }
+
+  const handleChangeToPreparing = async (orderId) => {
+    const response = await apiService.ChangeStatusToPreparing(orderId)
+    if(response.success) {
+      await FetchCustomerOrders();
+    }
+  }
 
   return  (
     <div className={styles.BigWrapper}>
@@ -83,10 +104,20 @@ const AdminOrder = () => {
                       <td className={styles.td}>{order.state}</td>
                       <td className={styles.td}>{order.zip_code}</td>
                       <td className={styles.td}>
-                        <button className={styles.viewButton} onClick={() => handleOpenListProduct(order)}>View</button>
+                        <button className={styles.viewButton} onClick={() => handleOpenListProduct(order.list_product)}>View</button>
                       </td>
                       <td className={styles.td}>{order.status}</td>
-                      <td></td>
+                      <td className={styles.statusContainer}>
+                        <button onClick={() => handleChangeToPreparing(order.order_id)}>
+                          <ArchiveRestore color="#FFA500"/>
+                        </button>
+                        <button onClick={() => handleChangeToShipping(order.order_id)}>
+                          <TruckElectric color="#1E90FF"/>
+                        </button>
+                        <button onClick={() => handleChangeToComplete(order.order_id)}>
+                          <ClipboardCheck color="#28A745"/>
+                        </button>
+                      </td>
                     </motion.tr>
                   )
                 })}
@@ -96,7 +127,7 @@ const AdminOrder = () => {
         </main>
 
         {isListProductOpen && (
-          <ListProductModal onClose={handleCloseListProduct} ListProduct={selectedOrder}/>
+          <ListProductModal onClose={handleCloseListProduct} ListProducts={selectedOrder}/>
         )}
       </div>
     </div>

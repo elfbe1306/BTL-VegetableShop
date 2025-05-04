@@ -452,7 +452,36 @@ class ApiService {
       throw error;
     }
   }
+
+  async ChangeStatusToShipping(orderId) {
+    try {
+      const response = await this.api.post('?action=change2shipping', { orderId: orderId });
+      return response.data;
+    } catch(error) {
+      console.error("Error changing to shipping", error);
+      throw error;
+    }
+  }
+
+  async ChangeStatusToComplete(orderId) {
+    try {
+      const response = await this.api.post('?action=change2complete', { orderId: orderId });
+      return response.data;
+    } catch(error) {
+      console.error("Error changing to complete", error);
+      throw error;
+    }
+  }
   
+  async ChangeStatusToPreparing(orderId) {
+    try {
+      const response = await this.api.post('?action=change2preparing', { orderId: orderId });
+      return response.data;
+    } catch(error) {
+      console.error("Error changing to preparing", error);
+      throw error;
+    }
+  }
 }
 
 

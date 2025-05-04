@@ -145,4 +145,40 @@ function FetchCustomerOrders($conn) {
     return ["success" => true, "orders" => array_values($orders)];
 }
 
+function ChangeToShipping($conn, $orderID) {
+    $sql = "UPDATE orders SET status=? WHERE id=?";
+
+    $newStatus = "Shipping";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("si", $newStatus, $orderID);
+    $stmt->execute();
+
+    return ["success" => true, "message" => "Successfully changed to Shipping"];
+}
+
+function ChangeToComplete($conn, $orderID) {
+    $sql = "UPDATE orders SET status=? WHERE id=?";
+
+    $newStatus = "Complete";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("si", $newStatus, $orderID);
+    $stmt->execute();
+
+    return ["success" => true, "message" => "Successfully changed to Complete"];
+}
+
+function ChangeToPreparing($conn, $orderID) {
+    $sql = "UPDATE orders SET status=? WHERE id=?";
+
+    $newStatus = "Preparing";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("si", $newStatus, $orderID);
+    $stmt->execute();
+
+    return ["success" => true, "message" => "Successfully changed to Preparing"];
+}
+
 ?>

@@ -361,7 +361,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo json_encode(["error" => "Missing id"]);
             }
             break;
- 
+
+        case 'change2shipping':
+            if (isset($data['orderId'])) {
+                echo json_encode(ChangeToShipping($conn, (int) $data['orderId']));
+            } else {
+                http_response_code(400);
+                echo json_encode(["error" => "Missing order id"]);
+            }
+            break;
+
+        case 'change2complete':
+            if (isset($data['orderId'])) {
+                echo json_encode(ChangeToComplete($conn, (int) $data['orderId']));
+            } else {
+                http_response_code(400);
+                echo json_encode(["error" => "Missing order id"]);
+            }
+            break;
+        
+        case 'change2preparing':
+            if (isset($data['orderId'])) {
+                echo json_encode(ChangeToPreparing($conn, (int) $data['orderId']));
+            } else {
+                http_response_code(400);
+                echo json_encode(["error" => "Missing order id"]);
+            }
+            break;
+
         default:
             http_response_code(404);
             echo json_encode(["error" => "Invalid route"]);

@@ -15,9 +15,42 @@
   background-color: #e8f4e8;
   padding: 48px;
   border-radius: 12px;
-  width: 50%;
+  width: 30%;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   position: relative;
+}
+
+.orderSummary {
+  border: 1px solid rgb(0, 178, 7);
+  border-radius: 8px;
+  margin-top: 2%;
+  padding: 2% 5%;
+}
+
+.orderSummary h3 {
+  color: black;
+}
+
+.productTotal {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.productName, .productPrice {
+  color: black;
+}
+
+.subTotalPriceContainer, .ShippingFeeContainer, .TotalPriceContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.subTotalPriceContainer, .ShippingFeeContainer{
+  border-bottom: 1px solid rgb(0, 178, 7);
 }
 
 .closeButton {
