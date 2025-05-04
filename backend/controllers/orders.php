@@ -43,15 +43,31 @@ function CreateCustomerOrder($conn, $jwtToken, $userAddress, $orderItem) {
       return "Error: " . $stmt->error;
   }
 
-  $sql2 = "INSERT INTO `order_product` (`order_id`, `product_id`, `quantity`) VALUES (?, ?, ?)";
+  $sql2 = "INSERT INTO `order_product` (`order_id`, `product_id`, `product_name`, `product_price`, `quantity`) VALUES (?, ?, ?, ?, ?)";
 
+  $stmt2 = $conn->prepare($sql2);
+  
+  if (!$stmt2) {
+      return "Error preparing order_product statement: " . $conn->error;
+  }
+  
   foreach ($orderItem as $item) {
       $product_id = $item['product']['product_id'];
-      $quantity = $item['quantity'];
-
-      $stmt2 = $conn->prepare($sql2);
-      $stmt2->bind_param("iii", $order_id, $product_id, $quantity);
-
+      $product_name = $item['product']['name'];
+      $price = (float) $item['product']['price'];
+      $quantity = (int) $item['quantity'];
+  
+      if (isset($item['product']['discount_percentage']) && $item['product']['discount_percentage'] !== null) {
+          $discount_percentage = (float) $item['product']['discount_percentage'];
+          $discounted_price = $price * (1 - ($discount_percentage / 100));
+      } else {
+          $discounted_price = $price;
+      }
+  
+      $discounted_price = round($discounted_price, 2);
+  
+      $stmt2->bind_param("iisdi", $order_id, $product_id, $product_name, $discounted_price, $quantity);
+  
       if (!$stmt2->execute()) {
           return "Error inserting order products: " . $stmt2->error;
       }
