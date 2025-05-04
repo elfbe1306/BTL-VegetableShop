@@ -435,11 +435,21 @@ class ApiService {
   
   async DeleteContact(id) {
     try {
-      const res = await this.api.post('?action=deletecontact', { id:id });
-      return res.data;
-    } catch (err) {
-      console.error("Error deleting contact:", err);
-      throw err;
+      const response = await this.api.post('?action=deletecontact', { id:id });
+      return response.data;
+    } catch (error) {
+      console.error("Error deleting contact:", error);
+      throw error;
+    }
+  }
+
+  async FetchCustomerOrders() {
+    try {
+      const response = await this.api.get('?action=fetchcustomerorder');
+      return response.data;
+    } catch(error) {
+      console.error("Error Fetching Orders", error);
+      throw error;
     }
   }
   

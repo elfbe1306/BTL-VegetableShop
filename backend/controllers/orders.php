@@ -24,16 +24,17 @@ function CreateCustomerOrder($conn, $jwtToken, $userAddress, $orderItem) {
   $shippingFee = round($totalprice * 0.1, 2);
   $finalTotal = round($totalprice + $shippingFee, 2);
 
-  $sql1 = "INSERT INTO `orders` (`total_price`, `shipping_fee`, `finalTotal`, `name`, `phone_number`, `address`, `state`, `zip_code`, `user_id`) 
-           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+  $sql1 = "INSERT INTO `orders` (`total_price`, `shipping_fee`, `finalTotal`, `name`, `phone_number`, `address`, `state`, `zip_code`, `user_id`, `status`) 
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
   $stmt = $conn->prepare($sql1);
 
   if ($stmt === false) {
       return "Error: Unable to prepare statement.";
   }
-
-  $stmt->bind_param("dddsssssi", $totalprice, $shippingFee, $finalTotal, $userAddress['name'], $userAddress['phone'], $userAddress['address'], $userAddress['state'], $userAddress['zip'], $userID);
+  
+  $status = "Prepared";
+  $stmt->bind_param("dddsssssis", $totalprice, $shippingFee, $finalTotal, $userAddress['name'], $userAddress['phone'], $userAddress['address'], $userAddress['state'], $userAddress['zip'], $userID, $status);
 
   if ($stmt->execute()) {
       $order_id = $conn->insert_id; 
@@ -99,6 +100,49 @@ function CountTotalSale($conn) {
             "success" => false
         );
     }
+}
+
+function FetchCustomerOrders($conn) {
+    $sql = "SELECT * 
+            FROM `orders`
+            INNER JOIN order_product
+            ON orders.id = order_product.order_id;";
+
+    $result = $conn->query($sql);
+
+    if (!$result) {
+        return ["success" => false, "message" => "Query failed: " . $conn->error];
+    }
+
+    $orders = [];
+    while ($row = $result->fetch_assoc()) {
+        $orderID = $row['order_id'];
+
+        if (!isset($orders[$orderID])) {
+            $orders[$orderID] = [
+                "order_id" => $row['order_id'],
+                "total_price" => $row['total_price'],
+                "shipping_fee" => $row['shipping_fee'],
+                "finalTotal" => $row['finalTotal'],
+                "name" => $row['name'],
+                "phone" => $row['phone_number'],
+                "address" => $row['address'],
+                "state" => $row['state'],
+                "zip_code" => $row['zip_code'],
+                "user_id" => $row['user_id'],
+                "status" => $row['status'],
+                "list_product" => []
+            ];
+        }
+
+        $orders[$orderID]['list_product'][] = [
+            "product_name" => $row['product_name'],
+            "product_price" => $row['product_price'],
+            "quantity" => $row['quantity']
+        ];
+    }
+
+    return ["success" => true, "orders" => array_values($orders)];
 }
 
 ?>

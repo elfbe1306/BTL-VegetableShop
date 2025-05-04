@@ -1,4 +1,4 @@
-import { BarChart2, Phone, Menu, Settings, ShoppingBag, CircleUser, Users, House, CircleHelp, Newspaper } from 'lucide-react';
+import { BarChart2, Phone, Menu, Settings, ShoppingBag, CircleUser, Users, House, CircleHelp, Newspaper, Truck } from 'lucide-react';
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -8,7 +8,8 @@ const SIDEBAR_ITEMS = [
   { name: "Overview", icon: BarChart2, color: "#E6E6E6", href: "/admin" },
   { name: "Account", icon: CircleUser, color: "#6366f1", href: "/admin/account" },
   { name: "Home", icon: House, color: "#FF8A00", href: "/admin/home" },
-  { name: "Shop", icon: ShoppingBag, color: "#EA4B48", href: "/admin/products" },
+  { name: "Products", icon: ShoppingBag, color: "#EA4B48", href: "/admin/products" },
+  { name: "Orders", icon: Truck, color: "#3B82F6", href: "/admin/orders" },
   { name: "FaQs", icon: CircleHelp, color: "#EC4899", href: "/admin/faqs" },
   { name: "Blog", icon: Newspaper, color: "#10B981", href: "/sales" },
   { name: "About Us", icon: Users, color: "#F59E0B", href: "/admin/about" },

@@ -93,7 +93,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         case 'counttotalsale':
             echo json_encode(CountTotalSale($conn));
             break;
-            
+
+        case 'fetchcustomerorder':
+            echo json_encode(FetchCustomerOrders($conn));
+            break;
+
         default:
             http_response_code(404);
             echo json_encode(["error" => "Invalid route"]);
