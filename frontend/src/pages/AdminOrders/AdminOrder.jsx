@@ -82,7 +82,7 @@ const AdminOrder = () => {
             <table className={styles.table}>
               <thead>
                 <tr>
-                    {["Customer", "Phone", "Address", "State", "Zipcode", "Order Summary", "Status", "Action"].map((head) => (
+                    {["Customer", "Phone", "Address", "State", "Zipcode", "Created At", "Order Summary", "Status", "Action"].map((head) => (
                     <th key={head} className={styles.th}>
                       {head}
                     </th>
@@ -103,6 +103,7 @@ const AdminOrder = () => {
                       <td className={styles.td}>{order.address}</td>
                       <td className={styles.td}>{order.state}</td>
                       <td className={styles.td}>{order.zip_code}</td>
+                      <td className={styles.td}>{order.createdAt}</td>
                       <td className={styles.td}>
                         <button className={styles.viewButton} onClick={() => handleOpenListProduct(order.list_product)}>View</button>
                       </td>

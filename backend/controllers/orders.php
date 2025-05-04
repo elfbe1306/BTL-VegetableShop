@@ -131,6 +131,7 @@ function FetchCustomerOrders($conn) {
                 "zip_code" => $row['zip_code'],
                 "user_id" => $row['user_id'],
                 "status" => $row['status'],
+                "createdAt" =>$row['createdAt'],
                 "list_product" => []
             ];
         }
