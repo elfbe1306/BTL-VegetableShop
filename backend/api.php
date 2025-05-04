@@ -330,6 +330,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo json_encode(["error" => "Missing team id"]);
             }
             break;
+
+        case 'deleteproduct':
+            if(isset($data['productID'])) {
+                echo json_encode(DeleteProduct($conn, $data['productID']));
+            } else {
+                http_response_code(400);
+                echo json_encode(["error" => "Missing product ID"]);
+            }
+            break;
             
         default:
             http_response_code(404);

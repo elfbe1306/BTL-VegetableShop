@@ -409,6 +409,16 @@ class ApiService {
       throw error;
     }
   }
+
+  async DeleteProduct(productID) {
+    try {
+      const response = await this.api.post('?action=deleteproduct', {productID: productID});
+      return response.data;
+    } catch(error) {
+      console.error("Error deleting product:", error);
+      throw error
+    }
+  }
 }
 
 

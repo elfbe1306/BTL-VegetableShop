@@ -231,6 +231,14 @@ function AddProduct($conn, $data, $files) {
     return ["success" => true, "message" => "Product added successfully", "imagePath" => $imagePath];
 }
 
+function DeleteProduct($conn, $productID) {
+    $sql = "DELETE FROM products WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $productID);
+    $stmt->execute();
+    return ["success" => true, "message" => "Product was deleted"];
+}
+
 
 
 ?>

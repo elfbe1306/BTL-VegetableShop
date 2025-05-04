@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styles from './AddNewProductModal.module.css';
 import CloseIcon from "../../../assets/icons/CloseIcon";
 import apiService from "../../../api";
-import { AwardIcon } from "lucide-react";
 
 const AddNewProductModal = ({ onClose, refreshProducts }) => {
   const [name, setName] = useState("");

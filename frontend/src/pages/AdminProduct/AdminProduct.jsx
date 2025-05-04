@@ -9,6 +9,7 @@ import SideBar from "../../components/Admin/SideBar/SideBar";
 import ProductModal from '../../components/ProductModal/ProductModal';
 import EditProductModal from "../../components/Admin/EditProductModal/EditProductModal";
 import AddNewProductModal from "../../components/Admin/AddNewProductModal/AddNewProductModal";
+import DeleteProductModal from "../../components/Admin/DeleteProductModal/DeleteProductModal";
 
 const AdminProduct = () => {
     const [products, setProducts] = useState([]);
@@ -57,6 +58,17 @@ const AdminProduct = () => {
     };
     const handleCloseAddNewProductModal = () => {
       setIsAddNewProductModalOpen(false);
+    };
+
+    const [isDeleteProductModalOpen, setIsDeleteProductModalOpen] = useState(false);
+    const [selectedDeleteProduct, setSelectedDeleteProduct] = useState(null);
+
+    const handleOpenDeleteProductModal = (product) => {
+      setSelectedDeleteProduct(product);
+      setIsDeleteProductModalOpen(true);
+    };
+    const handleCloseDeleteProductModal = () => {
+      setIsDeleteProductModalOpen(false);
     };
 
 
@@ -121,7 +133,7 @@ const AdminProduct = () => {
                       <td>
                         <button className={styles.viewButton} onClick={() => handleOpenProductModal(product)}>View</button>
                         <button className={styles.editButton} onClick={() => handleOpenEditProductModal(product)}>Edit</button>
-                        <button className={styles.deleButton}>Delete</button>
+                        <button className={styles.deleButton} onClick={() => handleOpenDeleteProductModal(product)}>Delete</button>
                       </td>
                     </motion.tr>
                   )
@@ -141,6 +153,10 @@ const AdminProduct = () => {
 
         {isAddNewProductModalOpen && (
           <AddNewProductModal onClose={handleCloseAddNewProductModal} refreshProducts={FetchProduct}/>
+        )}
+
+        {isDeleteProductModalOpen && (
+          <DeleteProductModal product={selectedDeleteProduct} onClose={handleCloseDeleteProductModal} refreshProducts={FetchProduct}/>
         )}
       </div>
     </div>
