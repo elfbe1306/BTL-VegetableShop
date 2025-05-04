@@ -179,5 +179,58 @@ function UpdateProduct($conn, $data, $files) {
     return ["success" => true, "message" => "Product updated successfully", "imagePath" => $imagePath];
 }
 
+function AddProduct($conn, $data, $files) {
+    $name = trim($data['name']);
+    $price = floatval($data['price']);
+    $quantity = intval($data['quantity']);
+    $description = trim($data['description']);
+
+    $ProductPathName = preg_replace('/\s+/', '', $name);
+    $baseDir = 'uploads/products/';
+    $newFolder = $baseDir . $ProductPathName;
+
+    // Step 1: Check if product name already exists
+    $stmtCheck = $conn->prepare("SELECT id FROM products WHERE name = ?");
+    $stmtCheck->bind_param("s", $name);
+    $stmtCheck->execute();
+    $stmtCheck->store_result();
+
+    if ($stmtCheck->num_rows > 0) {
+        return ["success" => false, "message" => "Product name already exists"];
+    }
+
+    // Step 2: Create directory if it doesn't exist
+    if (!is_dir($newFolder)) {
+        mkdir($newFolder, 0777, true);
+    }
+
+    // Step 3: Handle uploaded images
+    for ($i = 1; $i <= 3; $i++) {
+        $key = 'image' . $i;
+
+        if (isset($files[$key]) && $files[$key]['error'] === UPLOAD_ERR_OK) {
+            $tmpName = $files[$key]['tmp_name'];
+            $fileName = $ProductPathName . $i . '.png';
+            $destination = $newFolder . '/' . $fileName;
+
+            if (!move_uploaded_file($tmpName, $destination)) {
+                echo "Failed to move file: $tmpName to $destination<br>";
+                echo "Is tmpName readable? " . (is_readable($tmpName) ? "Yes" : "No") . "<br>";
+                echo "Does destination dir exist? " . (is_dir($newFolder) ? "Yes" : "No") . "<br>";
+                echo "Is destination writable? " . (is_writable($newFolder) ? "Yes" : "No") . "<br>";
+            }
+        }
+    }
+
+    // Step 4: Insert into database
+    $imagePath = $ProductPathName . '/' . $ProductPathName;
+    $stmt = $conn->prepare("INSERT INTO products (name, price, quantity, image, description) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("sdiss", $name, $price, $quantity, $imagePath, $description);
+    $stmt->execute();
+
+    return ["success" => true, "message" => "Product added successfully", "imagePath" => $imagePath];
+}
+
+
 
 ?>

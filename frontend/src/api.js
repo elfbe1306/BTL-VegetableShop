@@ -387,6 +387,28 @@ class ApiService {
       throw error;
     }
   }
+
+  async AddNewProduct(productData, imageFiles) {
+    try {
+      const formData = new FormData();
+      formData.append("name", productData.name);
+      formData.append("price", productData.price);
+      formData.append("quantity", productData.quantity);
+      formData.append("description", productData.description);
+
+      imageFiles.forEach((file, index) => {
+        if (file) {
+          formData.append(`image${index + 1}`, file); // e.g., image1, image2, ...
+        }
+      });
+
+      const response = await this.api.post('?action=addnewproduct', formData);
+      return response.data;
+    } catch(error) {
+      console.error("Error updating product:", error);
+      throw error;
+    }
+  }
 }
 
 

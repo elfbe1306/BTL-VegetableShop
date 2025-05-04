@@ -8,17 +8,18 @@ import Header from "../../components/Admin/Header/Header";
 import SideBar from "../../components/Admin/SideBar/SideBar";
 import ProductModal from '../../components/ProductModal/ProductModal';
 import EditProductModal from "../../components/Admin/EditProductModal/EditProductModal";
+import AddNewProductModal from "../../components/Admin/AddNewProductModal/AddNewProductModal";
 
 const AdminProduct = () => {
     const [products, setProducts] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
 
-    useEffect(() => {
-      const FetchProduct = async () => {
-        const response = await apiService.FetchProduct();
-        setProducts(response);
-      }
+    const FetchProduct = async () => {
+      const response = await apiService.FetchProduct();
+      setProducts(response);
+    }
 
+    useEffect(() => {
       FetchProduct();
     }, [])
 
@@ -49,12 +50,13 @@ const AdminProduct = () => {
       setIsEditProductModalOpen(false);
     };
 
-    const handleSaveProduct = (updatedProduct) => {
-      setProducts((prevProducts) =>
-        prevProducts.map((product) =>
-          product.product_id === updatedProduct.product_id ? updatedProduct : product
-        )
-      );
+    const [isAddNewProductModalOpen, setIsAddNewProductModalOpen] = useState(false);
+
+    const handleOpenAddNewProductModal = () => {
+      setIsAddNewProductModalOpen(true);
+    };
+    const handleCloseAddNewProductModal = () => {
+      setIsAddNewProductModalOpen(false);
     };
 
 
@@ -71,7 +73,7 @@ const AdminProduct = () => {
             transition={{ delay: 0.2 }}
           > 
             <div className={styles.SearchAndAddContainer}>
-              <button className={styles.NewProductButton}>Add New Product</button>
+              <button className={styles.NewProductButton} onClick={handleOpenAddNewProductModal}>Add New Product</button>
               <div className={styles.SearchContainer}>
                 <Search className={styles.searchIcon} size={18} />
                 <input
@@ -134,7 +136,11 @@ const AdminProduct = () => {
         )}
 
         {isEditProductModalOpen && (
-          <EditProductModal product={selectedEditProduct} onClose={handleCloseEditProductModal} onSave={handleSaveProduct}/>
+          <EditProductModal product={selectedEditProduct} onClose={handleCloseEditProductModal} refreshProducts={FetchProduct}/>
+        )}
+
+        {isAddNewProductModalOpen && (
+          <AddNewProductModal onClose={handleCloseAddNewProductModal} refreshProducts={FetchProduct}/>
         )}
       </div>
     </div>

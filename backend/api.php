@@ -321,7 +321,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo json_encode(["error" => "Missing team id"]);
             }
             break;
-                    
+        
+        case 'addnewproduct':
+            if(isset($_POST['name'])) {
+                echo json_encode(AddProduct($conn, $_POST, $_FILES));
+            } else {
+                http_response_code(400);
+                echo json_encode(["error" => "Missing team id"]);
+            }
+            break;
             
         default:
             http_response_code(404);

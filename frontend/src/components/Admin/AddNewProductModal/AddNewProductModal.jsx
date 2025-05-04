@@ -1,21 +1,17 @@
 import React, { useState } from "react";
-import styles from './EditProductModal.module.css';
+import styles from './AddNewProductModal.module.css';
 import CloseIcon from "../../../assets/icons/CloseIcon";
 import apiService from "../../../api";
+import { AwardIcon } from "lucide-react";
 
-const EditProductModal = ({ product, onClose, refreshProducts }) => {
-  const [name, setName] = useState(product.name);
-  const [price, setPrice] = useState(product.price);
-  const [description, setDescription] = useState(product.description);
-  const [quantity, setQuantity] = useState(product.quantity);
-
-  const [images, setImages] = useState([
-    `http://localhost/BTL-VegetableShop/backend/uploads/products/${product.image}1.png`,
-    `http://localhost/BTL-VegetableShop/backend/uploads/products/${product.image}2.png`,
-    `http://localhost/BTL-VegetableShop/backend/uploads/products/${product.image}3.png`
-  ]);
+const AddNewProductModal = ({ onClose, refreshProducts }) => {
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState();
+  const [description, setDescription] = useState();
+  const [quantity, setQuantity] = useState();
+  const [images, setImages] = useState([]);
   const [imageFiles, setImageFiles] = useState([null, null, null]);
-
+  
   const handleImageChange = (e, index) => {
     const file = e.target.files[0];
     if (file && file.type === "image/png") {
@@ -29,29 +25,27 @@ const EditProductModal = ({ product, onClose, refreshProducts }) => {
     } else {
       alert("Please upload a .png image file.");
     }
-  };  
+  };
+  
+  const handleAddNewProduct = async () => {
+    const addProduct = {
+      name: name,
+      price: price,
+      quantity: quantity,
+      description: description
+    }
 
-  const handleSave = async () => {
-    const updatedProduct = {
-      product_id: product.product_id,
-      name,
-      price,
-      quantity,
-      description,
-      oldname: product.name
-    };
-
-    const response = await apiService.UpdateProductByID(updatedProduct, imageFiles);
+    const response = await apiService.AddNewProduct(addProduct, imageFiles);
 
     if (response.success) {
-      await refreshProducts()
+      await refreshProducts();
       setTimeout(() => {
         onClose();
       }, 300);
     }
   }
 
-  return (
+  return(
     <div className={styles.overlay}>
       <div className={styles.modal}>
         <div style={{ paddingTop: 15 }}>
@@ -89,13 +83,17 @@ const EditProductModal = ({ product, onClose, refreshProducts }) => {
           <div className={styles.insertPicContainer}>
             <p>Image:</p>
             <div className={styles.PicContainer}>
-              {images.map((imgSrc, index) => (
+              {[0, 1, 2].map((index) => (
                 <div key={index} className={styles.PicUploadContainer}>
-                  <img
-                    className={styles.productImage}
-                    src={imgSrc}
-                    alt={`product-${index}`}
-                  />
+                  {images[index] ? (
+                    <img
+                      className={styles.productImage}
+                      src={images[index]}
+                      alt={`product-${index}`}
+                    />
+                  ) : (
+                    <div className={styles.placeholder}>No image</div>
+                  )}
                   <input
                     type="file"
                     accept="image/png"
@@ -107,14 +105,14 @@ const EditProductModal = ({ product, onClose, refreshProducts }) => {
           </div>
         </div>
         <div className={styles.SaveButtonContainer}>
-          <button className={styles.SaveButton} onClick={() => handleSave()}>Save</button>
+          <button className={styles.SaveButton} onClick={() => handleAddNewProduct()}>Add</button>
         </div>
         <button className={styles.closeButton} onClick={onClose}>
           <CloseIcon />
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default EditProductModal;
+export default AddNewProductModal
