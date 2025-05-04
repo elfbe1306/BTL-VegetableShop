@@ -321,6 +321,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo json_encode(["error" => "Missing token"]);
             }
             break;
+
+        case 'deletecontact':
+            if (isset($data['id'])) {
+                echo json_encode(deleteContact($conn, (int)$data['id']));
+            } else {
+                http_response_code(400);
+                echo json_encode(["error" => "Missing id"]);
+            }
+            break;
  
         default:
             http_response_code(404);

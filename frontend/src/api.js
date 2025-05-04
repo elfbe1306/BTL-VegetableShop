@@ -374,7 +374,15 @@ class ApiService {
     }
   }
   
-  //update password
+  async DeleteContact(id) {
+    try {
+      const res = await this.api.post('?action=deletecontact', { id:id });
+      return res.data;
+    } catch (err) {
+      console.error("Error deleting contact:", err);
+      throw err;
+    }
+  }
   
 }
 

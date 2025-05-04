@@ -18,9 +18,11 @@ const AdminContact = () => {
         fetchData();
     }, [])
 
-    const filteredUsers = accountData.filter((user) =>
-        user.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const filteredUsers = Array.isArray(accountData)
+    ? accountData.filter((user) =>
+        user.name?.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    : [];
 
     return (
         <>
@@ -51,7 +53,7 @@ const AdminContact = () => {
                         <table className={styles.table}>
                             <thead>
                             <tr>
-                                {["Name", "Phone Number", "Subject", "Message"].map((head) => (
+                                {["Name", "Phone Number", "Subject", "Message", ""].map((head) => (
                                 <th key={head} className={styles.th}>
                                     {head}
                                 </th>
@@ -70,6 +72,16 @@ const AdminContact = () => {
                                 <td className={styles.td}>{user.phonenum}</td>
                                 <td className={styles.td}>{user.subject}</td>
                                 <td className={styles.td}>{user.content}</td>
+                                <td>
+                                    <button className={styles.deleteBtn}
+                                    onClick={async () => {
+                                        if (window.confirm("Are you sure you want to delete this contact?")) {
+                                        await apiService.DeleteContact(user.id);
+                                        setaccountData(await apiService.FetchContact());
+                                        }
+                                    }}
+                                    >Delete</button>
+                                </td>
                                 </motion.tr>
                             ))}
                             </tbody>
