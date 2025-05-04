@@ -21,6 +21,7 @@ import AdminAbout from './pages/AdminAbout/AdminAbout'
 import AdminProduct from './pages/AdminProduct/AdminProduct'
 import AdminContact from './pages/AdminContact/AdminContact'
 import AdminOrder from './pages/AdminOrders/AdminOrder'
+import AdminSales from './pages/AdminSales/AdminSales'
 
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
 
@@ -61,6 +62,13 @@ function App() {
         <Route path="/admin/orders" element={
           <ProtectedRoute allowedRoles={['Admin']}>
             <AdminOrder />
+          </ProtectedRoute>
+        }/>
+
+
+        <Route path="/admin/sales" element={
+          <ProtectedRoute allowedRoles={['Admin']}>
+            <AdminSales />
           </ProtectedRoute>
         }/>
 

@@ -482,6 +482,16 @@ class ApiService {
       throw error;
     }
   }
+
+  async FetchSalePromotions() {
+    try {
+      const response = await this.api.get('?action=fetchsalepromotions');
+      return response.data;
+    } catch(error) {
+      console.error("Error Fetching Sale Promotions", error);
+      throw error;
+    }
+  }
 }
 
 

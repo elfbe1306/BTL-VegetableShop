@@ -97,6 +97,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         case 'fetchcustomerorder':
             echo json_encode(FetchCustomerOrders($conn));
             break;
+        
+        case 'fetchsalepromotions':
+            echo json_encode(FetchSalePromotions($conn));
+            break;
 
         default:
             http_response_code(404);
