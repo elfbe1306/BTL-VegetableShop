@@ -30,6 +30,14 @@ const ContactPage = () => {
             subject: contact.subject,
             content: contact.content
         });
+
+        if(response.success) {
+            setContact({
+                phonenum: "",
+                subject: "",
+                content: ""
+            })
+        }
     }
 
     const [userName, setUserName] = useState("Not found");

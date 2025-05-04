@@ -10,19 +10,30 @@ const AdminContact = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [accountData, setaccountData] = useState([]);
     
-    useEffect(() => {
-        const fetchData = async () => {
+    const fetchData = async () => {
         const response = await apiService.FetchContact();
         setaccountData(response.data);
-        }
+    }
+
+    useEffect(() => {
         fetchData();
     }, [])
 
     const filteredUsers = Array.isArray(accountData)
-    ? accountData.filter((user) =>
-        user.name?.toLowerCase().includes(searchTerm.toLowerCase())
+    ? accountData.filter((contact) =>
+        contact.name?.toLowerCase().includes(searchTerm.toLowerCase())
     )
     : [];
+
+    const handleSubmitContact = async (contactID) => {
+        if (window.confirm("Are you sure you want to delete this contact?")) {
+            const response = await apiService.DeleteContact(contactID);
+            
+            if(response.success) {
+                await fetchData();
+            }
+        }
+    }
 
     return (
         <>
@@ -74,12 +85,7 @@ const AdminContact = () => {
                                 <td className={styles.td}>{user.content}</td>
                                 <td>
                                     <button className={styles.deleteBtn}
-                                    onClick={async () => {
-                                        if (window.confirm("Are you sure you want to delete this contact?")) {
-                                        await apiService.DeleteContact(user.id);
-                                        setaccountData(await apiService.FetchContact());
-                                        }
-                                    }}
+                                    onClick={() => handleSubmitContact(user.id)}
                                     >Delete</button>
                                 </td>
                                 </motion.tr>
