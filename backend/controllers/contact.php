@@ -59,6 +59,7 @@ function FetchUserName($conn, $jwtToken) {
 
 function FetchContact($conn) {
     $sql = "SELECT 
+                contacts.id,
                 useraccount.name, 
                 contacts.phonenum, 
                 contacts.subject, 
@@ -85,4 +86,15 @@ function FetchContact($conn) {
         );
     }
 }
+
+function deleteContact($conn, $id) {
+    $stmt = $conn->prepare("DELETE FROM contacts WHERE id = ?");
+    $stmt->bind_param("i", $id);
+    if ($stmt->execute()) {
+        return ["success" => true];
+    } else {
+        return ["success" => false, "error" => $stmt->error];
+    }
+}
+
 ?>

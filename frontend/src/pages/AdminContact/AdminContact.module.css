@@ -104,3 +104,10 @@
 display: flex;
 align-items: center;
 }
+
+.deleteBtn {
+    color: #f87171;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+}

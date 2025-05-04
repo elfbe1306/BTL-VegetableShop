@@ -422,6 +422,27 @@ class ApiService {
       throw error
     }
   }
+  
+  async getUserInfo(userID) {
+    try {
+      const response = await this.api.post('?action=getuserinfo', { userID: userID});
+      return response.data;
+    } catch(error) {
+      console.error("Error fetching:", error.response);
+      throw error;
+    }
+  }
+  
+  async DeleteContact(id) {
+    try {
+      const res = await this.api.post('?action=deletecontact', { id:id });
+      return res.data;
+    } catch (err) {
+      console.error("Error deleting contact:", err);
+      throw err;
+    }
+  }
+  
 }
 
 
