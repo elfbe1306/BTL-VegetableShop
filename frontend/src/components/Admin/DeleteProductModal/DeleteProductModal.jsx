@@ -6,7 +6,7 @@ import apiService from "../../../api";
 const DeleteProductModal = ({ product, onClose, refreshProducts }) => {
 
   const handleDeleteProduct = async () => {
-    const response = await apiService.DeleteProduct(product.product_id);
+    const response = await apiService.DeleteProduct(product.product_id, product.name);
     
     if (response.success) {
       await refreshProducts();

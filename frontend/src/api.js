@@ -410,9 +410,12 @@ class ApiService {
     }
   }
 
-  async DeleteProduct(productID) {
+  async DeleteProduct(productID, productName) {
     try {
-      const response = await this.api.post('?action=deleteproduct', {productID: productID});
+      const response = await this.api.post('?action=deleteproduct', {
+        productID: productID,
+        productName: productName
+      });
       return response.data;
     } catch(error) {
       console.error("Error deleting product:", error);

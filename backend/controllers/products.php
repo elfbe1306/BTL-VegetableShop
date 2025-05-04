@@ -231,14 +231,30 @@ function AddProduct($conn, $data, $files) {
     return ["success" => true, "message" => "Product added successfully", "imagePath" => $imagePath];
 }
 
-function DeleteProduct($conn, $productID) {
+function DeleteProduct($conn, $productID, $productName) {
+    // Step 1: Format folder name the same way as in AddProduct
+    $ProductPathName = preg_replace('/\s+/', '', $productName);
+    $baseDir = 'uploads/products/';
+    $folderPath = $baseDir . $ProductPathName;
+
+    // Step 2: Delete product folder recursively
+    if (is_dir($folderPath)) {
+        $files = glob($folderPath . '/*'); // get all files in the folder
+        foreach ($files as $file) {
+            if (is_file($file)) {
+                unlink($file); // delete each file
+            }
+        }
+        rmdir($folderPath); // remove the folder itself
+    }
+
+    // Step 3: Delete from database
     $sql = "DELETE FROM products WHERE id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $productID);
     $stmt->execute();
-    return ["success" => true, "message" => "Product was deleted"];
+
+    return ["success" => true, "message" => "Product and associated images were deleted"];
 }
-
-
 
 ?>

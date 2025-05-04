@@ -333,7 +333,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         case 'deleteproduct':
             if(isset($data['productID'])) {
-                echo json_encode(DeleteProduct($conn, $data['productID']));
+                echo json_encode(DeleteProduct($conn, $data['productID'], $data['productName']));
             } else {
                 http_response_code(400);
                 echo json_encode(["error" => "Missing product ID"]);
