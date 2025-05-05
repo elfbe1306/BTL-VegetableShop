@@ -579,6 +579,28 @@ class ApiService {
       throw error;
     }
   }
+
+  async CreateSale(SaleData, imageFiles) {
+    try {
+      const formData = new FormData();
+      formData.append("name", SaleData.name);
+      formData.append("discount_percentage", SaleData.discount_percentage);
+      formData.append("description", SaleData.description);
+      formData.append('list_product', JSON.stringify(SaleData.selectedProducts));
+
+      imageFiles.forEach((file, index) => {
+        if (file) {
+          formData.append(`image${index + 1}`, file); // e.g., image1, image2, ...
+        }
+      });
+
+      const response = await this.api.post('?action=addnewsale', formData);
+      return response.data;
+    } catch(error) {
+      console.error("Error updating product:", error);
+      throw error;
+    }
+  }
 }
 
 

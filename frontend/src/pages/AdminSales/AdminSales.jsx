@@ -9,6 +9,7 @@ import apiService from "../../api";
 
 import ListSaleProductModal from "../../components/Admin/ListSaleProductModal/ListSaleProductModal";
 import EditSaleModal from "../../components/Admin/EditSaleModal/EditSaleModal";
+import AddNewSaleModal from "../../components/Admin/AddNewSale/AddNewSaleModal";
 
 const AdminSales = () => {
   const [sales, setSales] = useState([]);
@@ -44,6 +45,12 @@ const AdminSales = () => {
   }
   const handleCloseEditModal = () => setIsEditModalOpen(false);
 
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const handleOpenAddModal = (sale) => {
+    setIsAddModalOpen(true);
+  }
+  const handleCloseAddModal = () => setIsAddModalOpen(false);
+
   return(
     <div className={styles.BigWrapper}>
       <SideBar/>
@@ -57,7 +64,7 @@ const AdminSales = () => {
             transition={{ delay: 0.2 }}
           >
             <div className={styles.SearchAndAddContainer}>
-              <button className={styles.NewSaleButton}>Add New Sale</button>
+              <button className={styles.NewSaleButton} onClick={handleOpenAddModal}>Add New Sale</button>
               <div className={styles.SearchContainer}>
                 <Search className={styles.searchIcon} size={18} />
                 <input
@@ -116,6 +123,10 @@ const AdminSales = () => {
 
         {isEditModalOpen && (
           <EditSaleModal onClose={handleCloseEditModal} sale={selectedSale} refreshSales={FetchSaleData}/>
+        )}
+
+        {isAddModalOpen && (
+          <AddNewSaleModal onClose={handleCloseAddModal} refreshSales={FetchSaleData}/>
         )}
       </div>
     </div>

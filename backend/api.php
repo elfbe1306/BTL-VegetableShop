@@ -450,6 +450,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo json_encode(["error" => "Missing contact id"]);
             }
             break;
+        
+        case 'addnewsale':
+            if(isset($_POST['name'])) {
+                echo json_encode(AddSale($conn, $_POST, $_FILES));
+            } else {
+                http_response_code(400);
+                echo json_encode(["error" => "Missing sale name"]);
+            }
+            break;
 
         default:
             http_response_code(404);
