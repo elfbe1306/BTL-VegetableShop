@@ -15,7 +15,6 @@ const UserProfile = () => {
             const userID = localStorage.getItem("userID")
             const response = await apiService.getUserInfo(userID);
             setaccountData(response);
-            console.log(response)
           } catch (error) {
             console.error('Failed to fetch account data:', error);
           }
@@ -23,17 +22,21 @@ const UserProfile = () => {
         fetchData();
       }, []);
 
-    const handlePasswordChange = (e) => {
+    const handlePasswordChange = async (e) => {
         e.preventDefault()
         if (newPassword.trim().length < 6) {
         alert('Password must be at least 6 characters.')
         return
         }
 
-        // Send password to backend here
-        alert('Password updated!')
-        setNewPassword('')
-        setShowPasswordForm(false)
+        const userID = localStorage.getItem("userID");
+        const response = await apiService.ChangePassword(userID, newPassword);
+
+        if(response.success) {
+            alert('Password updated!')
+            setNewPassword('')
+            setShowPasswordForm(false)
+        }
     }
     return (
         <>

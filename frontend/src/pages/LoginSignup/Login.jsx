@@ -11,6 +11,10 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const response1 = await apiService.Login({email: email, password: password});
+
+        if(!response1.permission) {
+            alert(response1.message);
+        }
         
         const response2 = await apiService.CheckRole(response1.userID);
 

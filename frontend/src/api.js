@@ -526,6 +526,19 @@ class ApiService {
       throw error;
     }
   }
+
+  async ChangePassword(userID, newPass) {
+    try {
+      const response = await this.api.post('?action=changepassword', {
+        userID: userID,
+        newPass: newPass
+      });
+      return response.data;
+    } catch(error) {
+      console.error("Error Changing Password", error);
+      throw error;
+    }
+  }
 }
 
 

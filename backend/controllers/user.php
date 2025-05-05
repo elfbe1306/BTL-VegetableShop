@@ -172,7 +172,33 @@ function getUserInfo($conn, $jwtToken) {
     }
 }
 
-//ham update password
+function ChangePassword($conn, $jwtToken, $newPassword) {
+    $key = "congabietgay";
+
+    try {
+        $decoded = JWT::decode($jwtToken, new Key($key, 'HS256'));
+        $userID = $decoded->userId ?? null;
+
+        if (!$userID) {
+            return ["success" => false, "message" => "Invalid user ID from token."];
+        }
+
+        $newHashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+        $updateStmt = $conn->prepare("UPDATE useraccount SET password = ? WHERE id = ?");
+        $updateStmt->bind_param("si", $newHashedPassword, $userID);
+        $updateStmt->execute();
+
+        if ($updateStmt->affected_rows === 0) {
+            return ["success" => false, "message" => "User not found or password unchanged."];
+        }
+
+        return ["success" => true, "message" => "Password changed successfully."];
+
+    } catch (Exception $e) {
+        return ["success" => false, "message" => "Token error: " . $e->getMessage()];
+    }
+}
+
 
     
 ?>

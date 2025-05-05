@@ -406,6 +406,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             break;
 
+        case 'changepassword':
+            if (isset($data['userID'])) {
+                echo json_encode(ChangePassword($conn, $data['userID'], $data['newPass']));
+            } else {
+                http_response_code(400);
+                echo json_encode(["error" => "Missing sale id"]);
+            }
+            break;
+
         default:
             http_response_code(404);
             echo json_encode(["error" => "Invalid route"]);
