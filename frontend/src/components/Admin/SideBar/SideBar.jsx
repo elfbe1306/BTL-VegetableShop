@@ -7,7 +7,7 @@ import styles from './Sidebar.module.css';
 const SIDEBAR_ITEMS = [
   { name: "Overview", icon: BarChart2, color: "#E6E6E6", href: "/admin" },
   { name: "Account", icon: CircleUser, color: "#6366f1", href: "/admin/account" },
-  { name: "Home", icon: House, color: "#FF8A00", href: "/admin/home" },
+  { name: "Home", icon: House, color: "#FF8A00", href: "/" },
   { name: "Products", icon: ShoppingBag, color: "#EA4B48", href: "/admin/products" },
   { name: "Orders", icon: Truck, color: "#3B82F6", href: "/admin/orders" },
   { name: "Sales", icon: BadgePercent, color: "red", href: "/admin/sales" },
