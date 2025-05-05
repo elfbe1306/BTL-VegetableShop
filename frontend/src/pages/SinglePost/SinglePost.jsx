@@ -4,8 +4,9 @@ import apiService from '../../api';
 import Header from '../../components/Header/Header';
 import Sidebar from '../../components/BlogSidebar/Sidebar';
 import Footer from '../../components/Footer/Footer';
-import Comment from '../../components/Comment/Comment'
-import '../SinglePost/singlepost.css';
+// import '../SinglePost/singlepost.css';
+import CommentSection from '../../components/Comment/Comment';
+import styles from "./singlepost.module.css";
 
 
 export default function SinglePost() {
@@ -27,7 +28,7 @@ export default function SinglePost() {
     return (
       <>
         <Header />
-        <div className="single_post_page">
+        <div className={styles.single_post_page}>
           <p>Loading…</p>
         </div>
         <Footer />
@@ -39,7 +40,7 @@ export default function SinglePost() {
     return (
       <>
         <Header />
-        <div className="single_post_page">
+        <div className={styles.single_post_page}>
           <p>Error: {error}</p>
         </div>
         <Footer />
@@ -51,7 +52,7 @@ export default function SinglePost() {
     return (
       <>
         <Header />
-        <div className="single_post_page">
+        <div className={styles.single_post_page}>
           <p>Post not found.</p>
         </div>
         <Footer />
@@ -73,57 +74,68 @@ export default function SinglePost() {
     <>
       <Header />
 
-      <div className="single_post_page">
-        <div className="post">
+      <div className={styles.single_post_page}>
+        <button className={styles.filter_toggle_btn} onClick={toggleSidebar}>
+          Filters
+        </button>
+        <div className={styles.post}>
             {post.cover_file && (
-            <div className="post_featured">
+            <div className={styles.post_featured}>
                 <img
                 src={`${uploadsBase}/${post.cover_file}`}
                 alt={post.title}
-                className="post_featured_img"
+                className={styles.post_featured_img}
                 />
             </div>
             )}
-            <div className="blog_meta">
-                <div className="tag">
+            <div className={styles.blog_meta}>
+                <div className={styles.tag}>
                     <span className="material-symbols-outlined">sell</span>
                     <span>Food</span>
                 </div>
-                <div className="author">
+                <div className={styles.author}>
                     <span className="material-symbols-outlined">person</span>
                     <span>By {post.author_name}</span>
                 </div>
-                <div className="cmt">
+                <div className={styles.cmt}>
                     <span className="material-symbols-outlined">chat_bubble</span>
                     <span>65 Comments</span>
                 </div>          
             
             </div>
 
-            <div className="post_title">{post.title}</div>
+            <div className={styles.post_title}>{post.title}</div>
 
-            <div className="post_meta_row">
-                <div className="post_author">
+            <div className={styles.post_meta_row}>
+                <div className={styles.post_author}>
                     <img
                     src={post.author_avatar || '/images/default-avatar.jpg'}
                     alt={post.author_name}
-                    className="post_author_avatar"
+                    className={styles.post_author_avatar}
                     />
-                    <div className="post_author_text">
-                    <span className="post_author_name">{post.author_name}</span>
-                    <span className="post_author_meta">
+                    <div className={styles.post_author_text}>
+                    <span className={styles.post_author_name}>{post.author_name}</span>
+                    <span className={styles.post_author_meta}>
                         {formattedDate} • {readTime} min read
                     </span>
                     </div>
                 </div>
             </div>
 
-            <div className="post_content" dangerouslySetInnerHTML={{ __html: post.content }}/>
+            <div className={styles.post_content} dangerouslySetInnerHTML={{ __html: post.content }}/>
 
             <Comment/>
           
         </div>
-                <Sidebar />
+        <div className={styles.sidebar_drawer}>
+            <div
+              className={`${styles.sidebar_backdrop} ${isSidebarOpen ? styles.show : ''}`}
+              onClick={() => setSidebarOpen(false)}
+            ></div>
+            <div className={`${styles.sidebar_slide} ${isSidebarOpen ? styles.open : ''}`}>
+            <Sidebar />
+          </div>
+        </div>
       </div>
 
       <Footer />

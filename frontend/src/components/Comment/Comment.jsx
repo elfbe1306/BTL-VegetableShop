@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import '../Comment/comment.css'
+import styles from "./comment.module.css"
+import React, { useEffect, useState } from "react";
+import apiService from "../../api";
 
 const CommentForm = () => {
   const [formData, setFormData] = useState({
@@ -55,19 +56,17 @@ const CommentForm = () => {
   };
 
   return (
-    <div className="comment_section">
-      <div className="section_title">Comments</div>
-      <form onSubmit={handleSubmit}>
-        <div className='comment_box'>
-          <textarea
-            name="message"
-            placeholder='Write your comment'
-            value={formData.message}
-            onChange={handleChange}
-          ></textarea>
-          {errors.message && <p>{errors.message}</p>}
-        </div>
-        <button className="subscribe_button" type='submit'>Post Comments</button>
+    <div className="mt-4">
+      <form onSubmit={handleSubmit} className="mb-4">
+        <textarea
+          className="form-control"
+          placeholder="Write your comment here…"
+          rows={4}
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+        />
+        {error && <div className="text-danger small">{error}</div>}
+        <button className={styles.post_button}>Post Comment</button>
       </form>
     </div>
     
