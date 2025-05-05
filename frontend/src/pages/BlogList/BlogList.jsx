@@ -3,11 +3,11 @@ import { useLocation } from 'react-router-dom';
 import Header from '../../components/Header/Header'
 import Footer from '../../components/Footer/Footer'
 import Pagination from '../../components/Pagination/Pagination'
-import "../BlogList/bloglist.css";
+// import "../BlogList/bloglist.css";
 import BlogCard from '../../components/BlogCard/BlogCard'
 import Sidebar from '../../components/BlogSidebar/Sidebar'
 import apiService from '../../api';
-
+import styles from "./bloglist.module.css";
 
 function BlogList() {
     const location = useLocation();
@@ -65,19 +65,19 @@ function BlogList() {
     return(
         <div>
             <Header/>
-            <div className="container">
-              <button className="filter_toggle_btn" onClick={toggleSideBar}>
+            <div className={styles.container}>
+              <button className={styles.filter_toggle_btn} onClick={toggleSideBar}>
                 Filters
               </button>
-              <div className="blog_layout">
-                <div className="sidebar_drawer">
-                  <div className={`sidebar_backdrop ${isSideBarOpen ? 'show' : ''}`} onClick={() => setSideBarOpen(false)}></div>
-                  <div className={`sidebar_slide ${isSideBarOpen ? 'open' : ''}`}>
+              <div className={styles.blog_layout}>
+                <div className={styles.sidebar_drawer}>
+                  <div className={`${styles.sidebar_backdrop} ${isSideBarOpen ? styles.show : ''}`} onClick={() => setSideBarOpen(false)}></div>
+                  <div className={`${styles.sidebar_slide} ${isSideBarOpen ? styles.open : ''}`}>
                     <Sidebar />
                   </div>
                 </div>
-                <main className="blog_content">
-                    <div className="blog_post">
+                <main className={styles.blog_content}>
+                    <div className={styles.blog_post}>
                         {!loading && !error && posts.length === 0 && (
                         <p>No posts found for "{query}"</p>
                         )}
