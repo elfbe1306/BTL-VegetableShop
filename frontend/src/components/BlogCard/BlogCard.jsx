@@ -1,46 +1,49 @@
 import React from 'react';
-import styles from './blogcard.module.css';
+import './BlogCard.css';
 import { Link } from 'react-router-dom';
 
 const BlogCard = ({ id, image, date, category, author, comments, title, link }) => {
     const { day = '', month = '' } = date;
     return (
-      <Link to={`/blog/${id}/${slug}`} className={styles.blog_card_link}>
-        <div className={styles.blog_card}>
-          <div className={styles.blog_card_img}>
-            <img src={image} alt={title} />
-            <div className={styles.blog_date}>
-              <span className={styles.day}>{day}</span>
-              <span className={styles.month}>{month}</span>
+      <Link to={`/blog/${id}`} className="blog_card_link">
+        <div className="blog_card">
+              <div className="blog_card_img">
+                <img src={image} alt={title} />
+                <div className="blog_date">
+                  <span className="day">{date.day}</span>
+                  <span className="month">{date.month}</span>
+                </div>
+              </div>
+
+              <div className="blog_card_content">
+                <div className="blog_meta">
+                    <div className="tag">
+                        <span className="material-symbols-outlined">sell</span>
+                        <span>{category}</span>
+                    </div>
+                    <div className="author">
+                        <span className="material-symbols-outlined">person</span>
+                        <span>By {author}</span>
+                    </div>
+                    <div className="cmt">
+                        <span className="material-symbols-outlined">chat_bubble</span>
+                        <span>{comments} Comments</span>
+                    </div>          
+              
+                </div>
+
+                <div className="blog_title">{title}</div>
+
+                <span className="read_more">
+                  Read More 
+                  <span className="material-symbols-outlined arrow">arrow_right_alt</span>
+                </span>
+
+              </div>
             </div>
-          </div>
-
-          <div className={styles.blog_card_content}>
-            <div className={styles.blog_meta}>
-              <div className={styles.tag}>
-                <span className={`material-symbols-outlined ${styles.customIconStyle}`}>sell</span>
-                <span>{category}</span>
-              </div>
-              <div className={styles.author}>
-                <span className={`material-symbols-outlined ${styles.customIconStyle}`}>person</span>
-                <span>By {author}</span>
-              </div>
-              <div className={styles.cmt}>
-                <span className={`material-symbols-outlined ${styles.customIconStyle}`}>chat_bubble</span>
-                <span>{comments} Comments</span>
-              </div>
-            </div>
-
-            <div className={styles.blog_title}>{title}</div>
-
-            <span className={styles.read_more}>
-              Read More
-              <span className={`material-symbols-outlined ${styles.customIconStyle} ${styles.arrow}`}>arrow_right_alt</span>
-            </span>
-          </div>
-        </div>
       </Link>
-    );
+    
+  );
 };
 
 export default BlogCard;
