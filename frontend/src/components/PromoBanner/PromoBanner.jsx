@@ -9,11 +9,14 @@ const PromoBanner = () => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await apiService.FetchPromotion();
-      setPromotion(response.slice(0,1)[0]);
+  
+      // Pick 1 random item
+      const randomIndex = Math.floor(Math.random() * response.length);
+      setPromotion(response[randomIndex]);
     };
-    
+  
     fetchData();
-  }, [])
+  }, []);
   
 
   return(

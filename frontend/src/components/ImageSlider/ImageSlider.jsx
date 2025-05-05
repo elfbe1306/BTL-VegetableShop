@@ -10,7 +10,13 @@ const ImageSlider = () => {
     useEffect(() => {
         const fetchData = async () => {
             const response = await apiService.FetchPromotion();
-            setSlides(response.slice(0, 3));
+            // Shuffle the array
+            const shuffled = [...response].sort(() => 0.5 - Math.random());
+            // Take the first 3
+            const selected = shuffled.slice(0, 3);
+
+            setSlides(selected);
+
         };
 
         fetchData();
