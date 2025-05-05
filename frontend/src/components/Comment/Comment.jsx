@@ -1,4 +1,4 @@
-import "./comment.css"
+import styles from "./comment.module.css"
 import React, { useEffect, useState } from "react";
 import apiService from "../../api";
 
@@ -46,7 +46,7 @@ export default function CommentSection({ postId }) {
           onChange={(e) => setMessage(e.target.value)}
         />
         {error && <div className="text-danger small">{error}</div>}
-        <button className="post_button">Post Comment</button>
+        <button className={styles.post_button}>Post Comment</button>
       </form>
 
       <h5>Comments</h5>

@@ -1,7 +1,7 @@
-.text-black {
+.text_black {
     color: black !important;
   }
-  .custom-modal-backdrop {
+  .custom_modal_backdrop {
     position: fixed;
     top: 0; left: 0;
     width: 100vw; height: 100vh;
@@ -11,14 +11,15 @@
     justify-content: center;
     align-items: center;
   }
-  .custom-modal {
+  .custom_modal {
     background: white;
     padding: 1rem;
     border-radius: 8px;
     min-width: 300px;
+    color: black;
   }
-  .custom-modal-header,
-  .custom-modal-footer {
+  .custom_modal_header,
+  .custom_modal_footer {
     display: flex;
     justify-content: space-between;
     align-items: center;

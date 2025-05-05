@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import apiService from "../../../api";
-import "./posttable.css"; 
+import styles from "./posttable.module.css"; 
 
 export default function AdminPostTable() {
   const [posts, setPosts] = useState([]);
@@ -40,9 +40,9 @@ export default function AdminPostTable() {
 
   return (
     <>
-      <div className="card">
+      <div className={styles.card}>
         <div className="card-header d-flex justify-content-between align-items-center">
-          <Link to="/admin/posts/create" className="btn btn-success">
+          <Link to="/admin/posts/create" className="btn btn-success mb-3">
             + Add New Post
           </Link>
         </div>
@@ -109,16 +109,16 @@ export default function AdminPostTable() {
       </div>
 
       {showModal && (
-        <div className="custom-modal-backdrop">
-          <div className="custom-modal">
-            <div className="custom-modal-header">
+        <div className={styles.custom_modal_backdrop}>
+          <div className={styles.custom_modal}>
+            <div className={styles.custom_modal_header}>
               <h5>Confirm Delete</h5>
               <button className="btn-close" onClick={() => setShowModal(false)}></button>
             </div>
-            <div className="custom-modal-body">
+            <div className={styles.custom_modal_body}>
               Are you sure you want to delete this post?
             </div>
-            <div className="custom-modal-footer">
+            <div className={styles.custom_modal_footer}>
               <button className="btn btn-secondary" onClick={() => setShowModal(false)}>
                 Cancel
               </button>

@@ -54,7 +54,7 @@ export default function AdminPostForm({ mode }) {
   };
 
   return (
-    <div className="card m-5">
+    <div className="card bg-success m-5 bg-opacity-10">
       <div className="card-header">
         <h4>{isEdit ? 'Edit Post' : 'Create New Post'}</h4>
       </div>

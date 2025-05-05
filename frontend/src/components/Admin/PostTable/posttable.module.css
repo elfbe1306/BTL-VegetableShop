@@ -1,7 +1,9 @@
 .card {
     background-color: #e8f4e8;
+    padding: 40px;
+    border-radius: 5px;
 }
-.custom-modal-backdrop {
+.custom_modal_backdrop {
     position: fixed;
     top: 0;
     left: 0;
@@ -14,7 +16,7 @@
     z-index: 1050;
   }
   
-  .custom-modal {
+  .custom_modal {
     background: white;
     padding: 20px;
     border-radius: 8px;
@@ -24,19 +26,19 @@
     animation: fadeIn 0.2s ease-out;
   }
   
-  .custom-modal-header {
+  .custom_modal_header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     color: black;
   }
   
-  .custom-modal-body {
+  .custom_modal_body {
     margin: 20px 0;
     color: black;
   }
   
-  .custom-modal-footer {
+  .custom_modal_footer {
     display: flex;
     justify-content: flex-end;
     gap: 10px;

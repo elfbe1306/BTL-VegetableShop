@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import apiService from '../../../api';
-import './commenttable.css';
+import styles from './commenttable.module.css';
 
 function CommentsTable() {
   const [comments, setComments] = useState([]);
@@ -61,7 +61,7 @@ function CommentsTable() {
           />
 
           <div className="table-responsive">
-            <table className="table table-striped table-hover table-borderless text-black">
+            <table className={`table table-striped table-hover table-borderless ${styles.text_black}`}>
               <thead>
                 <tr>
                   <th>ID</th>
@@ -105,20 +105,20 @@ function CommentsTable() {
       </div>
 
       {showModal && (
-        <div className="custom-modal-backdrop">
-          <div className="custom-modal">
-            <div className="custom-modal-header">
+        <div className={styles.custom_modal_backdrop}>
+          <div className={styles.custom_modal}>
+            <div className={styles.custom_modal_header}>
               <h5>Confirm Delete</h5>
               <button className="btn-close" onClick={() => setShowModal(false)}></button>
             </div>
-            <div className="custom-modal-body">
+            <div className={styles.custom_modal_body}>
               Are you sure you want to delete this comment?
             </div>
-            <div className="custom-modal-footer">
-              <button className="btn btn-secondary" onClick={() => setShowModal(false)}>
+            <div className={styles.custom_modal_footer}>
+              <button className={`btn btn-secondary`} onClick={() => setShowModal(false)}>
                 Cancel
               </button>
-              <button className="btn btn-danger" onClick={confirmDelete}>
+              <button className={`btn btn-danger`} onClick={confirmDelete}>
                 Delete
               </button>
             </div>
