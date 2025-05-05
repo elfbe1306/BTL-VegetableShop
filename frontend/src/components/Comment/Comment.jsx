@@ -1,4 +1,4 @@
-import styles from "./comment.module.css"
+import "./comment.css"
 import React, { useEffect, useState } from "react";
 import apiService from "../../api";
 
@@ -66,7 +66,7 @@ const CommentForm = () => {
           onChange={(e) => setMessage(e.target.value)}
         />
         {error && <div className="text-danger small">{error}</div>}
-        <button className={styles.post_button}>Post Comment</button>
+        <button className="post_button">Post Comment</button>
       </form>
     </div>
     
