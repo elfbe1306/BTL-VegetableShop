@@ -1,18 +1,40 @@
 import React, { useState } from "react";
 import styles from "../Pagination/pagination.module.css"; 
 
-const Pagination = () => {
-    
+const Pagination = ({ currentPage, totalPages, onPageChange }) => {
+
+  if (totalPages <= 1) return null; 
+
+  const pages = [];
+  for (let i = 1; i <= totalPages; i++) {
+    pages.push(i);
+  }
+
   return (
     <div className={styles.pagination}>
-        <a href="#">&laquo;</a>
-        <a href="#">1</a>
-        <a className={styles.active} href="#">2</a>
-        <a href="#">3</a>
-        <a href="#">4</a>
-        <a href="#">5</a>
-        <a href="#">6</a>
-        <a href="#">&raquo;</a>
+      <button
+        onClick={() => onPageChange(currentPage - 1)}
+        disabled={currentPage === 1}
+      >
+        &laquo;
+      </button>
+
+      {pages.map((page) => (
+        <button
+          key={page}
+          onClick={() => onPageChange(page)}
+          className={page === currentPage ? styles.active : ""}
+        >
+          {page}
+        </button>
+      ))}
+
+      <button
+        onClick={() => onPageChange(currentPage + 1)}
+        disabled={currentPage === totalPages}
+      >
+        &raquo;
+      </button>
     </div>
   );
 };

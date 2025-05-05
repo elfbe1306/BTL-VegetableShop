@@ -13,28 +13,54 @@ function BlogList() {
     const location = useLocation();
     const query = new URLSearchParams(location.search).get('query');
     const [posts, setPosts]     = useState([]);
+    const [totalPosts, setTotalPosts] = useState(0);
     const [page, setPage]       = useState(1);
     const [loading, setLoading] = useState(true);
     const [error, setError]     = useState("");
     const uploadsBase = apiService.api.defaults.baseURL.replace('api.php', 'uploads');
   
     useEffect(() => {
-        setLoading(true);
-        const fetch = query
-          ? apiService.searchPosts(query)
-          : apiService.fetchPostList(page, 8);
-      
-        fetch
-          .then(data => {
-            setPosts(data);
-            setError("");
-          })
-          .catch(err => {
-            console.error(err);
-            setError("Could not load posts.");
-          })
-          .finally(() => setLoading(false));
+      setLoading(true);
+      const fetch = query
+        ? apiService.searchPosts(query)
+        : apiService.fetchPostList(page, 8);
+    
+      fetch
+        .then(async (data) => {
+          let rawPosts = query ? data : data.posts;
+          const postsWithCounts = await Promise.all(
+            rawPosts.map(async (post) => {
+              try {
+                const count = await apiService.fetchCommentCount(post.id);
+                return { ...post, comments: count };
+              } catch (err) {
+                console.error(`Error fetching comment count for post ${post.id}`, err);
+                return { ...post, comments: 0 };
+              }
+            })
+          );
+    
+          setPosts(postsWithCounts);
+          setTotalPosts(query ? data.length : data.totalPosts);
+          setError("");
+        })
+        .catch(err => {
+          console.error(err);
+          setError("Could not load posts.");
+        })
+        .finally(() => setLoading(false));
     }, [page, query]);
+    
+
+    const postsPerPage = 8;
+    const totalPages = Math.ceil(totalPosts / postsPerPage);
+    const [isSideBarOpen, setSideBarOpen] = useState(false);
+    const toggleSideBar = () => {
+      setSideBarOpen(!isSideBarOpen);
+    };
+    useEffect(() => {
+      document.body.style.overflow = isSideBarOpen ? 'hidden' : '';
+    }, [isSideBarOpen]);
     
     return(
         <div>
@@ -68,9 +94,16 @@ function BlogList() {
                                 slug={p.slug}
                         />
                         ))}
-                      </div>
-                    </main>
-                </div>
+                    </div>
+                    {!query && (
+                    <Pagination
+                        currentPage={page}
+                        totalPages={totalPages || 1}          
+                        onPageChange={(newPage) => setPage(newPage)}
+                    />
+                    )}
+                </main>
+              </div>
 
             </div>
             <Footer/>

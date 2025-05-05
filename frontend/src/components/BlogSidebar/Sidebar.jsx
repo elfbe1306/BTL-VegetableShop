@@ -5,36 +5,29 @@ import apiService from '../../api';
 
 import styles from './sidebar.module.css';
 
-
-
-const categories = [
-  { name: 'Fresh Fruit', count: 134 },
-  { name: 'Vegetables', count: 150 },
-  { name: 'Cooking', count: 54 },
-  { name: 'Snacks', count: 47 },
-  { name: 'Beverages', count: 43 },
-  { name: 'Beauty & Health', count: 38 },
-  { name: 'Bread & Bakery', count: 15 },
-];
-
-
 const Sidebar = () => {
   const [activeTag, setActiveTag] = useState(null);
   const [recentPosts, setRecentPosts] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [tags, setTags] = useState([]);
+  const [categories, setCategories] = useState([]);
   const uploadsBase = apiService.api.defaults.baseURL.replace('api.php', 'uploads');
 
   useEffect(() => {
     apiService
       .fetchPostList(1, 3)
-      .then((data) => setRecentPosts(data))
+      .then((data) => setRecentPosts(data.posts))
       .catch((err) => console.error("Failed to load recent posts", err));
 
     apiService
       .fetchTags()
       .then((data) => setTags(data))
       .catch((err) => console.error("Failed to load tags", err));
+
+    apiService
+      .fetchTagCounts()
+      .then((data) => setCategories(data))
+      .catch((err) => console.error("Failed to load categories", err));
   }, []);
 
   const navigate = useNavigate();
@@ -76,7 +69,7 @@ const Sidebar = () => {
           {tags.map((tag, idx) => (
             <span
               key={idx}
-              className={`${styles.tag_item} ${activeTag === tag ? styles.active : ''}`}
+              className={`${styles.tag_item} ${activeTag === tag ? styles.tag_item.active : ''}`}
               onClick={() => {
                 setActiveTag(tag);
                 navigate(`/blog?query=${encodeURIComponent(tag)}`);

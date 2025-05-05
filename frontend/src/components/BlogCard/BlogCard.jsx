@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './blogcard.module.css';
 import { Link } from 'react-router-dom';
 
-const BlogCard = ({ id, image, date, category, author, comments, title, link }) => {
+const BlogCard = ({ id, image, date, category, author, comments, title, slug }) => {
     const { day = '', month = '' } = date;
     return (
       <Link to={`/blog/${id}/${slug}`} className={styles.blog_card_link}>
