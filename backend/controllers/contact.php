@@ -8,7 +8,7 @@ function CreateContact($conn, $jwtToken, $userData) {
     $decoded = JWT::decode($jwtToken, new Key($key, 'HS256'));
     $userID = $decoded->userId ?? null;
 
-    $sql = "INSERT INTO `contacts` (`customer_id`, `phonenum`, `subject`, `content`) VALUES (?, ?, ?, ?);";
+    $sql = "INSERT INTO `contacts` (`customer_id`, `phonenum`, `subject`, `content`, `status`) VALUES (?, ?, ?, ?, ?);";
 
     $stmt = $conn->prepare($sql);
 
@@ -16,7 +16,9 @@ function CreateContact($conn, $jwtToken, $userData) {
         return "Error: Unable to prepare statement.";
     }
 
-    $stmt->bind_param("isss", $userID, $userData['phonenum'], $userData['subject'], $userData['content']);
+    $status = "Unread";
+
+    $stmt->bind_param("issss", $userID, $userData['phonenum'], $userData['subject'], $userData['content'], $status);
 
     if ($stmt->execute()) {
         return array("message" => "Your question is successfully sent", "success" => true);
@@ -63,7 +65,8 @@ function FetchContact($conn) {
                 useraccount.name, 
                 contacts.phonenum, 
                 contacts.subject, 
-                contacts.content
+                contacts.content,
+                contacts.status
             FROM contacts
             INNER JOIN useraccount ON contacts.customer_id = useraccount.id";
 
@@ -95,6 +98,42 @@ function deleteContact($conn, $id) {
     } else {
         return ["success" => false, "error" => $stmt->error];
     }
+}
+
+function ChangeContactToRead($conn, $ContactID) {
+    $sql = "UPDATE contacts SET status=? WHERE id=?";
+
+    $newStatus = "Read";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("si", $newStatus, $ContactID);
+    $stmt->execute();
+
+    return ["success" => true, "message" => "Successfully changed to Read"];
+}
+
+function ChangeContactToUnRead($conn, $ContactID) {
+    $sql = "UPDATE contacts SET status=? WHERE id=?";
+
+    $newStatus = "Unread";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("si", $newStatus, $ContactID);
+    $stmt->execute();
+
+    return ["success" => true, "message" => "Successfully changed to Unread"];
+}
+
+function ChangeContactToComplete($conn, $ContactID) {
+    $sql = "UPDATE contacts SET status=? WHERE id=?";
+
+    $newStatus = "Complete";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("si", $newStatus, $ContactID);
+    $stmt->execute();
+
+    return ["success" => true, "message" => "Successfully changed to Complete"];
 }
 
 ?>

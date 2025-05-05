@@ -549,6 +549,36 @@ class ApiService {
       throw err;
     }
   }
+
+  async ChangeContactStatusToUnread(ContactId) {
+    try {
+      const response = await this.api.post('?action=changecontact2unread', { ContactId: ContactId });
+      return response.data;
+    } catch(error) {
+      console.error("Error changing contact to read", error);
+      throw error;
+    }
+  }
+
+  async ChangeContactStatusToRead(ContactId) {
+    try {
+      const response = await this.api.post('?action=changecontact2read', { ContactId: ContactId });
+      return response.data;
+    } catch(error) {
+      console.error("Error changing contact to unread", error);
+      throw error;
+    }
+  }
+  
+  async ChangeContactStatusToComplete(ContactId) {
+    try {
+      const response = await this.api.post('?action=changecontact2complete', { ContactId: ContactId });
+      return response.data;
+    } catch(error) {
+      console.error("Error changing contact to complete", error);
+      throw error;
+    }
+  }
 }
 
 

@@ -4,7 +4,7 @@ import Header from "../../components/Admin/Header/Header";
 import SideBar from '../../components/Admin/SideBar/SideBar';
 import apiService from '../../api';
 import { motion } from "framer-motion";
-import { Search } from "lucide-react";
+import { Search, BookCheck, Mail, Check, Trash2 } from "lucide-react";
 
 const AdminContact = () => {
     const [searchTerm, setSearchTerm] = useState("");
@@ -32,6 +32,27 @@ const AdminContact = () => {
             if(response.success) {
                 await fetchData();
             }
+        }
+    }
+
+    const handleChangeToUnread = async (ContactId) => {
+        const response = await apiService.ChangeContactStatusToUnread(ContactId)
+        if(response.success) {
+            await fetchData();
+        }
+    }
+
+    const handleChangeToRead = async (ContactId) => {
+        const response = await apiService.ChangeContactStatusToRead(ContactId)
+        if(response.success) {
+            await fetchData();
+        }
+    }
+
+    const handleChangeToComplete = async (ContactId) => {
+        const response = await apiService.ChangeContactStatusToComplete(ContactId)
+        if(response.success) {
+            await fetchData();
         }
     }
 
@@ -64,7 +85,7 @@ const AdminContact = () => {
                         <table className={styles.table}>
                             <thead>
                             <tr>
-                                {["Name", "Phone Number", "Subject", "Message", ""].map((head) => (
+                                {["Name", "Phone Number", "Subject", "Message", "Status", "Action"].map((head) => (
                                 <th key={head} className={styles.th}>
                                     {head}
                                 </th>
@@ -83,10 +104,20 @@ const AdminContact = () => {
                                 <td className={styles.td}>{user.phonenum}</td>
                                 <td className={styles.td}>{user.subject}</td>
                                 <td className={styles.td}>{user.content}</td>
-                                <td>
-                                    <button className={styles.deleteBtn}
-                                    onClick={() => handleSubmitContact(user.id)}
-                                    >Delete</button>
+                                <td className={styles.td}>{user.status}</td>
+                                <td className={styles.buttonContainer}>
+                                    <button className={styles.deleteBtn} onClick={() => handleSubmitContact(user.id)}>
+                                        <Trash2/>
+                                    </button>
+                                    <button className={styles.UnRead} onClick={() => handleChangeToUnread(user.id)}>
+                                        <Mail color='orange'/>
+                                    </button>
+                                    <button className={styles.Read} onClick={() => handleChangeToRead(user.id)}>
+                                        <BookCheck color='pink'/>
+                                    </button>
+                                    <button className={styles.Complete} onClick={() => handleChangeToComplete(user.id)}>
+                                        <Check color='green'/>
+                                    </button>
                                 </td>
                                 </motion.tr>
                             ))}

@@ -424,6 +424,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             break;
 
+        case 'changecontact2unread':
+            if (isset($data['ContactId'])) {
+                echo json_encode(ChangeContactToUnRead($conn, (int) $data['ContactId']));
+            } else {
+                http_response_code(400);
+                echo json_encode(["error" => "Missing contact id"]);
+            }
+            break;
+
+        case 'changecontact2read':
+            if (isset($data['ContactId'])) {
+                echo json_encode(ChangeContactToRead($conn, (int) $data['ContactId']));
+            } else {
+                http_response_code(400);
+                echo json_encode(["error" => "Missing contact id"]);
+            }
+            break;
+        
+        case 'changecontact2complete':
+            if (isset($data['ContactId'])) {
+                echo json_encode(ChangeContactToComplete($conn, (int) $data['ContactId']));
+            } else {
+                http_response_code(400);
+                echo json_encode(["error" => "Missing contact id"]);
+            }
+            break;
+
         default:
             http_response_code(404);
             echo json_encode(["error" => "Invalid route"]);

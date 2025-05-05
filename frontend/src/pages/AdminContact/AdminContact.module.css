@@ -105,9 +105,23 @@ display: flex;
 align-items: center;
 }
 
+.buttonContainer {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    margin-top: 15px;
+}
+
+.buttonContainer button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
 .deleteBtn {
     color: #f87171;
     cursor: pointer;
     background-color: transparent;
     border: none;
+    margin-left: 20px;
 }
