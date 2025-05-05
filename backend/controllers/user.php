@@ -201,4 +201,22 @@ function ChangePassword($conn, $jwtToken, $newPassword) {
 
 
     
+    function deleteUserAccount($conn, $id) {
+        // Xóa reviews trước
+        $stmt1 = $conn->prepare("DELETE FROM reviews WHERE user_id = ?");
+        $stmt1->bind_param("i", $id);
+        if (!$stmt1->execute()) {
+            return ["success" => false, "error" => $stmt1->error];
+        }
+    
+        // Sau đó xóa user
+        $stmt2 = $conn->prepare("DELETE FROM useraccount WHERE role = 'customer' AND id = ?");
+        $stmt2->bind_param("i", $id);
+        if ($stmt2->execute()) {
+            return ["success" => true];
+        } else {
+            return ["success" => false, "error" => $stmt2->error];
+        }
+    }
+    
 ?>

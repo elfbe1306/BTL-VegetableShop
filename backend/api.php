@@ -351,6 +351,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo json_encode(["error" => "Missing product ID"]);
             }
             break;
+                
+        case 'deleteUser':
+            if (isset($data['id'])) {
+                echo json_encode(deleteUserAccount($conn, (int)$data['id']));
+            } else {
+                http_response_code(400);
+                echo json_encode(["error" => "Missing user id"]);
+            }
+            break;
             
         case 'getuserinfo':
             if (isset($data['userID'])) {

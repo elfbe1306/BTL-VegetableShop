@@ -82,7 +82,12 @@ const UsersTable = () => {
                 </td>
 
                 <td className={styles.td}>
-                  <button className={styles.deleteBtn}>Delete</button>
+                  <button className={styles.deleteBtn} onClick={async () => {
+                                if (window.confirm("Are you sure you want to delete this user account?")) {
+                                await apiService.DeleteUserAccount(user.id);
+                                setFilteredUsers(await apiService.FetchAdminAccount());
+                                }
+                            }}>Delete</button>
                 </td>
               </motion.tr>
             ))}
