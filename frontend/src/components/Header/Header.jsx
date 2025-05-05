@@ -22,9 +22,14 @@ const Header = () => {
   const getPageTitle = () => {
     const pathnames = location.pathname.split('/').filter(Boolean);
     const lastSegment = pathnames[pathnames.length - 1] || '';
+    const secondLastSegment = pathnames[pathnames.length - 2] || '';
 
     if (location.pathname.startsWith('/vegetable/') && productName) {
       return 'Vegetable/' + `${formatProductName(productName)}`;
+    }
+
+    if (location.pathname.startsWith('/blog/') && !isNaN(secondLastSegment)) {
+      return 'Single Post';
     }
 
     switch (lastSegment) {
@@ -43,12 +48,10 @@ const Header = () => {
       case 'singlepost':
         return 'Single Blog';
       default:
-        if (!isNaN(lastSegment)) {
-          return 'Single Blog';
-        }
         return lastSegment.charAt(0).toUpperCase() + lastSegment.slice(1) || 'Home';
     }
   };
+
 
   const [productCount, setProductCount] = useState(0);
   const [productPrice, setProductPrice] = useState(0);
@@ -146,11 +149,11 @@ const Header = () => {
           <i className="ri-user-line favorite_icon" onClick={handleClick} style={{ cursor: 'pointer' }}></i>
           <span className="divider"></span>
             <Link className="cart" to={'/cart'}>
-              <span className="material-symbols-outlined cart-icon">shopping_bag</span>
-              <span className="cart-badge">{productCount}</span>
+              <span className="material-symbols-outlined cart_icon">shopping_bag</span>
+              <span className="cart_badge">{productCount}</span>
               <div>
-                <div className="cart-text">Shopping cart:</div>
-                <div className="cart-value">${productPrice}</div>
+                <div className="cart_text">Shopping cart:</div>
+                <div className="cart_value">${productPrice}</div>
               </div>
             </Link>
         </div>
@@ -175,7 +178,7 @@ const Header = () => {
       </nav>
 
       <div className="breadcrumb">
-        <div className="breadcrumb-address">
+        <div className="breadcrumb_address">
             <span className="material-symbols-outlined">home</span>
             <span className="material-symbols-outlined">chevron_right</span>
             {location.pathname === '/checkout' ? (
@@ -190,8 +193,14 @@ const Header = () => {
                 <span className="material-symbols-outlined">chevron_right</span>
                 <span className="page">{formatProductName(productName)}</span>
               </>
+            ) : location.pathname.startsWith('/blog/') ? (
+              <>
+                <a href="/blog" className="breadcrumb-link">Blog</a>
+                <span className="material-symbols-outlined">chevron_right</span>
+                <span className="page">{getPageTitle()}</span>
+              </>
             ) : (
-              <span className="page">{getPageTitle()}</span>
+              <a href={location.pathname} className="page">{getPageTitle()}</a>
             )}
         </div>
       </div>

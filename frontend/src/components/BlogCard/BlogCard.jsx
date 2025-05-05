@@ -2,10 +2,10 @@ import React from 'react';
 import './BlogCard.css';
 import { Link } from 'react-router-dom';
 
-const BlogCard = ({ id, image, date, category, author, comments, title, link }) => {
+const BlogCard = ({ id, image, date, category, author, comments, title, slug }) => {
     const { day = '', month = '' } = date;
     return (
-      <Link to={`/blog/${id}`} className="blog_card_link">
+      <Link to={`/blog/${id}/${slug}`} className="blog_card_link">
         <div className="blog_card">
               <div className="blog_card_img">
                 <img src={image} alt={title} />

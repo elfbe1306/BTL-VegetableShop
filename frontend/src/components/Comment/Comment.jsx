@@ -1,77 +1,70 @@
-import React, { useState } from 'react';
-import '../Comment/comment.css'
+import "./comment.css"
+import React, { useEffect, useState } from "react";
+import apiService from "../../api";
 
-const CommentForm = () => {
-  const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    message: '',
-    saveInfo: false,
-  });
-
-  const [errors, setErrors] = useState({});
-
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === 'checkbox' ? checked : value,
-    });
+export default function CommentSection({ postId }) {
+  const [comments, setComments] = useState([]);
+  const [message, setMessage]   = useState("");
+  const [error, setError]       = useState("");
+  const token = localStorage.getItem("userID");
+  const loadComments = async () => {
+    try {
+      const data = await apiService.fetchComments(postId);
+      setComments(data);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
-  const validate = () => {
-    let tempErrors = {};
-    if (!formData.fullName) tempErrors.fullName = 'Full Name is required';
-    if (!formData.email) tempErrors.email = 'Email is required';
-    else if (!/\S+@\S+\.\S+/.test(formData.email)) tempErrors.email = 'Email is invalid';
-    if (!formData.message) tempErrors.message = 'Message is required';
-    return tempErrors;
-  };
+  useEffect(() => {
+    loadComments();
+  }, [postId]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const validationErrors = validate();
-    if (Object.keys(validationErrors).length === 0) {
-      try {
-        const response = await fetch('server.php', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData),
-        });
-        const result = await response.json();
-        if (result.success) {
-          alert('Comment posted successfully');
-        } else {
-          alert('Error posting comment');
-        }
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    } else {
-      setErrors(validationErrors);
+    if (!message.trim()) {
+      setError("Comment cannot be empty.");
+      return;
+    }
+    try {
+      await apiService.postComment(postId, token, message.trim());
+      setMessage("");
+      loadComments();
+    } catch (e) {
+      setError(e.response?.data?.error || e.message);
     }
   };
 
   return (
-    <div className="comment_section">
-      <div className="section_title">Comments</div>
-      <form onSubmit={handleSubmit}>
-        <div className='comment_box'>
-          <textarea
-            name="message"
-            placeholder='Write your comment'
-            value={formData.message}
-            onChange={handleChange}
-          ></textarea>
-          {errors.message && <p>{errors.message}</p>}
-        </div>
-        <button className="subscribe_button" type='submit'>Post Comments</button>
+    <div className="mt-4">
+      <form onSubmit={handleSubmit} className="mb-4">
+        <textarea
+          className="form-control"
+          placeholder="Write your comment here…"
+          rows={4}
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+        />
+        {error && <div className="text-danger small">{error}</div>}
+        <button className="post_button">Post Comment</button>
       </form>
-    </div>
-    
-  );
-};
 
-export default CommentForm;
+      <h5>Comments</h5>
+      <div>
+        {comments.length === 0 && (
+          <p className="text-muted">No comments yet.</p>
+        )}
+        {comments.map((c) => (
+          <div key={c.id} className="border-bottom py-2">
+            <strong>{c.user_name}</strong>{" "}
+            <small className="text-muted">
+              • {new Date(c.created_at).toLocaleDateString()}
+            </small>
+            <p className="mb-1">{c.message}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+

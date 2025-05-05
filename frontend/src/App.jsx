@@ -24,6 +24,10 @@ import AdminOrder from './pages/AdminOrders/AdminOrder'
 import AdminSales from './pages/AdminSales/AdminSales'
 
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
+import AdminBlog from './pages/AdminBlog/AdminBlog'
+import AdminCreatePost from './pages/AdminBlog/AdminCreatePost'
+import AdminEditPost from './pages/AdminBlog/AdminEditPost'
+import AdminComment from './pages/AdminComment/AdminComment'
 
 function App() {
   return (
@@ -78,11 +82,32 @@ function App() {
           </ProtectedRoute>
         }/>
         
+        <Route path="/admin/blog" element={
+          <ProtectedRoute allowedRoles={['Admin']}>
+            <AdminBlog />
+          </ProtectedRoute>
+        }/>
+        <Route path="/admin/posts/create" element={
+          <ProtectedRoute allowedRoles={['Admin']}>
+            <AdminCreatePost />
+          </ProtectedRoute>
+        }/>
+
+        <Route path="/admin/posts/edit/:id" element={
+          <ProtectedRoute allowedRoles={['Admin']}>
+            <AdminEditPost />
+          </ProtectedRoute>
+        }/>
+        <Route path="/admin/comment" element={
+          <ProtectedRoute allowedRoles={['Admin']}>
+            <AdminComment />
+          </ProtectedRoute>
+        }/>
         <Route path="/vegetable" element={<ListProduct/>}/>
         <Route path="/vegetable/search/:searchText" element={<ListProduct/>} />
         <Route path="/blog" element={<BlogList/>} />
-        <Route path="/blog/:postId" element={<SinglePost />} />
         <Route path="/vegetable/detail/:productName" element={<ProductDetail/>} />
+        <Route path="/blog/:postId/:slug" element={<SinglePost />} />
         <Route path="/cart" element={<Cart/>}/>
         <Route path="/checkout" element={<Checkout/>}/>
         <Route path="/contact" element={<ContactPage/>} />
