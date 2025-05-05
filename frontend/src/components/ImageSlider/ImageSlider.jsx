@@ -28,7 +28,7 @@ const ImageSlider = () => {
 
     return (
         <div className={styles.sliderContainer}>
-            <img src={current.image ? `http://localhost/BTL-VegetableShop/backend/uploads/promotion/${current.image}2.png`: "image"} alt="Slide" />
+            <img src={current.image ? `http://localhost/BTL-VegetableShop/backend/uploads/promotion/${current.image}2.png`: ""} alt="Slide" />
 
             <div className={styles.content}>
                 <p className={styles.contentTitle}>{current.description || ""}</p>

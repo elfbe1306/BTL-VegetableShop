@@ -36,73 +36,15 @@ class ApiService {
     return data;
   }
 
-  async createPost(formData) {
-    const { data } = await this.api.post('?action=createpost', formData, {
-      headers: { 'Content-Type': 'multipart/form-data' }
-    });
-    if (data.error) throw new Error(data.error);
-    return data;
-  }
-  
-  async updatePost(id, formData) {
-    const { data } = await this.api.post(`?action=updatepost&id=${id}`, formData, {
-      headers: { 'Content-Type': 'multipart/form-data' }
-    });
-    if (data.error) throw new Error(data.error);
-    return data;
-  }
-  
   async fetchTags() {
     const { data } = await this.api.get(`?action=fetchtags`);
     return data;
   }
-  async fetchTagCounts() {
-    const { data } = await this.api.get(`?action=fetchtagcounts`);
-    return data;
-  }
-  
 
   async searchPosts(query) {
     const { data } = await this.api.get(`?action=searchposts&query=${encodeURIComponent(query)}`);
     return data;
   }
-
-  async deletePost(postId) {
-    const { data } = await this.api.post(`?action=deletepost`, { id: postId });
-    if (data.error) throw new Error(data.error);
-    return data;
-  }
-
-  async fetchComments(postId) {
-    const { data } = await this.api.get(`?action=fetchcomments&postId=${postId}`);
-    return data; 
-  }
-
-  async fetchAllComments() {
-    const { data } = await this.api.get(`?action=fetchallcomments`);
-    if (data.error) throw new Error(data.error);
-    return data;
-  }  
-
-  async fetchCommentCount(postId) {
-    const { data } = await this.api.get(`?action=fetchcommentcount&postId=${postId}`);
-    if (data.error) throw new Error(data.error);
-    return data.count;
-  }
-  
-  async postComment(postId, token, message) {
-    const { data } = await this.api.post(`?action=postcomment`, {
-      postId, token, message
-    });
-    if (data.error) throw new Error(data.error);
-    return data;
-  }
-
-  async deleteComment(commentId) {
-    const { data } = await this.api.post(`?action=deletecomment`, { id: commentId });
-    if (data.error) throw new Error(data.error);
-    return data;
-  }  
 
   async FetchReview() {
     try {

@@ -128,8 +128,8 @@
     font-family: 'Poppins', sans-serif;
 }
 
-.favorite_icon,
-.cart_icon {
+.favorite-icon,
+.cart-icon {
     font-size: 28px;
     cursor: pointer;
 }
@@ -148,7 +148,7 @@
     color: black;
 }
 
-.cart_badge {
+.cart-badge {
     position: absolute;
     top: -5px;
     left: 14px;
@@ -164,12 +164,12 @@
     border: 2px solid white;
 }
 
-.cart_text {
+.cart-text {
     font-size: 11px;
     color: #4d4d4d;
 }
 
-.cart_value {
+.cart-value {
     font-size: 14px;
     font-weight: 500;
 }
@@ -216,25 +216,24 @@
     padding: 10px 5%;
 }
 
-.breadcrumb_address {
+.breadcrumb-address {
     display: flex;
     align-items: center;
     gap: 8px;
     font-size: 16px;
 }
 
-.breadcrumb_address a {
+.breadcrumb-address a {
     text-decoration: none;
     color:#00B207;
 }
 
-.breadcrumb_address .material-symbols-outlined{
+.breadcrumb-address .material-symbols-outlined{
     font-weight: 200;
     color: #808080;
 }
 .page {
     color: #00B207; 
-    font-size: 16px;
 }
 
 .hamburger {

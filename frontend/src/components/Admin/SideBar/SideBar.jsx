@@ -1,4 +1,4 @@
-import { BarChart2, Phone, Menu, Settings, ShoppingBag, CircleUser, Users, House, CircleHelp, Newspaper, Truck, BadgePercent, MessageSquareText } from 'lucide-react';
+import { BarChart2, Phone, Menu, Settings, ShoppingBag, CircleUser, Users, House, CircleHelp, Newspaper, Truck, BadgePercent } from 'lucide-react';
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -12,8 +12,7 @@ const SIDEBAR_ITEMS = [
   { name: "Orders", icon: Truck, color: "#3B82F6", href: "/admin/orders" },
   { name: "Sales", icon: BadgePercent, color: "red", href: "/admin/sales" },
   { name: "FaQs", icon: CircleHelp, color: "#EC4899", href: "/admin/faqs" },
-  { name: "Blog", icon: Newspaper, color: "#10B981", href: "/admin/blog" },
-  { name: "Comment", icon: MessageSquareText, color: "#10B981", href: "/admin/comment" },
+  { name: "Blog", icon: Newspaper, color: "#10B981", href: "/sales" },
   { name: "About Us", icon: Users, color: "#F59E0B", href: "/admin/about" },
   { name: "Contact Us", icon: Phone, color: "#3B82F6", href: "/admin/contact" },
 ];

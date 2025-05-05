@@ -41,32 +41,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             }
             echo json_encode(fetchPostById($conn, $id));
             break;
-
         case 'fetchpostlist':
             $page   = isset($_GET['page'])  ? max(1, (int)$_GET['page'])  : 1;
             $limit  = isset($_GET['limit']) ? max(1, (int)$_GET['limit']) : 8;
             $offset = ($page - 1) * $limit;
-        
-            $totalQuery = $conn->query("SELECT COUNT(*) AS total FROM posts");
-            $totalRow = $totalQuery->fetch_assoc();
-            $totalPosts = (int) $totalRow['total'];
-        
-            $posts = fetchPostList($conn, $limit, $offset);
-        
-            $result = [
-                "posts" => $posts,
-                "totalPosts" => $totalPosts
-            ];
-        
-            echo json_encode($result, JSON_UNESCAPED_SLASHES);
+            echo json_encode(fetchPostList($conn, $limit, $offset));
             break;
-            
-
         case 'fetchtags':
             echo json_encode(fetchAllTags($conn));
-            break;
-        case 'fetchtagcounts':
-            echo json_encode(fetchTagCounts($conn));
             break;
         case 'searchposts':
             $query = isset($_GET['query']) ? trim($_GET['query']) : '';
@@ -76,29 +58,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 echo json_encode(searchPosts($conn, $query));
             }
             break;
-        case 'fetchcomments':
-            $postId = (int)($_GET['postId'] ?? 0);
-            echo json_encode(fetchComments($conn, $postId));
-            break;
-
-        case 'fetchallcomments':
-            echo json_encode(fetchAllComments($conn));
-            break;
-
-        case 'fetchcommentcount':
-            $postId = isset($_GET['postId']) ? (int)$_GET['postId'] : 0;
-            if ($postId < 1) {
-                http_response_code(400);
-                echo json_encode(["error" => "Invalid postId"]);
-                break;
-            }
-            $stmt = $conn->prepare("SELECT COUNT(*) as count FROM comments WHERE post_id = ?");
-            $stmt->bind_param("i", $postId);
-            $stmt->execute();
-            $result = $stmt->get_result()->fetch_assoc();
-            echo json_encode(["count" => (int)$result['count']]);
-            break;
-
         case 'fetchquestions':
             echo json_encode(fetchQuestions($conn));
             break;
@@ -465,80 +424,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             break;
 
-        case 'createpost':
-            echo json_encode(createPost($conn, $_POST, $_FILES));
-            break;
-        
-        case 'updatepost':
-            $id = (int) ($_GET['id'] ?? 0);
-            echo json_encode(updatePost($conn, $id, $_POST, $_FILES));
-            break;
-            
-        case 'deletepost':
-            $input = json_decode(file_get_contents("php://input"), true);
-            $id = (int) ($input['id'] ?? 0);
-        
-            if ($id < 1) {
-                http_response_code(400);
-                echo json_encode(["error" => "Invalid post ID"]);
-                break;
-            }
-        
-            $stmt = $conn->prepare("SELECT file_name FROM images WHERE post_id = ?");
-            $stmt->bind_param("i", $id);
-            $stmt->execute();
-            $res = $stmt->get_result();
-            $image = $res->fetch_assoc();
-        
-            if ($image && !empty($image['file_name'])) {
-                $filePath = __DIR__ . '/uploads/postsImg/' . $image['file_name'];
-                if (file_exists($filePath)) {
-                    unlink($filePath); 
-                }
-            }
-            $stmt = $conn->prepare("DELETE FROM images WHERE post_id = ?");
-            $stmt->bind_param("i", $id);
-            $stmt->execute();
-        
-            $stmt = $conn->prepare("DELETE FROM posts WHERE id = ?");
-            $stmt->bind_param("i", $id);
-            $stmt->execute();
-        
-            echo json_encode(["success" => true]);
-            break;
-        
-        case 'postcomment':
-            $data = json_decode(file_get_contents("php://input"), true);
-            $jwtToken = $data['token'] ?? null;
-
-            if (!$jwtToken) {
-                http_response_code(401);
-                echo json_encode(["error" => "Missing token"]);
-                exit;
-            }
-            $userId = decodeJwtUserId($jwtToken);
-            if (!$userId) {
-              http_response_code(401);
-              echo json_encode(["error"=>"Invalid token"]);
-              exit;
-            }
-            $postId  = (int)($data['postId']  ?? 0);
-            $message = trim($data['message'] ?? '');
-            echo json_encode(postComment($conn, $postId, $userId, $message));
-            break;
-        
-        case 'deletecomment':
-            $input = json_decode(file_get_contents("php://input"), true);
-            $id = (int)($input['id'] ?? 0);
-            $stmt = $conn->prepare("DELETE FROM comments WHERE id = ?");
-            $stmt->bind_param("i", $id);
-            $stmt->execute();
-            echo json_encode(['success' => true]);
-            break;
-              
         default:
-        http_response_code(404);
-        echo json_encode(["error" => "Invalid route"]);
+            http_response_code(404);
+            echo json_encode(["error" => "Invalid route"]);
     }
 }
 

@@ -4,8 +4,8 @@ import apiService from '../../api';
 import Header from '../../components/Header/Header';
 import Sidebar from '../../components/BlogSidebar/Sidebar';
 import Footer from '../../components/Footer/Footer';
+import Comment from '../../components/Comment/Comment'
 import '../SinglePost/singlepost.css';
-import CommentSection from '../../components/Comment/Comment';
 
 
 export default function SinglePost() {
@@ -14,24 +14,14 @@ export default function SinglePost() {
   const [post, setPost]       = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError]     = useState('');
-  const [commentCount, setCommentCount] = useState(0);
-  const [isSidebarOpen, setSidebarOpen] = useState(false);
-  const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
-  
 
   useEffect(() => {
-    setLoading(true);
     apiService
       .fetchPostById(postId)
-      .then(data => {
-        setPost(data);
-        return apiService.fetchCommentCount(postId);
-      })
-      .then(count => setCommentCount(count))
+      .then(data => setPost(data))
       .catch(err => setError(err.message))
       .finally(() => setLoading(false));
   }, [postId]);
-  
 
   if (loading) {
     return (
@@ -78,14 +68,12 @@ export default function SinglePost() {
   const formattedDate = new Date(post.created_at)
     .toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
 
+
   return (
     <>
       <Header />
 
       <div className="single_post_page">
-        <button className="filter_toggle_btn" onClick={toggleSidebar}>
-          Filters
-        </button>
         <div className="post">
             {post.cover_file && (
             <div className="post_featured">
@@ -99,7 +87,7 @@ export default function SinglePost() {
             <div className="blog_meta">
                 <div className="tag">
                     <span className="material-symbols-outlined">sell</span>
-                    <span>{post.tag}</span>
+                    <span>Food</span>
                 </div>
                 <div className="author">
                     <span className="material-symbols-outlined">person</span>
@@ -107,7 +95,7 @@ export default function SinglePost() {
                 </div>
                 <div className="cmt">
                     <span className="material-symbols-outlined">chat_bubble</span>
-                    <span>{commentCount} Comments</span>
+                    <span>65 Comments</span>
                 </div>          
             
             </div>
@@ -132,15 +120,10 @@ export default function SinglePost() {
 
             <div className="post_content" dangerouslySetInnerHTML={{ __html: post.content }}/>
 
-            <CommentSection postId={post.id}/>
+            <Comment/>
           
         </div>
-        <div className="sidebar_drawer">
-          <div className={`sidebar_backdrop ${isSidebarOpen ? "show" : ""}`} onClick={() => setSidebarOpen(false)}></div>
-          <div className={`sidebar_slide ${isSidebarOpen ? "open" : ""}`}>
-            <Sidebar />
-          </div>
-        </div>
+                <Sidebar />
       </div>
 
       <Footer />

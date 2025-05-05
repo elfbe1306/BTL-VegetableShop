@@ -209,7 +209,7 @@
     .footer_column{
         text-align: center;
     }
-    .footer_container .footer_column:nth-child(n+2) {
+    .footer_container .footer-column:nth-child(n+2) {
         display: none;
     }
     .logo, .contact_info{
