@@ -502,6 +502,30 @@ class ApiService {
       throw error;
     }
   }
+
+  async UpdateSaleByID(SaleData, imageFiles) {
+    try {
+      const formData = new FormData();
+      formData.append("name", SaleData.name);
+      formData.append("id", SaleData.sale_id);
+      formData.append("discount_percentage", SaleData.discount_percentage);
+      formData.append("description", SaleData.description);
+      formData.append("selectedProducts", JSON.stringify(SaleData.selectedProducts));
+      formData.append("oldname", SaleData.oldname)
+
+      imageFiles.forEach((file, index) => {
+        if (file) {
+          formData.append(`image${index + 1}`, file); // e.g., image1, image2, ...
+        }
+      });
+
+      const response = await this.api.post('?action=updatesale', formData)
+      return response.data;
+    } catch(error) {
+      console.error("Error Updating Sale", error);
+      throw error;
+    }
+  }
 }
 
 

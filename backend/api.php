@@ -397,6 +397,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             break;
 
+        case 'updatesale':
+            if (isset($_POST['id'])) {
+                echo json_encode(UpdateSale($conn, $_POST, $_FILES));
+            } else {
+                http_response_code(400);
+                echo json_encode(["error" => "Missing sale id"]);
+            }
+            break;
+
         default:
             http_response_code(404);
             echo json_encode(["error" => "Invalid route"]);

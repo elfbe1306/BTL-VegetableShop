@@ -2,22 +2,18 @@ import React from "react";
 import styles from './SelectSaleProductModal.module.css';
 import CloseIcon from "../../../assets/icons/CloseIcon";
 import { motion } from "framer-motion";
-import apiService from "../../../api";
 
 const SelectSaleProductModal = ({ onClose, products, selectedProducts, setSelectedProducts }) => {
   const isSelected = (productId) => {
-    return selectedProducts.some((p) => p.product_id === productId);
+    return selectedProducts.some((p) => Number(p.product_id) === Number(productId));
   };
-
-  // Handle checkbox toggle
+  
   const handleToggle = (product) => {
     if (isSelected(product.product_id)) {
-      // Remove from selected
       setSelectedProducts((prev) =>
-        prev.filter((p) => p.product_id !== product.product_id)
+        prev.filter((p) => Number(p.product_id) !== Number(product.product_id))
       );
     } else {
-      // Add to selected
       setSelectedProducts((prev) => [...prev, product]);
     }
   };

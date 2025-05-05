@@ -58,18 +58,16 @@ const EditSaleModal = ({sale, onClose, refreshSales}) => {
       name: name,
       discount_percentage: discount,
       description: description,
-      selectedProducts: selectedProducts,
+      selectedProducts: selectedProducts.filter(p => p && p.product_id),
       oldname: sale.name
     }
-    console.log(updateSale);
     const response = await apiService.UpdateSaleByID(updateSale, imageFiles);
-    console.log(response);
-    // if (response.success) {
-    //   await refreshProducts()
-    //   setTimeout(() => {
-    //     onClose();
-    //   }, 300);
-    // }
+    if (response.success) {
+      await refreshSales()
+      setTimeout(() => {
+        onClose();
+      }, 300);
+    }
   }
 
   return(

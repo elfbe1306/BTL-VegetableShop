@@ -17,7 +17,6 @@ const AdminSales = () => {
   const FetchSaleData = async () => {
     const response = await apiService.FetchSalePromotions();
     setSales(response.sales);
-    console.log(response);
   }
 
   useEffect(() => {
@@ -100,7 +99,6 @@ const AdminSales = () => {
                         </button>
                       </td>
                       <td>
-                        <button className={styles.viewButton} >View</button>
                         <button className={styles.editButton} onClick={() => handleOpenEditModal(sale)}>Edit</button>
                         <button className={styles.deleButton} >Delete</button>
                       </td>
