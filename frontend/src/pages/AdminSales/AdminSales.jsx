@@ -8,6 +8,7 @@ import SideBar from '../../components/Admin/SideBar/SideBar';
 import apiService from "../../api";
 
 import ListSaleProductModal from "../../components/Admin/ListSaleProductModal/ListSaleProductModal";
+import EditSaleModal from "../../components/Admin/EditSaleModal/EditSaleModal";
 
 const AdminSales = () => {
   const [sales, setSales] = useState([]);
@@ -35,6 +36,14 @@ const AdminSales = () => {
     setIsListProductModalOpen(true);
   }
   const handleCloseListProductModal = () => setIsListProductModalOpen(false);
+
+  const [selectedSale, setSelectSale] = useState(null);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const handleOpenEditModal = (sale) => {
+    setSelectSale(sale);
+    setIsEditModalOpen(true);
+  }
+  const handleCloseEditModal = () => setIsEditModalOpen(false);
 
   return(
     <div className={styles.BigWrapper}>
@@ -91,7 +100,8 @@ const AdminSales = () => {
                         </button>
                       </td>
                       <td>
-                        <button className={styles.editButton} >Edit</button>
+                        <button className={styles.viewButton} >View</button>
+                        <button className={styles.editButton} onClick={() => handleOpenEditModal(sale)}>Edit</button>
                         <button className={styles.deleButton} >Delete</button>
                       </td>
                     </motion.tr>
@@ -104,6 +114,10 @@ const AdminSales = () => {
 
         {isListProductModalOpen && (
           <ListSaleProductModal onClose={handleCloseListProductModal} ListProduct={selectedSaleProductList} Discount_Percentage={selectDiscount}/>
+        )}
+
+        {isEditModalOpen && (
+          <EditSaleModal onClose={handleCloseEditModal} sale={selectedSale} refreshSales={FetchSaleData}/>
         )}
       </div>
     </div>

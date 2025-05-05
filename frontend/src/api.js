@@ -492,6 +492,16 @@ class ApiService {
       throw error;
     }
   }
+
+  async FetchProductForSale() {
+    try {
+      const response = await this.api.get('?action=fetchproductforsale');
+      return response.data;
+    } catch(error) {
+      console.error("Error fetching product for sale", error);
+      throw error;
+    }
+  }
 }
 
 

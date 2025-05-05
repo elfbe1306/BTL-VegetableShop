@@ -102,6 +102,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             echo json_encode(FetchSalePromotions($conn));
             break;
 
+        case 'fetchproductforsale':
+            echo json_encode(FetchProductForSale(($conn)));
+            break;
+
         default:
             http_response_code(404);
             echo json_encode(["error" => "Invalid route"]);

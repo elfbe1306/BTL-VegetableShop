@@ -1,0 +1,93 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+
+.modal {
+  background-color: #e8f4e8;
+  padding: 48px;
+  border-radius: 12px;
+  width: 50%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.insertContainer {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  margin-top: 15px;
+}
+
+.insertContainer p {
+  color: black;
+  font-size: 14px;
+}
+
+.insertContainer input {
+  border: 1px solid black;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-size: 14px;
+}
+
+.SaveButton {
+  border: none;
+  color: white;
+  border-radius: 10px;
+  padding: 10px 40px;
+  background-color: rgb(0, 178, 7);
+}
+
+.SaveButtonContainer {
+  display: flex;
+  justify-content: end;
+  margin-top: 30px;
+}
+
+.PicContainer {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  align-items: center;
+  justify-items: center;
+}
+
+.SaleImage {
+  width: 150px;
+  height: 200px;
+}
+
+.BannerImage {
+  width: 350px;
+  height: 200px;
+}
+
+.PicUploadContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.PicUploadContainer input {
+  color: black;
+}
+
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  border: none;
+  background-color: transparent;
+  color: rgb(0, 178, 7);
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 30px;
+}
