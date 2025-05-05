@@ -169,4 +169,70 @@
 
         return ["success" => true, "message" => "Sale updated successfully"];
     }
+
+    function AddSale($conn, $data, $files) {
+        $name = trim($data['name']);
+        $discount = floatval($data['discount_percentage']);
+        $description = trim($data['description']);
+        $selectedProducts = json_decode($data['list_product'], true);
+    
+        $SalePathName = preg_replace('/\s+/', '', $name);
+    
+        $baseDir = 'uploads/promotion/';
+        $newFolder = $baseDir . $SalePathName;
+    
+        // Step 1: Create a new folder for the sale
+        if (!is_dir($newFolder)) {
+            mkdir($newFolder, 0777, true);
+        }
+
+        // Step 2: Handle uploaded images
+        for ($i = 1; $i <= 2; $i++) {
+            $key = 'image' . $i;
+
+            if (isset($files[$key]) && $files[$key]['error'] === UPLOAD_ERR_OK) {
+                $tmpName = $files[$key]['tmp_name'];
+                $fileName = $SalePathName . $i . '.png';
+                $destination = $newFolder . '/' . $fileName;
+
+                if (!move_uploaded_file($tmpName, $destination)) {
+                    echo "Failed to move file: $tmpName to $destination<br>";
+                    echo "Is tmpName readable? " . (is_readable($tmpName) ? "Yes" : "No") . "<br>";
+                    echo "Does destination dir exist? " . (is_dir($newFolder) ? "Yes" : "No") . "<br>";
+                    echo "Is destination writable? " . (is_writable($newFolder) ? "Yes" : "No") . "<br>";
+                }
+            }
+        }
+
+        // Step 3: Insert sale into sales table
+        $imagePath = $SalePathName . '/' . $SalePathName;
+        $stmt = $conn->prepare("INSERT INTO sales (sale_name, discount_percentage, description, image) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("sdss", $name, $discount, $description, $imagePath);
+        $stmt->execute();
+        $sale_id = $stmt->insert_id; // Get the last inserted sale ID
+
+        // Step 4: Reassign products to the new sale
+        foreach ($selectedProducts as $product) {
+            $product_id = (int) $product['product_id'];
+
+            // Ensure the product is not already linked to another sale
+            $checkStmt = $conn->prepare("SELECT sale_id FROM sale_products WHERE product_id = ?");
+            $checkStmt->bind_param("i", $product_id);
+            $checkStmt->execute();
+            $result = $checkStmt->get_result();
+
+            if ($result->num_rows > 0) {
+                $removeStmt = $conn->prepare("DELETE FROM sale_products WHERE product_id = ?");
+                $removeStmt->bind_param("i", $product_id);
+                $removeStmt->execute();
+            }
+
+            // Link the product to the new sale
+            $insertStmt = $conn->prepare("INSERT INTO sale_products (sale_id, product_id) VALUES (?, ?)");
+            $insertStmt->bind_param("ii", $sale_id, $product_id);
+            $insertStmt->execute();
+        }
+
+        return ["success" => true, "message" => "Sale added successfully"];
+    }
 ?>
