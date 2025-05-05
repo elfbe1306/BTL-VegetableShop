@@ -24,7 +24,6 @@
   
 .category_section, .tag_section, .recently_added {
     margin-bottom: 1.5rem;
-    padding-top: 1rem;
     border-top: 1px solid #ccc;
 }
   
@@ -114,10 +113,9 @@
     color: #666;
 }
   
-.customIconStyle {
+.recent_date .material-symbols-outlined {
     color: #00b300;
     margin-right: 0.2rem;
-    font-weight: 200;
 }
 
 .recent_link {

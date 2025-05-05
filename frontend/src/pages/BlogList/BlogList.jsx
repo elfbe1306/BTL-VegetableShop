@@ -3,11 +3,11 @@ import { useLocation } from 'react-router-dom';
 import Header from '../../components/Header/Header'
 import Footer from '../../components/Footer/Footer'
 import Pagination from '../../components/Pagination/Pagination'
-// import "../BlogList/bloglist.css";
+import "../BlogList/bloglist.css";
 import BlogCard from '../../components/BlogCard/BlogCard'
 import Sidebar from '../../components/BlogSidebar/Sidebar'
 import apiService from '../../api';
-import styles from "./bloglist.module.css";
+
 
 function BlogList() {
     const location = useLocation();
@@ -39,36 +39,33 @@ function BlogList() {
     return(
         <div>
             <Header/>
-            <div className={styles.container}>
-              <button className={styles.filter_toggle_btn} onClick={toggleSideBar}>
-                Filters
-              </button>
-              <div className={styles.blog_layout}>
-                <div className={styles.sidebar_drawer}>
-                  <div className={`${styles.sidebar_backdrop} ${isSideBarOpen ? styles.show : ''}`} onClick={() => setSideBarOpen(false)}></div>
-                  <div className={`${styles.sidebar_slide} ${isSideBarOpen ? styles.open : ''}`}>
-                    <Sidebar />
-                  </div>
-                </div>
-                <main className={styles.blog_content}>
-                    <div className={styles.blog_post}>
-                        {!loading && !error && posts.length === 0 && (
-                        <p>No posts found for "{query}"</p>
-                        )}
-                        {posts.map(p => (
-                            <BlogCard
-                                key={p.id}
-                                id={p.id}
-                                image={`${uploadsBase}/${p.cover_file}`}
-                                date={p.date}
-                                category={p.tag}               
-                                author={p.author_name}
-                                comments={p.comments || 0}     
-                                title={p.title}
-                                slug={p.slug}
+            <div className="container">
+                <div className="blog_layout">
+                    <Sidebar/>
+                    <main className="blog_content">
+                        <div className="blog_post">
+                            {!loading && !error && posts.length === 0 && (
+                            <p>No posts found for "{query}"</p>
+                            )}
+                            {posts.map(p => (
+                                <BlogCard
+                                    key={p.id}
+                                    id={p.id}
+                                    image={`${uploadsBase}/${p.cover_file}`}
+                                    date={p.date}
+                                    category={p.tag}               // <-- use the tag column here
+                                    author={p.author_name}
+                                    comments={p.comments || 0}     // if you added a comment_count later
+                                    title={p.title}
+                            />
+                            ))}
+                        </div>
+                        {!query && (
+                        <Pagination
+                            currentPage={page}
+                            onPageChange={(newPage) => setPage(newPage)}
                         />
-                        ))}
-                      </div>
+                        )}
                     </main>
                 </div>
 
