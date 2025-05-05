@@ -20,6 +20,11 @@
   position: relative;
 }
 
+.tableContainer {
+  max-height: 400px; /* Adjust as needed */
+  overflow-y: auto;
+}
+
 .table {
   width: 100%;
   border-collapse: collapse;
